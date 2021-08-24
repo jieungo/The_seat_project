@@ -28,12 +28,7 @@ public class UsersController {
 	
 	//로그인 폼 요청 처리
 	@RequestMapping("/users/loginform")
-	public ModelAndView loginform(ModelAndView mView,
-			@RequestParam String url) {
-		
-		String encodedUrl=URLEncoder.encode(url);
-		mView.addObject("url", url);
-		mView.addObject("encodedUrl", encodedUrl);
+	public ModelAndView loginform(ModelAndView mView) {
 		
 		mView.setViewName("users/loginform");
 		return mView;
