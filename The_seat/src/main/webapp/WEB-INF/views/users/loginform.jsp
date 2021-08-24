@@ -115,7 +115,7 @@
                      <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                  </svg>
                  <h2>Sign up</h2>
-                 <form id="signupForm" action="${pageContext.request.contextPath}/users/signup.do" method="post">
+                 <form id="signupForm" action="${pageContext.request.contextPath}/users/checkemail.do" method="post">
                      <div>
                          <input class="form-control" type="text" name="email" id="email" placeholder="이메일주소">
                          <div class="invalid-feedback">사용할수 없는 이메일 입니다.</div>
@@ -131,6 +131,9 @@
                      </div>
                      <div>
                          <input class="form-control" type="text" name="name" id="name" placeholder="이름">
+                     </div>
+                     <div>
+                         <input class="form-control" type="text" name="phoneNumber" id="phoneNumber" placeholder="연락처">
                      </div>
                      <div>
                          <label for="data">생년월일</label>
@@ -183,7 +186,7 @@
 			return; //함수를 여기서 끝낸다 (ajax 전송 되지 않도록)
 		}
 		
-		//2. util 에 있는 함수를 이용해서 ajax 요청하기
+		//2. util 에 있는 함수를 이용해서 login에 대한 ajax 요청하기
 		ajaxPromise("${pageContext.request.contextPath}/users/checkemail.do", "get", "inputEmail="+inputEmail)
 		.then(function(response){
 			return response.json();
@@ -202,7 +205,21 @@
 			}
 		});
 	});
-	
+		
+	document.querySelector('#signupForm')addEventListener('submit', function(e){
+		e.preventDefault();
+		let signupForm = document.querySelector('#signupForm');
+		
+		ajaxFormPromise(signupForm)
+		.then(function(response){
+			return respon.json();
+		})
+		.then(function(data){
+			console.log(data);
+		});
+	});
+		
+
 	//비밀 번호를 확인 하는 함수 
 	function checkPwd(){
 		document.querySelector("#pwd").classList.remove("is-valid");
@@ -227,6 +244,7 @@
 			isPwdValid=true;
 			document.querySelector("#pwd").classList.add("is-valid");
 		}
+
 	}
 	
 	//비밀번호 입력란에 input 이벤트가 일어 났을때 실행할 함수 등록
@@ -235,7 +253,7 @@
 	
 	
 	//폼에 submit 이벤트가 발생했을때 실행할 함수 등록
-	document.querySelector("#signupForm").addEventListener("submit", function(e){
+	document.querySelector("#loginForm").addEventListener("submit", function(e){
 		//console.log(e);
 		/*
 			입력한 아이디, 비밀번호의 효성 여부를 확인해서 하나라도 유효 하지 않으면
@@ -247,8 +265,10 @@
 		if(!isFormValid){//폼이 유효하지 않으면
 			//폼 전송 막기 
 			e.preventDefault();
-		}	
+		}
 	});
+	
+
 
 </script>
     <!-- datepicker-->
