@@ -12,7 +12,7 @@
 <div class="container">
 
 	<h2>공지사항</h2>
-	
+		<a href="${pageContext.request.contextPath}/users/loginform.do"><strong>로그인</strong></a>
 	<ul>
 		<c:forEach var="tmp" items="${notice }">
 			<li>${tmp }</li>

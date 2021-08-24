@@ -10,17 +10,19 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.star.seat.users.dao.UsersDao;
 import com.star.seat.users.dto.UsersDto;
 
+@Service
 public class UsersServiceImpl implements UsersService {
+	
 	@Autowired
 	private UsersDao dao;
 	
-
 	@Override
 	public void addUser(UsersDto dto) {
 		//사용자가 입력한 비밀 번호를 읽어와서 
@@ -37,7 +39,7 @@ public class UsersServiceImpl implements UsersService {
 	@Override
 	public void loginProcess(UsersDto dto, HttpSession session) {
 		//입력한 정보가 맞는여부
-		boolean isValid=false;
+		boolean isValemail=false;
 		
 		//1. 로그인 폼에 입력한 아이디를 이용해서 해당 정보를 select 해 본다. 
 		UsersDto result=dao.getData(dto.getEmail());
@@ -46,10 +48,10 @@ public class UsersServiceImpl implements UsersService {
 			String encodedPwd=result.getPwd(); //DB 에 저장된 암호화된 비밀번호 
 			String inputPwd=dto.getPwd(); //로그인폼에 입력한 비밀번호
 			//Bcrypt 클래스의 static 메소드를 이용해서 일치 여부를 얻어낸다.
-			isValid=BCrypt.checkpw(inputPwd, encodedPwd);
+			isValemail=BCrypt.checkpw(inputPwd, encodedPwd);
 		}
 		
-		if(isValid) {//만일 유효한 정보이면 
+		if(isValemail) {//만일 유효한 정보이면 
 			//로그인 처리를 한다.
 			session.setAttribute("email", dto.getEmail());
 		}

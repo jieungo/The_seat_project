@@ -19,8 +19,8 @@ public class UsersDaoImpl implements UsersDao {
 	}
 	//user 정보 가져오기
 	@Override
-	public UsersDto getData(String id) {
-		return session.selectOne("users.getData", id);
+	public UsersDto getData(String email) {
+		return session.selectOne("users.getData", email);
 	}
 	//user 비밀번호 변경
 	@Override
@@ -34,14 +34,14 @@ public class UsersDaoImpl implements UsersDao {
 	}
 	//user 삭제
 	@Override
-	public void delete(String id) {
-		session.delete("users.delete", id);
+	public void delete(String email) {
+		session.delete("users.delete", email);
 	}
 	@Override
-	public boolean isExist(String inputId) {
+	public boolean isExist(String inputEmail) {
 		//인자로 전달 받은 아이디가 존재 하는지 select 해 본다.
-		String id=session.selectOne("users.isExist", inputId);
-		if(id==null) {
+		String email=session.selectOne("users.isExist", inputEmail);
+		if(email==null) {
 			return false;
 		}else {
 			return true;
