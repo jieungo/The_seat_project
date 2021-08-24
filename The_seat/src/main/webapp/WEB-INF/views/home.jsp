@@ -6,14 +6,31 @@
 <head>
 <meta charset="UTF-8">
 <title>/views/home.jsp</title>
+<style>
+	body{
+		background-image: url("resources/img/blue1.png");
+	}
+	#area, #group{
+		margin-top: 30px;
+	}
+	#keyword{
+		margin-top: 20px;
+	}
+	#searchBtn{
+		margin-top: 20px;
+	}
+	#loginBtn{
+		margin-top: 20px;
+	}
+</style>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.css" />
 </head>
 <body>
-<div class="container">
+<div class="text-center" style="margin-top:150px;">
 
-	<h6>이젠, 빈자리 찾아 헤매지 말자!</h6>
-	<h1>자리..</h1>
-	<h1>있어요?</h1>
+	<h6 style="color: white;">이젠, 빈자리 찾아 헤매지 말자!</h6>
+	<h1 style="color: white;">자리..</h1>
+	<h1 style="color: white;">있어요?</h1>
 	
 	<!-- get 방식을 활용해 메인 페이지 URL 에 select & option 태그 설정 -->
 	<form action="${pageContext.request.contextPath}/main.do" method="get">
@@ -36,10 +53,11 @@
 		<br/>
 		<input type="text" id="keyword" name="keyword" placeholder="오늘은 뭐 먹을까?" value="${keyword }"/>
 		<br/>
-		<button type="submit" onclick="location.href='${pageContext.request.contextPath}/main.do'">검색</button>
+		<button id="searchBtn" type="submit" onclick="location.href='${pageContext.request.contextPath}/main.do'">검색</button>
+		<br/>
 	</form>
-	<br />
-	<button onclick="location.href='${pageContext.request.contextPath}/users/loginform.do?url=${param.url }'">로그인</button>
+		<button id="loginBtn" onclick="location.href='${pageContext.request.contextPath}/users/loginform.do'">로그인</button>
+
 </div>
 </body>
 </html>

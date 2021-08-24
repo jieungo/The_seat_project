@@ -26,6 +26,7 @@ public class StoreController {
 	public String getList(StoreDto dto, HttpServletRequest request) {
 		//area group keyword
 		
+
 		request.setAttribute("dto", dto);
 		
 		service.getMyStores(request);
