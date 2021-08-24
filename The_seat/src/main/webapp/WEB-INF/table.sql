@@ -1,23 +1,30 @@
-CREATE TABLE users(
-	email VARCHAR2(100) PRIMARY KEY,
-	pwd VARCHAR2(100) NOT NULL,
-	tag VARCHAR2(100),
-	profile VARCHAR2(100),
-	regdate DATE
+CREATE TABLE seat_users(
+	name varchar2(100) not null,
+	email varchar2(100) primary key,
+	pwd varchar2(100) not null,
+	phoneNumber varchar(20) not null,
+	profile clob,
+	tag clob,
+	regdate date
 );
 
-CREATE TABLE store(
-	num,
-	owner,
-	storeName,
-	storeAddr,
-	storeTag,
-	openTime,
-	image_1,
-	image_2,
-	image_3,
-	image_4
+create table store(
+	num number primary key,
+	owner varchar2(100) not null,
+	storeName varchar2(100) not null,
+	storeAddr clob not null,
+	storeTag clob,
+	openingTime clob,
+	image_logo clob,
+	image_1 clob,
+	image_2 clob,
+	image_3 clob,
+	image_4 clob,
+	storeOpen varchar2(10) not null,
+	regdate date
 );
+
+create sequence store_seq;
 
 CREATE TABLE storeMenu(
 	num,
