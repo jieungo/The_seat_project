@@ -24,7 +24,7 @@ public class StoreController {
 	public String getList(HttpServletRequest request) {
 		//area group search
 		
-		service.getMyStore(request);
+		//service.getMyStore(request);
 		
 		return "main";
 	}
