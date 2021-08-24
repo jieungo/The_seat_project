@@ -16,7 +16,7 @@
 	<h1>있어요?</h1>
 	
 	<!-- get 방식을 활용해 메인 페이지 URL 에 select & option 태그 설정 -->
-	<form action="/main.do" method="get">
+	<form action="${pageContext.request.contextPath}/main.do" method="get">
 		<select name="area" id="area">
 			<option value="area" ${area eq 'area' ? 'selected' : '' }>지역</option>
 			<option value="Gangnam-gu" ${area eq 'Gangnam-gu' ? 'selected' : '' }>강남구</option>

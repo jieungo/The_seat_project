@@ -10,13 +10,23 @@
 			'no', sysdate)
 	</insert>
 	
-	<!-- 사장님의 매장 정보 가져오기 -->
-	<select id="getStore" parameterType="string" resultType="storeDto">
+	<!-- 사장님의 매장 정보 목록 가져오기 -->
+	<select id="getMyStores" parameterType="string" resultType="storeDto">
 		select *
 		from store
-		inner join seat_users
-		on seat_users.email=store.owner
-		where email=#{email}
+		where owner=#{email}
+	</select>
+	
+	<!-- 사장님의 매장 정보 하나만 가져오기 -->
+	<select id="getMyStore" parameterType="storeDto" resultType="storeDto">
+		select *
+		from
+			(select result1.*, rownum as rnum
+			from
+				(select *
+				from store
+				where owner=#{owner}) result1)
+		where rnum=#{num}
 	</select>
 
 	<select id="getList">
