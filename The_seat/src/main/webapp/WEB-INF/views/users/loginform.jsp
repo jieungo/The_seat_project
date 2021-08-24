@@ -58,7 +58,7 @@
 </style>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script> -->
 </head>
 
 <body>
@@ -69,6 +69,7 @@
             <p>이젠, 빈자리 찾아 해매지 말자!</p>
             <h1>자리..<br>있어요?</h1>
         </section>
+        
        <!-- 오른쪽 로그인바 -->
        <section class="col">
            <form id="loginForm" action="${pageContext.request.contextPath}/users/login.do" method="post">
@@ -84,14 +85,15 @@
                </div>
                <button type="submit">Continue</button>
            </form>
-   
+           
+   <!--
            <div class="line-section">
                <div class="line"></div>
                <span>OR</span>
                <div class="line"></div>
            </div>  
          <section>
-          <!-- 카카오 로그인 -->
+        <!--  	카카오 로그인  
           <button class="login_box kakao" onclick="kakaoLogin();">
               <a href="javascript:void(0)"></a>
               카카오 로그인</button>
@@ -101,50 +103,68 @@
                       <span>카카오 로그아웃</span>
                   </a>
               </li>
-
+	
+		-->
           <!-- 구글 로그인
           <button class="login_box google">
               <a href="javascript:void(0)"></a>
-              구글 로그인</button> -->
-         </section> 
+              구글 로그인</button>
+              
          </section>
-         <button class="signup__btn">Signup</button>
-         <section class="signup__modal modal-hide">
-             <div>
-                 <svg id="cancle_icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                     <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                 </svg>
-                 <h2>Sign up</h2>
-                 <form id="signupForm" action="${pageContext.request.contextPath}/users/signup.do" method="post">
-                     <div>
-                         <input class="form-control" type="text" name="email" id="email" placeholder="이메일주소">
-                         <div class="invalid-feedback">사용할수 없는 이메일 입니다.</div>
-                     </div>
-                     <div>
-                         <input class="form-control" type="password" name="pwd" id="pwd" placeholder="비밀번호">
-                         <small class="form-text text-muted">5글자~10글자 이내로 입력하세요.</small>
-                         <div class="invalid-feedback">비밀번호를 확인 하세요.</div>
-                     </div>
-                     <div>
-                         <input class="form-control" type="password" name="pwd2" id="pwd2" placeholder="비밀번호를 한번 더 입력해주세요">
-                         <div class="invalid-feedback">비밀번호를 확인 하세요.</div>
-                     </div>
-                     <div>
-                         <input class="form-control" type="text" name="name" id="name" placeholder="이름">
-                     </div>
-                     <div>
-                         <label for="data">생년월일</label>
-                         <input name="date" id="litepicker" autocomplete="off" placeholder="생년월일"/>
-                     </div>
-                     <div class="line"></div>
-                     <div>
-                         <input class="form-control" type="text" name="likeMenu" id="likeMenu" placeholder="선호하는 음식">
-                         <button class="menu-add">추가</button>
-                     </div>
-                     <button type="submit">가입완료</button>
-                 </form>
-             </div>
-         </section>
+  -->
+  
+       </section>
+       
+       <button type="button" class="text-btn" data-bs-toggle="modal" data-bs-target="#modal-signupForm">
+          Signup
+      	</button>
+       
+       <!-- SignUp Modal -->
+       <div class="modal animate__animated animate__bounce animate__fadeInDown" tabindex="-1" id="modal-signupForm" aria-labelledby="signupForm" aria-hidden="true">
+         <div class="modal-dialog">
+             <div class="modal-content">
+	             <div class="modal-header">
+	                 <h3 class="modal-title"><strong>Sign up</strong> </h3>
+	                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	             </div>
+	             <div class="modal-body">
+	                 <form id="signupForm" action="${pageContext.request.contextPath}/users/signup.do" method="post">
+	                     <div>
+	                        <input class="form-control" type="text" name="email" id="email" placeholder="이메일주소">
+	                        <div class="invalid-feedback">사용할수 없는 이메일 입니다.</div>
+	                     </div>
+	                     <div>
+	                        <input class="form-control" type="password" name="pwd" id="pwd" placeholder="비밀번호">
+	                        <small class="form-text text-muted">5글자~10글자 이내로 입력하세요.</small>
+	                        <div class="invalid-feedback">비밀번호를 확인 하세요.</div>
+	                     </div>
+	                     <div>
+	                         <input class="form-control" type="password" name="pwd2" id="pwd2" placeholder="비밀번호를 한번 더 입력해주세요">
+	                         <div class="invalid-feedback">비밀번호를 확인 하세요.</div>
+	                     </div>
+	                     <div>
+	                         <input class="form-control" type="text" name="name" id="name" placeholder="이름">
+	                     </div>
+	                     <div>
+	                         <!-- <label for="data">생년월일</label> -->
+	                         <input name="date" id="litepicker" class="form-control" autocomplete="off" placeholder="생년월일"/>
+	                     </div>
+	                     <div>
+	                     	<!-- 연락처에 글자입력막아야함 -->
+	                         <input class="form-control" type=text" name="phoneNumber" id="phoneNumber" placeholder="연락처">
+	                     </div>
+	                     <div class="line" style="background-color: #2e8eff; width: 30vw;"></div>
+	                     <div class="row signup__menu">
+	                         <input class="form-control col-2" type="text" name="tag" id="signup__menu-like" style="width: 25vw;" placeholder="선호하는 음식">
+	                         <button class="signup__menu-add col-1">추가</button>
+	                     </div>
+	                     <button type="submit">가입완료</button>
+	                 </form>
+	             </div>
+	         </div>
+	       </div>
+	    </div>   
+	    
     </div>
 </div>
 <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
@@ -161,6 +181,8 @@
         signup__modal.classList.add("modal-hide");
     });
 
+    //----------------------------------로그인---------------------------------------------
+    
     //continue 버튼 누르면 ajax 로그인
     document.querySelector("#loginForm").addEventListener("submit",function(e){
     	//폼 제출 막고
@@ -173,9 +195,17 @@
 			return response.json();
 		})
 		.then(function(data){
-			console.log(data);
+			if(${not empty sessionScope.email }){
+				alert(${sessionScope.email }+"님 로그인되었습니다.");
+				location.href="${pageContext.request.contextPath}/main.do";
+			} else {
+				alert("아이디와 비밀번호를 확인해 주세요");
+				location.href="${pageContext.request.contextPath}/home.do";
+			};
 		});
     });
+    
+    //---------------------------------회원가입--------------------------------------------
     
 	//아이디, 비밀번호, 이메일의 유효성 여부를 관리한 변수 만들고 초기값 대입
 	let isEmailValid=false;
@@ -205,7 +235,6 @@
 			return response.json();
 		})
 		.then(function(data){
-			console.log(data);
 			//data 는 {isExist:true} or {isExist:false} 형태의 object 이다.
 			if(data.isExist){//만일 존재한다면
 				//사용할수 없는 아이디라는 피드백을 보이게 한다. 
@@ -249,31 +278,36 @@
 	document.querySelector("#pwd").addEventListener("input", checkPwd);
 	document.querySelector("#pwd2").addEventListener("input", checkPwd);
 	
+	// signupForm ajax 요청하기 
 	
-	//폼에 submit 이벤트가 발생했을때 실행할 함수 등록
-	document.querySelector("#signupForm").addEventListener("submit", function(e){
-		//console.log(e);
-		/*
-			입력한 아이디, 비밀번호의 효성 여부를 확인해서 하나라도 유효 하지 않으면
-			e.preventDefault(); 
-			가 수행 되도록 해서 폼의 제출을 막아야 한다. 
-		*/
-		//폼 전체의 유효성 여부 알아내기 
-		let isFormValid = isIdValid && isPwdValid;
-		if(!isFormValid){//폼이 유효하지 않으면
-			//폼 전송 막기 
-			e.preventDefault();
-		}	
+	document.querySelector('#signupForm').addEventListener('submit', function(e){
+		
+		e.preventDefault();
+		
+		let signupForm = document.querySelector('#signupForm');
+		let isFormValid = isEmailValid && isPwdValid;
+		
+		if(isFormValid){
+			ajaxFormPromise(signupForm)
+			.then(function(response){
+				return response.json();
+			})
+			.then(function(data){
+				alert("회원 가입을 축하드립니다.")
+				location.href="${pageContext.request.contextPath}/users/loginform.do";
+			})
+		};
 	});
-
 </script>
-    <!-- datepicker-->
+
+
+<!--    datepicker
 	<script>
         const picker = new Litepicker({ 
           element: document.getElementById('litepicker') 
         });
 	</script>
-
+-->
     <!-- 카카오 스크립트 -->
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script>

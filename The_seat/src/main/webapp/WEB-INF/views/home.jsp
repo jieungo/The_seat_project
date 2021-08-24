@@ -56,6 +56,7 @@
 		<button id="searchBtn" type="submit" onclick="location.href='${pageContext.request.contextPath}/main.do'">검색</button>
 		<br/>
 	</form>
+	
 		<button id="loginBtn" onclick="location.href='${pageContext.request.contextPath}/users/loginform.do'">로그인</button>
 
 </div>
