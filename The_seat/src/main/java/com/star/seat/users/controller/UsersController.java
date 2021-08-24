@@ -1,6 +1,7 @@
 package com.star.seat.users.controller;
 
 import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,9 +28,26 @@ public class UsersController {
 	
 	//로그인 폼 요청 처리
 	@RequestMapping("/users/loginform")
-	public String loginform() {
+	public ModelAndView loginform(ModelAndView mView,
+			@RequestParam String url) {
 		
-		return "users/loginform";
+		String encodedUrl=URLEncoder.encode(url);
+		mView.addObject("url", url);
+		mView.addObject("encodedUrl", encodedUrl);
+		
+		mView.setViewName("users/loginform");
+		return mView;
+		
+	}
+	
+	//로그인 요청 처리
+	@RequestMapping(value = "/users/login", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> ajaxLogin( UsersDto dto, HttpSession session) {
+		
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("success","success");
+		return map;
 	}
 	
 	//회원 가입 요청 처리 ( post 방식 요청은 요청 method 를 명시하는것이 좋다.
@@ -127,22 +145,5 @@ public class UsersController {
 		return service.isExistEmail(inputEmail);
 	}
 	
-	//로그인 요청 처리
-	@RequestMapping("/users/login")
-	public ModelAndView login(ModelAndView mView, UsersDto dto,
-			@RequestParam String url, HttpSession session) {
-		/*
-		 *  서비스에서 비즈니스 로직을 처리할때 필요로  하는 객체를 컨트롤러에서 직접 전달을 해 주어야 한다.
-		 *  주로, HttpServletRequest, HttpServletResponse, HttpSession, ModelAndView
-		 *  등등의 객체 이다. 
-		 */
-		service.loginProcess(dto, session);
-		
-		String encodedUrl=URLEncoder.encode(url);
-		mView.addObject("url", url);
-		mView.addObject("encodedUrl", encodedUrl);
-		
-		mView.setViewName("users/login");
-		return mView;
-	}
+
 }

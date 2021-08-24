@@ -37,10 +37,9 @@
 		<input type="text" id="keyword" name="keyword" placeholder="오늘은 뭐 먹을까?" value="${keyword }"/>
 		<br/>
 		<button type="submit" onclick="location.href='${pageContext.request.contextPath}/main.do'">검색</button>
-		<br/>
 	</form>
-		<button onclick="location.href='${pageContext.request.contextPath}/users/loginform.do'">로그인</button>
-
+	<br />
+	<button onclick="location.href='${pageContext.request.contextPath}/users/loginform.do?url=${param.url }'">로그인</button>
 </div>
 </body>
 </html>
