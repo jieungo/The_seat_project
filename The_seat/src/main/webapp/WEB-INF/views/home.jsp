@@ -16,7 +16,7 @@
 	<h1>있어요?</h1>
 	
 	<!-- get 방식을 활용해 메인 페이지 URL 에 select & option 태그 설정 -->
-	<form action="/users/main.do" method="get">
+	<form action="/main.do" method="get">
 		<select name="area" id="area">
 			<option value="area" ${area eq 'area' ? 'selected' : '' }>지역</option>
 			<option value="Gangnam-gu" ${area eq 'Gangnam-gu' ? 'selected' : '' }>강남구</option>
@@ -36,15 +36,11 @@
 		<br/>
 		<input type="text" id="keyword" name="keyword" placeholder="오늘은 뭐 먹을까?" value="${keyword }"/>
 		<br/>
-		<button type="submit" onclick="location.href='${pageContext.request.contextPath}/users/main.do'">검색</button>
+		<button type="submit" onclick="location.href='${pageContext.request.contextPath}/main.do'">검색</button>
 		<br/>
 	</form>
-		<button onclick="location.href='${pageContext.request.contextPath}/users/login.do'">로그인</button>
-		<ul>
-			<c:forEach var="tmp" items="${notice }">
-				<li>${tmp }</li>
-			</c:forEach>
-		</ul>
+		<button onclick="location.href='${pageContext.request.contextPath}/users/loginform.do'">로그인</button>
+
 </div>
 </body>
 </html>
