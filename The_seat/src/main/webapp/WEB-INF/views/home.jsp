@@ -10,6 +10,7 @@
 </head>
 <body>
 <div class="container">
+
 	<h6>이젠, 빈자리 찾아 헤매지 말자!</h6>
 	<h1>자리..</h1>
 	<h1>있어요?</h1>

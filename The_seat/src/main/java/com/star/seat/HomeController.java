@@ -30,6 +30,8 @@ public class HomeController {
 		//view 페이지 (jsp페이지) 로 forward 이동해서 응답 
 		return "home";
 	}
+	
+	
 }
 
 

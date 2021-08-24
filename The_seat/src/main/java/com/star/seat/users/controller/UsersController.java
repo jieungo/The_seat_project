@@ -21,8 +21,26 @@ import com.star.seat.users.service.UsersService;
 
 @Controller
 public class UsersController {
+	
 	@Autowired
 	private UsersService service;
+	
+	//로그인 폼 요청 처리
+	@RequestMapping("/users/loginform")
+	public String loginform() {
+		
+		return "users/loginform";
+	}
+	
+	//회원 가입 요청 처리 ( post 방식 요청은 요청 method 를 명시하는것이 좋다.
+	@RequestMapping(value = "/users/signup", method = RequestMethod.POST)
+	public ModelAndView signup(ModelAndView mView, UsersDto dto) {
+		
+		service.addUser(dto);
+		
+		mView.setViewName("users/signup");
+		return mView;
+	}
 	
 	//회원 탈퇴 요청 처리
 	@RequestMapping("/users/delete")
@@ -101,12 +119,6 @@ public class UsersController {
 		return "users/logout";
 	}
 	
-	@RequestMapping(value = "/users/signup_form", method = RequestMethod.GET)
-	public String signupForm() {
-		
-		return "users/signup_form";
-	}
-	
 	//아이디 중복 확인을 해서 json 문자열을 리턴해주는 메소드 
 	@RequestMapping("/users/checkemail")
 	@ResponseBody
@@ -114,22 +126,7 @@ public class UsersController {
 		//UsersService 가 리턴해주는 Map 을 리턴해서 json 문자열을 응답한다. 
 		return service.isExistEmail(inputEmail);
 	}
-	//회원 가입 요청 처리 ( post 방식 요청은 요청 method 를 명시하는것이 좋다.
-	@RequestMapping(value = "/users/signup", method = RequestMethod.POST)
-	public ModelAndView signup(ModelAndView mView, UsersDto dto) {
-		
-		service.addUser(dto);
-		
-		mView.setViewName("users/signup");
-		return mView;
-	}
 	
-	//로그인 폼 요청 처리
-	@RequestMapping("/users/loginform")
-	public String loginform() {
-		
-		return "users/loginform";
-	}
 	//로그인 요청 처리
 	@RequestMapping("/users/login")
 	public ModelAndView login(ModelAndView mView, UsersDto dto,
