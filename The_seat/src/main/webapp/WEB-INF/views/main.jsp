@@ -13,23 +13,33 @@
 </head>
 <body>
 	<div class="container">
-		<c:if test="${ not empty keyword }">
+		<c:if test="${ not empty dto.keyword }">
 			<p>	
-				<strong>${area }</strong> 지역,
-				<strong>${group }</strong> 메뉴,
-				<strong>${keyword }</strong> 검색어로 검색된 내용 자세히 보기 
+				<strong>${dto.area }</strong> 지역,
+				<strong>${dto.group }</strong> 메뉴,
+				<strong>${dto.keyword }</strong> 검색어로 검색된 내용 자세히 보기 
 			</p>
 		</c:if>
 	</div>
-	<div class="container">
-		<a data-num="0" id="addBtn0" href="#">+매장 추가</a>
+	<div class="container toggle">
+		<c:choose>
+			<c:when test="${list.size() != 0}">
+				<c:forEach var="tmp" items="${list }" varStatus="status">
+					<a href="${pageContext.request.contextPath}/myStore.do?num=${status.count }" class="store">${tmp.storeName }</a>
+				</c:forEach>
+				<a data-num="0" id="addBtn0" href="#">+매장 추가</a>
+			</c:when>
+			<c:otherwise>
+				<a data-num="0" id="addBtn0" href="#">+매장 추가</a>
+			</c:otherwise>	
+		</c:choose>			
 	</div>
 </body>
 <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 
 <script>
 	let dataNum=0;
-	let storePath="${pageContext.request.contextPath}/store.do?num=";
+	let storePath="${pageContext.request.contextPath}/myStore.do?num=";
 	
 	document.querySelector("#addBtn0").addEventListener("click", function(e){
 		// 일단 링크 이동을 막고
@@ -56,7 +66,7 @@
 			newAnchor.setAttribute("data-num", dataNum);
 			newAnchor.setAttribute("class", "store");
 			newAnchor.setAttribute("id", "addBtn"+strDataNum);
-			document.querySelector(".container").prepend(newAnchor);
+			document.querySelector(".toggle").prepend(newAnchor);
 			resetDataNum();
 		}
 	});

@@ -23,11 +23,28 @@ public class StoreServiceImpl implements StoreService{
 	}
 	
 	@Override
+	public void getMyStores(HttpServletRequest request) {
+		String email=(String)request.getSession().getAttribute("email");
+		email="test";
+		
+		List<StoreDto> list=dao.getMyStores(email);
+		//System.out.println(list);
+		request.setAttribute("list", list);
+	}
+	
+	@Override
 	public void getMyStore(HttpServletRequest request) {
 		String email=(String)request.getSession().getAttribute("email");
 		email="test";
 		
-		List<StoreDto> list=dao.getMyStore(email);
-		request.setAttribute("list", list);
+		int num=Integer.parseInt(request.getParameter("num"));
+		
+		StoreDto dto=new StoreDto();
+		dto.setNum(num); // rnum으로 들어감
+		dto.setOwner(email);
+		
+		StoreDto myDto=dao.getMyStore(dto);
+
+		request.setAttribute("dto", myDto);
 	}
 }
