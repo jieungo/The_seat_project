@@ -19,11 +19,20 @@ public class StoreDaoImpl implements StoreDao{
 		session.insert("addStore", email);
 	}
 	
-	// 사장님의 매장 정보를 불러오는 method
+	// 사장님의 매장 정보 목록을 불러오는 method
 	@Override
-	public List<StoreDto> getMyStore(String email) {
-		List<StoreDto> list=session.selectList("getStore", email);
+	public List<StoreDto> getMyStores(String email) {
+		List<StoreDto> list=session.selectList("getMyStores", email);
 		return list;
+	}
+	
+	// 사장님의 매장 정보 하나를 불러오는 method
+	@Override
+	public StoreDto getMyStore(StoreDto dto) {
+		
+		StoreDto myDto=session.selectOne("getMyStore", dto);
+		
+		return myDto;
 	}
 	
 	// 매장 검색 목록 불러오는 method

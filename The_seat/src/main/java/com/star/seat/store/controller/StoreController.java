@@ -1,6 +1,7 @@
 package com.star.seat.store.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.star.seat.store.dto.StoreDto;
 import com.star.seat.store.service.StoreService;
 
 @Controller
@@ -21,10 +23,13 @@ public class StoreController {
 	private StoreService service;
 	
 	@RequestMapping("/main.do")
-	public String getList(HttpServletRequest request) {
-		//area group search
+	public String getList(StoreDto dto, HttpServletRequest request) {
+		//area group keyword
 		
-		//service.getMyStore(request);
+
+		request.setAttribute("dto", dto);
+		
+		service.getMyStores(request);
 		
 		return "main";
 	}
@@ -42,15 +47,11 @@ public class StoreController {
 		return map;
 	}
 	
-	@RequestMapping(value="/store.do", method=RequestMethod.GET)
-	@ResponseBody
-	public String store(HttpServletRequest request) {
-		int num=Integer.parseInt(request.getParameter("num"));
-		System.out.println(num);
-		
+	@RequestMapping(value="/myStore.do", method=RequestMethod.GET)
+	public String myStore(@RequestParam int num, HttpServletRequest request) {
 		service.getMyStore(request);
 		
-		return "store";
+		return "myStore";
 	}
 	
 }

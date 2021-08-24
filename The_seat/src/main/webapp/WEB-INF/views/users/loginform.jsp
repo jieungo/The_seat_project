@@ -78,7 +78,7 @@
                    <div class="invalid-feedback">사용할수 없는 이메일 입니다.</div>
                </div>
                <div>
-                   <label class="label" for="password">Password</label><br>
+                   <label class="label" for="pwd">Password</label><br>
                    <input class="form-control" type="password" name="pwd"/>
                    <div class="invalid-feedback">비밀번호를 확인 하세요.</div>
                </div>
@@ -161,6 +161,22 @@
         signup__modal.classList.add("modal-hide");
     });
 
+    //continue 버튼 누르면 ajax 로그인
+    document.querySelector("#loginForm").addEventListener("submit",function(e){
+    	//폼 제출 막고
+    	e.preventDefault();
+    	//ajax 로 폼 내용 전송하고 json으로 응답 받기
+    	let loginForm = document.querySelector("#loginForm");
+    	
+    	ajaxFormPromise(loginForm)
+    	.then(function(response){
+			return response.json();
+		})
+		.then(function(data){
+			console.log(data);
+		});
+    });
+    
 	//아이디, 비밀번호, 이메일의 유효성 여부를 관리한 변수 만들고 초기값 대입
 	let isEmailValid=false;
 	let isPwdValid=false;
