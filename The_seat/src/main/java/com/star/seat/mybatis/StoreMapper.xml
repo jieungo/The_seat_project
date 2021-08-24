@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="store">
+	<!-- 매장 추가 method -->
+	<insert id="addStore" parameterType="string">
+		insert into store
+		(num, owner, storeName, storeAddr, openingTime,
+			storeOpen, regdate)
+		values(store_seq.nextval, #{email}, 'Default Name', 'Default Address', '00:00 ~ 24:00',
+			'no', sysdate)
+	</insert>
+	
+	<!-- 사장님의 매장 정보 가져오기 -->
+	<select id="getStore" parameterType="string" resultType="storeDto">
+		select *
+		from store
+		inner join seat_users
+		on seat_users.email=store.owner
+		where email=#{email}
+	</select>
+
+	<select id="getList">
+		select storeName, storeAddr, storeTag, openingTime, image_logo
+		from store
+		where 
+	</select>
+</mapper>
