@@ -112,21 +112,21 @@
              <span style="font-size: 4em;">자리..<br>있어요?</span>
          </section>
         
-	      <!-- 오른쪽 로그인바 -->
-	      <section class="col col__section">
-	          <form id="loginForm" action="${pageContext.request.contextPath}/users/login.do" method="post">
-	              <div>
-	                  <label class="label" for="email">Email</label><br>
-	                  <input class="form-control" type="email" name="email"/>
-	                  <div class="invalid-feedback">사용할수 없는 이메일 입니다.</div>
-	              </div>
-	              <div>
-	                  <label class="label" for="password">Password</label><br>
-	                  <input class="form-control" type="password" name="pwd"/>
-	                  <div class="invalid-feedback">비밀번호를 확인 하세요.</div>
-	              </div>
-	              <button class="text-btn" type="submit">Continue</button>
-	          </form>
+         <!-- 오른쪽 로그인바 -->
+         <section class="col col__section">
+             <form id="loginForm" action="${pageContext.request.contextPath}/users/login.do" method="post">
+                 <div>
+                     <label class="label" for="email">Email</label><br>
+                     <input class="form-control" type="email" name="email"/>
+                     <div class="invalid-feedback">사용할수 없는 이메일 입니다.</div>
+                 </div>
+                 <div>
+                     <label class="label" for="password">Password</label><br>
+                     <input class="form-control" type="password" name="pwd"/>
+                     <div class="invalid-feedback">비밀번호를 확인 하세요.</div>
+                 </div>
+                 <button class="text-btn" type="submit">Continue</button>
+             </form>
            
 
            <div class="line-section">
@@ -149,9 +149,9 @@
                     <!-- <a href="javascript:void(0)"></a> -->
                 구글 로그인</button>  
                 
-	     <button type="button" class="text-btn" data-bs-toggle="modal" data-bs-target="#modal-signupForm">
-	          Signup
-	     </button>
+        <button type="button" class="text-btn" data-bs-toggle="modal" data-bs-target="#modal-signupForm">
+             Signup
+        </button>
        </section>
        
       <div class="modal animate__animated animate__bounce animate__fadeInDown" tabindex="-1" id="modal-signupForm" aria-labelledby="signupForm" aria-hidden="true">
@@ -178,13 +178,14 @@
                       </div>
                       <div>
                           <input class="form-control" type="text" name="name" id="name" placeholder="이름" required="required">
+                          <input class="form-control" type="hidden" name="profile" id="profile" value="profile" >
                       </div>
                       <div>
                           <!-- <label for="data">생년월일</label> -->
-                          <input name="date" id="litepicker" class="form-control" autocomplete="off" placeholder="생년월일"/>
+                          <input name="regdate" id="litepicker" class="form-control" autocomplete="off" placeholder="생년월일" required="required"/>
                       </div>
                       <div>
-                          <input class="form-control" type="text" pattern="[0-9]+" maxlength="11" name="phoneNumber" id="phoneNumber" placeholder="'-'을 제외한 휴대폰번호" required="required">
+                          <input class="form-control" type="tel"  pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" maxlength="13" name="phoneNumber" id="phoneNumber" placeholder="연락처" required="required">
                       </div>
                       <div class="line" style="background-color: #2e8eff; width: 30vw;"></div>
                       <div class="row signup__menu">
@@ -207,130 +208,171 @@
     
     //continue 버튼 누르면 ajax 로그인
     document.querySelector("#loginForm").addEventListener("submit",function(e){
-    	//폼 제출 막고
-    	e.preventDefault();
-    	//ajax 로 폼 내용 전송하고 json으로 응답 받기
-    	let loginForm = document.querySelector("#loginForm");
-    	
-    	ajaxFormPromise(loginForm)
-    	.then(function(response){
-			return response.json();
-		})
-		.then(function(data){
-			if(${not empty sessionScope.email }){
-				alert('${sessionScope.email }'+"님 로그인되었습니다.");
-				location.href="${pageContext.request.contextPath}/main.do";
-			} else {
-				alert("아이디와 비밀번호를 확인해 주세요");
-				location.href="${pageContext.request.contextPath}/home.do";
-			};
-		});
+       //폼 제출 막고
+       e.preventDefault();
+       //ajax 로 폼 내용 전송하고 json으로 응답 받기
+       let loginForm = document.querySelector("#loginForm");
+       
+       ajaxFormPromise(loginForm)
+       .then(function(response){
+         return response.json();
+      })
+      .then(function(data){
+         if(${not empty sessionScope.email }){
+            alert('${sessionScope.email }'+"님 로그인되었습니다.");
+            location.href="${pageContext.request.contextPath}/main.do";
+         } else {
+            alert("아이디와 비밀번호를 확인해 주세요");
+            location.href="${pageContext.request.contextPath}/home.do";
+         };
+      });
     });
     
     //---------------------------------회원가입--------------------------------------------
     
-	//아이디, 비밀번호, 이메일의 유효성 여부를 관리한 변수 만들고 초기값 대입
-	let isEmailValid=false;
-	let isPwdValid=false;
+   //아이디, 비밀번호, 이메일의 유효성 여부를 관리한 변수 만들고 초기값 대입
+   let isEmailValid=false;
+   let isPwdValid=false;
 
-	//이메일 입력했을때(input) 실행할 함수 등록 
-	document.querySelector("#email").addEventListener("input", function(){
-		//일단 is-valid,  is-invalid 클래스를 제거한다.
-		document.querySelector("#email").classList.remove("is-valid");
-		document.querySelector("#email").classList.remove("is-invalid");
-		
-		//1. 입력한 이메일 value 값 읽어오기  
-		let inputEmail=this.value;
-		//입력한 이메일을 검증할 정규 표현식
-		const reg_id=/@/;
-		//만일 입력한 이메일이 정규표현식과 매칭되지 않는다면
-		if(!reg_id.test(inputEmail)){
-			isEmailValid=false; //매칭되지 않는다고 표시하고 
-			// is-invalid 클래스를 추가한다. 
-			document.querySelector("#email").classList.add("is-invalid");
-			return; //함수를 여기서 끝낸다 (ajax 전송 되지 않도록)
-		}
-		
-		//2. util 에 있는 함수를 이용해서 ajax 요청하기
-		ajaxPromise("${pageContext.request.contextPath}/users/checkemail.do", "get", "inputEmail="+inputEmail)
-		.then(function(response){
-			return response.json();
-		})
-		.then(function(data){
-			//data 는 {isExist:true} or {isExist:false} 형태의 object 이다.
-			if(data.isExist){//만일 존재한다면
-				//사용할수 없는 아이디라는 피드백을 보이게 한다. 
-				isEmailValid=false;
-				// is-invalid 클래스를 추가한다. 
-				document.querySelector("#email").classList.add("is-invalid");
-			}else{
-				isEmailValid=true;
-				document.querySelector("#email").classList.add("is-valid");
-			}
-		});
-	});
-	
-	//비밀 번호를 확인 하는 함수 
-	function checkPwd(){
-		
-		document.querySelector("#pwd").classList.remove("is-valid");
-		document.querySelector("#pwd").classList.remove("is-invalid");
-		
-		const pwd=document.querySelector("#pwd").value;
-		const pwd2=document.querySelector("#pwd2").value;
-		
-		// 최소5글자 최대 10글자인지를 검증할 정규표현식
-		const reg_pwd=/^.{5,10}$/;
-		if(!reg_pwd.test(pwd)){
-			isPwdValid=false;
-			document.querySelector("#pwd").classList.add("is-invalid");
-			return; //함수를 여기서 종료
-		}
-		
-		if(pwd != pwd2){//비밀번호와 비밀번호 확인란이 다르면
-			//비밀번호를 잘못 입력한것이다.
-			isPwdValid=false;
-			document.querySelector("#pwd").classList.add("is-invalid");
-		}else{
-			isPwdValid=true;
-			document.querySelector("#pwd").classList.add("is-valid");
-		}		
+   //이메일 입력했을때(input) 실행할 함수 등록 
+   document.querySelector("#email").addEventListener("input", function(){
+      //일단 is-valid,  is-invalid 클래스를 제거한다.
+      document.querySelector("#email").classList.remove("is-valid");
+      document.querySelector("#email").classList.remove("is-invalid");
+      
+      //1. 입력한 이메일 value 값 읽어오기  
+      let inputEmail=this.value;
+      //입력한 이메일을 검증할 정규 표현식
+      const reg_id=/@/;
+      //만일 입력한 이메일이 정규표현식과 매칭되지 않는다면
+      if(!reg_id.test(inputEmail)){
+         isEmailValid=false; //매칭되지 않는다고 표시하고 
+         // is-invalid 클래스를 추가한다. 
+         document.querySelector("#email").classList.add("is-invalid");
+         return; //함수를 여기서 끝낸다 (ajax 전송 되지 않도록)
+      }
+      
+      //2. util 에 있는 함수를 이용해서 ajax 요청하기
+      ajaxPromise("${pageContext.request.contextPath}/users/checkemail.do", "get", "inputEmail="+inputEmail)
+      .then(function(response){
+         return response.json();
+      })
+      .then(function(data){
+         //data 는 {isExist:true} or {isExist:false} 형태의 object 이다.
+         if(data.isExist){//만일 존재한다면
+            //사용할수 없는 아이디라는 피드백을 보이게 한다. 
+            isEmailValid=false;
+            // is-invalid 클래스를 추가한다. 
+            document.querySelector("#email").classList.add("is-invalid");
+         }else{
+            isEmailValid=true;
+            document.querySelector("#email").classList.add("is-valid");
+         }
+      });
+   });
+   
+   //비밀 번호를 확인 하는 함수 
+   function checkPwd(){
+      
+      document.querySelector("#pwd").classList.remove("is-valid");
+      document.querySelector("#pwd").classList.remove("is-invalid");
+      
+      const pwd=document.querySelector("#pwd").value;
+      const pwd2=document.querySelector("#pwd2").value;
+      
+      // 최소5글자 최대 10글자인지를 검증할 정규표현식
+      const reg_pwd=/^.{5,10}$/;
+      if(!reg_pwd.test(pwd)){
+         isPwdValid=false;
+         document.querySelector("#pwd").classList.add("is-invalid");
+         return; //함수를 여기서 종료
+      }
+      
+      if(pwd != pwd2){//비밀번호와 비밀번호 확인란이 다르면
+         //비밀번호를 잘못 입력한것이다.
+         isPwdValid=false;
+         document.querySelector("#pwd").classList.add("is-invalid");
+      }else{
+         isPwdValid=true;
+         document.querySelector("#pwd").classList.add("is-valid");
+      }      
+   }
+   
+   //비밀번호 입력란에 input 이벤트가 일어 났을때 실행할 함수 등록
+   document.querySelector("#pwd").addEventListener("input", checkPwd);
+   document.querySelector("#pwd2").addEventListener("input", checkPwd);
+   
+   
+   // signupForm ajax 요청하기 
+   document.querySelector('#signupForm').addEventListener("submit", function(e){
+
+      const signupForm = document.querySelector('#signupForm');
+      const isFormValid = isEmailValid && isPwdValid ;
+         
+         if(!isFormValid) {
+            e.preventDefault();
+         } else {
+            ajaxFormPromise(signupForm)
+            .then(function(response){
+               return response.json();
+            })
+            .then(function(data){
+               alert("회원 가입을 축하드립니다.");
+               location.href="${pageContext.request.contextPath}/users/loginform.do";
+            });                        
+         }
+      });
+   
+   
+   //---------------------------연락처 자동 하이픈---------------------------------
+   
+  const autoHypenPhone = function(str){
+      str = str.replace(/[^0-9]/g, '');
+      let tmp = '';
+      	if (str.length < 4) {
+          return str;
+        } if (str.length < 7) {
+          tmp += str.substr(0, 3);
+          tmp += '-';
+          tmp += str.substr(3);
+          return tmp;
+        } else if (str.length < 11) {
+          tmp += str.substr(0, 3);
+          tmp += '-';
+          tmp += str.substr(3, 3);
+          tmp += '-';
+          tmp += str.substr(6);
+          return tmp;
+        } else {
+          tmp += str.substr(0, 3);
+          tmp += '-';
+          tmp += str.substr(3, 4);
+          tmp += '-';
+          tmp += str.substr(7);
+          return tmp;
+        }
+  
+      return str;
 	}
-	
-	//비밀번호 입력란에 input 이벤트가 일어 났을때 실행할 함수 등록
-	document.querySelector("#pwd").addEventListener("input", checkPwd);
-	document.querySelector("#pwd2").addEventListener("input", checkPwd);
-	
-	
-	// signupForm ajax 요청하기 
-	document.querySelector('#signupForm').addEventListener("submit", function(e){
 
-		const signupForm = document.querySelector('#signupForm');
-		const isFormValid = isEmailValid && isPwdValid ;
-			
-			if(!isFormValid) {
-				e.preventDefault();
-			} else {
-				ajaxFormPromise(signupForm)
-				.then(function(response){
-					return response.json();
-				})
-				.then(function(data){
-					alert("회원 가입을 축하드립니다.");
-					location.href="${pageContext.request.contextPath}/users/loginform.do";
-				});								
-			}
-		});
+
+	var phoneNum = document.querySelector('#phoneNumber');
 	
+	phoneNum.onkeyup = function(){
+	  this.value = autoHypenPhone( this.value ) ;  
+	}
+
+   
+   
 </script>
 
 
 <!-- datepicker 생년월일 -->   
-	<script>
+   <script>
         const picker = new Litepicker({ 
           element: document.getElementById('litepicker') 
         });
-	</script>
+   </script>
 
     <!-- 카카오 스크립트 -->
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
@@ -358,21 +400,21 @@
             },
             })
         };
-	//카카오로그아웃  
-	function kakaoLogout() {
-	if (Kakao.Auth.getAccessToken()) {
-		Kakao.API.request({
-			url: '/v1/user/unlink',
-			success: function (response) {
-			console.log(response)
-			},
-			fail: function (error) {
-				console.log(error)
-			},
-		})
-	    Kakao.Auth.setAccessToken(undefined)
-		}
-	} 
+   //카카오로그아웃  
+   function kakaoLogout() {
+   if (Kakao.Auth.getAccessToken()) {
+      Kakao.API.request({
+         url: '/v1/user/unlink',
+         success: function (response) {
+         console.log(response)
+         },
+         fail: function (error) {
+            console.log(error)
+         },
+      })
+       Kakao.Auth.setAccessToken(undefined)
+      }
+   } 
     </script>
     
     
@@ -410,14 +452,13 @@
                 console.log(e);
             })
         }
-        function onSignInFailure(t){		
+        function onSignInFailure(t){      
             console.log(t);
         }
         </script>
         <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script> -->
     </body>
     </html>
-
 
 
 
