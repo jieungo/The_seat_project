@@ -14,7 +14,7 @@
 	</insert>
 	
 	<select id="getData" parameterType="string" resultType="usersDto">
-		SELECT name, email, pwd, tag, profile, regdate
+		SELECT name, email, pwd, tag, phoneNumber,profile, regdate
 		FROM seat_users
 		WHERE email=#{email }
 	</select>

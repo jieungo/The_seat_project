@@ -15,7 +15,7 @@ public interface UsersService {
 	
 	public Map<String, Object> isExistEmail(String inputEmail);
 	public void addUser(UsersDto dto);
-	public void loginProcess(UsersDto dto, HttpSession session);
+	public Map<String, Object> loginProcess(UsersDto dto, HttpSession session);
 	public void getInfo(HttpSession session, ModelAndView mView);
 	public void updateUserPwd(HttpSession session, UsersDto dto, ModelAndView mView);
 	public Map<String, Object> saveProfileImage(HttpServletRequest request, 
