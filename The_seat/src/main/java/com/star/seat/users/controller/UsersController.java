@@ -108,6 +108,7 @@ public class UsersController {
 		return mView;
 	}
 	
+	//비밀번호 변경
 	@RequestMapping("/users/pwd_update")
 	public ModelAndView PwdUpdate(UsersDto dto, 
 			ModelAndView mView, HttpSession session, HttpServletRequest request) {
@@ -118,6 +119,8 @@ public class UsersController {
 		return mView;
 	}
 	
+	
+	//비밀번호 업데이트 폼으로 이동
 	@RequestMapping("/users/pwd_updateform")
 	public ModelAndView PwdUpdateForm(ModelAndView mView, HttpServletRequest request) {
 		
@@ -125,6 +128,7 @@ public class UsersController {
 		return mView;
 	}
 	
+	//회원정보 가져오기
 	@RequestMapping("/users/info")
 	public ModelAndView Info(HttpSession session, ModelAndView mView,
 			HttpServletRequest request) {
@@ -135,12 +139,12 @@ public class UsersController {
 		return mView;
 	}
 	
-	
+	//로그아웃
 	@RequestMapping("/users/logout")
 	public String logout(HttpSession session) {
 		//세션에서 id 라는 키값으로 저장된 값 삭제 
 		session.removeAttribute("email");
-		return "users/logout";
+		return "users/loginform";
 	}
 	
 	

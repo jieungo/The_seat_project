@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 </head>
 <body>
+
 	<nav class="navbar navbar-expand-sm navbar-light bg-light" aria-label="Third navbar example">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="#">자리..<br>있어요?</a>

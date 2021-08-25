@@ -9,8 +9,8 @@
 	</select>
 	<insert id="insert" parameterType="usersDto">
 		INSERT INTO seat_users
-		(name, email, pwd, tag, phoneNumber, regdate)
-		VALUES(#{name },#{email }, #{pwd }, #{tag }, #{phoneNumber }, SYSDATE)
+		(name, email, pwd, tag, phoneNumber,profile, regdate)
+		VALUES(#{name },#{email }, #{pwd }, #{tag }, #{phoneNumber }, #{profile }, SYSDATE)
 	</insert>
 	
 	<select id="getData" parameterType="string" resultType="usersDto">

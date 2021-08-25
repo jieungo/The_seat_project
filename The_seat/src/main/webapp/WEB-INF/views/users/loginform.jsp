@@ -5,181 +5,203 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>login page</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
 <style>
-        body {
-            background-color: #2e8eff;
-            color: white;
-            font-size: 1rem;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-        }
+    body {
+        background-color: #2e8eff;
+        color: white;
+        font-size: 1rem;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
 
-        .line {
-            height: 1px;
-            width: 100px;
-            background-color: white;
-            display: inline-block;
-        }
+    .col__section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 
-        .line-section {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+    .line {
+        height: 1px;
+        width: 10vw;
+        background-color: white;
+        display: inline-block;
+    }
 
-        .line-section > span {
-            padding: 0 15px 0 15px;
-        }
+    .line-section {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 15px 0 15px 0;
+    }
 
-        .form-control {
-            width: 25vw;
-            height: 4vh;
-            outline: none;
-            border: none;
-            margin-top: 5px;
-        }
+    .line-section > span {
+        padding: 0 15px 0 15px;
+    }
 
-        .signup__modal {
-            width: 50vw;
-            height: 50vh;
-            background-color: white;
-            color: black;
-        }
-        .modal-hide {
-            display: none;
-        }
+    .form-control {
+        width: 25vw;
+        height: 5vh;
+        outline: none;
+        border: none;
+        margin: 10px 0 10px 0;
+    }
 
-        #cancle_icon {
-            cursor: pointer;
-        }
+    .text-btn {
+        outline: none;
+        border: none;
+        background-color: transparent;
+        color: white;
+        margin: 15px auto 5px auto;
+        display: flex;
+        text-align: center;
+    }
+
+    .modal {
+        color: black;
+    }
+
+    #signupForm {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    #signupForm > div > input {
+        width: 30vw;
+        background-color: #f2f2f2;
+        outline: none;
+        border: 0.5px solid lightgray;
+    }
+    .signup__menu {
+        display: flex;
+        align-items: center;
+    }
+
+    .signup__menu-add {
+        width: 5vw; 
+        height: 5vh; 
+        padding: 0;
+        margin: 10px 0 10px 5px;
+        outline: none;
+        border: none;
+        background-color: white;
+        color: #2e8eff;
+    }
 </style>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-<!-- <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script> -->
 </head>
-
 <body>
-  <div class="container">
-    <div class="row">
-        <!-- 왼쪽 텍스트 -->
-        <section class="col">
-            <p>이젠, 빈자리 찾아 해매지 말자!</p>
-            <h1>자리..<br>있어요?</h1>
-        </section>
+ <div class="container">
+     <div class="row">
+         <!-- 왼쪽 텍스트 -->
+         <section class="col col__section">
+             <p>이젠, 빈자리 찾아 해매지 말자!</p>
+             <span style="font-size: 4em;">자리..<br>있어요?</span>
+         </section>
         
-       <!-- 오른쪽 로그인바 -->
-       <section class="col">
-           <form id="loginForm" action="${pageContext.request.contextPath}/users/login.do" method="post">
-               <div>
-                   <label class="label" for="email">Email</label><br>
-                   <input class="form-control" type="email" name="email"/>
-                   <div class="invalid-feedback">사용할수 없는 이메일 입니다.</div>
-               </div>
-               <div>
-                   <label class="label" for="pwd">Password</label><br>
-                   <input class="form-control" type="password" name="pwd"/>
-                   <div class="invalid-feedback">비밀번호를 확인 하세요.</div>
-               </div>
-               <button type="submit">Continue</button>
-           </form>
+	      <!-- 오른쪽 로그인바 -->
+	      <section class="col col__section">
+	          <form id="loginForm" action="${pageContext.request.contextPath}/users/login.do" method="post">
+	              <div>
+	                  <label class="label" for="email">Email</label><br>
+	                  <input class="form-control" type="email" name="email"/>
+	                  <div class="invalid-feedback">사용할수 없는 이메일 입니다.</div>
+	              </div>
+	              <div>
+	                  <label class="label" for="password">Password</label><br>
+	                  <input class="form-control" type="password" name="pwd"/>
+	                  <div class="invalid-feedback">비밀번호를 확인 하세요.</div>
+	              </div>
+	              <button class="text-btn" type="submit">Continue</button>
+	          </form>
            
-   <!--
+
            <div class="line-section">
                <div class="line"></div>
                <span>OR</span>
                <div class="line"></div>
            </div>  
-         <section>
-        <!--  	카카오 로그인  
-          <button class="login_box kakao" onclick="kakaoLogin();">
-              <a href="javascript:void(0)"></a>
-              카카오 로그인</button>
-
-              <li onclick="kakaoLogout();">
-                  <a href="javascript:void(0)">
-                      <span>카카오 로그아웃</span>
-                  </a>
-              </li>
-	
-		-->
-          <!-- 구글 로그인
-          <button class="login_box google">
-              <a href="javascript:void(0)"></a>
-              구글 로그인</button>
-              
-         </section>
-  -->
-  
+           
+                <!-- 카카오 로그인 -->
+                <button class="form-control" style="background-color: #fee501;" onclick="kakaoLogin();">
+                    <a href="javascript:void(0)"></a>
+                    카카오 로그인</button>
+                    <li onclick="kakaoLogout();">
+                        <a href="javascript:void(0)">
+                            <span>카카오 로그아웃</span>
+                        </a>
+                    </li>
+                <!-- 구글 로그인 -->
+                    <button class="form-control" style="background-color: #d4d4d4;">
+                    <!-- <a href="javascript:void(0)"></a> -->
+                구글 로그인</button>  
+                
+	     <button type="button" class="text-btn" data-bs-toggle="modal" data-bs-target="#modal-signupForm">
+	          Signup
+	     </button>
        </section>
        
-       <button type="button" class="text-btn" data-bs-toggle="modal" data-bs-target="#modal-signupForm">
-          Signup
-      	</button>
-       
-       <!-- SignUp Modal -->
-       <div class="modal animate__animated animate__bounce animate__fadeInDown" tabindex="-1" id="modal-signupForm" aria-labelledby="signupForm" aria-hidden="true">
-         <div class="modal-dialog">
-             <div class="modal-content">
-	             <div class="modal-header">
-	                 <h3 class="modal-title"><strong>Sign up</strong> </h3>
-	                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	             </div>
-	             <div class="modal-body">
-	                 <form id="signupForm" action="${pageContext.request.contextPath}/users/signup.do" method="post">
-	                     <div>
-	                        <input class="form-control" type="text" name="email" id="email" placeholder="이메일주소">
-	                        <div class="invalid-feedback">사용할수 없는 이메일 입니다.</div>
-	                     </div>
-	                     <div>
-	                        <input class="form-control" type="password" name="pwd" id="pwd" placeholder="비밀번호">
-	                        <small class="form-text text-muted">5글자~10글자 이내로 입력하세요.</small>
-	                        <div class="invalid-feedback">비밀번호를 확인 하세요.</div>
-	                     </div>
-	                     <div>
-	                         <input class="form-control" type="password" name="pwd2" id="pwd2" placeholder="비밀번호를 한번 더 입력해주세요">
-	                         <div class="invalid-feedback">비밀번호를 확인 하세요.</div>
-	                     </div>
-	                     <div>
-	                         <input class="form-control" type="text" name="name" id="name" placeholder="이름">
-	                     </div>
-	                     <div>
-	                         <!-- <label for="data">생년월일</label> -->
-	                         <input name="date" id="litepicker" class="form-control" autocomplete="off" placeholder="생년월일"/>
-	                     </div>
-	                     <div>
-	                     	<!-- 연락처에 글자입력막아야함 -->
-	                         <input class="form-control" type=text" name="phoneNumber" id="phoneNumber" placeholder="연락처">
-	                     </div>
-	                     <div class="line" style="background-color: #2e8eff; width: 30vw;"></div>
-	                     <div class="row signup__menu">
-	                         <input class="form-control col-2" type="text" name="tag" id="signup__menu-like" style="width: 25vw;" placeholder="선호하는 음식">
-	                         <button class="signup__menu-add col-1">추가</button>
-	                     </div>
-	                     <button type="submit">가입완료</button>
-	                 </form>
-	             </div>
-	         </div>
-	       </div>
-	    </div>   
-	    
-    </div>
+      <div class="modal animate__animated animate__bounce animate__fadeInDown" tabindex="-1" id="modal-signupForm" aria-labelledby="signupForm" aria-hidden="true">
+          <div class="modal-dialog">
+              <div class="modal-content">
+              <div class="modal-header">
+                  <h3 class="modal-title"><strong>Sign up</strong> </h3>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <form id="signupForm" action="${pageContext.request.contextPath}/users/signup.do" method="post" class="needs-validation">
+                      <div>
+                          <input class="form-control" type="text" name="email" id="email" placeholder="이메일주소" required="required">
+                          <div class="invalid-feedback">사용할수 없는 이메일 입니다.</div>
+                      </div>
+                      <div>
+                          <input class="form-control" type="password" name="pwd" id="pwd" placeholder="비밀번호" required="required">
+                          <small class="form-text">5글자~10글자 이내로 입력하세요.</small>
+                          <div class="invalid-feedback">비밀번호를 확인 하세요.</div>
+                      </div>
+                      <div>
+                          <input class="form-control" type="password" name="pwd" id="pwd2" placeholder="비밀번호를 한번 더 입력해주세요" required="required">
+                          <div class="invalid-feedback">비밀번호를 확인 하세요.</div>
+                      </div>
+                      <div>
+                          <input class="form-control" type="text" name="name" id="name" placeholder="이름" required="required">
+                      </div>
+                      <div>
+                          <!-- <label for="data">생년월일</label> -->
+                          <input name="date" id="litepicker" class="form-control" autocomplete="off" placeholder="생년월일"/>
+                      </div>
+                      <div>
+                          <input class="form-control" type="text" pattern="[0-9]+" maxlength="11" name="phoneNumber" id="phoneNumber" placeholder="'-'을 제외한 휴대폰번호" required="required">
+                      </div>
+                      <div class="line" style="background-color: #2e8eff; width: 30vw;"></div>
+                      <div class="row signup__menu">
+                          <input class="form-control col-2" type="text" name="tag" id="signup__menu-like" style="width: 25vw;" placeholder="선호하는 음식">
+                          <button class="signup__menu-add col-1">추가</button>
+                      </div>
+                      <button type="submit">가입완료</button>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>   
+</div>
 </div>
 <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
+
 <script>
-    const signupBtn = document.querySelector('.signup__btn');
-    const cancleBtn = document.querySelector('#cancle_icon');
-    let signup__modal = document.querySelector('.signup__modal');
-
-    signupBtn.addEventListener('click', function() {
-        signup__modal.classList.remove("modal-hide");
-    });
-
-    cancleBtn.addEventListener('click', function() {
-        signup__modal.classList.add("modal-hide");
-    });
 
     //----------------------------------로그인---------------------------------------------
     
@@ -196,7 +218,7 @@
 		})
 		.then(function(data){
 			if(${not empty sessionScope.email }){
-				alert(${sessionScope.email }+"님 로그인되었습니다.");
+				alert('${sessionScope.email }'+"님 로그인되었습니다.");
 				location.href="${pageContext.request.contextPath}/main.do";
 			} else {
 				alert("아이디와 비밀번호를 확인해 주세요");
@@ -250,6 +272,7 @@
 	
 	//비밀 번호를 확인 하는 함수 
 	function checkPwd(){
+		
 		document.querySelector("#pwd").classList.remove("is-valid");
 		document.querySelector("#pwd").classList.remove("is-invalid");
 		
@@ -271,43 +294,44 @@
 		}else{
 			isPwdValid=true;
 			document.querySelector("#pwd").classList.add("is-valid");
-		}
+		}		
 	}
 	
 	//비밀번호 입력란에 input 이벤트가 일어 났을때 실행할 함수 등록
 	document.querySelector("#pwd").addEventListener("input", checkPwd);
 	document.querySelector("#pwd2").addEventListener("input", checkPwd);
 	
-	// signupForm ajax 요청하기 
 	
-	document.querySelector('#signupForm').addEventListener('submit', function(e){
-		
-		e.preventDefault();
-		
-		let signupForm = document.querySelector('#signupForm');
-		let isFormValid = isEmailValid && isPwdValid;
-		
-		if(isFormValid){
-			ajaxFormPromise(signupForm)
-			.then(function(response){
-				return response.json();
-			})
-			.then(function(data){
-				alert("회원 가입을 축하드립니다.")
-				location.href="${pageContext.request.contextPath}/users/loginform.do";
-			})
-		};
-	});
+	// signupForm ajax 요청하기 
+	document.querySelector('#signupForm').addEventListener("submit", function(e){
+
+		const signupForm = document.querySelector('#signupForm');
+		const isFormValid = isEmailValid && isPwdValid ;
+			
+			if(!isFormValid) {
+				e.preventDefault();
+			} else {
+				ajaxFormPromise(signupForm)
+				.then(function(response){
+					return response.json();
+				})
+				.then(function(data){
+					alert("회원 가입을 축하드립니다.");
+					location.href="${pageContext.request.contextPath}/users/loginform.do";
+				});								
+			}
+		});
+	
 </script>
 
 
-<!--    datepicker
+<!-- datepicker 생년월일 -->   
 	<script>
         const picker = new Litepicker({ 
           element: document.getElementById('litepicker') 
         });
 	</script>
--->
+
     <!-- 카카오 스크립트 -->
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script>
@@ -393,3 +417,7 @@
         <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script> -->
     </body>
     </html>
+
+
+
+
