@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,24 +23,29 @@ public class StoreController {
 	@Autowired
 	private StoreService service;
 	
+	// 검색 결과 메인 페이지를 요청할 때의 method
 	@RequestMapping("/main.do")
 	public String getList(StoreDto dto, HttpServletRequest request) {
-		//area group keyword
 		
-
+		// dto에 지역, 메뉴, 검색어 넣어서 dto라는 이름으로 저장.
 		request.setAttribute("dto", dto);
 		
+		// 검색 결과 목록을 얻어옴
+		service.getList(request, dto);
+		
+		// 내가 관리하는 매장 정보를 얻어옴
 		service.getMyStores(request);
 		
 		return "main";
 	}
 	
+	// 매장 추가 링크를 눌러서 요청되는 경로에 대한 method
 	@RequestMapping("/newStore.do")
 	@ResponseBody
 	public Map<String, Object> addStore(HttpServletRequest request){
 		Map<String, Object> map=new HashMap<>();
 		
-		// service로 보내서 매장 정보 DB에 email 정보를 더해줌.
+		// serviced에서 매장 정보 DB에 email 정보를 더해줌.
 		service.addStore(request);
 		
 		map.put("beSuccess", true);
@@ -47,11 +53,32 @@ public class StoreController {
 		return map;
 	}
 	
+	// 매장 관리 링크를 눌러서 요청되는 경로에 대한 method
 	@RequestMapping(value="/myStore.do", method=RequestMethod.GET)
 	public String myStore(@RequestParam int num, HttpServletRequest request) {
+		
+		// service에서 매장 정보를 DB에서 꺼내와서 request에 넣고
 		service.getMyStore(request);
 		
+		// 페이지 return
 		return "myStore";
+	}
+	
+	// 매장 태그 추가 링크를 눌러서 요청되는 경로에 대한 method
+	@RequestMapping(value = "/addTag.do", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> addTag(StoreDto dto){
+		System.out.println(dto.getNum());
+		System.out.println(dto.getStoreTag());
+		
+		// service에서 DB에 매장 태그를 추가하고
+		//service.addTag(dto);
+		
+		Map<String, Object> map=new HashMap<>();
+		
+		map.put("beAdded", true);
+
+		return map;
 	}
 	
 }

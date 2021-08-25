@@ -10,14 +10,14 @@
 			'no', sysdate)
 	</insert>
 	
-	<!-- 사장님의 매장 정보 목록 가져오기 -->
+	<!-- 사장님의 매장 정보 목록 가져오는 method -->
 	<select id="getMyStores" parameterType="string" resultType="storeDto">
 		select *
 		from store
 		where owner=#{email}
 	</select>
 	
-	<!-- 사장님의 매장 정보 하나만 가져오기 -->
+	<!-- 사장님의 매장 정보 하나만 가져오는 method(이메일과 rnum 이용) -->
 	<select id="getMyStore" parameterType="storeDto" resultType="storeDto">
 		select *
 		from
@@ -28,10 +28,24 @@
 				where owner=#{owner}) result1)
 		where rnum=#{num}
 	</select>
-
-	<select id="getList">
-		select storeName, storeAddr, storeTag, openingTime, image_logo
+	
+	<!-- 사장님의 매장 정보 하나만 가져오는 method(해당 매장 DB 번호 이용) -->
+	<select id="getMyStore_num" parameterType="storeDto" resultType="storeDto">
+		select *
 		from store
-		where 
+		where num=#{num}
 	</select>
+
+	<!-- 검색한 매장 목록들 불러오는 method -->
+	<select id="getList" parameterType="storeDto" resultType="storeDto">
+		select *
+		from store
+	</select>
+	
+	<!-- 매장 태그를 추가하는 method -->
+	<update id="addTag">
+		update store
+		set storeTag=#{storeTag}
+		where num=#{num}
+	</update>
 </mapper>
