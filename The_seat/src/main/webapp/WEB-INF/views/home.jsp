@@ -8,7 +8,7 @@
 <title>/views/home.jsp</title>
 <style>
 	body{
-		background-image: url("resources/img/blue1.png");
+		background-image: url("resources/img/blue.png");
 	}
 	#area, #group{
 		margin-top: 30px;
