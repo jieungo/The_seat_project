@@ -40,18 +40,6 @@
 	<select id="getList" parameterType="storeDto" resultType="storeDto">
 		select *
 		from store
-		<choose>
-			<when test="group != null">
-				where storeAddr like '%' || #{storeAddr} || '%'
-			</when>
-			<when test="keyword != null">
-				where keyword like '%' || #{keyword} || '%'
-			</when>
-			<when test="group != and keyword !=null">
-				where storeAddr like '%' || #{storeAddr} || '%'
-				and keyword like '%' || #{keyword} || '%'
-			</when>
-		</choose>
 	</select>
 	
 	<!-- 매장 태그를 추가하는 method -->

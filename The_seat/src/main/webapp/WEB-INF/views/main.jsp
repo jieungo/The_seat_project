@@ -43,8 +43,7 @@
 </head>
 <body>
 <div class="container">
-
-	<jsp:include page="nav/navbar.jsp" />
+   <jsp:include page="nav/navbar.jsp" />
 
       <c:if test="${ not empty dto.keyword }">
          <p>

@@ -51,7 +51,6 @@
 </head>
 <body>
 <div style="margin-top:100px;">
-<a href="${pageContext.request.contextPath}/users/info.do">내정보</a>
       <section class="d-grid gap-2 col-2 mx-auto">
        <p>이젠, 빈자리 찾아 해매지 말자!</p>
         <span style="font-size: 3em;">자리..<br>있어요?</span>

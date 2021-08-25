@@ -208,27 +208,27 @@
     
     //continue 버튼 누르면 ajax 로그인
     document.querySelector("#loginForm").addEventListener("submit",function(e){
-
-    	//폼 제출 막고
-    	e.preventDefault();
-    	//ajax 로 폼 내용 전송하고 json으로 응답 받기
-    	let loginForm = document.querySelector("#loginForm");
-    	
-    	ajaxFormPromise(loginForm)
-    	.then(function(response){
-			return response.json();
-		})
-		.then(function(data){
-			console.log(data.login.isValemail);
-			if(data.login.isValemail){
-				alert(data.login.result.name+"님 로그인되었습니다.");
-				location.href="${pageContext.request.contextPath}/main.do";
-			} else {
-				alert("아이디와 비밀번호를 확인해 주세요");
-				
-				//location.href="${pageContext.request.contextPath}/home.do";
-			};
-		});
+       //폼 제출 막고
+       e.preventDefault();
+       //ajax 로 폼 내용 전송하고 json으로 응답 받기
+       let loginForm = document.querySelector("#loginForm");
+       
+       ajaxFormPromise(loginForm)
+       .then(function(response){
+         return response.json();
+      })
+      .then(function(data){
+         console.log(data.login.isValemail);
+         if(data.login.isValemail){
+            alert(data.login.result.name+"님 로그인되었습니다.");
+            location.href="${pageContext.request.contextPath}/main.do";
+         } else {
+            alert("아이디와 비밀번호를 확인해 주세요");
+            
+            //location.href="${pageContext.request.contextPath}/home.do";
+         };
+      });
+    });
     
     //---------------------------------회원가입--------------------------------------------
     
@@ -236,95 +236,96 @@
    let isEmailValid=false;
    let isPwdValid=false;
 
-	//이메일 입력했을때(input) 실행할 함수 등록 
-	document.querySelector("#email").addEventListener("input", function(){
-		//일단 is-valid,  is-invalid 클래스를 제거한다.
-		document.querySelector("#email").classList.remove("is-valid");
-		document.querySelector("#email").classList.remove("is-invalid");
-		
-		//1. 입력한 이메일 value 값 읽어오기  
-		let inputEmail=this.value;
-		//입력한 이메일을 검증할 정규 표현식
-		const reg_id=/@/;
-		//만일 입력한 이메일이 정규표현식과 매칭되지 않는다면
-		if(!reg_id.test(inputEmail)){
-			isEmailValid=false; //매칭되지 않는다고 표시하고 
-			// is-invalid 클래스를 추가한다. 
-			document.querySelector("#email").classList.add("is-invalid");
-			return; //함수를 여기서 끝낸다 (ajax 전송 되지 않도록)
-		};
-		
-		//2. util 에 있는 함수를 이용해서 ajax 요청하기
-		ajaxPromise("${pageContext.request.contextPath}/users/checkemail.do", "get", "inputEmail="+inputEmail)
-		.then(function(response){
-			return response.json();
-		})
-		.then(function(data){
-			//data 는 {isExist:true} or {isExist:false} 형태의 object 이다.
-			if(data.isExist){//만일 존재한다면
-				//사용할수 없는 아이디라는 피드백을 보이게 한다. 
-				isEmailValid=false;
-				// is-invalid 클래스를 추가한다. 
-				document.querySelector("#email").classList.add("is-invalid");
-			}else{
-				isEmailValid=true;
-				document.querySelector("#email").classList.add("is-valid");
-			};
-		});
-	});
-	
-	//비밀 번호를 확인 하는 함수 
-	function checkPwd(){
-		
-		document.querySelector("#pwd").classList.remove("is-valid");
-		document.querySelector("#pwd").classList.remove("is-invalid");
-		
-		const pwd=document.querySelector("#pwd").value;
-		const pwd2=document.querySelector("#pwd2").value;
-		
-		// 최소5글자 최대 10글자인지를 검증할 정규표현식
-		const reg_pwd=/^.{5,10}$/;
-		if(!reg_pwd.test(pwd)){
-			isPwdValid=false;
-			document.querySelector("#pwd").classList.add("is-invalid");
-			return; //함수를 여기서 종료
-		};
-		
-		if(pwd != pwd2){//비밀번호와 비밀번호 확인란이 다르면
-			//비밀번호를 잘못 입력한것이다.
-			isPwdValid=false;
-			document.querySelector("#pwd").classList.add("is-invalid");
-		}else{
-			isPwdValid=true;
-			document.querySelector("#pwd").classList.add("is-valid");
-		};
-	};
-	
-	//비밀번호 입력란에 input 이벤트가 일어 났을때 실행할 함수 등록
-	document.querySelector("#pwd").addEventListener("input", checkPwd);
-	document.querySelector("#pwd2").addEventListener("input", checkPwd);
-	
-	
-	// signupForm ajax 요청하기 
-	document.querySelector('#signupForm').addEventListener("submit", function(e){
-		e.preventDefault();
-		
-		const signupForm = document.querySelector('#signupForm');
-		const isFormValid = isEmailValid && isPwdValid ;
-			
-		if(!isFormValid) {
-			alert("입력이 올바르지 않습니다. 다시 회원가입 해주세요.")
-		} else {
-			ajaxFormPromise(signupForm)
-			.then(function(response){
-				return response.json();
-			})
-			.then(function(data){
-				alert("회원 가입을 축하드립니다.");
-				location.href="${pageContext.request.contextPath}/users/loginform.do";
-			});								
-		};
-	});
+   //이메일 입력했을때(input) 실행할 함수 등록 
+   document.querySelector("#email").addEventListener("input", function(){
+      //일단 is-valid,  is-invalid 클래스를 제거한다.
+      document.querySelector("#email").classList.remove("is-valid");
+      document.querySelector("#email").classList.remove("is-invalid");
+      
+      //1. 입력한 이메일 value 값 읽어오기  
+      let inputEmail=this.value;
+      //입력한 이메일을 검증할 정규 표현식
+      const reg_id=/@/;
+      //만일 입력한 이메일이 정규표현식과 매칭되지 않는다면
+      if(!reg_id.test(inputEmail)){
+         isEmailValid=false; //매칭되지 않는다고 표시하고 
+         // is-invalid 클래스를 추가한다. 
+         document.querySelector("#email").classList.add("is-invalid");
+         return; //함수를 여기서 끝낸다 (ajax 전송 되지 않도록)
+      };
+      
+      //2. util 에 있는 함수를 이용해서 ajax 요청하기
+      ajaxPromise("${pageContext.request.contextPath}/users/checkemail.do", "get", "inputEmail="+inputEmail)
+      .then(function(response){
+         return response.json();
+      })
+      .then(function(data){
+         //data 는 {isExist:true} or {isExist:false} 형태의 object 이다.
+         if(data.isExist){//만일 존재한다면
+            //사용할수 없는 아이디라는 피드백을 보이게 한다. 
+            isEmailValid=false;
+            // is-invalid 클래스를 추가한다. 
+            document.querySelector("#email").classList.add("is-invalid");
+         }else{
+            isEmailValid=true;
+            document.querySelector("#email").classList.add("is-valid");
+         };
+      });
+   });
+   
+   //비밀 번호를 확인 하는 함수 
+   function checkPwd(){
+      
+      document.querySelector("#pwd").classList.remove("is-valid");
+      document.querySelector("#pwd").classList.remove("is-invalid");
+      
+      const pwd=document.querySelector("#pwd").value;
+      const pwd2=document.querySelector("#pwd2").value;
+      
+      // 최소5글자 최대 10글자인지를 검증할 정규표현식
+      const reg_pwd=/^.{5,10}$/;
+      if(!reg_pwd.test(pwd)){
+         isPwdValid=false;
+         document.querySelector("#pwd").classList.add("is-invalid");
+         return; //함수를 여기서 종료
+      };
+      
+      if(pwd != pwd2){//비밀번호와 비밀번호 확인란이 다르면
+         //비밀번호를 잘못 입력한것이다.
+         isPwdValid=false;
+         document.querySelector("#pwd").classList.add("is-invalid");
+      }else{
+         isPwdValid=true;
+         document.querySelector("#pwd").classList.add("is-valid");
+      };
+   };
+   
+   //비밀번호 입력란에 input 이벤트가 일어 났을때 실행할 함수 등록
+   document.querySelector("#pwd").addEventListener("input", checkPwd);
+   document.querySelector("#pwd2").addEventListener("input", checkPwd);
+   
+   
+   // signupForm ajax 요청하기 
+   document.querySelector('#signupForm').addEventListener("submit", function(e){
+      e.preventDefault();
+      
+      const signupForm = document.querySelector('#signupForm');
+      const isFormValid = isEmailValid && isPwdValid ;
+         
+      if(!isFormValid) {
+         alert("입력이 올바르지 않습니다. 다시 회원가입 해주세요.")
+      } else {
+         ajaxFormPromise(signupForm)
+         .then(function(response){
+            return response.json();
+         })
+         .then(function(data){
+            alert("회원 가입을 축하드립니다.");
+            location.href="${pageContext.request.contextPath}/users/loginform.do";
+         });                        
+      };
+   });
+   
 </script>
 
 
