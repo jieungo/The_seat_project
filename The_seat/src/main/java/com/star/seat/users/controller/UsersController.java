@@ -1,6 +1,5 @@
 package com.star.seat.users.controller;
 
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,10 +38,12 @@ public class UsersController {
 	@ResponseBody
 	public Map<String, Object> ajaxLogin( UsersDto dto, HttpSession session) {
 		
-		service.loginProcess(dto, session);
+		Map<String, Object> login = service.loginProcess(dto, session);
 		
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("url","${pageContext.request.contextPath}/main.do");
+		map.put("login", login);
+		
 		return map;
 	}
 	
@@ -144,10 +145,6 @@ public class UsersController {
 	public String logout(HttpSession session) {
 		//세션에서 id 라는 키값으로 저장된 값 삭제 
 		session.removeAttribute("email");
-		return "users/loginform";
+		return "main";
 	}
-	
-	
-	
-
 }

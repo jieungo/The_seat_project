@@ -37,7 +37,7 @@ public class UsersServiceImpl implements UsersService {
 	}
 
 	@Override
-	public void loginProcess(UsersDto dto, HttpSession session) {
+	public Map<String, Object> loginProcess(UsersDto dto, HttpSession session) {
 		//입력한 정보가 맞는여부
 		boolean isValemail=false;
 		
@@ -49,12 +49,19 @@ public class UsersServiceImpl implements UsersService {
 			String inputPwd=dto.getPwd(); //로그인폼에 입력한 비밀번호
 			//Bcrypt 클래스의 static 메소드를 이용해서 일치 여부를 얻어낸다.
 			isValemail=BCrypt.checkpw(inputPwd, encodedPwd);
-		};
-		
+		}
+		String encodedPwd=result.getPwd(); //DB 에 저장된 암호화된 비밀번호 
+		String inputPwd=dto.getPwd();
+		isValemail=BCrypt.checkpw(inputPwd, encodedPwd);
 		if(isValemail) {//만일 유효한 정보이면 
 			//로그인 처리를 한다.
 			session.setAttribute("email", dto.getEmail());
 		};
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("result",result);
+		map.put("dto",dto);
+		map.put("isValemail", isValemail);
+		return map;
 	}
 
 	@Override

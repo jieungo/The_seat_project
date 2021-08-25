@@ -173,11 +173,12 @@
                           <div class="invalid-feedback">비밀번호를 확인 하세요.</div>
                       </div>
                       <div>
-                          <input class="form-control" type="password" name="pwd" id="pwd2" placeholder="비밀번호를 한번 더 입력해주세요" required="required">
+                          <input class="form-control" type="password" name="pwd2" id="pwd2" placeholder="비밀번호를 한번 더 입력해주세요" required="required">
                           <div class="invalid-feedback">비밀번호를 확인 하세요.</div>
                       </div>
                       <div>
                           <input class="form-control" type="text" name="name" id="name" placeholder="이름" required="required">
+                          <input class="form-control" type="hidden" name="profile" id="profile" value="profile" >
                       </div>
                       <div>
                           <!-- <label for="data">생년월일</label> -->
@@ -217,12 +218,14 @@
 			return response.json();
 		})
 		.then(function(data){
-			if(${not empty sessionScope.email }){
-				alert('${sessionScope.email }'+"님 로그인되었습니다.");
+			console.log(data.login.isValemail);
+			if(data.login.isValemail){
+				alert(data.login.result.name+"님 로그인되었습니다.");
 				location.href="${pageContext.request.contextPath}/main.do";
 			} else {
 				alert("아이디와 비밀번호를 확인해 주세요");
-				location.href="${pageContext.request.contextPath}/home.do";
+				
+				//location.href="${pageContext.request.contextPath}/home.do";
 			};
 		});
     });
@@ -249,7 +252,7 @@
 			// is-invalid 클래스를 추가한다. 
 			document.querySelector("#email").classList.add("is-invalid");
 			return; //함수를 여기서 끝낸다 (ajax 전송 되지 않도록)
-		}
+		};
 		
 		//2. util 에 있는 함수를 이용해서 ajax 요청하기
 		ajaxPromise("${pageContext.request.contextPath}/users/checkemail.do", "get", "inputEmail="+inputEmail)
@@ -266,7 +269,7 @@
 			}else{
 				isEmailValid=true;
 				document.querySelector("#email").classList.add("is-valid");
-			}
+			};
 		});
 	});
 	
@@ -285,7 +288,7 @@
 			isPwdValid=false;
 			document.querySelector("#pwd").classList.add("is-invalid");
 			return; //함수를 여기서 종료
-		}
+		};
 		
 		if(pwd != pwd2){//비밀번호와 비밀번호 확인란이 다르면
 			//비밀번호를 잘못 입력한것이다.
@@ -294,8 +297,8 @@
 		}else{
 			isPwdValid=true;
 			document.querySelector("#pwd").classList.add("is-valid");
-		}		
-	}
+		};
+	};
 	
 	//비밀번호 입력란에 input 이벤트가 일어 났을때 실행할 함수 등록
 	document.querySelector("#pwd").addEventListener("input", checkPwd);
@@ -304,23 +307,24 @@
 	
 	// signupForm ajax 요청하기 
 	document.querySelector('#signupForm').addEventListener("submit", function(e){
-
+		e.preventDefault();
+		
 		const signupForm = document.querySelector('#signupForm');
 		const isFormValid = isEmailValid && isPwdValid ;
 			
-			if(!isFormValid) {
-				e.preventDefault();
-			} else {
-				ajaxFormPromise(signupForm)
-				.then(function(response){
-					return response.json();
-				})
-				.then(function(data){
-					alert("회원 가입을 축하드립니다.");
-					location.href="${pageContext.request.contextPath}/users/loginform.do";
-				});								
-			}
-		});
+		if(!isFormValid) {
+			alert("입력이 올바르지 않습니다. 다시 회원가입 해주세요.")
+		} else {
+			ajaxFormPromise(signupForm)
+			.then(function(response){
+				return response.json();
+			})
+			.then(function(data){
+				alert("회원 가입을 축하드립니다.");
+				location.href="${pageContext.request.contextPath}/users/loginform.do";
+			});								
+		};
+	});
 	
 </script>
 
