@@ -21,7 +21,7 @@
 		</c:forEach>
 		</p>
 		<input id="inputTag" type="text" style="display:none"/>
-		<a data-num="${dto.num }" href="" id="plus">태그 추가</a>
+		<a data-num="${dto.num }" href="" class="plus addTag">태그 추가</a>
 		<br>
 	</div>
 	<br>
@@ -37,52 +37,29 @@
 </body>
 <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 <script>
-	document.querySelector("#plus").addEventListener("click", function(e){
-		e.preventDefault();
-				
-		this.setAttribute("id", "addTag");
-		document.querySelector("#inputTag").style.display="block";
-		this.innerText="태그 추가";
-		addTagEvent("#addTag");
-	});
-
-	function addTagEvent(rel){
-		document.querySelector(rel).addEventListener("click", function(e){
-			e.preventDefault();
-			 
-			let num=this.getAttribute("data-num");
-			let storeTag=document.querySelector("#inputTag").value;
-			let obj={num, storeTag};
-			console.log(obj);
-			
-			ajaxPromise("${pageContext.request.contextPath}/addTag.do", "post", obj)
-			.then(function(response){
-				return response.json();
-			}).then(function(data){
-				console.log(data);
-				if(data.beAdded){
-					document.querySelector("#inputTag").style.display="none";
-					let newBtn=document.createElement("button");
-					newBtn.innerText=storeTag;
-					document.querySelector("#btns").appendChild(newBtn);
-					document.querySelector("#addTag").setAttribute("id", "plus");
-				}
-			});
-		});
-	}
-	
-	function task1(e){
+	document.querySelector(".plus").addEventListener("click", function(e){
 		e.preventDefault();
 		
-		document.querySelector("#plus").setAttribute("id", "addTag");
+		//document.querySelector(".addTag").removeEventListener("click", removeTagEvent);
+		
+		//this.removeAttribute("class");
 		document.querySelector("#inputTag").style.display="block";
-		document.querySelector("#plus").innerText="태그 추가";
-		addTagEvent("#addTag");
+		this.setAttribute("class", "addTag");
+		//document.querySelector("#inputTag").style.display="block";
+		this.innerText="태그 추가";
+		//this.removeEventListener("click", test);
+		addTagEvent(".addTag");
+	});
+	
+	function addTagEvent(rel){
+		document.querySelector(rel).addEventListener("click", test, {once:true});
 	}
 	
-	function task2(e){
+	function test(e){
 		e.preventDefault();
-		 
+		
+		let self=this;
+		
 		let num=this.getAttribute("data-num");
 		let storeTag=document.querySelector("#inputTag").value;
 		let obj={num, storeTag};
@@ -94,16 +71,14 @@
 		}).then(function(data){
 			console.log(data);
 			if(data.beAdded){
+				document.querySelector("#inputTag").value="";
 				document.querySelector("#inputTag").style.display="none";
 				let newBtn=document.createElement("button");
 				newBtn.innerText=storeTag;
 				document.querySelector("#btns").appendChild(newBtn);
-				document.querySelector("#addTag").setAttribute("id", "plus");
-				document.querySelector("#plus").removeEventListener("click", task1);
+				document.querySelector(".addTag").setAttribute("class", "plus addTag");
 			}
 		});
 	}
-	
-
 </script>
 </html>
