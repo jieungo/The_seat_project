@@ -62,10 +62,11 @@
 			</p>
 		</c:if>
 	</div>
+	<!-- 임시 매장 관리 링크 -->
 	<div class="container toggle">
 		<c:choose>
-			<c:when test="${list.size() != 0}">
-				<c:forEach var="tmp" items="${list }" varStatus="status">
+			<c:when test="${myStoreList.size() != 0}">
+				<c:forEach var="tmp" items="${myStoreList }" varStatus="status">
 					<a href="${pageContext.request.contextPath}/myStore.do?num=${status.count }" class="store">${tmp.storeName }</a>
 				</c:forEach>
 				<a data-num="0" id="addBtn0" href="#">+매장 추가</a>
@@ -74,6 +75,28 @@
 				<a data-num="0" id="addBtn0" href="#">+매장 추가</a>
 			</c:otherwise>	
 		</c:choose>			
+	</div>
+
+	<!-- 임시 검색 결과 -->
+	<div class="container">
+		<div class="row row-cols-3 row-cols-md-2 g-4">
+			<c:forEach var="tmp" items="${list }">
+				<div class="col">
+  					<div class="row g-0">
+    					<div class="col-md-4">
+      						<img src="..." class="img-fluid rounded-start" alt="...">
+    					</div>
+    					<div class="col-md-8">
+      						<div class="card-body">
+        						<h5 class="card-title">이름 : ${tmp.storeName }</h5>
+						        <p class="card-text">주소 : ${tmp.storeName }</p>
+						        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      						</div>
+    					</div>
+  					</div>
+		  		</div>
+	  		</c:forEach>
+		</div>
 	</div>
 </body>
 <script
@@ -103,7 +126,10 @@
 				console.log(data);
 			});
 			 */
-
+			/*
+				새로 매장이 생성되면 그 번호를 바로 들고 올 수 있도록 바꿔야 함.
+				그럼 reset 없어도 되지
+			*/
 			let newAnchor = document.createElement("a");
 			newAnchor.innerText = "매장 관리";
 			newAnchor.setAttribute("data-num", dataNum);
