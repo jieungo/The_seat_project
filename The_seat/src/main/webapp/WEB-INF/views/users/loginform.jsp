@@ -112,21 +112,21 @@
              <span style="font-size: 4em;">자리..<br>있어요?</span>
          </section>
         
-	      <!-- 오른쪽 로그인바 -->
-	      <section class="col col__section">
-	          <form id="loginForm" action="${pageContext.request.contextPath}/users/login.do" method="post">
-	              <div>
-	                  <label class="label" for="email">Email</label><br>
-	                  <input class="form-control" type="email" name="email"/>
-	                  <div class="invalid-feedback">사용할수 없는 이메일 입니다.</div>
-	              </div>
-	              <div>
-	                  <label class="label" for="password">Password</label><br>
-	                  <input class="form-control" type="password" name="pwd"/>
-	                  <div class="invalid-feedback">비밀번호를 확인 하세요.</div>
-	              </div>
-	              <button class="text-btn" type="submit">Continue</button>
-	          </form>
+         <!-- 오른쪽 로그인바 -->
+         <section class="col col__section">
+             <form id="loginForm" action="${pageContext.request.contextPath}/users/login.do" method="post">
+                 <div>
+                     <label class="label" for="email">Email</label><br>
+                     <input class="form-control" type="email" name="email"/>
+                     <div class="invalid-feedback">사용할수 없는 이메일 입니다.</div>
+                 </div>
+                 <div>
+                     <label class="label" for="password">Password</label><br>
+                     <input class="form-control" type="password" name="pwd"/>
+                     <div class="invalid-feedback">비밀번호를 확인 하세요.</div>
+                 </div>
+                 <button class="text-btn" type="submit">Continue</button>
+             </form>
            
 
            <div class="line-section">
@@ -149,9 +149,9 @@
                     <!-- <a href="javascript:void(0)"></a> -->
                 구글 로그인</button>  
                 
-	     <button type="button" class="text-btn" data-bs-toggle="modal" data-bs-target="#modal-signupForm">
-	          Signup
-	     </button>
+        <button type="button" class="text-btn" data-bs-toggle="modal" data-bs-target="#modal-signupForm">
+             Signup
+        </button>
        </section>
        
       <div class="modal animate__animated animate__bounce animate__fadeInDown" tabindex="-1" id="modal-signupForm" aria-labelledby="signupForm" aria-hidden="true">
@@ -208,6 +208,7 @@
     
     //continue 버튼 누르면 ajax 로그인
     document.querySelector("#loginForm").addEventListener("submit",function(e){
+
     	//폼 제출 막고
     	e.preventDefault();
     	//ajax 로 폼 내용 전송하고 json으로 응답 받기
@@ -228,13 +229,12 @@
 				//location.href="${pageContext.request.contextPath}/home.do";
 			};
 		});
-    });
     
     //---------------------------------회원가입--------------------------------------------
     
-	//아이디, 비밀번호, 이메일의 유효성 여부를 관리한 변수 만들고 초기값 대입
-	let isEmailValid=false;
-	let isPwdValid=false;
+   //아이디, 비밀번호, 이메일의 유효성 여부를 관리한 변수 만들고 초기값 대입
+   let isEmailValid=false;
+   let isPwdValid=false;
 
 	//이메일 입력했을때(input) 실행할 함수 등록 
 	document.querySelector("#email").addEventListener("input", function(){
@@ -325,16 +325,15 @@
 			});								
 		};
 	});
-	
 </script>
 
 
 <!-- datepicker 생년월일 -->   
-	<script>
+   <script>
         const picker = new Litepicker({ 
           element: document.getElementById('litepicker') 
         });
-	</script>
+   </script>
 
     <!-- 카카오 스크립트 -->
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
@@ -362,21 +361,21 @@
             },
             })
         };
-	//카카오로그아웃  
-	function kakaoLogout() {
-	if (Kakao.Auth.getAccessToken()) {
-		Kakao.API.request({
-			url: '/v1/user/unlink',
-			success: function (response) {
-			console.log(response)
-			},
-			fail: function (error) {
-				console.log(error)
-			},
-		})
-	    Kakao.Auth.setAccessToken(undefined)
-		}
-	} 
+   //카카오로그아웃  
+   function kakaoLogout() {
+   if (Kakao.Auth.getAccessToken()) {
+      Kakao.API.request({
+         url: '/v1/user/unlink',
+         success: function (response) {
+         console.log(response)
+         },
+         fail: function (error) {
+            console.log(error)
+         },
+      })
+       Kakao.Auth.setAccessToken(undefined)
+      }
+   } 
     </script>
     
     
@@ -414,14 +413,13 @@
                 console.log(e);
             })
         }
-        function onSignInFailure(t){		
+        function onSignInFailure(t){      
             console.log(t);
         }
         </script>
         <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script> -->
     </body>
     </html>
-
 
 
 

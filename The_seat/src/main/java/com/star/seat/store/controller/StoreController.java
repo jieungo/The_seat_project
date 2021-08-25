@@ -72,7 +72,7 @@ public class StoreController {
 		System.out.println(dto.getStoreTag());
 		
 		// service에서 DB에 매장 태그를 추가하고
-		//service.addTag(dto);
+		service.addTag(dto);
 		
 		Map<String, Object> map=new HashMap<>();
 		
@@ -81,4 +81,16 @@ public class StoreController {
 		return map;
 	}
 	
+	// 매장을 태그를 삭제하는 method
+	@RequestMapping(value = "deleteTag.do", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deleteTag(StoreDto dto) {
+		
+		service.deleteTag(dto);
+		
+		Map<String, Object> map=new HashMap<>();
+		map.put("beDeleted", true);
+		
+		return map;
+	}
 }
