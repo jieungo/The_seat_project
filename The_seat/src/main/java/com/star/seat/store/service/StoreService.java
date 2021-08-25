@@ -24,4 +24,7 @@ public interface StoreService {
 	
 	// 매장 태그를 추가하는 method
 	public void addTag(StoreDto dto);
+	
+	// 매장 태그를 삭제하는 method
+	public void deleteTag(StoreDto dto);
 }
