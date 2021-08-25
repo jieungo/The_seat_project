@@ -49,12 +49,12 @@ public class UsersServiceImpl implements UsersService {
 			String inputPwd=dto.getPwd(); //로그인폼에 입력한 비밀번호
 			//Bcrypt 클래스의 static 메소드를 이용해서 일치 여부를 얻어낸다.
 			isValemail=BCrypt.checkpw(inputPwd, encodedPwd);
-		}
+		};
 		
 		if(isValemail) {//만일 유효한 정보이면 
 			//로그인 처리를 한다.
 			session.setAttribute("email", dto.getEmail());
-		}
+		};
 	}
 
 	@Override

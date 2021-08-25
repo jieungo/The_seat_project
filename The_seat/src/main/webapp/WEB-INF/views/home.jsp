@@ -27,7 +27,7 @@
 </head>
 <body>
 <div class="text-center" style="margin-top:150px;">
-
+<a href="${pageContext.request.contextPath}/users/info.do">내정보</a>
 	<h6 style="color: white;">이젠, 빈자리 찾아 헤매지 말자!</h6>
 	<h1 style="color: white;">자리..</h1>
 	<h1 style="color: white;">있어요?</h1>
@@ -56,6 +56,7 @@
 		<button id="searchBtn" type="submit">검색</button>
 		<br/>
 	</form>
+	
 		<button id="loginBtn" onclick="location.href='${pageContext.request.contextPath}/users/loginform.do'">로그인</button>
 
 </div>

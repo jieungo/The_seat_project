@@ -32,7 +32,6 @@ public class UsersController {
 		
 		mView.setViewName("users/loginform");
 		return mView;
-		
 	}
 	
 	//로그인 요청 처리
@@ -40,19 +39,31 @@ public class UsersController {
 	@ResponseBody
 	public Map<String, Object> ajaxLogin( UsersDto dto, HttpSession session) {
 		
+		service.loginProcess(dto, session);
+		
 		Map<String, Object> map=new HashMap<String, Object>();
-		map.put("success","success");
+		map.put("url","${pageContext.request.contextPath}/main.do");
 		return map;
 	}
 	
+	//아이디 중복 확인을 해서 json 문자열을 리턴해주는 메소드 
+	@RequestMapping("/users/checkemail")
+	@ResponseBody
+	public Map<String, Object> checkEmail(@RequestParam String inputEmail){
+		//UsersService 가 리턴해주는 Map 을 리턴해서 json 문자열을 응답한다. 
+		return service.isExistEmail(inputEmail);
+	}
+
 	//회원 가입 요청 처리 ( post 방식 요청은 요청 method 를 명시하는것이 좋다.
 	@RequestMapping(value = "/users/signup", method = RequestMethod.POST)
-	public ModelAndView signup(ModelAndView mView, UsersDto dto) {
+	@ResponseBody
+	public Map<String, Object> signup(UsersDto dto) {
 		
 		service.addUser(dto);
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("isSignup",true);
 		
-		mView.setViewName("users/signup");
-		return mView;
+		return map;
 	}
 	
 	//회원 탈퇴 요청 처리
@@ -97,6 +108,7 @@ public class UsersController {
 		return mView;
 	}
 	
+	//비밀번호 변경
 	@RequestMapping("/users/pwd_update")
 	public ModelAndView PwdUpdate(UsersDto dto, 
 			ModelAndView mView, HttpSession session, HttpServletRequest request) {
@@ -107,6 +119,8 @@ public class UsersController {
 		return mView;
 	}
 	
+	
+	//비밀번호 업데이트 폼으로 이동
 	@RequestMapping("/users/pwd_updateform")
 	public ModelAndView PwdUpdateForm(ModelAndView mView, HttpServletRequest request) {
 		
@@ -114,6 +128,7 @@ public class UsersController {
 		return mView;
 	}
 	
+	//회원정보 가져오기
 	@RequestMapping("/users/info")
 	public ModelAndView Info(HttpSession session, ModelAndView mView,
 			HttpServletRequest request) {
@@ -124,21 +139,15 @@ public class UsersController {
 		return mView;
 	}
 	
-	
+	//로그아웃
 	@RequestMapping("/users/logout")
 	public String logout(HttpSession session) {
 		//세션에서 id 라는 키값으로 저장된 값 삭제 
 		session.removeAttribute("email");
-		return "users/logout";
+		return "users/loginform";
 	}
 	
-	//아이디 중복 확인을 해서 json 문자열을 리턴해주는 메소드 
-	@RequestMapping("/users/checkemail")
-	@ResponseBody
-	public Map<String, Object> checkEmail(@RequestParam String inputEmail){
-		//UsersService 가 리턴해주는 Map 을 리턴해서 json 문자열을 응답한다. 
-		return service.isExistEmail(inputEmail);
-	}
+	
 	
 
 }
