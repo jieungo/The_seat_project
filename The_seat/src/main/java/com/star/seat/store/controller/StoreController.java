@@ -93,4 +93,10 @@ public class StoreController {
 		
 		return map;
 	}
+	
+	// 매장 상세 정보 페이지로 이동
+	@RequestMapping("/storeDetail.do")
+	public String goStoreDetail() {
+		return "storeDetail";
+	}
 }
