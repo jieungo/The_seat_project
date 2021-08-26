@@ -6,7 +6,29 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
 src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
 integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
 crossorigin="anonymous"></script>
-
+<style>
+	#area, #group{
+		width: 110px;
+		margin-left: 30px;
+		height: 45px;
+		margin-top: 30px;
+		border: solid 2px gray;
+		border-radius: 5px;
+		text-align-last: center;
+		text-align: center;
+	}
+	#area, #group:focus{
+		outline: none;
+	}
+	#keyword{
+		width: 200px;
+		height: 35px;
+		margin-left: 30px;
+		margin-bottom: 30px;
+		border-radius: 5px;
+		border: solid 2px gray;
+	}
+</style>
    <nav class="navbar navbar-light bg-light">
       <img style= "width: 50px; height: 50px;" src="${pageContext.request.contextPath}/resources/img/chair.png" alt="chair" />
          <a class="navbar-brand"
@@ -52,24 +74,15 @@ crossorigin="anonymous"></script>
                      aria-current="page" href="#">${sessionScope.email }</a></li>
                   <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/users/info.do">마이 페이지</a></li>
                   <li class="nav-item"><a class="nav-link" href="#">공지사항</a></li>
-                  <li class="nav-item dropdown"><a
-                     class="nav-link dropdown-toggle" href="#"
-                     id="offcanvasNavbarDropdown" role="button"
-                     data-bs-toggle="dropdown" aria-expanded="false"> 매장 목록 </a>
-                     <ul class="dropdown-menu"
-                        aria-labelledby="offcanvasNavbarDropdown">
-                        <li><a class="dropdown-item" href="#">The Station</a></li>
-                        <li><a class="dropdown-item" href="#">STARBUCKS</a></li>
-                        <li><a class="dropdown-item" href="#">SUBWAY</a></li>
-                     </ul>
-                  </li>
                </ul>
-               <form class="d-flex">
-                  <input class="form-control me-2" type="search"
-                     placeholder="Search here!" aria-label="Search">
-                  <button class="btn btn-outline-primary" type="submit">Search</button>
-               </form>
-               <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/users/logout.do">로그아웃</a></li>
+               <select name="storeList" id="storeList" class="form-select">
+               <option selected value="">매장 목록</option>
+               <option value="">The Station</option>
+               <option value="">TWOSOME</option>
+               </select>
+               
+               <a class="nav-link" href="">매장 등록</a>
+               <a class="nav-link" href="${pageContext.request.contextPath}/users/logout.do">로그아웃</a>
             </div>
          </div>
    </nav>
