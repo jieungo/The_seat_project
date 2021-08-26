@@ -15,29 +15,52 @@
 	DB 번호 : <p>${dto.num }</p>
 	매장 관리자 : <p>${dto.owner }</p>
 	<br>
-	<a href="">매장 정보 편집</a>
-	<br>
+	<!-- 매장 정보 관리 영역 -->
 	<div>
-		<p>매장 이름 : <strong>${dto.storeName } <input type="text" /></strong></p>
-		<p>매장 주소 : <strong>${dto.storeAddr } <input type="text" /></strong></p>
-		<p>영업 시간 : <strong>${dto.openingTime } <input type="text" /></strong></p>
+		<form id="updateForm" action="${pageContext.request.contextPath}/storeUpdate.do" method="post">
+			<a href="javascript:" id="updateBtn" style="display:block">매장 정보 수정</a>
+			<p id="updateBox" style="display:none">
+				<a href="javascript:" id="update">수정 완료</a>
+				<a href="javascript:" id="updateCancel">취소</a>
+			</p>
+			<input type="hidden" name="num" value="${dto.num }"/>
+			<p>매장 이름 : <strong class="storeData">${dto.storeName } </strong>
+				<input type="text" name="storeName" class="updateData" value="${dto.storeName }" style="display:none;"/></p>
+			<p>매장 주소 : <strong class="storeData">${dto.storeAddr } </strong>
+				<input type="text" name="storeAddr" class="updateData" value="${dto.storeAddr }" style="display:none;"/></p>
+			<p>영업 시간 : <strong class="storeData">${dto.openingTime } </strong>
+				<input type="text" name="openingTime" class="updateData" value="${dto.openingTime }" style="display:none;"/></p>
+		</form>
 	</div>
+	
+	<!-- 매장 태그 관리 영역 -->
 	<div>
 		매장 태그 : 
 		<p id="btns">
-		<c:forEach var="tmp" items="${list }">
-			<button data-num="${dto.num }" name="tag" class="btn btn-primary tag">
-				${tmp }
-				<button data-num="${dto.num }" type="button" class="btn-close del-tag"></button>
-			</button>
-		</c:forEach>
+			<c:forEach var="tmp" items="${list }">
+				<button data-num="${dto.num }" name="tag" class="btn btn-primary tag">
+					${tmp }	
+				</button>
+			</c:forEach>
 		</p>
 		<input id="inputTag" type="text" style="display:none"/>
 		<a data-num="${dto.num }" href="" class="plus addTag">태그 추가</a>
 		<br>
 	</div>
 	<br>
+	
+	<!-- 매장 로고 관리 영역 -->
+	<div>
+		<form action="">
+			<label for="">매장 로고</label>
+			<img src="" alt="" id="image_logo" name="image_logo"/>
+			<input type="file" id="logoImage"/>
+			<button type="submit">로고 등록</button>
+		</form>
+	</div>
 	매장 로고 : <p>${dto.image_logo }</p>
+	
+	<!-- 매장 대표 이미지 관리 영역 -->
 	이미지 1 : <p>${dto.image_1 }</p>
 	이미지 2 : <p>${dto.image_2 }</p>
 	이미지 3 : <p>${dto.image_3 }</p>
@@ -48,89 +71,114 @@
 </body>
 <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 <script>
-	// 로딩되는 태그 안에 x 넣기
-	/*
-	window.addEventListener("load", function(){
+	// 태그 안에 x 버튼 넣어서 로딩하기
+	// 페이지 로딩되는 시점에 작동할 함수
+	window.onload=function(){
+		// 태그에 해당하는 버튼들의 array
 		let btns=document.querySelectorAll(".tag");
-		for(let i=0; i<btn.length; i++){
+		for(let i=0; i<btns.length; i++){
+			// 버튼의 data-num 성분의 값을 가져옴
 			let dataNum=btns[i].getAttribute("data-num");
-			let newDeleteBtn=document.createElement("button");
-			newDeleteBtn.setAttribute("class", "btn-close del-tag");
-			newDeleteBtn.setAttribute("data-num", dataNum);
-			document.querySelector("#btns").appendChild(newDeleteBtn);
+			//새로운 버튼을 만듦(취소 버튼)
+			let deleteBtn=document.createElement("button");
+			// 새로운 버튼에 class와 data-num 정보를 지정
+			deleteBtn.setAttribute("class", "btn-close del-tag");
+			deleteBtn.setAttribute("data-num", dataNum);
+			// 각 버튼에 자식 요소로 넣어줌
+			btns[i].appendChild(deleteBtn);
 		}
-	});
-	*/
+		// 새로 만들어진 취소 버튼에 삭제 이벤트를 부여
+		deleteTag(".del-tag", ".tag");
+	};
 
 	// 태그를 추가하는 method
 	document.querySelector(".plus").addEventListener("click", function(e){
 		e.preventDefault();
-		
+		// 태그를 추가하는 input 요소를 보이게 함
 		document.querySelector("#inputTag").style.display="block";
+		// 태그 추가 링크의 class를 변경
 		this.setAttribute("class", "addTag");
+		// 태그 추가 링크의 내용을 변경
 		this.innerText="태그 추가";
+		// 해당 class에 해당하는 링크에 태그 추가 이벤트 부여
 		addTagEvent(".addTag");
 	});
 	
+	// 태그를 추가하는 함수
 	function addTagEvent(rel){
 		document.querySelector(rel).addEventListener("click", test, {once:true});
 	}
 	
+	// 태그를 추가하는 함수에 들어갈 함수
 	function test(e){
 		e.preventDefault();
-		
+		// 태그를 추가할 버튼의 data-num 성분을 읽어옴
 		let num=this.getAttribute("data-num");
+		// 추가하고 싶은 태그를 작성한 input 요소의 값을 읽어옴
 		let storeTag=document.querySelector("#inputTag").value;
+		// 두 정보를 object로 만들어서 전달할 준비
 		let obj={num, storeTag};
 		console.log(obj);
 		
+		// 해당 링크를 요청하면서 object를 전달하고
 		ajaxPromise("${pageContext.request.contextPath}/addTag.do", "post", obj)
 		.then(function(response){
 			return response.json();
 		}).then(function(data){
 			console.log(data);
+			// 데이터를 받으면
 			if(data.beAdded){
+				// 태그 추가 input 창을 reset하고, 화면에서 숨김
 				document.querySelector("#inputTag").value="";
 				document.querySelector("#inputTag").style.display="none";
-				
+				// 해당 매장의 DB 번호를 받아서
 				let dataNum=${dto.num};
-				
+				// 새로운 태그 버튼을 만들고 성분과 값을 부여함
 				let newBtn=document.createElement("button");
 				newBtn.innerText=storeTag;
 				newBtn.setAttribute("class", "btn btn-primary add-tag");
 				newBtn.setAttribute("data-num", dataNum);
+				// 새로운 취소 버튼을 만들고 성분과 값을 부여함
 				let newDeleteBtn=document.createElement("button");
 				newDeleteBtn.setAttribute("class", "btn-close add-del-tag");
 				newDeleteBtn.setAttribute("data-num", dataNum);
+				// 새 버튼의 자식 요소로 취소 버튼을 넣고, 태그 버튼 또한 태그 공간의 자식 요소로 넣어줌
 				newBtn.appendChild(newDeleteBtn);
 				document.querySelector("#btns").appendChild(newBtn);
 				document.querySelector(".addTag").setAttribute("class", "plus addTag");
-				
+				// 새롭게 만든 삭제 버튼에 태그 삭제 이벤트 부여
 				deleteTag(".add-del-tag", ".add-tag");
 			}
 		});
 	}
 	
 	// 태그 삭제
-	deleteTag(".del-tag", ".tag");
+	//deleteTag(".del-tag", ".tag");
 	
+	// 태그를 삭제하는 함수 (추가된 삭제 버튼, 추가된 태그 버튼)
 	function deleteTag(addDeleteTag, addTag){
-		// 태그를 삭제하는 method
+		// 추가된 삭제 버튼, 태그버튼들
 		let deleteBtns=document.querySelectorAll(addDeleteTag);
 		let tags=document.querySelectorAll(addTag);
+		// 버튼의 개수만큼 반복
 		for(let i=0; i<deleteBtns.length; i++){
+			// 버튼의 data-num 성분의 값과 태그 값을 얻어서 object로 담음
 			let num=deleteBtns[i].getAttribute("data-num");
 			let storeTag=tags[i].innerText;
 			let obj={num, storeTag};
+			// 삭제 버튼을 눌렀을 때 작동할 이벤트
 			deleteBtns[i].addEventListener("click", function(){
+				// 삭제여부를 확인
 				let toDelete=confirm("이 태그를 삭제하시겠습니까?");
 				if(toDelete){
+					// 해당 경로를 요청하면서 object 전달
 					ajaxPromise("${pageContext.request.contextPath}/deleteTag.do", "post", obj)
 					.then(function(response){
 						return response.json();
 					}).then(function(data){
 						console.log(data);
 						if(data.beDeleted){
+							// 해당 태그 버튼과 삭제버튼을 지움.
 							tags[i].remove();
 							deleteBtns[i].remove();
 						}
@@ -139,5 +187,68 @@
 			});
 		}
 	}
+	
+	// 매장 정보 수정
+	// 수정완료, 취소 링크 영역
+	let updateBox=document.querySelector("#updateBox");
+	// 뿌려주는 정보(매장 이름, 주소, 영업시간)
+	let storeDatas=document.querySelectorAll(".storeData");
+	// 수정 form input들
+	let updateInputs=document.querySelectorAll(".updateData");
+	
+	// 수정 form 매장정보수정 -> 수정완료, 취소 변환 method
+	document.querySelector("#updateBtn").addEventListener("click", function(){
+		// 정보 수정 링크를 숨김
+		this.style.display="none";
+		// 수정완료, 취소 링크를 보이게 함
+		updateBox.style.display="block";
+		// input들을 보이게 함
+		for(let i=0; i<updateInputs.length; i++){
+			updateInputs[i].style.display="block";
+		}
+	});
+	
+	let updateBtn=document.querySelector("#updateBtn");
+	// 수정 form 수정완료, 취소 변환 -> 매장정보수정 method
+	document.querySelector("#updateCancel").addEventListener("click", function(){
+		// 수정완료, 취소 링크를 숨김
+		updateBox.style.display="none";
+		// 매장정보수정 링크를 보이게 함
+		updateBtn.style.display="block";
+		// input들을 숨김
+		for(let i=0; i<updateInputs.length; i++){
+			updateInputs[i].style.display="none";
+		}
+	});
+	
+	// 수정 완료 버튼 눌렀을 때 동작하는 method
+	document.querySelector("#update").addEventListener("click", function(){
+		// 수정 폼의 참조값을 얻어옴
+		let updateForm=document.querySelector("#updateForm");
+		ajaxFormPromise(updateForm)
+		.then(function(response){
+			return response.json();
+		}).then(function(data){
+			console.log(data);
+			if(data.beUpdated){
+				// 알람창을 띄우고
+				alert("매장 정보를 수정했습니다.");
+				// 수정완료, 취소 링크를 숨김
+				updateBox.style.display="none";
+				// 매장 정보 수정 링크를 보이게 함
+				updateBtn.style.display="block";
+				// input 창의 값을 수정값으로 바꾸고 input창을 숨김
+				for(let i=0; i<updateInputs.length; i++){
+					storeDatas[i].innerText=updateInputs[i].value;
+					updateInputs[i].style.display="none";
+				}
+			}
+		});
+	});
+	
+	// 
+	document.querySelector("#logoImage").addEventListener("change", function(){
+		document.querySelector("#image_logo").setAttribute("src", this.value);
+	});
 </script>
 </html>
