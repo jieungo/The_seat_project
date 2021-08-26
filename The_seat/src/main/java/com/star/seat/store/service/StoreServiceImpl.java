@@ -21,7 +21,7 @@ public class StoreServiceImpl implements StoreService{
 	@Override
 	public void addStore(HttpServletRequest request) {
 		String email=(String)request.getSession().getAttribute("email");
-		email="test";
+		//email="test";
 		dao.addStore(email);
 	}
 	
@@ -29,10 +29,10 @@ public class StoreServiceImpl implements StoreService{
 	@Override
 	public void getMyStores(HttpServletRequest request) {
 		String email=(String)request.getSession().getAttribute("email");
-		email="test";
-		
+		//email="test";
+		System.out.println(email);
 		List<StoreDto> list=dao.getMyStores(email);
-		//System.out.println(list);
+		System.out.println(list);
 		request.setAttribute("myStoreList", list);
 	}
 	
@@ -40,7 +40,7 @@ public class StoreServiceImpl implements StoreService{
 	@Override
 	public void getMyStore(HttpServletRequest request) {
 		String email=(String)request.getSession().getAttribute("email");
-		email="test";
+		//email="test";
 		
 		int num=Integer.parseInt(request.getParameter("num"));
 		
@@ -67,9 +67,8 @@ public class StoreServiceImpl implements StoreService{
 	
 	// 사장님의 매장 정보 하나를 불러오는 method(해당 매장 DB 번호 이용)
 	@Override
-	public void getMyStore_num(StoreDto dto) {
-		dao.getMyStore_num(dto);
-		
+	public void getMyStore_num(StoreDto dto) {		
+		dao.getMyStore_num(dto);	
 	}
 	
 	// 매장 검색목록 불러오는 method

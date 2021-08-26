@@ -33,8 +33,11 @@ public class StoreController {
 		// 검색 결과 목록을 얻어옴
 		service.getList(request, dto);
 		
-		// 내가 관리하는 매장 정보를 얻어옴
-		service.getMyStores(request);
+		String email=(String)request.getSession().getAttribute("email");
+		if(email != null) {
+			// 내가 관리하는 매장 정보를 얻어옴
+			service.getMyStores(request);
+		}
 		
 		return "main";
 	}
