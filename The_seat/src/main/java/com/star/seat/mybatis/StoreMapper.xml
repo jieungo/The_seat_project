@@ -54,4 +54,11 @@
 		delete from store
 		where num=#{num}
 	</delete>
+	
+	<!-- 매장 정보(이름, 주소, 시간)를 수정하는 method -->
+	<update id="updateStore" parameterType="storeDto">
+		update store
+		set storeName=#{storeName}, storeAddr=#{storeAddr}, openingTime=#{openingTime}
+		where num=#{num}
+	</update>
 </mapper>

@@ -2,6 +2,8 @@ package com.star.seat.store.dao;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -35,7 +37,7 @@ public class StoreDaoImpl implements StoreDao{
 		return myDto;
 	}
 	
-	// 사장님의 매장 정보 하나를 불러오는 method(해당 매장 DB 번호 이용)
+	// (사장님의) 매장 정보 하나를 불러오는 method(해당 매장 DB 번호 이용)
 	@Override
 	public StoreDto getMyStore_num(StoreDto dto) {
 		StoreDto myDto=session.selectOne("getMyStore_num", dto);
@@ -62,5 +64,11 @@ public class StoreDaoImpl implements StoreDao{
 	@Override
 	public void deleteTag(StoreDto dto) {
 		session.update("addTag", dto);
+	}
+	
+	// 매장 정보(이름, 주소, 시간)를 수정하는 method
+	@Override
+	public void updateStore(StoreDto dto) {
+		session.update("updateStore", dto);	
 	}
 }
