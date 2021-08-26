@@ -129,7 +129,7 @@ public class UsersController {
 		return mView;
 	}
 	
-	//회원정보 가져오기
+	//로그인된 회원정보와 함께 info 페이지로 이동
 	@RequestMapping("/users/info")
 	public ModelAndView Info(HttpSession session, ModelAndView mView,
 			HttpServletRequest request) {
@@ -140,11 +140,19 @@ public class UsersController {
 		return mView;
 	}
 	
+	@RequestMapping("/users/getData")
+	@ResponseBody
+	public Map<String, Object> getUser(HttpSession session) {
+		
+		return service.getData(session);
+	}
+	
 	//로그아웃
 	@RequestMapping("/users/logout")
 	public String logout(HttpSession session) {
 		//세션에서 id 라는 키값으로 저장된 값 삭제 
 		session.removeAttribute("email");
+		session.removeAttribute("name");
 		return "main";
 	}
 }

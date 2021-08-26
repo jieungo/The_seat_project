@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" 
 integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 <script
@@ -30,7 +31,7 @@ crossorigin="anonymous"></script>
 	}
 </style>
    <nav class="navbar navbar-light bg-light">
-      <img style= "width: 50px; height: 50px;" src="${pageContext.request.contextPath}/resources/img/chair.png" alt="chair" />
+      <img id="chair" style= "width: 50px; height: 50px;" src="${pageContext.request.contextPath}/resources/img/chair.png" alt="chair" />
          <a class="navbar-brand"
             href="${pageContext.request.contextPath}/main.do">자리..<br>있어요?
          </a>
@@ -64,25 +65,70 @@ crossorigin="anonymous"></script>
          <div class="offcanvas offcanvas-end" tabindex="-1"
             id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header">
-               <h5 class="offcanvas-title" id="offcanvasNavbarLabel"></h5>
+               <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
+				<c:choose>
+					<c:when test="${sessionScope.email ne null }">
+						<span id="userName" style="font-weight: bold; font-size: 33px;"></span>님 로그인 중..
+					</c:when>
+					<c:otherwise>
+						<span>반갑습니다.</span>
+					</c:otherwise>
+				</c:choose>	
+               </h5>
                <button type="button" class="btn-close text-reset"
                   data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                   <li class="nav-item"><a class="nav-link active"
-                     aria-current="page" href="#">${sessionScope.email }</a></li>
-                  <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/users/info.do">마이 페이지</a></li>
+                     aria-current="page" href="#"></a></li>
+                  <li class="nav-item">
+                  	<c:choose>
+                  		<c:when test="${sessionScope.email ne null }">
+                  			<a class="nav-link" href="${pageContext.request.contextPath}/users/info.do">마이페이지</a>
+                  		</c:when>
+                  		<c:otherwise>
+                  			<a class="nav-link" href="${pageContext.request.contextPath}/users/loginform.do">로그인</a>
+                  		</c:otherwise>
+                  	</c:choose>
+                  </li>
                   <li class="nav-item"><a class="nav-link" href="#">공지사항</a></li>
+
+                  <select name="storeList" id="storeList" class="form-select">
+                  <option selected value="">매장 목록</option>
+                  <option value="">The Station</option>
+                  <option value="">TWOSOME</option>
+                  </select>
+                  <a class="nav-link" href="">매장 등록</a>
+                  <c:if test="${sessionScope.email ne null }">
+	               	<li class="nav-item">
+	               		<a class="nav-link" href="${pageContext.request.contextPath}/users/logout.do">
+	               			로그아웃
+	               		</a>
+	               	</li>
+	               </c:if>
                </ul>
-               <select name="storeList" id="storeList" class="form-select">
-               <option selected value="">매장 목록</option>
-               <option value="">The Station</option>
-               <option value="">TWOSOME</option>
-               </select>
-               
-               <a class="nav-link" href="">매장 등록</a>
-               <a class="nav-link" href="${pageContext.request.contextPath}/users/logout.do">로그아웃</a>
+               <form class="d-flex">
+                  <input class="form-control me-2" type="search"
+                     placeholder="Search here!" aria-label="Search">
+                  <button class="btn btn-outline-primary" type="submit">Search</button>
+               </form>
+
             </div>
          </div>
    </nav>
+   <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
+   <script>
+   // session 정보로 이름 정보 가져오기
+   ajaxPromise("${pageContext.request.contextPath}/users/getData.do")
+   .then(function(response){
+	   return response.json()
+   })
+   .then(function(data){
+	   document.querySelector("#userName").innerText = data.dto.name;
+   });
+   
+   document.querySelector("#chair").addEventListener("click",function(){
+	   location.href="${pageContext.request.contextPath}/main.do";
+   });
+   </script>
