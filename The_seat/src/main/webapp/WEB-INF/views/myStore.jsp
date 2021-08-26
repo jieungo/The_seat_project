@@ -18,9 +18,9 @@
 	<a href="">매장 정보 편집</a>
 	<br>
 	<div>
-		<p>매장 이름 : <strong>${dto.storeName }</strong></p>
-		<p>매장 주소 : <strong>${dto.storeAddr }</strong></p>
-		<p>영업 시간 : <strong>${dto.openingTime }</strong></p>
+		<p>매장 이름 : <strong>${dto.storeName } <input type="text" /></strong></p>
+		<p>매장 주소 : <strong>${dto.storeAddr } <input type="text" /></strong></p>
+		<p>영업 시간 : <strong>${dto.openingTime } <input type="text" /></strong></p>
 	</div>
 	<div>
 		매장 태그 : 
@@ -28,7 +28,7 @@
 		<c:forEach var="tmp" items="${list }">
 			<button data-num="${dto.num }" name="tag" class="btn btn-primary tag">
 				${tmp }
-				<button data-num="${dto.num }" type="button" class="btn-close del-tag"/>
+				<button data-num="${dto.num }" type="button" class="btn-close del-tag"></button>
 			</button>
 		</c:forEach>
 		</p>
@@ -48,6 +48,20 @@
 </body>
 <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 <script>
+	// 로딩되는 태그 안에 x 넣기
+	/*
+	window.addEventListener("load", function(){
+		let btns=document.querySelectorAll(".tag");
+		for(let i=0; i<btn.length; i++){
+			let dataNum=btns[i].getAttribute("data-num");
+			let newDeleteBtn=document.createElement("button");
+			newDeleteBtn.setAttribute("class", "btn-close del-tag");
+			newDeleteBtn.setAttribute("data-num", dataNum);
+			document.querySelector("#btns").appendChild(newDeleteBtn);
+		}
+	});
+	*/
+
 	// 태그를 추가하는 method
 	document.querySelector(".plus").addEventListener("click", function(e){
 		e.preventDefault();
