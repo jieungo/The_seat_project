@@ -36,14 +36,16 @@ CREATE TABLE storeMenu(
 );
 
 CREATE TABLE storeReview(
-	num,
-	storeName,
-	writer,
-	content,
-	star,
-	targetNum,
-	regdate
+	num NUMBER PRIMARY KEY,
+	storeName VARCHAR2(100) NOT NULL,
+	writer VARCHAR2(100) NOT NULL,
+	content VARCHAR2(100) NOT NULL,
+	star NUMBER,
+	targetNum NUMBER,
+	regdate DATE
 );
+
+CREATE SEQUENCE storeReview_seq;
 
 CREATE TABLE storeSeat(
 	

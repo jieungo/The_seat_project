@@ -11,97 +11,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script>
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-  />
-<style>
-    body {
-        background-color: #2e8eff;
-        color: white;
-        font-size: 1rem;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        position: relative;
-    }
-
-    .col__section {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .line {
-        height: 1px;
-        width: 10vw;
-        background-color: white;
-        display: inline-block;
-    }
-
-    .line-section {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 15px 0 15px 0;
-    }
-
-    .line-section > span {
-        padding: 0 15px 0 15px;
-    }
-
-    .form-control {
-        width: 25vw;
-        height: 5vh;
-        outline: none;
-        border: none;
-        margin: 10px 0 10px 0;
-    }
-
-    .text-btn {
-        outline: none;
-        border: none;
-        background-color: transparent;
-        color: white;
-        margin: 15px auto 5px auto;
-        display: flex;
-        text-align: center;
-    }
-
-    .modal {
-        color: black;
-    }
-
-    #signupForm {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    #signupForm > div > input {
-        width: 30vw;
-        background-color: #f2f2f2;
-        outline: none;
-        border: 0.5px solid lightgray;
-    }
-    .signup__menu {
-        display: flex;
-        align-items: center;
-    }
-
-    .signup__menu-add {
-        width: 5vw; 
-        height: 5vh; 
-        padding: 0;
-        margin: 10px 0 10px 5px;
-        outline: none;
-        border: none;
-        background-color: white;
-        color: #2e8eff;
-    }
-</style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/loginform.css" type="text/css"/>
 </head>
 <body>
  <div class="container">
@@ -117,18 +28,21 @@
              <form id="loginForm" action="${pageContext.request.contextPath}/users/login.do" method="post">
                  <div>
                      <label class="label" for="email">Email</label><br>
-                     <input class="form-control" type="email" name="email"/>
-                     <div class="invalid-feedback">사용할수 없는 이메일 입니다.</div>
+                     <input id="id" class="form-control" type="text" placeholder="이메일" required="required"/><span>@</span>
+                     <select name="emailAddr" id="emailAddr">
+                     	<option value="naver.com">네이버</option>
+                     	<option value="gmail.com">구글</option>
+                     	<option value="daum.net">다음</option>
+                     </select>
+                     <input type="hidden" id="emailLogin" name="email"/>
                  </div>
                  <div>
                      <label class="label" for="password">Password</label><br>
-                     <input class="form-control" type="password" name="pwd"/>
-                     <div class="invalid-feedback">비밀번호를 확인 하세요.</div>
+                     <input id="loginPwd" class="form-control" type="password" name="pwd" placeholder="비밀번호" required="required"/>
                  </div>
                  <button class="text-btn" type="submit">Continue</button>
              </form>
            
-
            <div class="line-section">
                <div class="line"></div>
                <span>OR</span>
@@ -158,13 +72,20 @@
           <div class="modal-dialog">
               <div class="modal-content">
               <div class="modal-header">
-                  <h3 class="modal-title"><strong>Sign up</strong> </h3>
+                  <h3 class="modal-title"><strong>회원가입</strong> </h3>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
                   <form id="signupForm" action="${pageContext.request.contextPath}/users/signup.do" method="post" class="needs-validation">
                       <div>
-                          <input class="form-control" type="text" name="email" id="email" placeholder="이메일주소" required="required">
+						  
+						  <input id="idSignup" class="form-control" type="text" placeholder="이메일" required="required"/><span>@</span>
+	                      <select name="emailAddrSignup" id="emailAddrSignup">
+	                     	<option value="naver.com">네이버</option>
+	                     	<option value="gmail.com">구글</option>
+	                     	<option value="daum.net">다음</option>
+	                      </select>
+                          <input  type="hidden" name="email" id="email" >
                           <div class="invalid-feedback">사용할수 없는 이메일 입니다.</div>
                       </div>
                       <div>
@@ -200,16 +121,34 @@
   </div>   
 </div>
 </div>
+
+<script type="text/javascript" src="script2.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 
 <script>
-
     //----------------------------------로그인---------------------------------------------
     
+    // email 입력 폼
+    document.querySelector("#id").addEventListener("change",function(){
+    	let emailAddr = document.querySelector("#emailAddr").value;
+    	let email = this.value + "@" + emailAddr;
+    	document.querySelector("#emailLogin").value = email;
+    	console.log(document.querySelector("#emailLogin").value);
+    });
+    
+    document.querySelector("#emailAddr").addEventListener("change",function(){
+    	let id = document.querySelector("#id").value;
+    	let email = id + "@" + this.value
+    	document.querySelector("#emailLogin").value = email;
+    	console.log(document.querySelector("#emailLogin").value);
+    });
+   
     //continue 버튼 누르면 ajax 로그인
     document.querySelector("#loginForm").addEventListener("submit",function(e){
        //폼 제출 막고
        e.preventDefault();
+     
        //ajax 로 폼 내용 전송하고 json으로 응답 받기
        let loginForm = document.querySelector("#loginForm");
        
@@ -232,27 +171,34 @@
     
     //---------------------------------회원가입--------------------------------------------
     
+    //email 입력 폼
+    document.querySelector("#idSignup").addEventListener("change",function(){
+    	let emailAddr = document.querySelector("#emailAddrSignup").value;
+    	let email = this.value + "@" + emailAddr;
+    	document.querySelector("#email").value = email;
+    	console.log(document.querySelector("#email").value);
+    });
+    
+    document.querySelector("#emailAddrSignup").addEventListener("change",function(){
+    	let id = document.querySelector("#idSignup").value;
+    	let email = id + "@" + this.value
+    	document.querySelector("#email").value = email;
+    	console.log(document.querySelector("#email").value);
+    });
+    
+    
    //아이디, 비밀번호, 이메일의 유효성 여부를 관리한 변수 만들고 초기값 대입
    let isEmailValid=false;
    let isPwdValid=false;
 
    //이메일 입력했을때(input) 실행할 함수 등록 
-   document.querySelector("#email").addEventListener("input", function(){
+   document.querySelector("#idSignup").addEventListener("change", function(){
       //일단 is-valid,  is-invalid 클래스를 제거한다.
-      document.querySelector("#email").classList.remove("is-valid");
-      document.querySelector("#email").classList.remove("is-invalid");
+      document.querySelector("#idSignup").classList.remove("is-valid");
+      document.querySelector("#idSignup").classList.remove("is-invalid");
       
       //1. 입력한 이메일 value 값 읽어오기  
-      let inputEmail=this.value;
-      //입력한 이메일을 검증할 정규 표현식
-      const reg_id=/@/;
-      //만일 입력한 이메일이 정규표현식과 매칭되지 않는다면
-      if(!reg_id.test(inputEmail)){
-         isEmailValid=false; //매칭되지 않는다고 표시하고 
-         // is-invalid 클래스를 추가한다. 
-         document.querySelector("#email").classList.add("is-invalid");
-         return; //함수를 여기서 끝낸다 (ajax 전송 되지 않도록)
-      };
+      let inputEmail=document.querySelector("#email").value;
       
       //2. util 에 있는 함수를 이용해서 ajax 요청하기
       ajaxPromise("${pageContext.request.contextPath}/users/checkemail.do", "get", "inputEmail="+inputEmail)
@@ -265,10 +211,37 @@
             //사용할수 없는 아이디라는 피드백을 보이게 한다. 
             isEmailValid=false;
             // is-invalid 클래스를 추가한다. 
-            document.querySelector("#email").classList.add("is-invalid");
+            document.querySelector("#idSignup").classList.add("is-invalid");
          }else{
             isEmailValid=true;
-            document.querySelector("#email").classList.add("is-valid");
+            document.querySelector("#idSignup").classList.add("is-valid");
+         };
+      });
+   });
+   
+   document.querySelector("#emailAddrSignup").addEventListener("change", function(){
+      //일단 is-valid,  is-invalid 클래스를 제거한다.
+      document.querySelector("#idSignup").classList.remove("is-valid");
+      document.querySelector("#idSignup").classList.remove("is-invalid");
+      
+      //1. 입력한 이메일 value 값 읽어오기  
+      let inputEmail=document.querySelector("#email").value;
+      
+      //2. util 에 있는 함수를 이용해서 ajax 요청하기
+      ajaxPromise("${pageContext.request.contextPath}/users/checkemail.do", "get", "inputEmail="+inputEmail)
+      .then(function(response){
+         return response.json();
+      })
+      .then(function(data){
+         //data 는 {isExist:true} or {isExist:false} 형태의 object 이다.
+         if(data.isExist){//만일 존재한다면
+            //사용할수 없는 아이디라는 피드백을 보이게 한다. 
+            isEmailValid=false;
+            // is-invalid 클래스를 추가한다. 
+            document.querySelector("#idSignup").classList.add("is-invalid");
+         }else{
+            isEmailValid=true;
+            document.querySelector("#idSignup").classList.add("is-valid");
          };
       });
    });
@@ -326,42 +299,35 @@
       };
    });
    
-</script>
-
-
-<!-- datepicker 생년월일 -->   
-   <script>
+	<!-- datepicker 생년월일 -->   
         const picker = new Litepicker({ 
           element: document.getElementById('litepicker') 
         });
-   </script>
-
     <!-- 카카오 스크립트 -->
-    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-    <script>
-        Kakao.init('1cb3c0466b76917b1c74d17787e7bf55'); //발급받은 키 중 javascript키를 사용해준다.
-        console.log(Kakao.isInitialized()); // sdk초기화여부판단
-        //카카오로그인
-        function kakaoLogin() {
-            Kakao.Auth.login({
+    Kakao.init('1cb3c0466b76917b1c74d17787e7bf55'); //발급받은 키 중 javascript키를 사용해준다.
+    console.log(Kakao.isInitialized()); // sdk초기화여부판단
+    //카카오로그인
+    function kakaoLogin() {
+        Kakao.Auth.login({
+        success: function (response) {
+            Kakao.API.request({
+            url: '/v2/user/me',
             success: function (response) {
-                Kakao.API.request({
-                url: '/v2/user/me',
-                success: function (response) {
-                    console.log(response);
-                    
-                },
-                fail: function (error) {
-                    console.log(error)
-                    alert('로그인 실패');
-                },
-                })
+                console.log(response);
+                
             },
             fail: function (error) {
                 console.log(error)
+                alert('로그인 실패');
             },
             })
-        };
+        },
+        fail: function (error) {
+            console.log(error)
+        },
+        })
+    };
+    
    //카카오로그아웃  
    function kakaoLogout() {
    if (Kakao.Auth.getAccessToken()) {
@@ -376,8 +342,9 @@
       })
        Kakao.Auth.setAccessToken(undefined)
       }
-   } 
-    </script>
+   };
+   
+</script>
     
     
     <!-- 구글 스크립트
