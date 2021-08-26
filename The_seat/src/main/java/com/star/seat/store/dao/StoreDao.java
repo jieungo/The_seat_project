@@ -2,6 +2,8 @@ package com.star.seat.store.dao;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.star.seat.store.dto.StoreDto;
 
 public interface StoreDao {
@@ -15,7 +17,7 @@ public interface StoreDao {
 	// 사장님의 매장 정보 하나를 불러오는 method(이메일과 rnum 이용)
 	public StoreDto getMyStore(StoreDto dto);
 	
-	// 사장님의 매장 정보 하나를 불러오는 method(해당 매장 DB 번호 이용)
+	// (사장님의) 매장 정보 하나를 불러오는 method(해당 매장 DB 번호 이용)
 	public StoreDto getMyStore_num(StoreDto dto);
 	
 	// 매장 검색목록 불러오는 method
@@ -28,4 +30,7 @@ public interface StoreDao {
 	// 매장 태그를 삭제하는 method
 	// 사실상 update를 이용하는 것
 	public void deleteTag(StoreDto dto);
+	
+	// 매장 정보(이름, 주소, 시간)를 수정하는 method
+	public void updateStore(StoreDto dto);
 }

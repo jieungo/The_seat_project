@@ -97,9 +97,25 @@ public class StoreController {
 		return map;
 	}
 	
+	// 관리 매장 정보 수정
+	@RequestMapping(value = "/storeUpdate.do", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> storeUpdate(StoreDto dto, HttpServletRequest request){
+
+		service.updateStore(dto, request);
+		
+		Map<String, Object> map=new HashMap<>();
+		map.put("beUpdated", true);
+		
+		return map;
+	}
+	
 	// 매장 상세 정보 페이지로 이동
-	@RequestMapping("/storeDetail.do")
-	public String goStoreDetail() {
+	@RequestMapping(value = "/storeDetail.do", method = RequestMethod.GET)
+	public String goStoreDetail(StoreDto dto, HttpServletRequest request) {
+		
+		service.getMyStore_num(dto, request);
+		
 		return "storeDetail";
 	}
 }

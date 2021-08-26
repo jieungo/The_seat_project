@@ -65,10 +65,12 @@ public class StoreServiceImpl implements StoreService{
 		request.setAttribute("list", list);
 	}
 	
-	// 사장님의 매장 정보 하나를 불러오는 method(해당 매장 DB 번호 이용)
+	// (사장님의) 매장 정보 하나를 불러오는 method(해당 매장 DB 번호 이용)
 	@Override
-	public void getMyStore_num(StoreDto dto) {		
-		dao.getMyStore_num(dto);	
+	public void getMyStore_num(StoreDto dto, HttpServletRequest request) {		
+		StoreDto theDto=dao.getMyStore_num(dto);	
+	
+		request.setAttribute("dto", theDto);
 	}
 	
 	// 매장 검색목록 불러오는 method
@@ -148,5 +150,18 @@ public class StoreServiceImpl implements StoreService{
 		myDto.setStoreTag(strList);
 		// dto를 넣어서 update
 		dao.deleteTag(myDto);	
+	}
+	
+	// 매장 정보(이름, 주소, 시간)를 수정하는 method
+	@Override
+	public void updateStore(StoreDto dto, HttpServletRequest request) {
+		System.out.println(dto.getNum());
+		System.out.println(dto.getStoreName());
+		System.out.println(dto.getStoreAddr());
+		System.out.println(dto.getOpeningTime());
+		
+		dao.updateStore(dto);
+		
+		request.setAttribute("newDto", dto);
 	}
 }
