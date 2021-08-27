@@ -49,16 +49,47 @@
 		where num=#{num}
 	</update>
 	
-	<!-- 매장 태그를 삭제하는 method -->
-	<delete id="deleteTag" parameterType="storeDto">
-		delete from store
-		where num=#{num}
-	</delete>
-	
 	<!-- 매장 정보(이름, 주소, 시간)를 수정하는 method -->
 	<update id="updateStore" parameterType="storeDto">
 		update store
 		set storeName=#{storeName}, storeAddr=#{storeAddr}, openingTime=#{openingTime}
+		where num=#{num}
+	</update>
+	
+	<!-- 이미지 업로드를 위한 이미지 종류를 체크하는 method -->
+	<update id="imageCheck" parameterType="storeDto">
+		update store
+		set imageCheck=#{imageCheck}
+		where num=#{num}
+	</update>
+	
+	<!-- 이미지를 업로드하는 method -->
+	<update id="updateImage" parameterType="storeDto" >
+		update store
+		<choose>
+			<when test="imageCheck == 'logo'">
+				set image_logo=#{image_logo}
+			</when>
+			<when test="imageCheck == 'img1'">
+				set image_1=#{image_1}
+			</when>
+			<when test="imageCheck == 'img2'">
+				set image_2=#{image_2}
+			</when>
+			<when test="imageCheck == 'img3'">
+				set image_3=#{image_3}
+			</when>
+			<when test="imageCheck == 'img4'">
+				set image_4=#{image_4}
+			</when>
+		</choose>
+		where num=#{num} and owner=#{owner}
+	</update>
+	
+	<!-- 매장 On Off method -->
+	<update id="storeOnOff" parameterType="storeDto">
+		update store
+		set storeOpen=#{storeOpen}
 		where num=#{num}
 	</update>
 </mapper>

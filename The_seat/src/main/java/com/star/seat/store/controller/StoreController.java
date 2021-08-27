@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,8 +25,8 @@ public class StoreController {
 	private StoreService service;
 	
 	// 검색 결과 메인 페이지를 요청할 때의 method
-	@RequestMapping("/main.do")
-	public String getList(StoreDto dto, HttpServletRequest request) {
+	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
+	public String getList(StoreDto dto, HttpServletRequest request, HttpSession session) {
 		
 		// dto에 지역, 메뉴, 검색어 넣어서 dto라는 이름으로 저장.
 		request.setAttribute("dto", dto);
@@ -34,9 +35,10 @@ public class StoreController {
 		service.getList(request, dto);
 		
 		String email=(String)request.getSession().getAttribute("email");
+		//System.out.println(email!=null);
 		if(email != null) {
 			// 내가 관리하는 매장 정보를 얻어옴
-			service.getMyStores(request);
+			service.getMyStores(request, session);
 		}
 		
 		return "main";
@@ -85,7 +87,7 @@ public class StoreController {
 	}
 	
 	// 매장을 태그를 삭제하는 method
-	@RequestMapping(value = "deleteTag.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/deleteTag.do", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> deleteTag(StoreDto dto) {
 		
@@ -117,5 +119,31 @@ public class StoreController {
 		service.getMyStore_num(dto, request);
 		
 		return "storeDetail";
+	}
+	
+	// (로고)사진 업로드 method
+	@RequestMapping(value = "/uploadImage.do", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> uploadImage(StoreDto dto, HttpServletRequest request){
+
+		service.uploadImage(dto, request);
+
+		Map<String, Object> map=new HashMap<>();
+		map.put("beUpdated", true);
+		
+		return map;
+	}
+	
+	// 매장 On Off method
+	@RequestMapping(value = "/storeOnOff.do", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> storeOnOff(StoreDto dto) {
+		
+		System.out.println(dto.getNum());
+		
+		Map<String, Object> map=new HashMap<>();
+		map.put("beSwitched", true);
+		
+		return map;
 	}
 }

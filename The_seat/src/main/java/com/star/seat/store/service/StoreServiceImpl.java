@@ -1,13 +1,16 @@
 package com.star.seat.store.service;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.star.seat.store.dao.StoreDao;
 import com.star.seat.store.dto.StoreDto;
@@ -27,13 +30,14 @@ public class StoreServiceImpl implements StoreService{
 	
 	// 사장님의 매장 정보 목록을 불러오는 method
 	@Override
-	public void getMyStores(HttpServletRequest request) {
+	public void getMyStores(HttpServletRequest request, HttpSession session) {
 		String email=(String)request.getSession().getAttribute("email");
 		//email="test";
 		System.out.println(email);
 		List<StoreDto> list=dao.getMyStores(email);
 		System.out.println(list);
-		request.setAttribute("myStoreList", list);
+		session.setAttribute("myStoreList", list);
+		//request.setAttribute("myStoreList", list);
 	}
 	
 	// 사장님의 매장 정보 하나를 불러오는 method(이메일과 rnum 이용)
@@ -70,6 +74,8 @@ public class StoreServiceImpl implements StoreService{
 	public void getMyStore_num(StoreDto dto, HttpServletRequest request) {		
 		StoreDto theDto=dao.getMyStore_num(dto);	
 	
+		System.out.println(theDto.getStoreTag());
+		
 		request.setAttribute("dto", theDto);
 	}
 	
@@ -111,6 +117,7 @@ public class StoreServiceImpl implements StoreService{
 		
 		// 입력한 tag의 정보를 읽어서
 		String newTag=dto.getStoreTag();
+
 		// array에 담아준 다음
 		list.add(newTag);
 		// array 각 성분이 , 로 구분된 String으로 바꿔서
@@ -140,9 +147,11 @@ public class StoreServiceImpl implements StoreService{
 		
 		// 입력한 tag의 정보를 읽어서
 		String tag=dto.getStoreTag();
+		System.out.println("|"+tag+"|");
+		System.out.println(list.indexOf(tag));
 		// array에서 없앤다음
 		list.remove(list.indexOf(tag));
-		
+
 		// array 각 성분이 , 로 구분된 String으로 바꿔서
 		String strList=String.join(",", list);
 		System.out.println(strList);
@@ -163,5 +172,77 @@ public class StoreServiceImpl implements StoreService{
 		dao.updateStore(dto);
 		
 		request.setAttribute("newDto", dto);
+	}
+	
+	// 이미지를 업로드하는 method
+	@Override
+	public void uploadImage(StoreDto dto, HttpServletRequest request) {
+		// Tomcat 서버를 실행했을때 WebContent/upload 폴더의 실제 경로 얻어오기
+		String realPath=request.getServletContext().getRealPath("/upload");
+		//저장할 파일의 상세 경로
+		String filePath=realPath+File.separator;
+		System.out.println("realPath:"+realPath);
+		//해당 경로를 access 할수 있는 파일 객체 생성
+		File f=new File(realPath);
+		if(!f.exists()){ //만일  폴더가 존재 하지 않으면
+			f.mkdir(); //upload 폴더 만들기 
+		}
+		
+		// upload할 image 정보
+		MultipartFile myImage=dto.getImageFile();
+		System.out.println(myImage);
+		//원본 파일명 
+		String orgFileName=myImage.getOriginalFilename();
+		//upload 폴더에 저장된 파일명 
+		String saveFileName=System.currentTimeMillis()+orgFileName;
+		System.out.println(orgFileName);
+		System.out.println(saveFileName);
+		try {
+			//upload 폴더에 파일을 저장한다.
+			myImage.transferTo(new File(filePath+saveFileName));
+			System.out.println(filePath+saveFileName);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		//업로드한 클라이언트의 아이디
+		String email=(String)request.getSession().getAttribute("email");
+		
+		//업로드된 파일 정보를 StoreDto 에 담아서
+		StoreDto myDto=new StoreDto();
+		myDto.setNum(dto.getNum());
+		myDto.setOwner(email);
+		if("check".equals(dto.getImage_logo())) {
+			myDto.setImage_logo("/upload/"+saveFileName);
+			myDto.setImageCheck("logo");
+		} else if("check".equals(dto.getImage_1())) {
+			System.out.println("image1: "+dto.getImage_1());
+			myDto.setImage_1("/upload/"+saveFileName);
+			myDto.setImageCheck("img1");
+		} else if("check".equals(dto.getImage_2())) {
+			myDto.setImage_2("/upload/"+saveFileName);
+			myDto.setImageCheck("img2");
+		} else if("check".equals(dto.getImage_3())) {
+			myDto.setImage_3("/upload/"+saveFileName);
+			myDto.setImageCheck("img3");
+		} else if("check".equals(dto.getImage_4())) {
+			myDto.setImage_4("/upload/"+saveFileName);
+			myDto.setImageCheck("img4");
+		}
+		
+		System.out.println("num: "+dto.getNum());
+		System.out.println("email: "+email);
+		System.out.println("image: "+"/upload/"+saveFileName);
+		System.out.println("check: "+myDto.getImageCheck());
+		
+		dao.imageCheck(myDto);
+		
+		dao.updateImage(myDto);
+	}
+	
+	// 매장 On Off method
+	@Override
+	public void storeOnOff(StoreDto dto) {
+		dao.storeOnOff(dto);
 	}
 }

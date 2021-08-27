@@ -77,11 +77,11 @@
       </div>
       <br/>
       <div class="d-grid gap-2 col-3 mx-auto">
-      <input type="text" id="keyword" name="keyword" placeholder="오늘은 뭐 먹을까?"/>
+      	<input type="text" id="keyword" name="keyword" placeholder="오늘은 뭐 먹을까?"/>
       </div>
       <br/>
       <div class="d-grid gap-2 col-3 mx-auto">
-      <button id="searchBtn" type="submit" class="btn btn-warning">검색</button>
+      	<button id="searchBtn" type="submit" class="btn btn-warning">검색</button>
       </div>
    </form>
    <c:if test="${sessionScope.email eq null }">
