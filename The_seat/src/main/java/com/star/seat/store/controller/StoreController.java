@@ -25,9 +25,7 @@ public class StoreController {
 	@Autowired
 	private StoreService service;
 	
-	
 	// 검색 결과 메인 페이지를 요청할 때의 method
-
 	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
 	public String getList(StoreDto dto, HttpServletRequest request, HttpSession session) {
 
@@ -42,7 +40,6 @@ public class StoreController {
 		//System.out.println(email!=null);
 		if(email != null) {
 			// 내가 관리하는 매장 정보를 얻어옴
-
 			service.getMyStores(request, session);
 		}
 
@@ -150,5 +147,12 @@ public class StoreController {
 		map.put("beSwitched", true);
 		
 		return map;
+	}
+	
+	//임시 매장관리 페이지 이동
+	@RequestMapping("/store/manageMenu.do")
+	public String getList() {
+
+		return "store/manageMenu";
 	}
 }

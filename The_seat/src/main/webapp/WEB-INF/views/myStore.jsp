@@ -17,6 +17,9 @@
 	}
 </style>
 <body>
+<div class="container">
+
+	<a href="${pageContext.request.contextPath}/store/manageMenu.do">매장 관리 페이지</a>
 	<p>매장 관리 페이지</p>
 	DB 번호 : <p>${dto.num }</p>
 	매장 관리자 : <p>${dto.owner }</p>
@@ -129,7 +132,7 @@
 		<button id="storeOnOffBtn">매장 열기</button>
 	</div>
 	매장 등록일 : <p>${dto.regdate }</p>
-	
+</div>
 </body>
 <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 <script>

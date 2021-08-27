@@ -135,13 +135,6 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
 							로그아웃 </a></li>
 				</c:if>
 			</ul>
-      
-			<form class="d-flex">
-				<input class="form-control me-2" type="search"
-					placeholder="Search here!" aria-label="Search">
-				<button class="btn btn-outline-primary" type="submit">Search</button>
-			</form>
-
 		</div>
 	</div>
 </nav>
