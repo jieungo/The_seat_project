@@ -52,9 +52,7 @@
 		</p>
 	</c:if>
 </div>
-   
-	<a href="${pageContext.request.contextPath}/storeDetail.do">매장 상세 페이지</a>
-   
+
 	<!-- 임시 검색 결과 -->
 	<div class="container">
 		<div class="row row-cols-3 row-cols-md-2 g-4">

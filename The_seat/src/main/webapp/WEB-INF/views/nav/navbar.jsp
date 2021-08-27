@@ -1,39 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
-	crossorigin="anonymous">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" 
+integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
 	crossorigin="anonymous"></script>
 <style>
-#area, #group {
-	width: 110px;
-	margin-left: 30px;
-	height: 45px;
-	margin-top: 30px;
-	border: solid 2px gray;
-	border-radius: 5px;
-	text-align-last: center;
-	text-align: center;
-}
-
-#area, #group:focus {
-	outline: none;
-}
-
-#keyword {
-	width: 200px;
-	height: 35px;
-	margin-left: 30px;
-	margin-bottom: 30px;
-	border-radius: 5px;
-	border: solid 2px gray;
-}
+	nav{
+		font-family: 'Do Hyeon', sans-serif;
+	}
+	#area, #group{
+		width: 110px;
+		margin-left: 30px;
+		height: 45px;
+		margin-top: 30px;
+		border: solid 2px gray;
+		border-radius: 5px;
+		text-align-last: center;
+		text-align: center;
+	}
+	#area, #group:focus{
+		outline: none;
+	}
+	#keyword{
+		width: 200px;
+		height: 35px;
+		margin-left: 30px;
+		margin-bottom: 30px;
+		border-radius: 5px;
+		border: solid 2px gray;
+	}
 </style>
 <nav class="navbar navbar-light bg-light">
 	<img id="chair" style="width: 50px; height: 50px;"
@@ -93,7 +96,8 @@
 		<div class="offcanvas-body">
 			<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
 				<li class="nav-item"><a class="nav-link active"
-					aria-current="page" href="#"></a></li>
+					aria-current="page" href="#"></a></li> 
+
 				<li class="nav-item"><c:choose>
 						<c:when test="${sessionScope.email ne null }">
 							<a class="nav-link"
@@ -105,6 +109,7 @@
 						</c:otherwise>
 					</c:choose></li>
 				<li class="nav-item"><a class="nav-link" href="#">공지사항</a></li>
+
 
 				<div class="toggle">
 					<c:choose>
@@ -130,6 +135,7 @@
 							로그아웃 </a></li>
 				</c:if>
 			</ul>
+      
 			<form class="d-flex">
 				<input class="form-control me-2" type="search"
 					placeholder="Search here!" aria-label="Search">
@@ -199,4 +205,11 @@
 			array[i].setAttribute("href", storePath + num);
 		}
 	}
+
+
+	// 네비바의 의자 로고 누르면 메인페이지로 이동
+	
+	document.querySelector("#chair").addEventListener("click", function() {
+		location.href = "${pageContext.request.contextPath}/main.do";
+	});
 </script>

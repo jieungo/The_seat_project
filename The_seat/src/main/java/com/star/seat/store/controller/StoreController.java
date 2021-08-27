@@ -18,15 +18,19 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.star.seat.store.dto.StoreDto;
 import com.star.seat.store.service.StoreService;
+import com.star.seat.users.service.UsersService;
 
 @Controller
 public class StoreController {
 	@Autowired
 	private StoreService service;
 	
+	
 	// 검색 결과 메인 페이지를 요청할 때의 method
+
 	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
 	public String getList(StoreDto dto, HttpServletRequest request, HttpSession session) {
+
 		
 		// dto에 지역, 메뉴, 검색어 넣어서 dto라는 이름으로 저장.
 		request.setAttribute("dto", dto);
@@ -38,10 +42,12 @@ public class StoreController {
 		//System.out.println(email!=null);
 		if(email != null) {
 			// 내가 관리하는 매장 정보를 얻어옴
+
 			service.getMyStores(request, session);
 		}
+
 		
-		return "main";
+		return mView;
 	}
 	
 	// 매장 추가 링크를 눌러서 요청되는 경로에 대한 method
