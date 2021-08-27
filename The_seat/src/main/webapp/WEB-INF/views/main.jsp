@@ -52,22 +52,7 @@
 		</p>
 	</c:if>
 </div>
-   
-	<div class="container toggle">
-		<c:choose>
-			<c:when test="${sessionScope.email !=null && myStoreList.size() != 0}">
-				<c:forEach var="tmp" items="${myStoreList }" varStatus="status">
-					<a
-					   href="${pageContext.request.contextPath}/myStore.do?num=${status.count }"
-					   class="store">${tmp.storeName }</a>
-				</c:forEach>
-				<a data-num="0" id="addBtn0" href="#">+매장 추가</a>
-			</c:when>
-			<c:when test="${sessionScope.email !=null || myStoreList.size() == 0}">
-				<a data-num="0" id="addBtn0" href="#">+매장 추가</a>
-			</c:when>
-		</c:choose>
-	</div>
+
 	<!-- 임시 검색 결과 -->
 	<div class="container">
 		<div class="row row-cols-3 row-cols-md-2 g-4">
@@ -92,53 +77,9 @@
 		</div>
 	</div>
 </body>
-<script src="js/jquery-2.1.3.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 
 <script>
-	let dataNum = 0;
-	let storePath = "${pageContext.request.contextPath}/myStore.do?num=";
-	
-	document.querySelector("#addBtn0").addEventListener("click", function(e) {
-		// 일단 링크 이동을 막고
-		e.preventDefault();
-		// 매장 추가 여부를 확인하고
-		let callAdd = confirm("매장을 추가하시겠습니까?");
-		// 확인을 눌렀다면
-		if (callAdd) {
-			dataNum++;
-			let strDataNum = dataNum.toString();
-			
-			// ajax 응답으로 새 매장 정보를 DB에 추가
-			
-			ajaxPromise("${pageContext.request.contextPath}/newStore.do")
-			.then(function(response){
-				return response.json();
-			}).then(function(data){
-				console.log(data);
-			});
-			
-			
-			let newAnchor = document.createElement("a");
-			newAnchor.innerText = "Default Name";
-			newAnchor.setAttribute("data-num", dataNum);
-			newAnchor.setAttribute("class", "store");
-			
-			newAnchor.setAttribute("id", "addBtn" + strDataNum);
-			document.querySelector(".toggle").prepend(newAnchor);
-			resetDataNum();
-		}
-	});
-	
-	// 전체의 data-num을 조정하는 function
-	function resetDataNum() {
-		let array = document.querySelectorAll("a[class='store']");
-		for (let i = 0; i < array.length; i++) {
-			let num=i+1;
-			array[i].setAttribute("data-num", num);
-			array[i].setAttribute("href", storePath + num);
-		}
-	}
+
 </script>
 </html>

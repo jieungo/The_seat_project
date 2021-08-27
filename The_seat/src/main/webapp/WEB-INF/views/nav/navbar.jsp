@@ -13,7 +13,6 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
 	integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
 	crossorigin="anonymous"></script>
 <style>
-
 	nav{
 		font-family: 'Do Hyeon', sans-serif;
 	}
@@ -38,7 +37,6 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
 		border-radius: 5px;
 		border: solid 2px gray;
 	}
-
 </style>
 <nav class="navbar navbar-light bg-light">
 	<img id="chair" style="width: 50px; height: 50px;"
@@ -99,6 +97,7 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
 			<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
 				<li class="nav-item"><a class="nav-link active"
 					aria-current="page" href="#"></a></li> 
+
 				<li class="nav-item"><c:choose>
 						<c:when test="${sessionScope.email ne null }">
 							<a class="nav-link"
@@ -111,20 +110,32 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
 					</c:choose></li>
 				<li class="nav-item"><a class="nav-link" href="#">공지사항</a></li>
 
-				<select name="storeList" id="storeList" class="form-select">
-					<option selected value="">매장 목록</option>
-					<option value="">The Station</option>
-					<option value="">TWOSOME</option>
-				</select>
-				<a class="nav-link" href="">매장 등록</a>
+
+				<div class="toggle">
+					<c:choose>
+						<c:when test="${sessionScope.email !=null && myStoreList.size() != 0}">
+							<c:forEach var="tmp" items="${myStoreList }" varStatus="status">
+								<li><a href="${pageContext.request.contextPath}/myStore.do?num=${status.count }"
+								   class="store">${tmp.storeName }</a></li>
+							</c:forEach>
+						</c:when>
+					</c:choose>
+				</div>
+				<br>
+				<br>
+				<br>
+				<br>
+				
+				<li><a data-num="0" id="addBtn0" href="#">+매장 추가</a></li>
+				<br>
+				<br>
 				<c:if test="${sessionScope.email ne null }">
-					<li class="nav-item">
-						<a class="nav-link" href="${pageContext.request.contextPath}/users/logout.do">
-							로그아웃 
-						</a>
-					</li>
+					<li class="nav-item"><a class="nav-link"
+						href="${pageContext.request.contextPath}/users/logout.do">
+							로그아웃 </a></li>
 				</c:if>
 			</ul>
+      
 			<form class="d-flex">
 				<input class="form-control me-2" type="search"
 					placeholder="Search here!" aria-label="Search">
@@ -137,16 +148,64 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
 <script
 	src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 <script>
-	${request}
 	// session 정보로 이름 정보 가져오기
-	
-	ajaxPromise("${pageContext.request.contextPath}/users/getData.do")
-	.then(function(response) {
-		return response.json();
-	})
-	.then(function(data) {
+	ajaxPromise("${pageContext.request.contextPath}/users/getData.do").then(
+			function(response) {
+				return response.json()
+			}).then(function(data) {
 		document.querySelector("#userName").innerText = data.dto.name;
 	});
+
+	document.querySelector("#chair").addEventListener("click", function() {
+		location.href = "${pageContext.request.contextPath}/main.do";
+	});
+	
+	
+	// 매장 추가 관리 영역
+	let dataNum = 0;
+	let storePath = "${pageContext.request.contextPath}/myStore.do?num=";
+	
+	document.querySelector("#addBtn0").addEventListener("click", function(e) {
+		// 일단 링크 이동을 막고
+		e.preventDefault();
+		// 매장 추가 여부를 확인하고
+		let callAdd = confirm("매장을 추가하시겠습니까?");
+		// 확인을 눌렀다면
+		if (callAdd) {
+			dataNum++;
+			let strDataNum = dataNum.toString();
+			
+			// ajax 응답으로 새 매장 정보를 DB에 추가
+			
+			ajaxPromise("${pageContext.request.contextPath}/newStore.do")
+			.then(function(response){
+				return response.json();
+			}).then(function(data){
+				console.log(data);
+			});
+			
+			
+			let newAnchor = document.createElement("a");
+			newAnchor.innerText = "Default Name";
+			newAnchor.setAttribute("data-num", dataNum);
+			newAnchor.setAttribute("class", "store");
+			
+			newAnchor.setAttribute("id", "addBtn" + strDataNum);
+			document.querySelector(".toggle").appendChild(newAnchor);
+			resetDataNum();
+		}
+	});
+	
+	// 전체의 data-num을 조정하는 function
+	function resetDataNum() {
+		let array = document.querySelectorAll("a[class='store']");
+		for (let i = 0; i < array.length; i++) {
+			let num=i+1;
+			array[i].setAttribute("data-num", num);
+			array[i].setAttribute("href", storePath + num);
+		}
+	}
+
 
 	// 네비바의 의자 로고 누르면 메인페이지로 이동
 	

@@ -71,4 +71,22 @@ public class StoreDaoImpl implements StoreDao{
 	public void updateStore(StoreDto dto) {
 		session.update("updateStore", dto);	
 	}
+	
+	// 이미지를 업로드하는 method
+	@Override
+	public void updateImage(StoreDto dto) {
+		session.update("updateImage", dto);
+	}
+	
+	// 이미지 업로드를 위한 이미지 종류를 체크하는 method
+	@Override
+	public void imageCheck(StoreDto dto) {
+		session.update("imageCheck", dto);	
+	}
+	
+	// 매장 On Off method
+	@Override
+	public void storeOnOff(StoreDto dto) {
+		session.update("storeOnOff", dto);	
+	}
 }

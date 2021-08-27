@@ -10,6 +10,12 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" 
    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 </head>
+<style>
+	.image{
+		width: 200px;
+		height: 200px;
+	}
+</style>
 <body>
 	<p>매장 관리 페이지</p>
 	DB 번호 : <p>${dto.num }</p>
@@ -38,34 +44,90 @@
 		매장 태그 : 
 		<p id="btns">
 			<c:forEach var="tmp" items="${list }">
-				<button data-num="${dto.num }" name="tag" class="btn btn-primary tag">
-					${tmp }	
-				</button>
+				<button data-num="${dto.num }" name="tag" class="btn btn-primary tag">${tmp}</button>
 			</c:forEach>
 		</p>
 		<input id="inputTag" type="text" style="display:none"/>
-		<a data-num="${dto.num }" href="" class="plus addTag">태그 추가</a>
+		<a data-num="${dto.num }" href="javascript:" class="plus addTag">태그 추가</a>
 		<br>
 	</div>
 	<br>
 	
 	<!-- 매장 로고 관리 영역 -->
 	<div>
-		<form action="">
-			<label for="">매장 로고</label>
-			<img src="" alt="" id="image_logo" name="image_logo"/>
-			<input type="file" id="logoImage"/>
-			<button type="submit">로고 등록</button>
+		<a class="updateImgLink" href="javascript:">
+			<img src="${pageContext.request.contextPath}${dto.image_logo}" alt="" id="image_logo" name="logo" class="image"/>
+		</a>
+		<form action="${pageContext.request.contextPath}/uploadImage.do" id="logoForm" method="post" enctype="multipart/form-data">
+			<label for="image_logo">매장 로고</label>
+			<input type="hidden" name="num" value="${dto.num }"/>
+			<input type="hidden" name="image_logo" value="check"/>
+			<input type="file" id="logoImage" name="imageFile" style="display:none"/>
+			<button class="updateImgBtn" type="submit" style="display:none">로고 등록</button>
 		</form>
 	</div>
 	매장 로고 : <p>${dto.image_logo }</p>
 	
-	<!-- 매장 대표 이미지 관리 영역 -->
+	<!-- 매장 대표 이미지 관리 영역1-->
+	<div>
+		<a class="updateImgLink" href="javascript:">
+			<img src="${pageContext.request.contextPath}${dto.image_1}" alt="" id="image_1" name="image1" class="image"/>
+		</a>
+		<form action="${pageContext.request.contextPath}/uploadImage.do" id="imageForm1" method="post" enctype="multipart/form-data">
+			<label for="image_1">대표 이미지1</label>
+			<input type="hidden" name="num" value="${dto.num }"/>
+			<input type="hidden" name="image_1" value="check"/>
+			<input type="file" id="repImage1" name="imageFile" style="display:none"/>
+			<button class="updateImgBtn" type="submit" style="display:none">로고 등록</button>
+		</form>
+	</div>
 	이미지 1 : <p>${dto.image_1 }</p>
+	<!-- 매장 대표 이미지 관리 영역2-->
+	<div>
+		<a class="updateImgLink" href="javascript:">
+			<img src="${pageContext.request.contextPath}${dto.image_2}" alt="" id="image_2" name="image2" class="image"/>
+		</a>
+		<form action="${pageContext.request.contextPath}/uploadImage.do" id="imageForm2" method="post" enctype="multipart/form-data">
+			<label for="image_2">대표 이미지2</label>
+			<input type="hidden" name="num" value="${dto.num }"/>
+			<input type="hidden" name="image_2" value="check"/>
+			<input type="file" id="repImage2" name="imageFile" style="display:none"/>
+			<button class="updateImgBtn" type="submit" style="display:none">로고 등록</button>
+		</form>
+	</div>
 	이미지 2 : <p>${dto.image_2 }</p>
+	<!-- 매장 대표 이미지 관리 영역3-->
+	<div>
+		<a class="updateImgLink" href="javascript:">
+			<img src="${pageContext.request.contextPath}${dto.image_3}" alt="" id="image_3" name="image3" class="image"/>
+		</a>
+		<form action="${pageContext.request.contextPath}/uploadImage.do" id="imageForm3" method="post" enctype="multipart/form-data">
+			<label for="image_3">대표 이미지3</label>
+			<input type="hidden" name="num" value="${dto.num }"/>
+			<input type="hidden" name="image_3" value="check"/>
+			<input type="file" id="repImage3" name="imageFile" style="display:none"/>
+			<button class="updateImgBtn" type="submit" style="display:none">로고 등록</button>
+		</form>
+	</div>
 	이미지 3 : <p>${dto.image_3 }</p>
+	<!-- 매장 대표 이미지 관리 영역4-->
+	<div>
+		<a class="updateImgLink" href="javascript:">
+			<img src="${pageContext.request.contextPath}${dto.image_4}" alt="" id="image_4" name="image4" class="image"/>
+		</a>
+		<form action="${pageContext.request.contextPath}/uploadImage.do" id="imageForm4" method="post" enctype="multipart/form-data">
+			<label for="image_4">대표 이미지4</label>
+			<input type="hidden" name="num" value="${dto.num }"/>
+			<input type="hidden" name="image_4" value="check"/>
+			<input type="file" id="repImage4" name="imageFile" style="display:none"/>
+			<button class="updateImgBtn" type="submit" style="display:none">로고 등록</button>
+		</form>
+	</div>
 	이미지 4 : <p>${dto.image_4 }</p>
-	오픈 여부 : <p>${dto.storeOpen }</p>
+	<div>
+		오픈 여부 : <p id="storeOnOff">${dto.storeOpen }</p>
+		<button id="storeOnOffBtn">매장 열기</button>
+	</div>
 	매장 등록일 : <p>${dto.regdate }</p>
 	
 </body>
@@ -116,40 +178,49 @@
 		let num=this.getAttribute("data-num");
 		// 추가하고 싶은 태그를 작성한 input 요소의 값을 읽어옴
 		let storeTag=document.querySelector("#inputTag").value;
-		// 두 정보를 object로 만들어서 전달할 준비
-		let obj={num, storeTag};
-		console.log(obj);
-		
-		// 해당 링크를 요청하면서 object를 전달하고
-		ajaxPromise("${pageContext.request.contextPath}/addTag.do", "post", obj)
-		.then(function(response){
-			return response.json();
-		}).then(function(data){
-			console.log(data);
-			// 데이터를 받으면
-			if(data.beAdded){
-				// 태그 추가 input 창을 reset하고, 화면에서 숨김
-				document.querySelector("#inputTag").value="";
-				document.querySelector("#inputTag").style.display="none";
-				// 해당 매장의 DB 번호를 받아서
-				let dataNum=${dto.num};
-				// 새로운 태그 버튼을 만들고 성분과 값을 부여함
-				let newBtn=document.createElement("button");
-				newBtn.innerText=storeTag;
-				newBtn.setAttribute("class", "btn btn-primary add-tag");
-				newBtn.setAttribute("data-num", dataNum);
-				// 새로운 취소 버튼을 만들고 성분과 값을 부여함
-				let newDeleteBtn=document.createElement("button");
-				newDeleteBtn.setAttribute("class", "btn-close add-del-tag");
-				newDeleteBtn.setAttribute("data-num", dataNum);
-				// 새 버튼의 자식 요소로 취소 버튼을 넣고, 태그 버튼 또한 태그 공간의 자식 요소로 넣어줌
-				newBtn.appendChild(newDeleteBtn);
-				document.querySelector("#btns").appendChild(newBtn);
-				document.querySelector(".addTag").setAttribute("class", "plus addTag");
-				// 새롭게 만든 삭제 버튼에 태그 삭제 이벤트 부여
-				deleteTag(".add-del-tag", ".add-tag");
-			}
-		});
+		if(storeTag==""){
+			alert("태그를 작성해주세요.");
+		} else {
+			// 두 정보를 object로 만들어서 전달할 준비
+			let obj={num, storeTag};
+			console.log(obj);
+			
+			// 해당 링크를 요청하면서 object를 전달하고
+			ajaxPromise("${pageContext.request.contextPath}/addTag.do", "post", obj)
+			.then(function(response){
+				return response.json();
+			}).then(function(data){
+				console.log(data);
+				// 데이터를 받으면
+				if(data.beAdded){
+					// 태그 추가 input 창을 reset하고, 화면에서 숨김
+					document.querySelector("#inputTag").value="";
+					document.querySelector("#inputTag").style.display="none";
+					// 해당 매장의 DB 번호를 받아서
+					let dataNum=${dto.num};
+					// 새로운 태그 버튼을 만들고 성분과 값을 부여함
+					let newBtn=document.createElement("button");
+					newBtn.innerText=storeTag;
+					newBtn.setAttribute("class", "btn btn-primary add-tag");
+					newBtn.setAttribute("data-num", dataNum);
+					// 붙어서 생기는 것을 방지하기 위해 야매
+					newBtn.style.marginRight="5px";
+					// 새로운 취소 버튼을 만들고 성분과 값을 부여함
+					let newDeleteBtn=document.createElement("button");
+					newDeleteBtn.setAttribute("class", "btn-close add-del-tag");
+					newDeleteBtn.setAttribute("data-num", dataNum);
+					// 새 버튼의 자식 요소로 취소 버튼을 넣고, 태그 버튼 또한 태그 공간의 자식 요소로 넣어줌
+					newBtn.appendChild(newDeleteBtn);
+					document.querySelector("#btns").appendChild(newBtn);
+					document.querySelector(".addTag").setAttribute("class", "plus addTag");
+					// 새롭게 만든 삭제 버튼에 태그 삭제 이벤트 부여
+					deleteTag(".add-del-tag", ".add-tag");
+					// 다시 버튼의 class를 원래대로 돌려놓음
+					newBtn.setAttribute("class", "btn btn-primary tag");
+					newDeleteBtn.setAttribute("class", "btn-close del-tag");
+				}
+			});
+		}
 	}
 	
 	// 태그 삭제
@@ -165,10 +236,12 @@
 			// 버튼의 data-num 성분의 값과 태그 값을 얻어서 object로 담음
 			let num=deleteBtns[i].getAttribute("data-num");
 			let storeTag=tags[i].innerText;
+			console.log(storeTag);
 			let obj={num, storeTag};
 			// 삭제 버튼을 눌렀을 때 작동할 이벤트
 			deleteBtns[i].addEventListener("click", function(){
 				// 삭제여부를 확인
+				console.log(obj);
 				let toDelete=confirm("이 태그를 삭제하시겠습니까?");
 				if(toDelete){
 					// 해당 경로를 요청하면서 object 전달
@@ -245,10 +318,97 @@
 			}
 		});
 	});
+	/*
+	document.querySelector("#logoImage").addEventListener("change", function(e){
+		readImage(e.target);
+	});
 	
-	// 
-	document.querySelector("#logoImage").addEventListener("change", function(){
-		document.querySelector("#image_logo").setAttribute("src", this.value);
+	document.querySelector("#logoForm").addEventListener("submit", function(e){
+		// 일단 form 제출을 막음
+		e.preventDefault();
+		console.log(this);
+		ajaxFormPromise(this)
+		.then(function(response){
+			return response.json();
+		}).then(function(data){
+			console.log(data);
+		});
+	});
+	*/
+	
+	// 이미지를 눌렀을 때 동작하는 영역
+	let imgLinks=document.querySelectorAll(".updateImgLink");
+	let updateImgBtns=document.querySelectorAll(".updateImgBtn");
+	
+	let imageInputs=["#logoImage", "#repImage1", "#repImage2", "#repImage3", "#repImage4"];
+	let imageForms=["#logoForm", "#imageForm1", "#imageForm2", "#imageForm3", "#imageForm4"];
+	let imageList=["#image_logo", "#image_1", "#image_2", "#image_3", "#image_4"];
+	
+	for(let i=0; i<imageList.length; i++){
+		imgLinks[i].addEventListener("click", function(e){
+			e.preventDefault();
+			
+			document.querySelector(imageInputs[i]).click();
+			updateImgBtns[i].style.display="block";
+		});
+		viewThumbNail(imageInputs[i], imageList[i]);
+		updateImage(imageForms[i], i);
+	}
+	
+	// 이미지 파일을 선택했을 때 동작하는 method
+	function viewThumbNail(rel, imageID){
+		document.querySelector(rel).addEventListener("change", function(e){
+			console.log("rel1: "+rel);
+			readImage(e.target, imageID);
+		});
+	}
+	
+	function readImage(input, imageID) {
+		console.log("rel2: "+imageID);
+	    // 인풋 태그에 파일이 있는 경우
+	    if(input.files && input.files[0]) {
+	        // 이미지 파일인지 검사 (생략)
+	        // FileReader 인스턴스 생성
+	        let reader=new FileReader();
+	        // 이미지가 로드가 된 경우
+	        reader.onload=function(e){
+	            let previewImg=document.querySelector(imageID);
+	            previewImg.src=e.target.result;
+	        }
+	        // reader가 이미지 읽도록 하기
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	}
+	
+	// 매장 로고 등록 시 동작하는 method
+	function updateImage(rel, i){
+		document.querySelector(rel).addEventListener("submit", function(e){
+			// 일단 form 제출을 막음
+			e.preventDefault();
+			console.log("rel3: "+i);
+			ajaxFormPromise(this)
+			.then(function(response){
+				return response.json();
+			}).then(function(data){
+				console.log(data);
+				if(data.beUpdated){
+					updateImgBtns[i].style.display="none";
+					alert("이미지를 수정하였습니다.");
+				}
+			});
+		});
+	}
+	
+	// 매장 열기 or 닫기 작업
+	document.querySelector("#storeOnOffBtn").addEventListener("click", function(e){
+		e.preventDefault();
+		
+		ajaxPromise("${pageContext.request.contextPath}/storeOnOff.do", "post", "num="+${dto.num})
+		.then(function(response){
+			return response.json();
+		}).then(function(data){
+			console.log(data);
+		});
 	});
 </script>
 </html>
