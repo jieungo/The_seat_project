@@ -1,5 +1,7 @@
 package com.star.seat.users.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class UsersDto {
 
 	private String name;
@@ -10,11 +12,12 @@ public class UsersDto {
 	private String phoneNumber;
 	private String profile;
 	private String regdate;
+	private MultipartFile image;
 	
 	public UsersDto() {}
 
 	public UsersDto(String name, String email, String pwd, String newPwd, String tag, String phoneNumber,
-			String profile, String regdate) {
+			String profile, String regdate, MultipartFile image) {
 		super();
 		this.name = name;
 		this.email = email;
@@ -24,6 +27,7 @@ public class UsersDto {
 		this.phoneNumber = phoneNumber;
 		this.profile = profile;
 		this.regdate = regdate;
+		this.image = image;
 	}
 
 	public String getName() {
@@ -88,6 +92,14 @@ public class UsersDto {
 
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
+	}
+
+	public MultipartFile getImage() {
+		return image;
+	}
+
+	public void setImage(MultipartFile image) {
+		this.image = image;
 	}
 
 	

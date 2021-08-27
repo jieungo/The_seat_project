@@ -80,13 +80,14 @@ public class UsersController {
 	
 	//개인정보 수정 반영 요청 처리
 	@RequestMapping(value = "/users/update", method=RequestMethod.POST)
-	public ModelAndView Update(UsersDto dto, HttpSession session,
-			HttpServletRequest request, ModelAndView mView) {
+	@ResponseBody
+	public Map<String, Object> Update(UsersDto dto, HttpSession session,
+			HttpServletRequest request) {
 		//서비스를 이용해서 개인정보를 수정하고 
 		service.updateUser(dto, session);
-		mView.setViewName("redirect:/users/info.do");
-		//개인정보 보기로 리다일렉트 이동 시틴다
-		return mView;
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("isUpdate",true);
+		return map;
 	}
 	
 	//ajax 프로필 사진 업로드 요청처리
@@ -100,33 +101,14 @@ public class UsersController {
 		return service.saveProfileImage(request, image);
 	}
 	
-	//회원정보 수정폼 요청처리
-	@RequestMapping("/users/updateform")
-	public ModelAndView UpdateForm(ModelAndView mView, HttpSession session,
-			HttpServletRequest request) {
-		service.getInfo(session, mView);
-		mView.setViewName("users/updateform");
-		return mView;
-	}
-	
 	//비밀번호 변경
-	@RequestMapping("/users/pwd_update")
-	public ModelAndView PwdUpdate(UsersDto dto, 
-			ModelAndView mView, HttpSession session, HttpServletRequest request) {
-		//서비스에 필요한 객체의 참조값을 전달해서 비밀번호 수정 로직을 처리한다.
-		service.updateUserPwd(session, dto, mView);
-		//view page 로 forward 이동해서 작업 결과를 응답한다.
-		mView.setViewName("users/pwd_update");
-		return mView;
-	}
-	
-	
-	//비밀번호 업데이트 폼으로 이동
-	@RequestMapping("/users/pwd_updateform")
-	public ModelAndView PwdUpdateForm(ModelAndView mView, HttpServletRequest request) {
+	@RequestMapping(value = "/users/pwd_update",
+			method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> PwdUpdate(UsersDto dto, 
+			 HttpSession session) {
 		
-		mView.setViewName("users/pwd_updateform");
-		return mView;
+		return service.updateUserPwd(session, dto);
 	}
 	
 	//로그인된 회원정보와 함께 info 페이지로 이동
@@ -149,10 +131,11 @@ public class UsersController {
 	
 	//로그아웃
 	@RequestMapping("/users/logout")
-	public String logout(HttpSession session) {
+	public ModelAndView logout(ModelAndView mView, HttpSession session) {
 		//세션에서 id 라는 키값으로 저장된 값 삭제 
 		session.removeAttribute("email");
 		session.removeAttribute("name");
-		return "main";
+		mView.setViewName("redirect:/main.do");
+		return mView;
 	}
 }

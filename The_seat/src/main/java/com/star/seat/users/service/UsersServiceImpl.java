@@ -66,12 +66,16 @@ public class UsersServiceImpl implements UsersService {
 
 	@Override
 	public void getInfo(HttpSession session, ModelAndView mView) {
-		//로그인된 아이디를 읽어온다. 
-		String email=(String)session.getAttribute("email");
-		//DB 에서 회원 정보를 얻어와서 
-		UsersDto dto=dao.getData(email);
-		//ModelAndView 객체에 담아준다.
-		mView.addObject("dto", dto);
+		//로그인된 아이디를 읽어온다.
+		
+		if(session.getAttribute("email") != null) {
+			String email=(String)session.getAttribute("email");
+			//DB 에서 회원 정보를 얻어와서 
+			UsersDto dto=dao.getData(email);
+			//ModelAndView 객체에 담아준다.
+			mView.addObject("dto", dto);
+		}
+		
 	}
 	
 	@Override
@@ -88,7 +92,7 @@ public class UsersServiceImpl implements UsersService {
 	}
 
 	@Override
-	public void updateUserPwd(HttpSession session, UsersDto dto, ModelAndView mView) {
+	public Map<String, Object> updateUserPwd(HttpSession session, UsersDto dto) {
 		//세션 영역에서 로그인된 아이디 읽어오기
 		String email=(String)session.getAttribute("email");
 		//DB 에 저장된 회원정보 얻어오기
@@ -113,10 +117,12 @@ public class UsersServiceImpl implements UsersService {
 			//로그아웃 처리
 			session.removeAttribute("email");
 		}
+		Map<String, Object> map=new HashMap<String, Object>();
 		//작업의 성공여부를 ModelAndView 객체에 담아 놓는다(결국 HttpServletRequest 에 담긴다)
-		mView.addObject("isSuccess", isValid);
+		map.put("isSuccess", isValid);
 		//로그인된 아이디도 담아준다.
-		mView.addObject("email", email);
+		map.put("email", email);
+		return map;
 	}
 
 	@Override
