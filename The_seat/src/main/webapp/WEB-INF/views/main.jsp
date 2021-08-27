@@ -53,8 +53,6 @@
 	</c:if>
 </div>
    
-	<a href="${pageContext.request.contextPath}/storeDetail.do">매장 상세 페이지</a>
-   
 	<div class="container toggle">
 		<c:choose>
 			<c:when test="${sessionScope.email !=null && myStoreList.size() != 0}">
