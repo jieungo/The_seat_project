@@ -1,132 +1,167 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
+	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login page</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/loginform.css" type="text/css"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>login page</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+	crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/loginform.css"
+	type="text/css" />
 </head>
 <body>
- <div class="container">
-     <div class="row">
-         <!-- 왼쪽 텍스트 -->
-         <section class="col col__section">
-             <p>이젠, 빈자리 찾아 해매지 말자!</p>
-             <span style="font-size: 4em;">자리..<br>있어요?</span>
-         </section>
-        
-         <!-- 오른쪽 로그인바 -->
-         <section class="col col__section">
-             <form id="loginForm" action="${pageContext.request.contextPath}/users/login.do" method="post">
-                 <div>
-                     <label class="label" for="email">Email</label><br>
-                     <input id="id" class="form-control" type="text" placeholder="이메일" required="required"/><span>@</span>
-                     <select name="emailAddr" id="emailAddr">
-                     	<option value="naver.com">네이버</option>
-                     	<option value="gmail.com">구글</option>
-                     	<option value="daum.net">다음</option>
-                     </select>
-                     <input type="hidden" id="emailLogin" name="email"/>
-                 </div>
-                 <div>
-                     <label class="label" for="password">Password</label><br>
-                     <input id="loginPwd" class="form-control" type="password" name="pwd" placeholder="비밀번호" required="required"/>
-                 </div>
-                 <button class="text-btn" type="submit">Continue</button>
-             </form>
-           
-           <div class="line-section">
-               <div class="line"></div>
-               <span>OR</span>
-               <div class="line"></div>
-           </div>  
-           
-                <!-- 카카오 로그인 -->
-                <button class="form-control" style="background-color: #fee501;" onclick="kakaoLogin();">
-                    <a href="javascript:void(0)"></a>
-                    카카오 로그인</button>
-                    <li onclick="kakaoLogout();">
-                        <a href="javascript:void(0)">
-                            <span>카카오 로그아웃</span>
-                        </a>
-                    </li>
-                <!-- 구글 로그인 -->
-                    <button class="form-control" style="background-color: #d4d4d4;">
-                    <!-- <a href="javascript:void(0)"></a> -->
-                구글 로그인</button>  
-                
-        <button type="button" class="text-btn" data-bs-toggle="modal" data-bs-target="#modal-signupForm">
-             Signup
-        </button>
-       </section>
-       
-      <div class="modal animate__animated animate__bounce animate__fadeInDown" tabindex="-1" id="modal-signupForm" aria-labelledby="signupForm" aria-hidden="true">
-          <div class="modal-dialog">
-              <div class="modal-content">
-              <div class="modal-header">
-                  <h3 class="modal-title"><strong>회원가입</strong> </h3>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                  <form id="signupForm" action="${pageContext.request.contextPath}/users/signup.do" method="post" class="needs-validation">
-                      <div>
-						  
-						  <input id="idSignup" class="form-control" type="text" placeholder="이메일" required="required"/><span>@</span>
-	                      <select name="emailAddrSignup" id="emailAddrSignup">
-	                     	<option value="naver.com">네이버</option>
-	                     	<option value="gmail.com">구글</option>
-	                     	<option value="daum.net">다음</option>
-	                      </select>
-                          <input  type="hidden" name="email" id="email" >
-                          <div class="invalid-feedback">사용할수 없는 이메일 입니다.</div>
-                      </div>
-                      <div>
-                          <input class="form-control" type="password" name="pwd" id="pwd" placeholder="비밀번호" required="required">
-                          <small class="form-text">5글자~10글자 이내로 입력하세요.</small>
-                          <div class="invalid-feedback">비밀번호를 확인 하세요.</div>
-                      </div>
-                      <div>
-                          <input class="form-control" type="password" name="pwd2" id="pwd2" placeholder="비밀번호를 한번 더 입력해주세요" required="required">
-                          <div class="invalid-feedback">비밀번호를 확인 하세요.</div>
-                      </div>
-                      <div>
-                          <input class="form-control" type="text" name="name" id="name" placeholder="이름" required="required">
-                          <input class="form-control" type="hidden" name="profile" id="profile" value="profile" >
-                      </div>
-                      <div>
-                          <!-- <label for="data">생년월일</label> -->
-                          <input name="date" id="litepicker" class="form-control" autocomplete="off" placeholder="생년월일"/>
-                      </div>
-                      <div>
-                          <input class="form-control" type="text" pattern="[0-9]+" maxlength="11" name="phoneNumber" id="phoneNumber" placeholder="'-'을 제외한 휴대폰번호" required="required">
-                      </div>
-                      <div class="line" style="background-color: #2e8eff; width: 30vw;"></div>
-                      <div class="row signup__menu">
-                          <input class="form-control col-2" type="text" name="tag" id="signup__menu-like" style="width: 25vw;" placeholder="선호하는 음식">
-                          <button class="signup__menu-add col-1">추가</button>
-                      </div>
-                      <button type="submit">가입완료</button>
-                  </form>
-              </div>
-          </div>
-      </div>
-  </div>   
-</div>
-</div>
+	<div class="container">
+		<div class="row">
+			<!-- 왼쪽 텍스트 -->
+			<section class="col col__section">
+				<p>이젠, 빈자리 찾아 해매지 말자!</p>
+				<span style="font-size: 4em;">자리..<br>있어요?
+				</span>
+			</section>
 
-<script type="text/javascript" src="script2.js"></script>
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
+			<!-- 오른쪽 로그인바 -->
+			<section class="col col__section">
+				<form id="loginForm"
+					action="${pageContext.request.contextPath}/users/login.do"
+					method="post">
+					<div>
+						<label class="label" for="email">Email</label><br> <input
+							id="id" class="form-control" type="text" placeholder="이메일"
+							required="required" /><span>@</span> <select name="emailAddr"
+							id="emailAddr">
+							<option value="naver.com">네이버</option>
+							<option value="gmail.com">구글</option>
+							<option value="daum.net">다음</option>
+						</select> <input type="hidden" id="emailLogin" name="email" />
+					</div>
+					<div>
+						<label class="label" for="password">Password</label><br> <input
+							id="loginPwd" class="form-control" type="password" name="pwd"
+							placeholder="비밀번호" required="required" />
+					</div>
+					<button class="text-btn" type="submit">Continue</button>
+				</form>
 
-<script>
+				<div class="line-section">
+					<div class="line"></div>
+					<span>OR</span>
+					<div class="line"></div>
+				</div>
+
+				<!-- 카카오 로그인 -->
+				<button class="form-control" style="background-color: #fee501;"
+					onclick="kakaoLogin();">
+					<a href="javascript:void(0)"></a> 카카오 로그인
+				</button>
+				
+		<!-- 
+				<li onclick="kakaoLogout();"><a href="javascript:void(0)">
+						<span>카카오 로그아웃</span>
+				</a></li>
+		-->
+		
+				<!-- 구글 로그인 -->
+				<button class="form-control" style="background-color: #d4d4d4;">
+					<!-- <a href="javascript:void(0)"></a> -->
+					구글 로그인
+				</button>
+
+				<button type="button" class="text-btn" data-bs-toggle="modal"
+					data-bs-target="#modal-signupForm">Signup</button>
+			</section>
+
+			<div
+				class="modal animate__animated animate__bounce animate__fadeInDown"
+				tabindex="-1" id="modal-signupForm" aria-labelledby="signupForm"
+				aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h3 class="modal-title">
+								<strong>회원가입</strong>
+							</h3>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<form id="signupForm"
+								action="${pageContext.request.contextPath}/users/signup.do"
+								method="post" class="needs-validation">
+								<div>
+
+									<input id="idSignup" class="form-control" type="text"
+										placeholder="이메일" required="required" /><span>@</span> <select
+										name="emailAddrSignup" id="emailAddrSignup">
+										<option value="naver.com">네이버</option>
+										<option value="gmail.com">구글</option>
+										<option value="daum.net">다음</option>
+									</select> <input type="hidden" name="email" id="email">
+									<div class="invalid-feedback">사용할수 없는 이메일 입니다.</div>
+								</div>
+								<div>
+									<input class="form-control" type="password" name="pwd" id="pwd"
+										placeholder="비밀번호" required="required"> <small
+										class="form-text">5글자~10글자 이내로 입력하세요.</small>
+									<div class="invalid-feedback">비밀번호를 확인 하세요.</div>
+								</div>
+								<div>
+									<input class="form-control" type="password" name="pwd2"
+										id="pwd2" placeholder="비밀번호를 한번 더 입력해주세요" required="required">
+									<div class="invalid-feedback">비밀번호를 확인 하세요.</div>
+								</div>
+								<div>
+									<input class="form-control" type="text" name="name" id="name"
+										placeholder="이름" required="required"> <input
+										class="form-control" type="hidden" name="profile" id="profile"
+										value="profile">
+								</div>
+								<div>
+									<!-- <label for="data">생년월일</label> -->
+									<input name="date" id="litepicker" class="form-control"
+										autocomplete="off" placeholder="생년월일" />
+								</div>
+								<div>
+									<input class="form-control" type="text" pattern="[0-9]+"
+										maxlength="11" name="phoneNumber" id="phoneNumber"
+										placeholder="'-'을 제외한 휴대폰번호" required="required">
+								</div>
+								<div class="line"
+									style="background-color: #2e8eff; width: 30vw;"></div>
+								<div class="row signup__menu">
+									<input class="form-control col-2" type="text" name="tag"
+										id="signup__menu-like" style="width: 25vw;"
+										placeholder="선호하는 음식">
+									<button class="signup__menu-add col-1">추가</button>
+								</div>
+								<button type="submit">가입완료</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
+
+	<script>
     //----------------------------------로그인---------------------------------------------
     
     // email 입력 폼
@@ -148,25 +183,38 @@
     document.querySelector("#loginForm").addEventListener("submit",function(e){
        //폼 제출 막고
        e.preventDefault();
-     
-       //ajax 로 폼 내용 전송하고 json으로 응답 받기
-       let loginForm = document.querySelector("#loginForm");
        
-       ajaxFormPromise(loginForm)
+       let inputEmail = document.querySelector("#emailLogin").value;
+       
+       //email 존재 확인 후 폼 ajax 전송
+       ajaxPromise("${pageContext.request.contextPath}/users/checkemail.do", "get", "inputEmail="+inputEmail)
        .then(function(response){
-         return response.json();
-      })
-      .then(function(data){
-         console.log(data.login.isValemail);
-         if(data.login.isValemail){
-            alert(data.login.result.name+"님 로그인되었습니다.");
-            location.href="${pageContext.request.contextPath}/main.do";
-         } else {
-            alert("아이디와 비밀번호를 확인해 주세요");
-            
-            //location.href="${pageContext.request.contextPath}/home.do";
-         };
-      });
+          return response.json();
+       })
+       .then(function(data){
+          //존재하는 email이면  {isExist:true} 없으면 {isExist:false}
+          if(data.isExist){//존재하면 전송
+        	  let loginForm = document.querySelector("#loginForm");
+              
+              ajaxFormPromise(loginForm)
+              .then(function(response){
+                return response.json();
+             })
+             .then(function(data){
+                console.log(data.login.isValemail);
+                if(data.login.isValemail){
+                   alert(data.login.result.name+"님 로그인되었습니다.");
+                   location.href="${pageContext.request.contextPath}/main.do";
+                } else {
+                   alert("아이디와 비밀번호를 확인해 주세요");
+                };
+             });
+          }else{
+             alert("아이디가 존재하지 않습니다. 다시 확인해 주세요.")
+          };
+       });
+       //ajax 로 폼 내용 전송하고 json으로 응답 받기
+       
     });
     
     //---------------------------------회원가입--------------------------------------------
@@ -345,9 +393,9 @@
    };
    
 </script>
-    
-    
-    <!-- 구글 스크립트
+
+
+	<!-- 구글 스크립트
     <script>
         //처음 실행하는 함수
         function init() {
@@ -386,8 +434,8 @@
         }
         </script>
         <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script> -->
-    </body>
-    </html>
+</body>
+</html>
 
 
 
