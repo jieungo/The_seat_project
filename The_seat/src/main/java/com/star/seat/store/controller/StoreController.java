@@ -46,8 +46,7 @@ public class StoreController {
 			service.getMyStores(request, session);
 		}
 
-		
-		return mView;
+		return "main";
 	}
 	
 	// 매장 추가 링크를 눌러서 요청되는 경로에 대한 method
