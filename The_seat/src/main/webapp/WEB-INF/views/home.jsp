@@ -9,14 +9,18 @@
 <!-- bootstrap 외부 링크 참조 -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" 
    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 <style>
    body{
       background-color: #2e8eff;
       color: white;
+      font-family: 'Do Hyeon', sans-serif;
    }
    #area, #group{
       width: 100px;
-      margin-right: 30px;
+      margin-right: 50px;
       height: 40px;
       margin-top: 30px;
       border: none;
@@ -57,7 +61,7 @@
       </section>
    <!-- get 방식을 활용해 메인 페이지 URL 에 select & option 태그 설정 -->
    <form action="${pageContext.request.contextPath}/main.do" method="get">
-      <div style="text-align: center; margin-right: 110px;">
+      <div style="text-align: center; margin-left: 50px;">
          <select name="area" id="area">
             <option value="null" ${area eq 'area' ? 'selected' : '' }>지역</option>
             <option value="Gangnam-gu" ${area eq 'Gangnam-gu' ? 'selected' : '' }>강남구</option>

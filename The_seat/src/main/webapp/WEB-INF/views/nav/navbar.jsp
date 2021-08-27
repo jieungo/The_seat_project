@@ -1,39 +1,44 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
-	crossorigin="anonymous">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" 
+integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
 	crossorigin="anonymous"></script>
 <style>
-#area, #group {
-	width: 110px;
-	margin-left: 30px;
-	height: 45px;
-	margin-top: 30px;
-	border: solid 2px gray;
-	border-radius: 5px;
-	text-align-last: center;
-	text-align: center;
-}
 
-#area, #group:focus {
-	outline: none;
-}
+	nav{
+		font-family: 'Do Hyeon', sans-serif;
+	}
+	#area, #group{
+		width: 110px;
+		margin-left: 30px;
+		height: 45px;
+		margin-top: 30px;
+		border: solid 2px gray;
+		border-radius: 5px;
+		text-align-last: center;
+		text-align: center;
+	}
+	#area, #group:focus{
+		outline: none;
+	}
+	#keyword{
+		width: 200px;
+		height: 35px;
+		margin-left: 30px;
+		margin-bottom: 30px;
+		border-radius: 5px;
+		border: solid 2px gray;
+	}
 
-#keyword {
-	width: 200px;
-	height: 35px;
-	margin-left: 30px;
-	margin-bottom: 30px;
-	border-radius: 5px;
-	border: solid 2px gray;
-}
 </style>
 <nav class="navbar navbar-light bg-light">
 	<img id="chair" style="width: 50px; height: 50px;"
