@@ -31,7 +31,7 @@ type="text/css" />
 	<header>
 		<div class="my-page__profile mt-2 mb-2">
 			<img class="me-5" src="${pageContext.request.contextPath}${dto.profile }" alt="프로필 이미지"
-				style="width: 100px; height: 100px; border-radius: 100%;">
+				style="width: 100px; border-radius: 100%;">
 			<div>
 				<h3>${dto.name}님의 마이페이지
 					<c:choose>
@@ -67,7 +67,7 @@ type="text/css" />
 	  <div class="col">
 	    <div class="card">
 	      <div class="card-head">
-	      <h3>cardhead</h3>
+	      	<h3>cardhead</h3>
 	      </div>
 	      <img src="..." class="card-img-top" alt="...">
 	      <div class="card-body">
@@ -146,13 +146,13 @@ type="text/css" />
 				<a id="profileLink" href="javascript:" >
 					<c:choose>
 						<c:when test="${dto.profile eq 'profile'}">
-							<svg id="profileImage" xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+							<svg id="profileImage" xmlns="http://www.w3.org/2000/svg" style="width:100px; border-radius: 100%;" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
 								  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
 								  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
 							</svg>
 						</c:when>
 						<c:otherwise>
-							<img id="profileImage" width="60" src="${pageContext.request.contextPath}${dto.profile}" />
+							<img id="profileImage" style="width:100px; border-radius: 100%;" src="${pageContext.request.contextPath}${dto.profile}" />
 						</c:otherwise>
 					</c:choose>
 				</a>
@@ -174,12 +174,19 @@ type="text/css" />
 					<div>
 						<input class="form-control" type="tel" maxlength="13"
 							name="phoneNumber" id="phoneNumber"
-							value=" ${dto.phoneNumber}" required="required">
+							value="${dto.phoneNumber}" required="required">
 					</div>
-					<button type="submit">정보 수정</button>
+					<div>
+						<input class="form-control" type="tel" maxlength="13"
+							name="tag" id="tag"
+							value=" ${dto.tag}" required="required">
+					</div>
+					<div style="display: flex; justify-content:flex-end;">
+						<button type="submit">정보 수정</button>
+					</div>
 				</form>
 				<!-- 비밀번호 변경 -->
-				<form id="pwdUpdate" action="${pageContext.request.contextPath}/users/pwd_update.do">
+				<form id="pwdUpdate" method="post" action="${pageContext.request.contextPath}/users/pwd_update.do">
 					<div>
 						<input class="form-control" type="password" name="pwd"
 							placeholder="기존 비밀번호" required="required">
@@ -195,8 +202,13 @@ type="text/css" />
 							placeholder="새 비밀번호 재입력" required="required">
 						<div class="invalid-feedback">비밀번호를 확인 하세요.</div>
 					</div>
-					<button type="submit">비밀번호 변경</button>
+					<div style="display: flex; justify-content:flex-end;">
+						<button type="submit">비밀번호 변경</button>
+					</div>
 				</form>
+				<div style="display: flex; justify-content:flex-end;" >
+					<button id="withdrawal">회원탈퇴</button>
+				</div>
 			</div>
 			
 		</div>
@@ -302,7 +314,8 @@ type="text/css" />
 			// data 는 {imagePath:"/upload/xxx.jpg"} 형식의 object 이다.
 			console.log(data);
 			// 클릭하는 자리에 이미지 넣어주기
-			let img=`<img id="profileImage" width="60" src="${pageContext.request.contextPath}\${data.imagePath}"/>`;
+			let img=`<img id="profileImage" style="width:100px; border-radius: 100%;" src="${pageContext.request.contextPath}\${data.imagePath}"/>`;
+			
 			document.querySelector("#profileLink").innerHTML=img;
 			// input name="profile" 요소의 value 값으로 이미지 경로 넣어주기
 			document.querySelector("input[name=profile]").value=data.imagePath;
@@ -318,7 +331,6 @@ type="text/css" />
 			return response.json();
 		})
 		.then(function(data) {
-			console.log(data);
 			alert("회원 정보가 수정되었습니다.");
 			location.href = "${pageContext.request.contextPath}/users/info.do";
 		});
@@ -363,21 +375,30 @@ type="text/css" />
 				return response.json();
 			})
 			.then(function(data) {
-				console.log(data);
 				alert("비밀번호가 변경 되었습니다. 다시 로그인 해주세요.");
 				location.href = "${pageContext.request.contextPath}/users/loginform.do";
 			});
 		} else {
 			alert("비밀번호가 동일하지 않습니다.");
 		}
-		
 	});
 
 	//비밀번호 입력란에 input 이벤트가 일어 났을때 실행할 함수 등록
 	document.querySelector("#newPwd").addEventListener("input", checkPwd);
 	document.querySelector("#newPwd2").addEventListener("input", checkPwd);
 
+	//------------------------------회원 탈퇴--------------------------------------------
 	
+	document.querySelector("#withdrawal").addEventListener("click",function(){
+		ajaxPromise("${pageContext.request.contextPath}/users/delete.do")
+		.then(function(response){
+			return response.json();
+		})
+		.then(function(data){
+			alert(data.email+" 님이 탈퇴 되었습니다.!");
+			location.href="${pageContext.request.contextPath}/main.do";
+		});
+	});
 
 	//---------------------------연락처 자동 하이픈---------------------------------
 
@@ -407,7 +428,6 @@ type="text/css" />
 			tmp += str.substr(7);
 			return tmp;
 		}
-
 		return str;
 	}
 

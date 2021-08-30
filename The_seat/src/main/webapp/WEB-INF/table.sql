@@ -53,8 +53,21 @@ CREATE TABLE storeReview(
 
 CREATE SEQUENCE storeReview_seq;
 
+CREATE TABLE order_(
+	orderNum VARCHAR2(100),
+	email VARCHAR2(100) not null,
+	storeName VARCHAR2(100) not null,
+	tableNum NUMBER,
+	menu CLOB,
+	menuCount NUMBER,
+	price NUMBER,
+	amount NUMBER,
+	regdate DATE
+);
+
 CREATE TABLE storeSeat(
-	
+
+
 );
 
 CREATE TABLE info(

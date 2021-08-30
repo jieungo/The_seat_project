@@ -1,6 +1,7 @@
 package com.star.seat.users.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.star.seat.order.dto.OrderDto;
+import com.star.seat.order.service.OrderService;
 import com.star.seat.users.dto.UsersDto;
 import com.star.seat.users.service.UsersService;
 
@@ -24,6 +27,9 @@ public class UsersController {
 	
 	@Autowired
 	private UsersService service;
+	
+	@Autowired
+	private OrderService service_order;
 	
 	//로그인 폼 요청 처리
 	@RequestMapping("/users/loginform")
@@ -69,13 +75,11 @@ public class UsersController {
 	
 	//회원 탈퇴 요청 처리
 	@RequestMapping("/users/delete")
-	public ModelAndView Delete(HttpSession session, ModelAndView mView,
+	@ResponseBody
+	public Map<String, Object> Delete(HttpSession session, 
 			HttpServletRequest request) {
-		
-		service.deleteUser(session, mView);
-		
-		mView.setViewName("users/delete");
-		return mView;
+		// 회원탈퇴한 email 정보를 전달 
+		return service.deleteUser(session);
 	}
 	
 	//개인정보 수정 반영 요청 처리
@@ -118,6 +122,8 @@ public class UsersController {
 		
 		service.getInfo(session, mView);
 		
+		List<OrderDto> list= service_order.getList(request, session);
+		mView.addObject(list);
 		mView.setViewName("users/info");
 		return mView;
 	}

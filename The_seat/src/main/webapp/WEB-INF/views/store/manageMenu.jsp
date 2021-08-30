@@ -12,6 +12,7 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
 />
+
 <style>
 
 body {
@@ -45,6 +46,10 @@ ul {
     list-style: none;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 .circle-btn {
     background-color: #598eff;
     color: white;
@@ -67,13 +72,17 @@ ul {
 
 .menu__list {
     margin-top: 60px;
-
 }
 
 .menu__category {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-left: 20px;
+    width: 40%; 
+    background-color: white; 
+    z-index: 999; 
+    position: fixed;
 }
 
 .menu__category  a {
@@ -143,23 +152,19 @@ img {
 <body>
 <!-- navbar 추가-->
 
-<!----------------- 메인 페이지 (카테고리 및 메뉴카드) -------------------->
-
+<!---------------------------------- 가장 바깥의 배경 ---------------------------------->
 <div class="container menu__article">
-    <article class="menu__list">
-    <section style="position: sticky; height: 60px;">
-        <div class="menu__category">
+    <section class="menu__category mt-4">
         <ul>
             <li>
                 <a href="#">전체</a>
             </li>
             
         </ul>
-        <button style="color:rgb(253, 197, 14); font-weight: 500;">카테고리 추가</button>
-        
-    </div>
+    <button style="color:rgb(253, 197, 14); font-weight: 500;">카테고리 추가</button>
     </section>
-        <div class="card mb-5" style="max-width: 500px; height: 220px; margin-top: 20px;">
+    <article class="menu__list pe-3 ps-3" style="height:450px; text-overflow: hidden; overflow-x: auto;">
+        <div class="card mb-5 mt-3 ms-3" style="max-width: 480px; height: 220px; margin-top: 20px;">
             <div class="menu__add card-body">
                 <button type="button" class="circle-btn" data-bs-toggle="modal" data-bs-target="#modal-menuAddForm">
                     <div style="font-size: 20px; font-weight: 500;">+</div>
@@ -190,8 +195,11 @@ img {
 	            </div>
 	        </div>
         </c:forEach>
+
     </article>
-<!------------------ 옆 사이드바 (매장정보, 메뉴관리 탭) ----------------->
+    
+<!------------------------------------ 옆 사이드바 (매장정보, 메뉴관리 탭) ----------------->
+
     <aside class="store__aside">
         <button>매장 정보</button>
         <button>메뉴 관리</button>
@@ -199,8 +207,8 @@ img {
         <button>주문 확인</button>
         <button>자리 관리</button>
     </aside>
-
-<!-------------------- 메뉴 등록 모달창 ------------------------------>
+    
+<!--------------------------------------- 메뉴 등록 모달창 ------------------------------>
     
     <div class="modal" tabindex="-1" id="modal-menuAddForm" aria-labelledby="menuAddForm" aria-hidden="true">
     <div class="modal-dialog">
@@ -238,8 +246,10 @@ img {
     </div> 
 </div>
 
+<!-------------------------- 아이콘 링크 ---------------------->
 
 <script src="https://kit.fontawesome.com/2ebe86210e.js" crossorigin="anonymous"></script>
+
 <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 <script>
 
@@ -312,10 +322,16 @@ img {
 			}
 		});	
 	}
-	
-	// 
-	
-</script>
+// --------------- star icon button 클릭 시 색 채워지는 효과 -----------------
 
+// let icons = document.querySelectorAll('.starIcon');
+
+// for (let i=0; i < icons.length; i++) {
+//     icons[i].addEventListener('click', ()=> {
+//         icons[i].classList.toggle('fas');
+//     })
+// }
+
+</script>
 </body>
 </html>
