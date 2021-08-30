@@ -131,11 +131,6 @@
 										value="profile">
 								</div>
 								<div>
-									<!-- <label for="data">생년월일</label> -->
-									<input name="date" id="litepicker" class="form-control"
-										autocomplete="off" placeholder="생년월일" />
-								</div>
-								<div>
 									<input class="form-control" type="text" pattern="[0-9]+"
 										maxlength="11" name="phoneNumber" id="phoneNumber"
 										placeholder="'-'을 제외한 휴대폰번호" required="required">
@@ -145,8 +140,7 @@
 								<div class="row signup__menu">
 									<input class="form-control col-2" type="text" name="tag"
 										id="signup__menu-like" style="width: 25vw;"
-										placeholder="선호하는 음식">
-									<button class="signup__menu-add col-1">추가</button>
+										placeholder="죽기전에 먹고죽을 딱한가지 음식은?">
 								</div>
 								<button type="submit">가입완료</button>
 							</form>
@@ -346,10 +340,10 @@
       };
    });
    
-	<!-- datepicker 생년월일 -->   
-        const picker = new Litepicker({ 
-          element: document.getElementById('litepicker') 
-        });
+//<!-- datepicker 생년월일 -->   
+//      const picker = new Litepicker({ 
+//        element: document.getElementById('litepicker') 
+//      });
     <!-- 카카오 스크립트 -->
     Kakao.init('1cb3c0466b76917b1c74d17787e7bf55'); //발급받은 키 중 javascript키를 사용해준다.
     console.log(Kakao.isInitialized()); // sdk초기화여부판단

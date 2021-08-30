@@ -28,8 +28,7 @@ public class UsersController {
 	@Autowired
 	private UsersService service;
 	
-	@Autowired
-	private OrderService service_order;
+
 	
 	//로그인 폼 요청 처리
 	@RequestMapping("/users/loginform")
@@ -122,9 +121,9 @@ public class UsersController {
 		
 		service.getInfo(session, mView);
 		
-		List<OrderDto> list= service_order.getList(request, session);
-		mView.addObject(list);
-		mView.setViewName("users/info");
+	//	List<OrderDto> list= service_order.getList(request, session);
+	//	mView.addObject(list);
+	//	mView.setViewName("users/info");
 		return mView;
 	}
 	
