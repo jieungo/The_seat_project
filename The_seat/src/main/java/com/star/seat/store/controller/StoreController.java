@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.star.seat.menu.service.MenuService;
 import com.star.seat.store.dto.StoreDto;
 import com.star.seat.store.service.StoreService;
 import com.star.seat.users.service.UsersService;
@@ -24,6 +25,8 @@ import com.star.seat.users.service.UsersService;
 public class StoreController {
 	@Autowired
 	private StoreService service;
+	@Autowired
+	private MenuService mService;
 	
 	// 검색 결과 메인 페이지를 요청할 때의 method
 	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
@@ -114,15 +117,6 @@ public class StoreController {
 		return map;
 	}
 	
-	// 매장 상세 정보 페이지로 이동
-	@RequestMapping(value = "/storeDetail.do", method = RequestMethod.GET)
-	public String goStoreDetail(StoreDto dto, HttpServletRequest request) {
-		
-		service.getMyStore_num(dto, request);
-		
-		return "storeDetail";
-	}
-	
 	// (로고)사진 업로드 method
 	@RequestMapping(value = "/uploadImage.do", method = RequestMethod.POST)
 	@ResponseBody
@@ -139,20 +133,26 @@ public class StoreController {
 	// 매장 On Off method
 	@RequestMapping(value = "/storeOnOff.do", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> storeOnOff(StoreDto dto) {
+	public Map<String, Object> storeOnOff(StoreDto dto) {;
 		
-		System.out.println(dto.getNum());
+		service.storeOnOff(dto);
 		
 		Map<String, Object> map=new HashMap<>();
 		map.put("beSwitched", true);
 		
 		return map;
 	}
-	
-	//임시 매장관리 페이지 이동
-	@RequestMapping("/store/manageMenu.do")
-	public String getList() {
 
-		return "store/manageMenu";
+	// 매장 상세 정보 페이지로 이동
+	@RequestMapping(value = "/storeDetail.do", method = RequestMethod.GET)
+	public String goStoreDetail(StoreDto dto, HttpServletRequest request) {
+		
+		service.getMyStore_num(dto, request);
+		
+		mService.getMenuList_user(dto, request);
+		
+		
+		return "storeDetail";
 	}
+	
 }

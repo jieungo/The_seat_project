@@ -19,7 +19,7 @@
 <body>
 <div class="container">
 
-	<a href="${pageContext.request.contextPath}/store/manageMenu.do">매장 관리 페이지</a>
+	<a href="${pageContext.request.contextPath}/store/manageMenu.do?num=${dto.num}&storeName=${dto.storeName}">매장 관리 페이지</a>
 	<p>매장 관리 페이지</p>
 	DB 번호 : <p>${dto.num }</p>
 	매장 관리자 : <p>${dto.owner }</p>
@@ -129,7 +129,14 @@
 	이미지 4 : <p>${dto.image_4 }</p>
 	<div>
 		오픈 여부 : <p id="storeOnOff">${dto.storeOpen }</p>
-		<button id="storeOnOffBtn">매장 열기</button>
+		<c:choose>
+			<c:when test="${dto.storeOpen == 'yes'}">
+				<button id="storeOnOffBtn">매장 닫기</button>
+			</c:when>
+			<c:when test="${dto.storeOpen == 'no'}">
+				<button id="storeOnOffBtn">매장 열기</button>
+			</c:when>
+		</c:choose>
 	</div>
 	매장 등록일 : <p>${dto.regdate }</p>
 </div>
@@ -226,9 +233,6 @@
 		}
 	}
 	
-	// 태그 삭제
-	//deleteTag(".del-tag", ".tag");
-	
 	// 태그를 삭제하는 함수 (추가된 삭제 버튼, 추가된 태그 버튼)
 	function deleteTag(addDeleteTag, addTag){
 		// 추가된 삭제 버튼, 태그버튼들
@@ -321,23 +325,6 @@
 			}
 		});
 	});
-	/*
-	document.querySelector("#logoImage").addEventListener("change", function(e){
-		readImage(e.target);
-	});
-	
-	document.querySelector("#logoForm").addEventListener("submit", function(e){
-		// 일단 form 제출을 막음
-		e.preventDefault();
-		console.log(this);
-		ajaxFormPromise(this)
-		.then(function(response){
-			return response.json();
-		}).then(function(data){
-			console.log(data);
-		});
-	});
-	*/
 	
 	// 이미지를 눌렀을 때 동작하는 영역
 	let imgLinks=document.querySelectorAll(".updateImgLink");
@@ -406,12 +393,38 @@
 	document.querySelector("#storeOnOffBtn").addEventListener("click", function(e){
 		e.preventDefault();
 		
-		ajaxPromise("${pageContext.request.contextPath}/storeOnOff.do", "post", "num="+${dto.num})
+		let self=this;
+		let num=${dto.num}
+		let storeOpen="no";
+		if(this.innerText=="매장 열기"){
+			let switchOn=confirm("매장을 열겠습니까?");
+			if(switchOn){
+				storeOpen="yes";
+				onoff(num, storeOpen, self);	
+			}
+		} else if(this.innerText=="매장 닫기"){
+			let switchOff=confirm("매장을 닫겠습니까?");
+			if(switchOff){
+				storeOpen="no";
+				onoff(num,storeOpen, self);
+			}
+		}
+	});
+	
+	function onoff(num, storeOpen, self){
+		let obj={num, storeOpen}
+		
+		ajaxPromise("${pageContext.request.contextPath}/storeOnOff.do", "post", obj)
 		.then(function(response){
 			return response.json();
 		}).then(function(data){
 			console.log(data);
+			if(data.beSwitched && storeOpen=="yes"){
+				self.innerText="매장 닫기";
+			} else if(data.beSwitched && storeOpen=="no"){
+				self.innerText="매장 열기";
+			}
 		});
-	});
+	}
 </script>
 </html>

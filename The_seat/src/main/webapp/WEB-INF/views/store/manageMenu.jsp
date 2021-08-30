@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -151,11 +152,11 @@ img {
         <ul>
             <li>
                 <a href="#">전체</a>
-                <a href="#">카테고리1</a>
-                <a href="#">카테고리2</a>
             </li>
+            
         </ul>
         <button style="color:rgb(253, 197, 14); font-weight: 500;">카테고리 추가</button>
+        
     </div>
     </section>
         <div class="card mb-5" style="max-width: 500px; height: 220px; margin-top: 20px;">
@@ -166,28 +167,29 @@ img {
                 <span style="color: rgb(173, 173, 173); font-size: 14px;">새로운 메뉴 추가하기</span>
             </div>
         </div>
-            
-        <div class="card" style="max-width: 500px;">
-            <div class="row g-0">
-                <button class="mt-3 pe-2 starBtn" style="display: flex; justify-content:flex-end;">
-                    <i class="starIcon far fa-star"></i>
-                </button>
-                <div class="col-md-4 ms-4">
-                    <img src="resources/cake.jpeg" class="rounded" alt="menu_image">
-                </div>
-                <div class="col-md-6">
-                    <div class="card-body p-2" style="width: 200px;">
-                        <h6 class="card-text">상품명 <!-- <p class="card-text">존맛탱 케이크</p> --> </h6>
-                        <h6 class="card-text">상품가격  <!-- <p class="card-text">10,000원</p> --> </h6>
-                        <h6 class="card-text">상품구성 <!-- <p class="card-text">생크림, 시나몬, 밀가루</p> --> </h6>
-                    </div>
-                </div>
-                <div class="menu__card-edit mb-2 pe-2" style="display: flex; justify-content: flex-end;">
-                    <button>수정</button>
-                    <button>삭제</button>
-                </div>
-            </div>
-        </div>
+        <c:forEach var="tmp" items="${menuList }">
+        	<div class="card" style="max-width: 500px;">
+            	<div class="row g-0">
+	                <button class="mt-3 pe-2 starBtn" style="display: flex; justify-content:flex-end;">
+	                    <i class="starIcon far fa-star"></i>
+	                </button>
+                	<div class="col-md-4 ms-4">
+	                    <img src="${pageContext.request.contextPath}${tmp.menuImage}" class="rounded" alt="menu_image">
+	                </div>
+	                <div class="col-md-6">
+	                    <div class="card-body p-2" style="width: 200px;">
+	                        <h6 class="card-text">${tmp.menuName } <!-- <p class="card-text">존맛탱 케이크</p> --> </h6>
+	                        <h6 class="card-text">${tmp.price }  <!-- <p class="card-text">10,000원</p> --> </h6>
+	                        <h6 class="card-text">${tmp.content } <!-- <p class="card-text">생크림, 시나몬, 밀가루</p> --> </h6>
+	                    </div>
+	                </div>
+	                <div class="menu__card-edit mb-2 pe-2" style="display: flex; justify-content: flex-end;">
+	                    <button>수정</button>
+	                    <button data-num="${tmp.num }" class="deleteBtn">삭제</button>
+	                </div>
+	            </div>
+	        </div>
+        </c:forEach>
     </article>
 <!------------------ 옆 사이드바 (매장정보, 메뉴관리 탭) ----------------->
     <aside class="store__aside">
@@ -200,7 +202,7 @@ img {
 
 <!-------------------- 메뉴 등록 모달창 ------------------------------>
     
-    <div class="modal " tabindex="-1" id="modal-menuAddForm" aria-labelledby="menuAddForm" aria-hidden="true">
+    <div class="modal" tabindex="-1" id="modal-menuAddForm" aria-labelledby="menuAddForm" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -208,21 +210,27 @@ img {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="menuAddForm" action="#" method="post">
-                    <input class="form-control" type="hidden" name="image" id="image">
-                    <input class="form-control" type="text" name="menuname" id="menuname" placeholder="상품명" required="required">
-                    <input class="form-control" type="number" name="menuprice" id="menuprice" placeholder="상품가격" required="required">
-                    <input class="form-control" type="text" name="menucontaine" id="menucontaine" placeholder="상품구성" required="required">
+                <form id="menuAddForm" action="${pageContext.request.contextPath}/store/addMenu.do" method="post" enctype="multipart/form-data">                 
+                    <img id="thumbImg" src="" alt="" />
+                    
+                    <input type="hidden" name="num" value="${storeDBNum }" />
+                    <input class="form-control" type="file" name="imageFile" id="image">
+                    <input class="form-control" type="text" name="menuName" id="menuname" placeholder="상품명" required="required">
+                    <input class="form-control" type="text" name="price" id="menuprice" placeholder="상품가격">
+                    <input class="form-control" type="text" name="content" id="menucontaine" placeholder="상품구성" required="required">
                     <span class="dropdown">카테고리 추가</span>
+                    <!--
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        카테고리 목록
+                    	카테고리 목록
                     </button>
+                    
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" > 
-                        <li><a class="dropdown-item" href="#">전체</a></li>
+                        <li><a class="dropdown-item" href="#">없음</a></li>
                         <li><a class="dropdown-item" href="#">1</a></li>
                         <li><a class="dropdown-item" href="#">2</a></li>
                     </ul><br>
-                    <button type="submit">완료</button>
+                    -->
+                    <button id="addBtn" type="submit">완료</button>
                 </form>
             </div>
         </div>
@@ -232,14 +240,81 @@ img {
 
 
 <script src="https://kit.fontawesome.com/2ebe86210e.js" crossorigin="anonymous"></script>
+<script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 <script>
 
-const starIcon = document.querySelector('.starIcon');
-
-starIcon.addEventListener('click', ()=> {
-    starIcon.classList.toggle('fas');
-});
-
+	
+	// 이미지를 고르면 썸네일에 등장하도록 하는 영역
+	viewThumbNail("#image");
+	
+	// 이미지 파일을 선택했을 때 동작하는 method
+	function viewThumbNail(rel){
+		document.querySelector(rel).addEventListener("change", function(e){
+			readImage(e.target);
+		});
+	}
+	
+	function readImage(input) {
+	    // 인풋 태그에 파일이 있는 경우
+	    if(input.files && input.files[0]) {
+	        // 이미지 파일인지 검사 (생략)
+	        // FileReader 인스턴스 생성
+	        let reader=new FileReader();
+	        // 이미지가 로드가 된 경우
+	        reader.onload=function(e){
+	            let previewImg=document.querySelector("#thumbImg");
+	            previewImg.src=e.target.result;
+	        }
+	        // reader가 이미지 읽도록 하기
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	}
+	
+	// 모달에서 메뉴 등록 버튼을 눌렀을 때 동작하는 곳
+	document.querySelector("#menuAddForm").addEventListener("submit", function(e){
+		e.preventDefault();
+		
+		let wantAdd=confirm("메뉴를 추가하시겠습니까?");
+		
+		if(wantAdd){
+			ajaxFormPromise(this)
+			.then(function(response){
+				return response.json();
+			}).then(function(data){
+				console.log(data);
+				if(data.beAdded){
+					alert("메뉴가 추가되었습니다.");
+					location.href="${pageContext.request.contextPath}/store/manageMenu.do?num=${storeData.num}&storeName=${storeData.storeName}";
+				}
+			});	
+		}
+		
+	});
+	
+	// 등록한 메뉴를 삭제하는 method
+	let deleteBtns=document.querySelectorAll(".deleteBtn");
+	for(let i=0; i<deleteBtns.length; i++){
+		deleteBtns[i].addEventListener("click", function(e){
+			e.preventDefault();
+			
+			let menuNum=this.getAttribute("data-num");
+			let wantDel=confirm("이 메뉴를 삭제하시겠습니까?");
+			if(wantDel){
+				ajaxPromise("${pageContext.request.contextPath}/store/deleteMenu.do", "post", "num="+menuNum)
+				.then(function(response){
+					return response.json();
+				}).then(function(data){
+					console.log(data);
+					if(data.beDeleted){
+						location.href="${pageContext.request.contextPath}/store/manageMenu.do?num=${storeData.num}&storeName=${storeData.storeName}";
+					}
+				});	
+			}
+		});	
+	}
+	
+	// 
+	
 </script>
 
 </body>
