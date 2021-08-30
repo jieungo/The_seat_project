@@ -308,7 +308,7 @@ input:focus {
 	// 태그를 추가하는 함수
 	function addTagEvent(rel){
 		document.querySelector(rel).addEventListener("click", test, {once:true});
-	}
+	};
 	
 	// 태그를 추가하는 함수에 들어갈 함수
 	function test(e){

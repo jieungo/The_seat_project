@@ -214,7 +214,6 @@
           };
        });
        //ajax 로 폼 내용 전송하고 json으로 응답 받기
-       
     });
     
     //---------------------------------회원가입--------------------------------------------
@@ -272,7 +271,7 @@
       document.querySelector("#idSignup").classList.remove("is-valid");
       document.querySelector("#idSignup").classList.remove("is-invalid");
       
-      //1. 입력한 이메일 value 값 읽어오기  
+      //1. 입력한 이메일 value 값 읽어오기
       let inputEmail=document.querySelector("#email").value;
       
       //2. util 에 있는 함수를 이용해서 ajax 요청하기

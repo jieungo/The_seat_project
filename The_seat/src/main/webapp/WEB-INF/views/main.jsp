@@ -53,29 +53,29 @@
 	</c:if>
 </div>
 
-	<!-- 임시 검색 결과 -->
-	<div class="container">
-		<div class="row row-cols-3 row-cols-md-2 g-4">
-			<c:forEach var="tmp" items="${list }">
-				<a href="${pageContext.request.contextPath}/storeDetail.do?num=${tmp.num}">
-					<div class="col">
-						<div class="row g-0">
-							<div class="col-md-4">
-								<img src="..." class="img-fluid rounded-start" alt="...">
-							</div>
-							<div class="col-md-8">
-								<div class="card-body">
-									<h5 class="card-title">이름 : ${tmp.storeName }</h5>
-									<p class="card-text">주소 : ${tmp.storeAddr }</p>
-									<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-								</div>
+<!-- 임시 검색 결과 -->
+<div class="container">
+	<div class="row row-cols-3 row-cols-md-2 g-4">
+		<c:forEach var="tmp" items="${list }">
+			<a href="${pageContext.request.contextPath}/storeDetail.do?num=${tmp.num}">
+				<div class="col">
+					<div class="row g-0">
+						<div class="col-md-4">
+							<img src="..." class="img-fluid rounded-start" alt="...">
+						</div>
+						<div class="col-md-8">
+							<div class="card-body">
+								<h5 class="card-title">이름 : ${tmp.storeName }</h5>
+								<p class="card-text">주소 : ${tmp.storeAddr }</p>
+								<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
 							</div>
 						</div>
 					</div>
-				</a>
-			</c:forEach>
-		</div>
+				</div>
+			</a>
+		</c:forEach>
 	</div>
+</div>
 </body>
 <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 
