@@ -6,134 +6,271 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- bootstrap 외부 링크 참조 -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" 
-   integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+	<!--  부트스트랩 -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 </head>
 <style>
-	.image{
-		width: 200px;
-		height: 200px;
-	}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #598eff;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(78, 78, 78);
+    font-size: 16px;
+}
+
+/* 버튼 기본 스타일링 */
+button {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    color: rgb(78, 78, 78);
+}
+
+/* 링크 기본 스타일링 */
+a {
+    text-decoration: none;
+    color: rgb(78, 78, 78);
+}
+
+/* 리스트 기본 스타일링 */
+ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+img {
+    width: 100px; 
+    height: 100px;
+}
+
+input {
+	padding-left:10px;
+	border:none;
+	border-bottom: 1px solid lightgray;
+	text-align:center;
+}
+
+input:focus {
+	outline:none;
+}
+
+.myStore_container {
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    border-radius: 10px  0 0 10px;
+    height: 80%;
+    max-width: 700px;
+    position: relative;
+}
+
+.inner_container {
+    text-overflow: hidden; 
+    overflow-x: auto;
+    height: 100%;
+    width: 100%;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.store__aside {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-evenly;
+    height: 100%;
+    position: absolute;
+    left: 100%;
+    padding: 0;
+    
+}
+
+.store__aside > button {
+    border: 1px solid gray;
+    background-color: white;
+    border-radius: 0 5px 5px 0;
+    border: 1px solid lightgray;
+    width: 15vw;
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 700;
+    transition: color 0.2s ease-in-out;
+}
+
+.store__aside button:focus {
+    color: #598eff;
+    border-left: none;
+}
+
+#storeOnOffBtn {
+    background-color: white;
+    color: #598eff;
+    box-shadow: 1px 1px 11px rgba(172, 172, 172, 0.699);
+    width: 90%;
+    font-weight: 600;
+}
+
 </style>
 <body>
-<div class="container">
 
-	<a href="${pageContext.request.contextPath}/store/manageMenu.do">매장 관리 페이지</a>
-	<p>매장 관리 페이지</p>
-	DB 번호 : <p>${dto.num }</p>
-	매장 관리자 : <p>${dto.owner }</p>
-	<br>
-	<!-- 매장 정보 관리 영역 -->
-	<div>
-		<form id="updateForm" action="${pageContext.request.contextPath}/storeUpdate.do" method="post">
-			<a href="javascript:" id="updateBtn" style="display:block">매장 정보 수정</a>
-			<p id="updateBox" style="display:none">
-				<a href="javascript:" id="update">수정 완료</a>
-				<a href="javascript:" id="updateCancel">취소</a>
-			</p>
-			<input type="hidden" name="num" value="${dto.num }"/>
-			<p>매장 이름 : <strong class="storeData">${dto.storeName } </strong>
-				<input type="text" name="storeName" class="updateData" value="${dto.storeName }" style="display:none;"/></p>
-			<p>매장 주소 : <strong class="storeData">${dto.storeAddr } </strong>
-				<input type="text" name="storeAddr" class="updateData" value="${dto.storeAddr }" style="display:none;"/></p>
-			<p>영업 시간 : <strong class="storeData">${dto.openingTime } </strong>
-				<input type="text" name="openingTime" class="updateData" value="${dto.openingTime }" style="display:none;"/></p>
-		</form>
-	</div>
-	
-	<!-- 매장 태그 관리 영역 -->
-	<div>
-		매장 태그 : 
-		<p id="btns">
-			<c:forEach var="tmp" items="${list }">
-				<button data-num="${dto.num }" name="tag" class="btn btn-primary tag">${tmp}</button>
-			</c:forEach>
-		</p>
-		<input id="inputTag" type="text" style="display:none"/>
-		<a data-num="${dto.num }" href="javascript:" class="plus addTag">태그 추가</a>
-		<br>
-	</div>
-	<br>
-	
-	<!-- 매장 로고 관리 영역 -->
-	<div>
-		<a class="updateImgLink" href="javascript:">
-			<img src="${pageContext.request.contextPath}${dto.image_logo}" alt="" id="image_logo" name="logo" class="image"/>
-		</a>
-		<form action="${pageContext.request.contextPath}/uploadImage.do" id="logoForm" method="post" enctype="multipart/form-data">
-			<label for="image_logo">매장 로고</label>
-			<input type="hidden" name="num" value="${dto.num }"/>
-			<input type="hidden" name="image_logo" value="check"/>
-			<input type="file" id="logoImage" name="imageFile" style="display:none"/>
-			<button class="updateImgBtn" type="submit" style="display:none">로고 등록</button>
-		</form>
-	</div>
-	매장 로고 : <p>${dto.image_logo }</p>
-	
-	<!-- 매장 대표 이미지 관리 영역1-->
-	<div>
-		<a class="updateImgLink" href="javascript:">
-			<img src="${pageContext.request.contextPath}${dto.image_1}" alt="" id="image_1" name="image1" class="image"/>
-		</a>
-		<form action="${pageContext.request.contextPath}/uploadImage.do" id="imageForm1" method="post" enctype="multipart/form-data">
-			<label for="image_1">대표 이미지1</label>
-			<input type="hidden" name="num" value="${dto.num }"/>
-			<input type="hidden" name="image_1" value="check"/>
-			<input type="file" id="repImage1" name="imageFile" style="display:none"/>
-			<button class="updateImgBtn" type="submit" style="display:none">로고 등록</button>
-		</form>
-	</div>
-	이미지 1 : <p>${dto.image_1 }</p>
-	<!-- 매장 대표 이미지 관리 영역2-->
-	<div>
-		<a class="updateImgLink" href="javascript:">
-			<img src="${pageContext.request.contextPath}${dto.image_2}" alt="" id="image_2" name="image2" class="image"/>
-		</a>
-		<form action="${pageContext.request.contextPath}/uploadImage.do" id="imageForm2" method="post" enctype="multipart/form-data">
-			<label for="image_2">대표 이미지2</label>
-			<input type="hidden" name="num" value="${dto.num }"/>
-			<input type="hidden" name="image_2" value="check"/>
-			<input type="file" id="repImage2" name="imageFile" style="display:none"/>
-			<button class="updateImgBtn" type="submit" style="display:none">로고 등록</button>
-		</form>
-	</div>
-	이미지 2 : <p>${dto.image_2 }</p>
-	<!-- 매장 대표 이미지 관리 영역3-->
-	<div>
-		<a class="updateImgLink" href="javascript:">
-			<img src="${pageContext.request.contextPath}${dto.image_3}" alt="" id="image_3" name="image3" class="image"/>
-		</a>
-		<form action="${pageContext.request.contextPath}/uploadImage.do" id="imageForm3" method="post" enctype="multipart/form-data">
-			<label for="image_3">대표 이미지3</label>
-			<input type="hidden" name="num" value="${dto.num }"/>
-			<input type="hidden" name="image_3" value="check"/>
-			<input type="file" id="repImage3" name="imageFile" style="display:none"/>
-			<button class="updateImgBtn" type="submit" style="display:none">로고 등록</button>
-		</form>
-	</div>
-	이미지 3 : <p>${dto.image_3 }</p>
-	<!-- 매장 대표 이미지 관리 영역4-->
-	<div>
-		<a class="updateImgLink" href="javascript:">
-			<img src="${pageContext.request.contextPath}${dto.image_4}" alt="" id="image_4" name="image4" class="image"/>
-		</a>
-		<form action="${pageContext.request.contextPath}/uploadImage.do" id="imageForm4" method="post" enctype="multipart/form-data">
-			<label for="image_4">대표 이미지4</label>
-			<input type="hidden" name="num" value="${dto.num }"/>
-			<input type="hidden" name="image_4" value="check"/>
-			<input type="file" id="repImage4" name="imageFile" style="display:none"/>
-			<button class="updateImgBtn" type="submit" style="display:none">로고 등록</button>
-		</form>
-	</div>
-	이미지 4 : <p>${dto.image_4 }</p>
-	<div>
-		오픈 여부 : <p id="storeOnOff">${dto.storeOpen }</p>
-		<button id="storeOnOffBtn">매장 열기</button>
-	</div>
-	매장 등록일 : <p>${dto.regdate }</p>
+    <!------------------------------- navbar 추가-------------------------------->
+
+<div class="container myStore_container pe-0 ps-0">
+    <!-- <a href="${pageContext.request.contextPath}/store/manageMenu.do">매장 관리 페이지</a> -->
+
+    <!------------------------------ 매장 로고 관리 영역 -------------------------->
+<div class="inner_container row ">
+
+    <div class="col" style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+        <div>
+            <a class="updateImgLink" href="javascript:">
+                <img src="${pageContext.request.contextPath}${dto.image_logo}" alt="" id="image_logo" name="logo" class="image mt-3"
+                style="width: 150px; height: 150px; "/>
+            </a>
+            <form action="${pageContext.request.contextPath}/uploadImage.do" id="logoForm" method="post" 
+            style="text-align: center;" enctype="multipart/form-data">
+                <label for="image_logo" style="font-size:14px">대표 이미지</label>
+                <input type="hidden" name="num" value="${dto.num }"/>
+                <input type="hidden" name="image_logo" value="check"/>
+                <input type="file" id="logoImage" name="imageFile" style="display:none"/>
+                <button class="updateImgBtn" type="submit" style="display:none"></button>
+            </form>
+        </div>
+    
+    <!------------------------- 매장 정보 관리 영역 ----------------------------->
+
+        <div class="mt-3 mb-3">
+            <form id="updateForm" action="${pageContext.request.contextPath}/storeUpdate.do" 
+            method="post">
+                <a href="javascript:" id="updateBtn" class="mb-2" style="display:block; text-align: end;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                    </svg>
+                </a>
+                <p id="updateBox" style="display:none; text-align:end; font-size:14px ">
+                    <a href="javascript:" id="update">수정완료</a>
+                    <a href="javascript:" id="updateCancel">취소</a>
+                </p>
+
+                <input type="hidden" name="num" value="${dto.num }"/>
+                <p>매장 이름 : <strong class="storeData">${dto.storeName } </strong></p>
+                <input type="text" name="storeName" class="updateData" value="${dto.storeName }" style="display:none;"/>
+                <p>매장 주소 : <strong class="storeData">${dto.storeAddr } </strong></p>
+                <input type="text" name="storeAddr" class="updateData" value="${dto.storeAddr }" style="display:none;"/>
+                <p>영업 시간 : <strong class="storeData">${dto.openingTime } </strong></p>
+                <input type="text" name="openingTime" class="updateData" value="${dto.openingTime }" style="display:none;"/>
+            </form>
+        </div>
+    
+    <!--------------------------- 매장 태그 관리 영역 --------------------------->
+
+        <div style="display:flex; justify-content:center; align-items:center; flex-direction:column">
+            <span style="font-size: 14px; color: lightgray;">매장을 나타내는 태그 추가하기</span>
+            <p id="btns" class="mt-3" >
+                <c:forEach var="tmp" items="${list }">
+                    <button data-num="${dto.num }" name="tag" class="btn btn-primary tag mb-1">${tmp}</button>
+                </c:forEach>
+            </p>
+            <div style="display:flex; box-shadow: 1px 1px 11px rgba(172, 172, 172, 0.699); width:150px; height:30px; margin-bottom:10px">
+	            <input id="inputTag" type="text" style="display:none; border:none; font-size:14px;"/>
+	            <a data-num="${dto.num }" href="javascript:" class="plus addTag btn" style="color: #598eff; 
+	            border-radius: 5px; height: 30px;  font-weight: 500; font-size: 20px;
+	            display:flex; align-items:center; justify-content:center; ">
+	                <span>+</span>
+	            </a>        
+            </div>
+        </div>     
+    </div>
+
+    <!--------------------------- 매장 대표 이미지 관리 영역1 ---------------------->
+
+    <div class="col" style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+        <div style="text-align: center;">
+            <a class="updateImgLink" href="javascript:">
+                <img src="${pageContext.request.contextPath}${dto.image_1}" alt="" id="image_1" name="image1" class="image" 
+                style="width: 300px; height: 150px;"/>
+            </a>
+            <form action="${pageContext.request.contextPath}/uploadImage.do" id="imageForm1" method="post" enctype="multipart/form-data">
+                <label for="image_1" style="visibility: hidden;">대표 이미지1</label>
+                <input type="hidden" name="num" value="${dto.num }"/>
+                <input type="hidden" name="image_1" value="check"/>
+                <input type="file" id="repImage1" name="imageFile" style="display:none"/>
+                <button class="updateImgBtn" type="submit" style="display:none">로고 등록</button>
+            </form>
+        </div>
+
+        <div>
+            <!-- 매장 대표 이미지 관리 영역2-->
+            <a class="updateImgLink" href="javascript:">
+                <img src="${pageContext.request.contextPath}${dto.image_2}" alt="" id="image_2" name="image2" class="image"/>
+            </a>
+            
+            <!-- 매장 대표 이미지 관리 영역3-->
+            <a class="updateImgLink" href="javascript:">
+                <img src="${pageContext.request.contextPath}${dto.image_3}" alt="" id="image_3" name="image3" class="image"/>
+            </a>
+            
+            <!-- 매장 대표 이미지 관리 영역4-->
+            <a class="updateImgLink" href="javascript:">
+                <img src="${pageContext.request.contextPath}${dto.image_4}" alt="" id="image_4" name="image4" class="image"/>
+            </a>
+
+            <form class="p-0" action="${pageContext.request.contextPath}/uploadImage.do" id="imageForm2" method="post" enctype="multipart/form-data">
+                <label style="visibility : hidden;" for="image_2">대표 이미지2</label>
+                <input type="hidden" name="num" value="${dto.num }"/>
+                <input type="hidden" name="image_2" value="check"/>
+                <input type="file" id="repImage2" name="imageFile" style="display:none"/>
+                <button class="updateImgBtn" type="submit" style="display:none"></button>
+            </form>
+            
+            <form class="p-0" action="${pageContext.request.contextPath}/uploadImage.do" id="imageForm3" method="post" enctype="multipart/form-data">
+                <label style="visibility : hidden" for="image_3">대표 이미지3</label>
+                <input type="hidden" name="num" value="${dto.num }"/>
+                <input type="hidden" name="image_3" value="check"/>
+                <input type="file" id="repImage3" name="imageFile" style="display:none"/>
+                <button class="updateImgBtn" type="submit" style="display:none"></button>
+            </form>
+
+            <form class=" p-0" action="${pageContext.request.contextPath}/uploadImage.do" id="imageForm4" method="post" enctype="multipart/form-data">
+                <label style="visibility : hidden" for="image_4">대표 이미지4</label>
+                <input type="hidden" name="num" value="${dto.num }"/>
+                <input type="hidden" name="image_4" value="check"/>
+                <input type="file" id="repImage4" name="imageFile" style="display:none"/>
+                <button class="updateImgBtn" type="submit" style="display:none"></button>
+            </form>
+        </div>
+
+        <div style="width: 100%;">
+            <p id="storeOnOff">${dto.storeOpen }</p>
+            <button id="storeOnOffBtn" class="btn">매장 열기</button>
+        </div>
+    </div>
 </div>
-</body>
+    <!------------------------------------ 옆 사이드바 (매장정보, 메뉴관리 탭) ----------------->
+    <aside class="store__aside" style="width: 0;">
+        <button>매장 정보</button>
+        <button>메뉴 관리</button>
+        <button>리뷰 관리</button>
+        <button>주문 확인</button>
+        <button>자리 관리</button>
+    </aside>
+</div>
 <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 <script>
 	// 태그 안에 x 버튼 넣어서 로딩하기
@@ -163,8 +300,7 @@
 		document.querySelector("#inputTag").style.display="block";
 		// 태그 추가 링크의 class를 변경
 		this.setAttribute("class", "addTag");
-		// 태그 추가 링크의 내용을 변경
-		this.innerText="태그 추가";
+
 		// 해당 class에 해당하는 링크에 태그 추가 이벤트 부여
 		addTagEvent(".addTag");
 	});
@@ -401,10 +537,22 @@
 			});
 		});
 	}
-	
+		
+	let storeOnOffBtn = document.querySelector('#storeOnOffBtn');
+
 	// 매장 열기 or 닫기 작업
-	document.querySelector("#storeOnOffBtn").addEventListener("click", function(e){
+		storeOnOffBtn.addEventListener("click", function(e){
 		e.preventDefault();
+
+		if(storeOnOffBtn.innerText === '매장 열기') {
+			storeOnOffBtn.innerText = '매장 닫기';
+			storeOnOffBtn.style.backgroundColor="lightGray";
+			storeOnOffBtn.style.color="white";
+		} else {
+			storeOnOffBtn.innerText = '매장 열기';
+			storeOnOffBtn.style.backgroundColor="white";
+			storeOnOffBtn.style.color="#598eff";			
+		}
 		
 		ajaxPromise("${pageContext.request.contextPath}/storeOnOff.do", "post", "num="+${dto.num})
 		.then(function(response){
@@ -414,4 +562,5 @@
 		});
 	});
 </script>
+</body>
 </html>

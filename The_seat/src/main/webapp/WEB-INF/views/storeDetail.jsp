@@ -16,42 +16,52 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
 	crossorigin="anonymous"></script>
-<script src="./jquery-3.4.1.min.js"></script>
 <style>
-	input {
-		text-align: center;
-	}
-	#reviewBtn{
-		background-color: #2e8eff;
-		color: white;
-		margin-top: 10px;
-		width: 130px;
-		height: 40px;
-		border-radius: 10px;
-		border: none;
-	}
-	#seatBtn {
-		background-color: #2e8eff;
-		color: white;
-		margin-top: 30px;
-		width: 400px;
-		height: 60px;
-		border-radius: 10px;
-		border: none;
-	}
+input {
+	text-align: center;
+}
+
+#reviewBtn {
+	background-color: #2e8eff;
+	color: white;
+	margin-top: 10px;
+	width: auto;
+	height: 40px;
+	border-radius: 10px;
+	border: none;
+}
+
+#seatBtn {
+	background-color: #2e8eff;
+	color: white;
+	margin-top: 30px;
+	width: auto;
+	height: 60px;
+	border-radius: 10px;
+	border: none;
+}
+
+#menuBtn {
+	background-color: white;
+	border: none;
+	font-size: 1.5em;
+	font-wight: bolder;
+	color: rgb(96, 92, 99);
+}
 </style>
 </head>
 <body>
 	<div class="container">
-		<!-- 네비바를 import 한다. -->
+		<!---------------------- 네비바를 import 한다. ------------------------->
 		<jsp:include page="nav/navbar.jsp" />
-
-		<section class="d-grid gap-2 col-3 mx-auto">
-			<!-- DB 연동해서 파라미터 값으로 칼럼 값을 받아온다.  -->
-			<img src="${dto.image_logo }" alt="storeLogo" /> <span
-				style="font-size: 2em; text-align: center;">${dto.storeName }</span>
+		<section class="gap-2 col-3 mx-auto">
+			<!---------------------- DB 연동해서 파라미터 값으로 칼럼 값을 받아온다.  --------------------->
+			<img src="${pageContext.request.contextPath}${dto.image_logo }"
+				alt="storeLogo" width="60px;" /> <span
+				style="font-size: 2.5em; font-weight: bold; color: rgb(85, 152, 252); text-shadow: 2px 6px 2px #d3d3d3; text-align: center;">${dto.storeName }</span>
 		</section>
 		<div class="row">
+			<!--------------------- 매장의 베스트 메뉴 4가지를 Carousel 로 띄우기  -------------------------->
 			<div id="carouselExampleDark"
 				class="col carousel carousel-dark slide" data-bs-ride="carousel"
 				style="width: 500px; margin-top: 50px; margin-bottom: 30px;">
@@ -68,32 +78,28 @@
 				</div>
 				<div class="carousel-inner" style="min-height: 500px;">
 					<div class="carousel-item active" data-bs-interval="10000">
-						<img
-							src="${pageContext.request.contextPath}/resources/img/coffee.jpg"
+						<img src="${pageContext.request.contextPath}${dto.image_1 }"
 							class="d-block w-100" alt="FirstBestmenu">
 						<div class="carousel-caption d-none d-md-block">
 							<h5>First Best Menu</h5>
 						</div>
 					</div>
 					<div class="carousel-item" data-bs-interval="2000">
-						<img
-							src="${pageContext.request.contextPath}/resources/img/cake.jpg"
+						<img src="${pageContext.request.contextPath}${dto.image_2 }"
 							class="d-block w-100" alt="SecondBestmenu">
 						<div class="carousel-caption d-none d-md-block">
 							<h5>Second Best Menu</h5>
 						</div>
 					</div>
 					<div class="carousel-item">
-						<img
-							src="${pageContext.request.contextPath}/resources/img/sandwich.jpg"
+						<img src="${pageContext.request.contextPath}${dto.image_3 }"
 							class="d-block w-100" alt="ThirdBestmenu">
 						<div class="carousel-caption d-none d-md-block">
 							<h5>Third Best Menu</h5>
 						</div>
 					</div>
 					<div class="carousel-item">
-						<img
-							src="${pageContext.request.contextPath}/resources/img/juice.png"
+						<img src="${pageContext.request.contextPath}${dto.image_4 }"
 							class="d-block w-100" alt="ThirdBestmenu">
 						<div class="carousel-caption d-none d-md-block">
 							<h5>Fourth Best Menu</h5>
@@ -110,9 +116,11 @@
 					<span class="carousel-control-next-icon" aria-hidden="true"></span>
 					<span class="visually-hidden">Next</span>
 				</button>
+				
+			<!------------------------------ 매장 상세 정보 카드 ----------------------------------->
 			</div>
 			<div class="col card text-center"
-				style="width: 600px; margin-top: 30px; margin-bottom: 30px; margin-left: 90px; border: none;">
+				style="width: 100px; margin-top: 30px; margin-bottom: 30px; margin-left: 90px; border: none;">
 				<!-- 파라미터 값으로 매장 정보를 받아온다. -->
 				<section class="d-grid gap-2 col-12 mx-auto"
 					style="margin-top: 60px;">
@@ -133,14 +141,13 @@
 							: 123개</button>
 					</div>
 					<div class="card-footer bg-transparent border-dark-light">
-						<button type="button" id="seatBtn"
-							data-bs-toggle="modal" data-bs-target="#Modalgrid">자리
-							잡으러 가기 ❕</button>
+						<button type="button" id="seatBtn" data-bs-toggle="modal"
+							data-bs-target="#Modalgrid">자리 잡으러 가기 ❕</button>
 					</div>
 				</section>
 			</div>
 
-			<!-- 리뷰 보기 Modal -->
+			<!------------------------------ 리뷰 보기 Modal -------------------------------->
 			<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
 				data-bs-keyboard="false" tabindex="-1"
 				aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -185,14 +192,14 @@
 				</div>
 			</div>
 
-			<!-- 자리 잡기 Modal -->
+			<!--------------------------------- 자리 잡기 Modal --------------------------------->
 			<div class="modal fade" id="Modalgrid" tabindex="-1" role="dialog"
 				aria-labelledby="Modalgrid" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-centered" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
 							<h5 class="modal-title" id="ModalLabel">
-								A TWOSOME PLACE <br />( 6 / 8 )
+								${dto.storeName } <br />( 6 / 8 )
 							</h5>
 							<p>자리를 선택해 주세요!</p>
 							<button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -245,7 +252,7 @@
 									</div>
 								</div>
 								<hr />
-								<!-- Modal 에서 선택한 자리 정보를 주문 페이지에 get 방식으로 값을 전달해준다. -->
+								<!------------------- Modal 에서 선택한 자리 정보를 주문 페이지에 get 방식으로 값을 전달해준다. ----------------->
 								<form action="${pageContext.request.contextPath}/order.do"
 									method="get">
 									<p>
@@ -280,6 +287,56 @@
 				</div>
 			</div>
 		</div>
+		<!---------------------------------------- 메뉴판 만들기 ------------------------------------------->
+		<div class="card mb-5"
+			style="max-width: auto; height: 700px; margin-top: 30px; background-color: rgb(86, 162, 255);">
+			<span
+				style="color: white; font-size: 45px; text-shadow: 2px 6px 2px gray; margin-left: 85px; margin-top: 25px;">Menu</span>
+			<div class="card mb-5"
+				style="max-width: 1130px; height: 600px; margin-top: 30px; margin-left: 80px; border-radius: 10px; background-color: white;">
+				<div class="col">
+					<c:forEach var="tmp" items="${list }">
+						<button data-num="${tmp.num }" type="button" id="menuBtn"
+							data-bs-toggle="modal" data-bs-target="#exampleModal"
+							style="width: 400px; margin-left: 70px; margin-top: 50px;">${tmp.menuName }</button>
+						<span
+							style="width: 300px; margin-left: 300px; font-size: 1.5em; color: rgb(96, 92, 99);">${tmp.price }</span>
+					</c:forEach>
+				</div>
+			</div>
+		</div>
+
+		<!-------------------------------- 메뉴 이름 누르면 그에 맞는 이미지 Modal 활성화 -------------------------------->
+		<div class="modal fade" id="exampleModal" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel"></h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="card" style="width: 18rem;">
+							<img src="${pageContext.request.contextPath}"
+								class="card-img-top" alt="MenuImage">
+							<div class="card-body">
+								<p class="card-text"></p>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-bs-dismiss="modal">창닫기</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
+<script>
+	document.querySelector("#menuBtn").addEventListenter("click", function(){
+		
+	});
+</script>
 </body>
 </html>

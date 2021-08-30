@@ -7,14 +7,15 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
 	crossorigin="anonymous"></script>
 <style>
-	* {
-		font-family: 'Do Hyeon', sans-serif;
+
+	*{
+		font-family: 'IBM Plex Sans KR', sans-serif;
 	}
 	#area, #group{
 		width: 110px;
@@ -41,7 +42,7 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
 <nav class="navbar navbar-light bg-light">
 	<img id="chair" style="width: 50px; height: 50px;"
 		src="${pageContext.request.contextPath}/resources/img/chair.png"
-		alt="chair" /> <a class="navbar-brand"
+		alt="chair" /> <a class="navbar-brand" style="font-family: 'Do Hyeon', sans-serif;"
 		href="${pageContext.request.contextPath}/main.do">자리..<br>있어요?
 	</a>
 	<form action="${pageContext.request.contextPath}/main.do" method="get">
