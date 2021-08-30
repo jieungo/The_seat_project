@@ -127,7 +127,6 @@ input:focus {
 
 </style>
 <body>
-
     <!------------------------------- navbar 추가-------------------------------->
 
 <div class="container myStore_container pe-0 ps-0">
@@ -362,9 +361,6 @@ input:focus {
 		}
 	}
 	
-	// 태그 삭제
-	//deleteTag(".del-tag", ".tag");
-	
 	// 태그를 삭제하는 함수 (추가된 삭제 버튼, 추가된 태그 버튼)
 	function deleteTag(addDeleteTag, addTag){
 		// 추가된 삭제 버튼, 태그버튼들
@@ -457,23 +453,6 @@ input:focus {
 			}
 		});
 	});
-	/*
-	document.querySelector("#logoImage").addEventListener("change", function(e){
-		readImage(e.target);
-	});
-	
-	document.querySelector("#logoForm").addEventListener("submit", function(e){
-		// 일단 form 제출을 막음
-		e.preventDefault();
-		console.log(this);
-		ajaxFormPromise(this)
-		.then(function(response){
-			return response.json();
-		}).then(function(data){
-			console.log(data);
-		});
-	});
-	*/
 	
 	// 이미지를 눌렀을 때 동작하는 영역
 	let imgLinks=document.querySelectorAll(".updateImgLink");
@@ -554,13 +533,39 @@ input:focus {
 			storeOnOffBtn.style.color="#598eff";			
 		}
 		
-		ajaxPromise("${pageContext.request.contextPath}/storeOnOff.do", "post", "num="+${dto.num})
+		let self=this;
+		let num=${dto.num}
+		let storeOpen="no";
+		if(this.innerText=="매장 열기"){
+			let switchOn=confirm("매장을 열겠습니까?");
+			if(switchOn){
+				storeOpen="yes";
+				onoff(num, storeOpen, self);	
+			}
+		} else if(this.innerText=="매장 닫기"){
+			let switchOff=confirm("매장을 닫겠습니까?");
+			if(switchOff){
+				storeOpen="no";
+				onoff(num,storeOpen, self);
+			}
+		}
+	});
+	
+	function onoff(num, storeOpen, self){
+		let obj={num, storeOpen}
+		
+		ajaxPromise("${pageContext.request.contextPath}/storeOnOff.do", "post", obj)
 		.then(function(response){
 			return response.json();
 		}).then(function(data){
 			console.log(data);
+			if(data.beSwitched && storeOpen=="yes"){
+				self.innerText="매장 닫기";
+			} else if(data.beSwitched && storeOpen=="no"){
+				self.innerText="매장 열기";
+			}
 		});
-	});
+	}
 </script>
 </body>
 </html>

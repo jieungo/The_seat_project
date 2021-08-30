@@ -7,12 +7,14 @@
 	<typeAliases>
 		<typeAlias type="com.star.seat.users.dto.UsersDto" alias="usersDto"/>
 		<typeAlias type="com.star.seat.store.dto.StoreDto" alias="storeDto"/>
+		<typeAlias type="com.star.seat.menu.dto.MenuDto" alias="menuDto"/>
 	</typeAliases>
 	
 	<!-- 필요한 Mapper xml 등록하기  -->
 	<mappers>
 		<mapper resource="com/star/seat/mybatis/UsersMapper.xml"/>
 		<mapper resource="com/star/seat/mybatis/StoreMapper.xml"/>
+		<mapper resource="com/star/seat/mybatis/MenuMapper.xml"/>
 	</mappers>
 </configuration>
 

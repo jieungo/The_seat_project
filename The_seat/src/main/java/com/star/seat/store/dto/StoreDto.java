@@ -16,6 +16,7 @@ public class StoreDto {
 	private String image_4;
 	private String storeOpen;
 	private String imageCheck;
+	private String category;
 	private String regdate;
 	private String area;
 	private String group;
@@ -28,7 +29,8 @@ public class StoreDto {
 
 	public StoreDto(int num, String owner, String storeName, String storeAddr, String storeTag, String openingTime,
 			String image_logo, String image_1, String image_2, String image_3, String image_4, String storeOpen,
-			String imageCheck, String regdate, String area, String group, String keyword, MultipartFile imageFile) {
+			String imageCheck, String category, String regdate, String area, String group, String keyword,
+			MultipartFile imageFile) {
 		super();
 		this.num = num;
 		this.owner = owner;
@@ -43,6 +45,7 @@ public class StoreDto {
 		this.image_4 = image_4;
 		this.storeOpen = storeOpen;
 		this.imageCheck = imageCheck;
+		this.category = category;
 		this.regdate = regdate;
 		this.area = area;
 		this.group = group;
@@ -154,6 +157,14 @@ public class StoreDto {
 		this.imageCheck = imageCheck;
 	}
 
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
 	public String getRegdate() {
 		return regdate;
 	}
@@ -193,6 +204,7 @@ public class StoreDto {
 	public void setImageFile(MultipartFile imageFile) {
 		this.imageFile = imageFile;
 	}
+
 
 	
 }

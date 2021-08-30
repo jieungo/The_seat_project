@@ -22,19 +22,24 @@ create table store(
 	image_4 clob,
 	storeOpen varchar2(10) not null,
 	imageCheck varchar2(10),
+	category clob,
 	regdate date
 );
 
 create sequence store_seq;
 
 CREATE TABLE storeMenu(
-	num,
-	storeName,
-	item,
-	content,
-	price,
-	best
+	num number primary key,
+	storeName varchar2(100) not null,
+	menuImage clob,
+	menuName varchar2(100) not null,
+	content clob,
+	price number not null,
+	best varchar2(10),
+	category varchar2(100)
 );
+
+create sequence storeMenu_seq;
 
 CREATE TABLE storeReview(
 	num NUMBER PRIMARY KEY,

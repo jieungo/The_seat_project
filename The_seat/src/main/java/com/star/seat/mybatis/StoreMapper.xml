@@ -5,9 +5,9 @@
 	<insert id="addStore" parameterType="string">
 		insert into store
 		(num, owner, storeName, storeAddr, openingTime,
-			storeOpen, regdate)
-		values(store_seq.nextval, #{email}, 'Default Name', 'Default Address', '00:00 ~ 24:00',
-			'no', sysdate)
+			storeOpen, category, regdate)
+		values(store_seq.nextval, #{email}, 'Default', 'Default', '00:00 ~ 24:00',
+			'no', 'Default', sysdate)
 	</insert>
 	
 	<!-- 사장님의 매장 정보 목록 가져오는 method -->

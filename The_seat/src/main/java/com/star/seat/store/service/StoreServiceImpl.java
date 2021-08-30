@@ -243,6 +243,7 @@ public class StoreServiceImpl implements StoreService{
 	// 매장 On Off method
 	@Override
 	public void storeOnOff(StoreDto dto) {
+		
 		dao.storeOnOff(dto);
 	}
 }
