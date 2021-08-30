@@ -147,7 +147,7 @@ input:focus {
                 <input type="hidden" name="num" value="${dto.num }"/>
                 <input type="hidden" name="image_logo" value="check"/>
                 <input type="file" id="logoImage" name="imageFile" style="display:none"/>
-                <button class="updateImgBtn" type="submit" style="display:none"></button>
+                <button class="updateImgBtn" type="submit" style="display:none">고지은</button>
             </form>
         </div>
     
@@ -256,7 +256,6 @@ input:focus {
         </div>
 
         <div style="width: 100%;">
-            <p id="storeOnOff">${dto.storeOpen }</p>
             <button id="storeOnOffBtn" class="btn">매장 열기</button>
         </div>
     </div>
@@ -520,19 +519,9 @@ input:focus {
 	let storeOnOffBtn = document.querySelector('#storeOnOffBtn');
 
 	// 매장 열기 or 닫기 작업
-		storeOnOffBtn.addEventListener("click", function(e){
+	storeOnOffBtn.addEventListener("click", function(e){
 		e.preventDefault();
 
-		if(storeOnOffBtn.innerText === '매장 열기') {
-			storeOnOffBtn.innerText = '매장 닫기';
-			storeOnOffBtn.style.backgroundColor="lightGray";
-			storeOnOffBtn.style.color="white";
-		} else {
-			storeOnOffBtn.innerText = '매장 열기';
-			storeOnOffBtn.style.backgroundColor="white";
-			storeOnOffBtn.style.color="#598eff";			
-		}
-		
 		let self=this;
 		let num=${dto.num}
 		let storeOpen="no";
@@ -546,7 +535,7 @@ input:focus {
 			let switchOff=confirm("매장을 닫겠습니까?");
 			if(switchOff){
 				storeOpen="no";
-				onoff(num,storeOpen, self);
+				onoff(num, storeOpen, self);
 			}
 		}
 	});
@@ -561,8 +550,12 @@ input:focus {
 			console.log(data);
 			if(data.beSwitched && storeOpen=="yes"){
 				self.innerText="매장 닫기";
+				storeOnOffBtn.style.backgroundColor="lightGray";
+				storeOnOffBtn.style.color="white";
 			} else if(data.beSwitched && storeOpen=="no"){
 				self.innerText="매장 열기";
+				storeOnOffBtn.style.backgroundColor="white";
+				storeOnOffBtn.style.color="#598eff";
 			}
 		});
 	}

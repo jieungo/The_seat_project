@@ -295,7 +295,7 @@ input {
 			<div class="card mb-5"
 				style="max-width: 1130px; height: 600px; margin-top: 30px; margin-left: 80px; border-radius: 10px; background-color: white;">
 				<div class="col">
-					<c:forEach var="tmp" items="${list }">
+					<c:forEach var="tmp" items="${menuList }">
 						<button data-num="${tmp.num }" type="button" id="menuBtn"
 							data-bs-toggle="modal" data-bs-target="#exampleModal"
 							style="width: 400px; margin-left: 70px; margin-top: 50px;">${tmp.menuName }</button>

@@ -31,7 +31,7 @@ public class MenuDaoImpl implements MenuDao{
 	@Override
 	public List<MenuDto> getMenuList_num(StoreDto dto) {
 		
-		return session.selectList("getMenuList_num", dto);
+		return session.selectList("getMenuList_user", dto);
 	}
 	
 	// 해당 매장의 메뉴 정보를 삭제하는 method

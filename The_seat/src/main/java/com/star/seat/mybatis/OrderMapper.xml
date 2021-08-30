@@ -21,7 +21,7 @@
 		WHERE orderNum = #{orderNum }
 	</select>
 	
-	<insert id="insert" parameterType="OderDto">
+	<insert id="insert" parameterType="orderDto">
 		INSERT INTO order_
 		(orderNum, email, storeName, tableNum, menu, count, price, amount, regdate)
 		VALUES(#{orderNum },#{email }, #{storeName }, #{tableNum }, #{menu }, #{count }, #{price },#{amount }, SYSDATE)
