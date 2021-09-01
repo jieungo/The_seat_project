@@ -18,6 +18,13 @@
 	integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
 	crossorigin="anonymous"></script>
 <style>
+	a:link{
+		text-decoration: none;
+	}
+ 	a:visited {
+ 		color: black;
+ 		text-decoration: none;
+ 	}
 	#area, #group{
 		width: 110px;
 		margin-left: 30px;
@@ -39,6 +46,10 @@
 		border-radius: 5px;
 		border: solid 2px gray;
 	}
+	img{
+		width: 100px;
+		height: 100px;
+	}
 </style>
 </head>
 <body>
@@ -54,14 +65,14 @@
 </div>
 
 <!-- 임시 검색 결과 -->
-<div class="container">
+<div class="container" style="margin-top: 20px;">
 	<div class="row row-cols-3 row-cols-md-2 g-4">
 		<c:forEach var="tmp" items="${list }">
 			<a href="${pageContext.request.contextPath}/storeDetail.do?num=${tmp.num}">
 				<div class="col">
 					<div class="row g-0">
 						<div class="col-md-4">
-							<img src="..." class="img-fluid rounded-start" alt="...">
+							<img src="${pageContext.request.contextPath}${tmp.image_logo } "class="img-fluid" alt="storeImageLogo">
 						</div>
 						<div class="col-md-8">
 							<div class="card-body">

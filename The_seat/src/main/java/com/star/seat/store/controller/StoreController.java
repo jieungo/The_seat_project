@@ -142,6 +142,32 @@ public class StoreController {
 		
 		return map;
 	}
+	
+	// 매장 메뉴 카테고리 추가하는 method
+	@RequestMapping(value = "/store/addCategory.do", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> addCategory(StoreDto dto){
+		
+		service.addCategory(dto);
+		
+		Map<String, Object> map=new HashMap<>();
+		map.put("beAdded", true);
+		
+		return map;
+	}
+	
+	// 매장 메뉴의 카테고리를 삭제하는 method
+	@RequestMapping(value = "/store/deleteCategory.do", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deleteCategory(StoreDto dto){
+		
+		service.deleteCategory(dto);
+		
+		Map<String, Object> map=new HashMap<>();
+		map.put("beDeleted", true);
+		
+		return map;
+	}
 
 	// 매장 상세 정보 페이지로 이동
 	@RequestMapping(value = "/storeDetail.do", method = RequestMethod.GET)
@@ -149,7 +175,7 @@ public class StoreController {
 		
 		service.getMyStore_num(dto, request);
 		
-		mService.getMenuList_user(dto, request);
+		mService.getMenuList_user(dto, request);	
 		
 		return "storeDetail";
 	}

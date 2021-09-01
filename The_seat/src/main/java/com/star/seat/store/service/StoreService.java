@@ -37,4 +37,10 @@ public interface StoreService {
 	
 	// 매장 On Off method
 	public void storeOnOff(StoreDto dto);
+	
+	// 매장 카테고리를 추가하는 method
+	public void addCategory(StoreDto dto);
+	
+	// 매장 메뉴의 카테고리를 삭제하는 method
+	public void deleteCategory(StoreDto dto);
 }

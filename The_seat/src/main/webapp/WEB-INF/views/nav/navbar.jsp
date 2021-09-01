@@ -113,7 +113,6 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
 					</c:choose></li>
 				<li class="nav-item"><a class="nav-link" href="#">공지사항</a></li>
 
-
 				<div class="toggle">
 					<c:choose>
 						<c:when test="${sessionScope.email !=null && myStoreList.size() != 0}">

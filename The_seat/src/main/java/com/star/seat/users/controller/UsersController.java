@@ -1,7 +1,6 @@
 package com.star.seat.users.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.star.seat.order.dto.OrderDto;
 import com.star.seat.order.service.OrderService;
 import com.star.seat.users.dto.UsersDto;
 import com.star.seat.users.service.UsersService;
@@ -28,7 +26,8 @@ public class UsersController {
 	@Autowired
 	private UsersService service;
 	
-
+	@Autowired
+	private OrderService order_service;
 	
 	//로그인 폼 요청 처리
 	@RequestMapping("/users/loginform")
@@ -116,14 +115,14 @@ public class UsersController {
 	
 	//로그인된 회원정보와 함께 info 페이지로 이동
 	@RequestMapping("/users/info")
-	public ModelAndView Info(HttpSession session, ModelAndView mView,
-			HttpServletRequest request) {
+	public ModelAndView Info(ModelAndView mView,HttpServletRequest request, 
+			HttpSession session) {
 		
-		service.getInfo(session, mView);
+		service.getInfo(mView, session);
 		
-	//	List<OrderDto> list= service_order.getList(request, session);
-	//	mView.addObject(list);
-	//	mView.setViewName("users/info");
+		order_service.getList(mView, request, session);
+		
+		mView.setViewName("users/info");
 		return mView;
 	}
 	

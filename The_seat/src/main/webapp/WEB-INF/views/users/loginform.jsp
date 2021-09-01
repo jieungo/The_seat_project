@@ -86,72 +86,73 @@
 
 				<button type="button" class="text-btn" data-bs-toggle="modal"
 									data-bs-target="#modal-signupForm">Signup</button>
+
+				</section>
 				
-				
-				<div
-				    class="modal animate__animated animate__bounce animate__fadeInDown"
-				    tabindex="-1" id="modal-signupForm" aria-labelledby="signupForm"
-				    aria-hidden="true">
-				    <div class="modal-dialog">
-				        <div class="modal-content">
-				            <div class="modal-header">
-				                <h3 class="modal-title">
-				                    <strong>회원가입</strong>
-				                </h3>
-				                <button type="button" class="btn-close" data-bs-dismiss="modal"
-				                    aria-label="Close"></button>
-				            </div>
-				            <div class="modal-body">
-				                <form id="signupForm"
-				                    action="${pageContext.request.contextPath}/users/signup.do"
-				                    method="post" class="needs-validation" style="max-width:500px;">
-				                    <div>
-				
-				                        <input id="idSignup" class="form-control" type="text"
-				                            placeholder="이메일" required="required" /><span>@</span> <select
-				                            name="emailAddrSignup" id="emailAddrSignup">
-				                            <option value="naver.com">네이버</option>
-				                            <option value="gmail.com">구글</option>
-				                            <option value="daum.net">다음</option>
-				                        </select> <input type="hidden" name="email" id="email">
-				                        <div class="invalid-feedback">사용할수 없는 이메일 입니다.</div>
-				                    </div>
-				                    <div style="display: flex; flex-direction: column; align-items: center;">
-				                        <input class="form-control" type="password" name="pwd" id="pwd"
-				                            placeholder="비밀번호 (5~10글자 이내)" required="required"> 
-				                        <div class="invalid-feedback">비밀번호를 확인 하세요.</div>
-				                            <small
-				                            class="form-text">5글자~10글자 이내로 입력하세요.</small>
-				                    </div>
-				                    <div>
-				                        <input class="form-control" type="password" name="pwd2"
-				                            id="pwd2" placeholder="비밀번호를 한번 더 입력해주세요" required="required">
-				                        <div class="invalid-feedback">비밀번호를 확인 하세요.</div>
-				                    </div>
-				                    <div>
-				                        <input class="form-control" type="text" name="name" id="name"
-				                            placeholder="이름" required="required"> <input
-				                            class="form-control" type="hidden" name="profile" id="profile"
-				                            value="profile">
-				                    </div>
-				                    <div>
-				                        <input class="form-control" type="text" pattern="[0-9]+"
-				                            maxlength="11" name="phoneNumber" id="phoneNumber"
-				                            placeholder="'-'을 제외한 휴대폰번호" required="required">
-				                    </div>
-				                    <div class="line mt-2 mb-2"
-				                        style="background-color: #2e8eff; width: 100%; height: 2px;"></div>
-				                    <div class="row signup__menu">
-				                        <input class="form-control " type="text" name="tag"
-				                            id="signup__menu-like" style="width: 25vw;"
-				                            placeholder="죽기전에 먹고죽을 딱한가지 음식은?">
-				                    </div>
-				                    <button type="submit" class="submit-btn mt-2 mb-2">가입완료</button>
-				                </form>
-				            </div>
-				        </div>
-				    </div>
-				</div>
+			<div
+			    class="modal animate__animated animate__bounce animate__fadeInDown"
+			    tabindex="-1" id="modal-signupForm" aria-labelledby="signupForm"
+			    aria-hidden="true">
+			    <div class="modal-dialog">
+			        <div class="modal-content">
+			            <div class="modal-header">
+			                <h3 class="modal-title">
+			                    <strong>회원가입</strong>
+			                </h3>
+			                <button type="button" class="btn-close" data-bs-dismiss="modal"
+			                    aria-label="Close"></button>
+			            </div>
+			            <div class="modal-body">
+			                <form id="signupForm"
+			                    action="${pageContext.request.contextPath}/users/signup.do"
+			                    method="post" class="needs-validation" style="max-width:500px;">
+			                    <div>
+			
+			                        <input id="idSignup" class="form-control" type="text"
+			                            placeholder="이메일" required="required" /><span>@</span> <select
+			                            name="emailAddrSignup" id="emailAddrSignup">
+			                            <option value="naver.com">네이버</option>
+			                            <option value="gmail.com">구글</option>
+			                            <option value="daum.net">다음</option>
+			                        </select> <input type="hidden" name="email" id="email">
+			                        <div class="invalid-feedback">사용할수 없는 이메일 입니다.</div>
+			                    </div>
+			                    <div style="display: flex; flex-direction: column; align-items: center;">
+			                        <input class="form-control" type="password" name="pwd" id="pwd"
+			                            placeholder="비밀번호 (5~10글자 이내)" required="required"> 
+			                        <div class="invalid-feedback">비밀번호를 확인 하세요.</div>
+			                            <small
+			                            class="form-text">5글자~10글자 이내로 입력하세요.</small>
+			                    </div>
+			                    <div>
+			                        <input class="form-control" type="password" name="pwd2"
+			                            id="pwd2" placeholder="비밀번호를 한번 더 입력해주세요" required="required">
+			                        <div class="invalid-feedback">비밀번호를 확인 하세요.</div>
+			                    </div>
+			                    <div>
+			                        <input class="form-control" type="text" name="name" id="name"
+			                            placeholder="이름" required="required"> <input
+			                            class="form-control" type="hidden" name="profile" id="profile"
+			                            value="profile">
+			                    </div>
+			                    <div>
+			                        <input class="form-control" type="text" pattern="[0-9]+"
+			                            maxlength="11" name="phoneNumber" id="phoneNumber"
+			                            placeholder="'-'을 제외한 휴대폰번호" required="required">
+			                    </div>
+			                    <div class="line mt-2 mb-2"
+			                        style="background-color: #2e8eff; width: 100%; height: 2px;"></div>
+			                    <div class="row signup__menu">
+			                        <input class="form-control " type="text" name="tag"
+			                            id="signup__menu-like" style="width: 25vw;"
+			                            placeholder="죽기전에 먹고죽을 딱한가지 음식은?">
+			                    </div>
+			                    <button type="submit" class="submit-btn mt-2 mb-2">가입완료</button>
+			                </form>
+			            </div>
+			        </div>
+			    </div>
+			</div>
 		</div>
 	</div>
 
@@ -433,6 +434,3 @@
         <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script> -->
 </body>
 </html>
-
-
-

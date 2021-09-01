@@ -42,4 +42,12 @@ public interface StoreDao {
 
 	// 매장 On Off method
 	public void storeOnOff(StoreDto dto);
+	
+	// 매장 카테고리를 추가하는 method
+	// 사실상 update를 이용하는 것
+	public void addCategory(StoreDto dto);
+	
+	// 매장 카테고리를 추가하는 method
+	// 사실상 update를 이용하는 것
+	public void deleteCategory(StoreDto dto);
 }

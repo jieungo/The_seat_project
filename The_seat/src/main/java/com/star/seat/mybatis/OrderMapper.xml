@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="Oder">
+<mapper namespace="order">
 	
-	<select id="getList" parameterType="orderDto" resultType="orderDto">
+	<select id="getOrderList" parameterType="orderDto" resultType="orderDto">
 		SELECT *
 		FROM
 			(SELECT result1.*, ROWNUM as rnum
 			FROM
-				(SELECT orderNum, email, storeName, tableNum, menu, count, price, amount
+				(SELECT orderNum, email, storeName, storeLogo, tableNum, menu, menuCount, price, amount, regdate
 				FROM order_
 				WHERE email = #{email }
-				GROUP BY orderNum, email, storeName, tableNum, menu, count, price, amount
+				GROUP BY orderNum, email, storeName, storeLogo, tableNum, menu, menuCount, price, amount, regdate
 				ORDER BY orderNum DESC) result1)
 		WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
 	</select>
@@ -21,13 +21,19 @@
 		WHERE orderNum = #{orderNum }
 	</select>
 	
-	<insert id="insert" parameterType="orderDto">
+	<select id="getCount" parameterType="string" resultType="int">
+		SELECT NVL(MAX(ROWNUM), 0)
+		FROM order_
+		WHERE email= #{email }
+	</select>
+	
+	<insert id="insertOrder" parameterType="orderDto">
 		INSERT INTO order_
-		(orderNum, email, storeName, tableNum, menu, count, price, amount, regdate)
-		VALUES(#{orderNum },#{email }, #{storeName }, #{tableNum }, #{menu }, #{count }, #{price },#{amount }, SYSDATE)
+		(orderNum, email, storeName, storeLogo, tableNum, menu, menuCount, price, amount, regdate)
+		VALUES(#{orderNum },#{email }, #{storeName }, #{storeLogo }, #{tableNum }, #{menu }, #{menuCount }, #{price },#{amount }, SYSDATE)
 	</insert>
 
-	<delete id="delete" parameterType="int">
+	<delete id="deleteOrder" parameterType="int">
 		DELETE FROM order_
 		WHERE orderNum=#{orderNum}
 	</delete>

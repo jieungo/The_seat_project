@@ -16,26 +16,32 @@ import org.springframework.web.servlet.ModelAndView;
 import com.star.seat.menu.dto.MenuDto;
 import com.star.seat.menu.service.MenuService;
 import com.star.seat.store.dto.StoreDto;
+import com.star.seat.store.service.StoreService;
 
 @Controller
 public class MenuController {
 	@Autowired
 	private MenuService service;
+	@Autowired
+	private StoreService sService;
 	
 	// 임시 메뉴관리 페이지 이동
 	@RequestMapping(value = "/store/manageMenu.do", method = RequestMethod.GET)
 	public ModelAndView getList(StoreDto sDto, HttpServletRequest request) {
 
-		System.out.println(sDto.getNum());
-		System.out.println(sDto.getStoreName());
 		int num=sDto.getNum();
 		String storeName=sDto.getStoreName();
 		
 		// 해당 매장의 메뉴 정보를 가져오는 method
 		service.getMenuList(sDto, request);
 		
+		// 해당 매장의 정보를 가져오는 method
+		sService.getMyStore_num(sDto, request);
+		
 		ModelAndView mView=new ModelAndView();
 		mView.addObject("storeDBNum", sDto.getNum());
+		mView.addObject("storeDBName", sDto.getStoreName());
+
 		mView.setViewName("store/manageMenu");
 		
 		return mView;
@@ -63,6 +69,26 @@ public class MenuController {
 		
 		Map<String, Object> map=new HashMap<>();
 		map.put("beDeleted", true);
+		
+		return map;
+	}
+	
+	// 해당 매장의 메뉴를 best로 설정 및 취소하는 method
+	@RequestMapping(value = "/store/bestOnOff.do", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> bestOnOff(MenuDto dto, HttpServletRequest request){
+		
+		System.out.println(dto.getNum());
+		System.out.println(dto.getBest());
+		
+		boolean beFour=service.bestOnOff(dto, request);
+		System.out.println(beFour);
+		Map<String, Object> map=new HashMap<>();
+		if(beFour) {
+			map.put("beSwitched", false);
+		} else {
+			map.put("beSwitched", true);
+		}
 		
 		return map;
 	}
