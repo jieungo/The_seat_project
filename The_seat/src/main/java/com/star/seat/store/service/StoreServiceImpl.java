@@ -59,7 +59,7 @@ public class StoreServiceImpl implements StoreService{
 		List<String> list=new ArrayList();
 		if(myDto.getStoreTag()!=null) {
 			String[] tags=myDto.getStoreTag().split(",");
-			for(int i=0; i<tags.length; i++) {
+			for(int i=1; i<tags.length; i++) {
 				System.out.println(tags[i]);
 				list.add(tags[i]);
 			}
@@ -76,6 +76,17 @@ public class StoreServiceImpl implements StoreService{
 	
 		System.out.println(theDto.getStoreTag());
 		
+		// 카테고리 리스트를 만들어서 request에 넣을 준비
+		// DB의 내용을 , 로 구분해서 String array로 만들어주고
+		String[] categories=theDto.getCategory().split(",");
+		// 새로운 array를 만들어서 거기에 하나씩 담아줌.
+		List<String> list=new ArrayList();
+		for(int i=0; i<categories.length; i++) {
+			System.out.println(categories[i]);
+			list.add(categories[i]);
+		}
+		
+		request.setAttribute("categoryList", list);
 		request.setAttribute("dto", theDto);
 	}
 	
@@ -110,7 +121,7 @@ public class StoreServiceImpl implements StoreService{
 		String[] tags=myDto.getStoreTag().split(",");
 		// 새로운 array를 만들어서 거기에 하나씩 담아줌.
 		List<String> list=new ArrayList();
-		for(int i=1; i<tags.length; i++) {
+		for(int i=0; i<tags.length; i++) {
 			System.out.println(tags[i]);
 			list.add(tags[i]);
 		}
@@ -245,5 +256,81 @@ public class StoreServiceImpl implements StoreService{
 	public void storeOnOff(StoreDto dto) {
 		
 		dao.storeOnOff(dto);
+	}
+	
+	// 매장 카테고리를 추가하는 method
+	@Override
+	public void addCategory(StoreDto dto) {
+		// 해당 매장에 해당하는 DB 번호를 받아서 dto에 넣고
+		
+		// DB에서 해당 번호의 정보를 받아옴.
+		StoreDto myDto=dao.getMyStore_num(dto);
+		System.out.println(myDto.getStoreTag());
+		
+		// 만약 DB에 매장 tag 정보가 없다면
+		if(myDto.getCategory()==null) {
+			// 이스터 에그를 추가해주고
+			myDto.setCategory("easter egg");
+		}
+		System.out.println(myDto.getCategory());
+		
+		// DB의 내용을 , 로 구분해서 String array로 만들어주고
+		String[] categories=myDto.getCategory().split(",");
+		// 새로운 array를 만들어서 거기에 하나씩 담아줌.
+		List<String> list=new ArrayList();
+		for(int i=0; i<categories.length; i++) {
+			System.out.println(categories[i]);
+			list.add(categories[i]);
+		}
+		
+		// 입력한 tag의 정보를 읽어서
+		String newCategory=dto.getCategory();
+
+		// array에 담아준 다음
+		list.add(newCategory);
+		// array 각 성분이 , 로 구분된 String으로 바꿔서
+		String strList=String.join(",", list);
+		System.out.println(strList);
+		
+		// DB에서 받아온 dto에 넣은 다음에
+		myDto.setCategory(strList);
+		// dto를 넣어서 update
+		dao.addCategory(myDto);
+	}
+	
+	// 매장 메뉴의 카테고리를 삭제하는 method
+	@Override
+	public void deleteCategory(StoreDto dto) {
+		// 해당 매장에 해당하는 DB 번호를 받아서 dto에 넣고
+		
+		// DB에서 해당 번호의 정보를 받아옴.
+		StoreDto myDto=dao.getMyStore_num(dto);
+		System.out.println(myDto.getStoreTag());
+		
+		System.out.println(myDto.getCategory());
+		
+		// DB의 내용을 , 로 구분해서 String array로 만들어주고
+		String[] categories=myDto.getCategory().split(",");
+		// 새로운 array를 만들어서 거기에 하나씩 담아줌.
+		List<String> list=new ArrayList();
+		for(int i=0; i<categories.length; i++) {
+			System.out.println(categories[i]);
+			list.add(categories[i]);
+		}
+		
+		// 입력한 tag의 정보를 읽어서
+		String category=dto.getCategory();
+		System.out.println("|"+category+"|");
+		System.out.println(list.indexOf(category));
+		// array에서 없앤다음
+		list.remove(list.indexOf(category));
+
+		// array 각 성분이 , 로 구분된 String으로 바꿔서
+		String strList=String.join(",", list);
+		System.out.println(strList);
+		// DB에서 받아온 dto에 넣은 다음에
+		myDto.setCategory(strList);
+		// dto를 넣어서 update
+		dao.deleteCategory(myDto);
 	}
 }

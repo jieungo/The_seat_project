@@ -1,7 +1,9 @@
 package com.star.seat.menu.service;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -78,13 +80,27 @@ public class MenuServiceImpl implements MenuService{
 	@Override
 	public void getMenuList(StoreDto sDto, HttpServletRequest request) {
 		String email=(String)request.getSession().getAttribute("email");
-		
+		System.out.println("storeNum : "+sDto.getNum());
+		System.out.println("storeName : "+sDto.getStoreName());
+		System.out.println("category : "+sDto.getCategory());
+		String category=sDto.getCategory();
 		sDto.setOwner(email);
-		
+
 		sDto=sDao.getMyStore_num(sDto);
-		
-		List<MenuDto> list=dao.getMenuList(sDto);
-		
+		MenuDto mDto=new MenuDto();
+		mDto.setCategory(category);
+		//List<MenuDto> list=dao.getMenuList(sDto);
+		Map<String, Object> map=new HashMap<>();
+		map.put("sDto", sDto);
+		map.put("mDto", mDto);
+		System.out.println(category==null);
+		List<MenuDto> list=null;
+		if(category!=null) {
+			list=dao.getMenuList(map);
+		} else if(category==null){
+			list=dao.getMenuList2(sDto);
+		}
+		System.out.println(list);
 		request.setAttribute("menuList", list);
 		request.setAttribute("storeData", sDto);
 	}
@@ -99,5 +115,32 @@ public class MenuServiceImpl implements MenuService{
 	// 해당 매장의 메뉴 정보를 삭제하는 method
 	public void deleteMenu(MenuDto dto) {
 		dao.deleteMenu(dto);
+	}
+	
+	// 해당 매장의 메뉴를 best로 설정 및 취소하는 method
+	@Override
+	public boolean bestOnOff(MenuDto dto, HttpServletRequest request) {
+		String email=(String)request.getSession().getAttribute("email");
+		StoreDto sDto=new StoreDto();
+		int storeNum=Integer.parseInt(request.getParameter("storeNum"));
+		String storeName=request.getParameter("storeName");
+		sDto.setNum(storeNum);
+		sDto.setStoreName(storeName);
+		sDto.setOwner(email);
+		
+		int bestCount=(dao.bestCount(sDto));
+		System.out.println(bestCount);
+		boolean beFour=false;
+		if(bestCount==4 && dto.getBest().equals("yes")) {
+			beFour=true;
+		} else if(bestCount==4 && dto.getBest().equals("no")){
+			beFour=false;
+			dao.bestOnOff(dto);
+		} else if(bestCount<4) {
+			dao.bestOnOff(dto);
+			beFour=false;
+		}
+		
+		return beFour;
 	}
 }
