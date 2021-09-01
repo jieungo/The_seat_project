@@ -89,4 +89,18 @@ public class StoreDaoImpl implements StoreDao{
 	public void storeOnOff(StoreDto dto) {
 		session.update("storeOnOff", dto);	
 	}
+	
+	// 매장 카테고리를 추가하는 method
+	// 사실상 update를 이용하는 것
+	@Override
+	public void addCategory(StoreDto dto) {
+		session.update("addCategory", dto);
+	}
+	
+	// 매장 카테고리를 추가하는 method
+	// 사실상 update를 이용하는 것
+	@Override
+	public void deleteCategory(StoreDto dto) {
+		session.update("addCategory", dto);
+	}
 }

@@ -22,6 +22,7 @@ public class StoreDto {
 	private String group;
 	private String keyword;
 	private MultipartFile imageFile;
+	private String category2;
 	
 	public StoreDto() {
 	
@@ -30,7 +31,7 @@ public class StoreDto {
 	public StoreDto(int num, String owner, String storeName, String storeAddr, String storeTag, String openingTime,
 			String image_logo, String image_1, String image_2, String image_3, String image_4, String storeOpen,
 			String imageCheck, String category, String regdate, String area, String group, String keyword,
-			MultipartFile imageFile) {
+			MultipartFile imageFile, String category2) {
 		super();
 		this.num = num;
 		this.owner = owner;
@@ -51,6 +52,7 @@ public class StoreDto {
 		this.group = group;
 		this.keyword = keyword;
 		this.imageFile = imageFile;
+		this.category2 = category2;
 	}
 
 	public int getNum() {
@@ -204,7 +206,13 @@ public class StoreDto {
 	public void setImageFile(MultipartFile imageFile) {
 		this.imageFile = imageFile;
 	}
+	
+	public String getCategory2() {
+		return category2;
+	}
 
-
+	public void setCategory2(String category2) {
+		this.category2 = category2;
+	}
 	
 }
