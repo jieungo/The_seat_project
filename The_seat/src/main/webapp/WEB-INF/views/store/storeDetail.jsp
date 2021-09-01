@@ -49,7 +49,7 @@
 <body>
 	<div class="container">
 		<!---------------------- 네비바를 import 한다. ------------------------->
-		<jsp:include page="nav/navbar.jsp" />
+		<jsp:include page="../nav/navbar.jsp" /> 
 		<section style="text-align: center;">
 			<!---------------------- DB 연동해서 파라미터 값으로 칼럼 값을 받아온다.  --------------------->
 			<img src="${pageContext.request.contextPath}${dto.image_logo }"

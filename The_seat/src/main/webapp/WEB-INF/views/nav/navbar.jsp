@@ -117,7 +117,7 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
 					<c:choose>
 						<c:when test="${sessionScope.email !=null && myStoreList.size() != 0}">
 							<c:forEach var="tmp" items="${myStoreList }" varStatus="status">
-								<li><a href="${pageContext.request.contextPath}/myStore.do?num=${status.count }"
+								<li><a href="${pageContext.request.contextPath}/store/myStore.do?num=${status.count }"
 								   class="store">${tmp.storeName }</a></li>
 							</c:forEach>
 						</c:when>
@@ -161,7 +161,7 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
 	
 	// 매장 추가 관리 영역
 	let dataNum = 0;
-	let storePath = "${pageContext.request.contextPath}/myStore.do?num=";
+	let storePath = "${pageContext.request.contextPath}/store/myStore.do?num=";
 	
 	document.querySelector("#addBtn0").addEventListener("click", function(e) {
 		// 일단 링크 이동을 막고

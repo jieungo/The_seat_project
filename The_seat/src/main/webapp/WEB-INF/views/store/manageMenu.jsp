@@ -81,7 +81,7 @@ type="text/css" />
 
     <aside class="store__aside">
         <button onclick="location.href='#'">매장 정보</button>
-        <button onclick="location.href='${pageContext.request.contextPath}/manageMenu.do'">메뉴 관리</button>
+        <button onclick="${pageContext.request.contextPath}/store/manageMenu.do?num=${dto.num}&storeName=${dto.storeName}">메뉴 관리</button>
         <button onclick="location.href='${pageContext.request.contextPath}/storeReview.do'">리뷰 관리</button>
         <button onclick="location.href='${pageContext.request.contextPath}/storeOrder.do'">주문 확인</button>
         <button onclick="location.href='#'">자리 관리</button>

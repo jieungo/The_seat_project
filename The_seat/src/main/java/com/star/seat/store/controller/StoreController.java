@@ -64,14 +64,14 @@ public class StoreController {
 	}
 	
 	// 매장 관리 링크를 눌러서 요청되는 경로에 대한 method
-	@RequestMapping(value="/myStore.do", method=RequestMethod.GET)
+	@RequestMapping(value="/store/myStore.do", method=RequestMethod.GET)
 	public String myStore(@RequestParam int num, HttpServletRequest request) {
 		
 		// service에서 매장 정보를 DB에서 꺼내와서 request에 넣고
 		service.getMyStore(request);
 		
 		// 페이지 return
-		return "myStore";
+		return "store/myStore";
 	}
 	
 	// 매장 태그 추가 링크를 눌러서 요청되는 경로에 대한 method
@@ -170,14 +170,14 @@ public class StoreController {
 	}
 
 	// 매장 상세 정보 페이지로 이동
-	@RequestMapping(value = "/storeDetail.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/store/storeDetail.do", method = RequestMethod.GET)
 	public String goStoreDetail(StoreDto dto, HttpServletRequest request) {
 		
 		service.getMyStore_num(dto, request);
 		
 		mService.getMenuList_user(dto, request);	
 		
-		return "storeDetail";
+		return "store/storeDetail";
 	}
 	
 	// 매장 리뷰 관리 페이지로 이동
@@ -186,19 +186,4 @@ public class StoreController {
 		mView.setViewName("storeReview");
 		return mView;
 	}
-	
-	// 매장 메뉴 관리 페이지로 이동
-	@RequestMapping("/manageMenu")
-	public ModelAndView manageMenu(ModelAndView mView){
-		mView.setViewName("manageMenu");
-		return mView;
-	}
-	
-	// 매장 주문 확인 페이지로 이동
-	@RequestMapping("/storeOrder")
-	public ModelAndView storeOrder(ModelAndView mView){
-		mView.setViewName("storeOrder");
-		return mView;
-	}
-	
 }

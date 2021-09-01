@@ -68,7 +68,7 @@
 <div class="container" style="margin-top: 20px;">
 	<div class="row row-cols-3 row-cols-md-2 g-4">
 		<c:forEach var="tmp" items="${list }">
-			<a href="${pageContext.request.contextPath}/storeDetail.do?num=${tmp.num}">
+			<a href="${pageContext.request.contextPath}/store/storeDetail.do?num=${tmp.num}">
 				<div class="col">
 					<div class="row g-0">
 						<div class="col-md-4">
