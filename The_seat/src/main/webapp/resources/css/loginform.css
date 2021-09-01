@@ -7,7 +7,7 @@ body {
        height: 100vh;
        display: flex;
        align-items: center;
-       position: relative;
+       font-family: 'IBM Plex Sans KR', sans-serif;
    }
 
    /* 버튼 기본 스타일링 */
