@@ -21,6 +21,8 @@
 <link rel="stylesheet"
 href="${pageContext.request.contextPath}/resources/css/info.css"
 type="text/css" />
+<!-- 타이틀 로고 -->
+<link rel="shortcut icon" type="image⁄x-icon" href="${pageContext.request.contextPath}/resources/img/summer.jpg">
 
 </head>
 <body>
@@ -62,69 +64,57 @@ type="text/css" />
 	
 <!--------------------------- 마이페이지 하단 주문내역 ------------------------------->
 <!--------------------------- 카드로 만들기 c:forEach  사용------------------------------>
-<div class="row row-cols-1 row-cols-md-3 g-4">
-	<c:forEach var="tmp" items="${list }">
-	  <div class="col">
-	    <div class="card">
-	      <div class="card-head">
-	      	<h3>cardhead</h3>
-	      </div>
-	      <img src="..." class="card-img-top" alt="...">
-	      <div class="card-body">
-	        <h5 class="card-title">Card title</h5>
-	        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-	      </div>
-	    </div>
-	  </div>
-	</c:forEach>
-</div>
 
-	<div style="height: 420px; text-overflow: hidden; ">
-		<ul class="m-3">
-			<li class="col-3">
-				<span>${StoreDto.regdate }</span>
-				<div class="my-page__order">
-					<h5>${StoreDto.storeName }</h5>
-					<div class="divide-line"></div>
-					<div>
-						<img src="${StoreDto.image_logo }" alt="store_img">
-					</div>
-					
-				<!------ 주문 내역 (스크롤로 확인할수 있도록) ---------->
-					<div>
-						<ul>
-							
-							<!-- for문으로 출력해야겠당-->
-							<li>주문상품명</li>
-							<li>주문상품명</li>
-						</ul>
-					</div>
-					<div class="divide-line"></div>
-					<span>결제 금액</span> <span> <!-- 결제 금액 --></span>
-					<div class="divide-line"></div>
-					<div>
-						<!-- 매장평점 -->
-						<span>매장평점: 
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-			                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-			                </svg> 
-               			</span> 
-						<!-- 내가 준 평점 -->
-						<span> / 내가 준 평점: 
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-		                    	<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-		                	</svg> 
-               			<span> 
-					</div>
+	<c:choose>
+		<c:when test="${empty list }">
+			<h1>아직 이용 내역이 없습니다. ㅠㅠ </h1><span><a href="${pageContext.request.contextPath}/main.do">->이용하러가기</a></span>
+		</c:when>
+		<c:otherwise>
+			<div class="row row-cols-1 row-cols-md-3 g-4">
+			<c:forEach var="tmp" items="${list }">
+			  <div class="col">
+			    <div class="card">
+			      <div class="card-head">
+			      	<p>${tmp.orderNum }</p>
+			      	<h3>${tmp.storeName }</h3>
+			      	<p>${tmp.regdate }</p>
+			      </div>
+			      <div>
+				  <!-- 매장평점 -->
+				  <span>매장평점: 
+					  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+		                   <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+		              </svg> 
+		          </span> 
+				  <!-- 내가 준 평점 -->
+				  <span> / 내가 준 평점: 
+					  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+		                  	<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+		              </svg> 
+		          </span>
+		   		  </div>
+			      <img src="${pageContext.request.contextPath}${tmp.storeLogo }" class="card-img-top" alt="...">
+			      <div class="card-body">
+			        <button>주문내역 상세보기</button>
+			        <br />
+			        <span>결제 금액</span> <span>${tmp.amount }</span>
+			        <p class="card-text"></p>
+			        <div>
 					<!-- 리뷰작성 Btn -->
 						<button type="button" class="circle-btn" data-bs-toggle="modal"data-bs-target="#modal-write_review" style="display:inline;">리뷰작성</button>
 					<!-- 리뷰보기 Btn -->	
 						<button type="button" class="circle-btn" data-bs-toggle="modal"data-bs-target="#modal-check_review" style="display:inline;">리뷰확인</button>
 					</div>
-				</li>
-			</ul>
-		</div>
-	</div>
+				  </div>
+				</div>
+		      </div>
+			</c:forEach>
+			</div>
+		</c:otherwise>
+	</c:choose>
+
+</div>
+
 
 
 <!------------모달창------------------프로필 편집------------------------------------->

@@ -17,29 +17,31 @@ public class OrderDaoImpl implements OrderDao{
 	//email 이 같은 주문내역 불러오기
 	@Override
 	public List<OrderDto> getList(OrderDto dto) {
-		return session.selectList("Order.getList", dto);
+		return session.selectList("order.getOrderList", dto);
+	}
+	
+	//email 이 같고 orderNum 이 같은 주문내역 불러오기
+	@Override
+	public List<OrderDto> getListOne(String orderNum) {
+		return session.selectList("order.getListOne",orderNum);
 	}
 	
 	//email 로 총 주문내역 갯수 구하기 
 	@Override
 	public int getCount(String email) {
-		return session.selectOne("Order.getCount", email);
-	}
-	
-	//email 이 같고 orderNum 이 같은 주문내역 불러오기
-	public List<OrderDto> getListOne(String orderNum) {
-		return session.selectList("Order.getListOne",orderNum);
+		return session.selectOne("order.getCount", email);
 	}
 	
 	//주문하기
 	@Override
 	public void insert(OrderDto dto) {
-		session.insert("Order.insert", dto);
+		session.insert("order.insertOrder", dto);
 	}
 	
 	//주문취소
+	@Override
 	public void delete(int orderNum) {
-		session.delete("Order.delete",orderNum);
+		session.delete("Order.deleteOrder",orderNum);
 	}
 	
 }

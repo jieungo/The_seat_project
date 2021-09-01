@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.star.seat.order.dao.OrderDao;
 import com.star.seat.order.dto.OrderDto;
@@ -20,7 +21,8 @@ public class OrderServiceImpl implements OrderService {
 	private OrderDao dao;
 	
 	//갤러리 이미지 list
-	public List<OrderDto> getList(HttpServletRequest request,HttpSession session) {
+	@Override
+	public ModelAndView getList(ModelAndView mView, HttpServletRequest request,HttpSession session) {
 		//한 페이지에 몇개씩 표시할 것인지
 		final int PAGE_ROW_COUNT=6;
 		//하단 페이지를 몇개씩 표시할 것인지
@@ -64,7 +66,18 @@ public class OrderServiceImpl implements OrderService {
 		if(endPageNum > totalPageCount){
 			endPageNum = totalPageCount; //보정해 준다. 
 		}
+
+		mView.addObject("list", list);	//order list
+		mView.addObject("startPageNum", startPageNum);	//시작 페이지 번호
+		mView.addObject("endPageNum", endPageNum);	//끝 페이지 번호
+		mView.addObject("pageNum", pageNum);	//현재 페이지 번호
+		mView.addObject("totalPageCount", totalPageCount);	//모든 페이지 count
 		
-		return list;
+		return mView;
+	}
+
+	@Override
+	public void orderInsert(OrderDto dto) {
+		dao.insert(dto);
 	}
 }

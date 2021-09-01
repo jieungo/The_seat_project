@@ -8,6 +8,7 @@
 		<typeAlias type="com.star.seat.users.dto.UsersDto" alias="usersDto"/>
 		<typeAlias type="com.star.seat.store.dto.StoreDto" alias="storeDto"/>
 		<typeAlias type="com.star.seat.menu.dto.MenuDto" alias="menuDto"/>
+		<typeAlias type="com.star.seat.order.dto.OrderDto" alias="orderDto"/>
 		
 	</typeAliases>
 	
@@ -16,7 +17,7 @@
 		<mapper resource="com/star/seat/mybatis/UsersMapper.xml"/>
 		<mapper resource="com/star/seat/mybatis/StoreMapper.xml"/>
 		<mapper resource="com/star/seat/mybatis/MenuMapper.xml"/>
-		
+		<mapper resource="com/star/seat/mybatis/OrderMapper.xml"/>
 	</mappers>
 </configuration>
 
