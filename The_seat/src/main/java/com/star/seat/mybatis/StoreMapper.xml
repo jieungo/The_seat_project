@@ -43,7 +43,7 @@
 	</select>
 	
 	<!-- 매장 태그를 추가하는 method -->
-	<update id="addTag">
+	<update id="addTag" parameterType="storeDto">
 		update store
 		set storeTag=#{storeTag}
 		where num=#{num}
@@ -90,6 +90,13 @@
 	<update id="storeOnOff" parameterType="storeDto">
 		update store
 		set storeOpen=#{storeOpen}
+		where num=#{num}
+	</update>
+	
+	<!-- 매장 카테고리를 추가하는 method -->
+	<update id="addCategory" parameterType="storeDto">
+		update store
+		set category=#{category}
 		where num=#{num}
 	</update>
 </mapper>

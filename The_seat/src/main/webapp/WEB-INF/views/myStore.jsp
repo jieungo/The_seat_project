@@ -130,7 +130,7 @@ input:focus {
     <!------------------------------- navbar 추가-------------------------------->
 
 <div class="container myStore_container pe-0 ps-0">
-    <!-- <a href="${pageContext.request.contextPath}/store/manageMenu.do">매장 관리 페이지</a> -->
+    <a href="${pageContext.request.contextPath}/store/manageMenu.do?num=${dto.num}&storeName=${dto.storeName}">메뉴 관리 페이지</a>
 
     <!------------------------------ 매장 로고 관리 영역 -------------------------->
 <div class="inner_container row ">
