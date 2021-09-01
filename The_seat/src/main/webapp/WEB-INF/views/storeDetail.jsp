@@ -17,14 +17,10 @@
 	integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
 	crossorigin="anonymous"></script>
 <style>
-input {
-	text-align: center;
-}
-
 #reviewBtn {
 	background-color: #2e8eff;
 	color: white;
-	margin-top: 10px;
+	margin-top: 20px;
 	width: auto;
 	height: 40px;
 	border-radius: 10px;
@@ -34,7 +30,7 @@ input {
 #seatBtn {
 	background-color: #2e8eff;
 	color: white;
-	margin-top: 30px;
+	margin-top: 20px;
 	width: auto;
 	height: 60px;
 	border-radius: 10px;
@@ -54,7 +50,7 @@ input {
 	<div class="container">
 		<!---------------------- 네비바를 import 한다. ------------------------->
 		<jsp:include page="nav/navbar.jsp" />
-		<section class="gap-2 col-3 mx-auto">
+		<section style="text-align: center;">
 			<!---------------------- DB 연동해서 파라미터 값으로 칼럼 값을 받아온다.  --------------------->
 			<img src="${pageContext.request.contextPath}${dto.image_logo }"
 				alt="storeLogo" width="60px;" /> <span
@@ -120,22 +116,20 @@ input {
 			<!------------------------------ 매장 상세 정보 카드 ----------------------------------->
 			</div>
 			<div class="col card text-center"
-				style="width: 100px; margin-top: 30px; margin-bottom: 30px; margin-left: 90px; border: none;">
-				<!-- 파라미터 값으로 매장 정보를 받아온다. -->
-				<section class="d-grid gap-2 col-12 mx-auto"
-					style="margin-top: 60px;">
+				style="height: 400px; margin-top: 90px; margin-bottom: 30px; margin-left: 90px; border: none;">
+				<!--------------- 파라미터 값으로 매장 정보를 받아온다. ----------------------->
 					<div class="card-header bg-transparent border-dark-light">
 						<h5>별점 : ⭐ 4.9 (100+)</h5>
-						<h3>${dto.storeTag }</h3>
+						<h3 style="line-height: 1.8;">${dto.storeTag }</h3>
 					</div>
-					<div class="card-body">
-						<h5 class="card-title">
-							주소 : <span>${dto.storeAddr }</span>
-						</h5>
-						<h5 class="card-title">
-							운영 시간 : <span>${dto.openingTime }</span>
-						</h5>
-						<h5 class="card-title">남은 자리 : 6 / 8</h5>
+					<div class="card-body" style="margin-top: 10px; line-height: 60px;">
+						<h4 class="card-title" style="line-height: 2;">
+							매장 주소 : <span>${dto.storeAddr }</span>
+						</h4>
+						<h4 class="card-title" style="line-height: 2;">
+							영업 시간 : <span>${dto.openingTime }</span>
+						</h4>
+						<h4 class="card-title" style="line-height: 2;">남은 자리 : 6 / 8</h4>
 						<button type="button" class="btn btn-primary" id="reviewBtn"
 							data-bs-toggle="modal" data-bs-target="#staticBackdrop">리뷰
 							: 123개</button>
@@ -144,14 +138,13 @@ input {
 						<button type="button" id="seatBtn" data-bs-toggle="modal"
 							data-bs-target="#Modalgrid">자리 잡으러 가기 ❕</button>
 					</div>
-				</section>
 			</div>
 
 			<!------------------------------ 리뷰 보기 Modal -------------------------------->
 			<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
 				data-bs-keyboard="false" tabindex="-1"
 				aria-labelledby="staticBackdropLabel" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 					<div class="modal-content">
 						<div class="modal-header">
 							<h5 class="modal-title" id="staticBackdropLabel">리뷰 보기 ⭐</h5>
@@ -195,62 +188,19 @@ input {
 			<!--------------------------------- 자리 잡기 Modal --------------------------------->
 			<div class="modal fade" id="Modalgrid" tabindex="-1" role="dialog"
 				aria-labelledby="Modalgrid" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
 							<h5 class="modal-title" id="ModalLabel">
 								${dto.storeName } <br />( 6 / 8 )
 							</h5>
-							<p>자리를 선택해 주세요!</p>
 							<button type="button" class="btn-close" data-bs-dismiss="modal"
 								aria-label="Close"></button>
 						</div>
+						<p style="text-align: right; margin-top: 20px; margin-right: 40px;">자리를 선택해 주세요 ☺</p>
 						<div class="modal-body">
 							<div class="container-fluid">
-								<div class="gridmodal">
-									<div class="row">
-										<div class="col-md-4">
-											<input class="form-control" placeholder="1" aria-label="City"
-												disabled>
-										</div>
-										<div class="col-md-4 ml-auto">
-											<input class="form-control" placeholder="2" aria-label="City"
-												disabled>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-3 ml-auto">
-											<input class="form-control" placeholder="3" aria-label="City"
-												disabled>
-										</div>
-										<div class="col-md-2 ml-auto">
-											<input class="form-control" placeholder="4" aria-label="City"
-												disabled>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-6 ml-auto">
-											<input class="form-control" placeholder="5" aria-label="City"
-												disabled>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-9">
-											<input class="form-control" placeholder="6" aria-label="City"
-												disabled>
-											<div class="row">
-												<div class="col-8 col-sm-6">
-													<input class="form-control" placeholder="7"
-														aria-label="City" disabled>
-												</div>
-												<div class="col-4 col-sm-6">
-													<input class="form-control" placeholder="8"
-														aria-label="City" disabled>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+								<img src="${pageContext.request.contextPath}/resources/img/chair.png "class="img-thumbnail" alt="seatImage">
 								<hr />
 								<!------------------- Modal 에서 선택한 자리 정보를 주문 페이지에 get 방식으로 값을 전달해준다. ----------------->
 								<form action="${pageContext.request.contextPath}/order.do"
@@ -296,6 +246,7 @@ input {
 				style="max-width: 1130px; height: 600px; margin-top: 30px; margin-left: 80px; border-radius: 10px; background-color: white;">
 				<div class="col">
 					<c:forEach var="tmp" items="${menuList }">
+						<input type="hidden" class="menuName"/>
 						<button data-num="${tmp.num }" type="button" id="menuBtn"
 							data-bs-toggle="modal" data-bs-target="#exampleModal"
 							style="width: 400px; margin-left: 70px; margin-top: 50px;">${tmp.menuName }</button>
@@ -333,9 +284,16 @@ input {
 			</div>
 		</div>
 	</div>
+<script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 <script>
+	//메뉴 이름을 클릭했을 때 이미지를 Modal 로 출력되게 하는 기능
 	document.querySelector("#menuBtn").addEventListenter("click", function(){
-		
+		let menuName=document.querySelectorAll(".menuName").value;
+		for(let i=0; i<menuName.length; i++){
+			menuName[i].addEventListener("click", function(){
+				
+			});
+		}
 	});
 </script>
 </body>
