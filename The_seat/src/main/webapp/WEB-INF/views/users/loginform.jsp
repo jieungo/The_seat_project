@@ -86,6 +86,7 @@
 
 				<button type="button" class="text-btn" data-bs-toggle="modal"
 									data-bs-target="#modal-signupForm">Signup</button>
+
 				</section>
 				
 			<div

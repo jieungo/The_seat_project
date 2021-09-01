@@ -9,123 +9,10 @@
 	<!--  부트스트랩 -->
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+	<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/myStore.css"
+	type="text/css" />
 </head>
-<style>
-
-* {
-    box-sizing: border-box;
-}
-
-body {
-    background-color: #598eff;
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgb(78, 78, 78);
-    font-size: 16px;
-}
-
-/* 버튼 기본 스타일링 */
-button {
-    outline: none;
-    border: none;
-    background-color: transparent;
-    color: rgb(78, 78, 78);
-}
-
-/* 링크 기본 스타일링 */
-a {
-    text-decoration: none;
-    color: rgb(78, 78, 78);
-}
-
-/* 리스트 기본 스타일링 */
-ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-}
-
-img {
-    width: 100px; 
-    height: 100px;
-}
-
-input {
-	padding-left:10px;
-	border:none;
-	border-bottom: 1px solid lightgray;
-	text-align:center;
-}
-
-input:focus {
-	outline:none;
-}
-
-.myStore_container {
-    display: flex;
-    justify-content: center;
-    background-color: white;
-    border-radius: 10px  0 0 10px;
-    height: 80%;
-    max-width: 700px;
-    position: relative;
-}
-
-.inner_container {
-    text-overflow: hidden; 
-    overflow-x: auto;
-    height: 100%;
-    width: 100%;
-}
-
-::-webkit-scrollbar {
-    display: none;
-}
-
-.store__aside {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: space-evenly;
-    height: 100%;
-    position: absolute;
-    left: 100%;
-    padding: 0;
-    
-}
-
-.store__aside > button {
-    border: 1px solid gray;
-    background-color: white;
-    border-radius: 0 5px 5px 0;
-    border: 1px solid lightgray;
-    width: 15vw;
-    height: 20vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
-    font-weight: 700;
-    transition: color 0.2s ease-in-out;
-}
-
-.store__aside button:focus {
-    color: #598eff;
-    border-left: none;
-}
-
-#storeOnOffBtn {
-    background-color: white;
-    color: #598eff;
-    box-shadow: 1px 1px 11px rgba(172, 172, 172, 0.699);
-    width: 90%;
-    font-weight: 600;
-}
-
-</style>
 <body>
     <!------------------------------- navbar 추가-------------------------------->
 
@@ -148,7 +35,7 @@ input:focus {
                 <input type="hidden" name="num" value="${dto.num }"/>
                 <input type="hidden" name="image_logo" value="check"/>
                 <input type="file" id="logoImage" name="imageFile" style="display:none"/>
-                <button class="updateImgBtn" type="submit" style="display:none">고지은</button>
+                <button class="updateImgBtn" type="submit" style="display:none">등록</button>
             </form>
         </div>
     
@@ -184,11 +71,11 @@ input:focus {
             <span style="font-size: 14px; color: lightgray;">매장을 나타내는 태그 추가하기</span>
             <p id="btns" class="mt-3" >
                 <c:forEach var="tmp" items="${list }">
-                    <button data-num="${dto.num }" name="tag" class="btn btn-primary tag mb-1">${tmp}</button>
+                    <button data-num="${dto.num }" name="tag" class="btn btn-primary tag mb-1 allTag">${tmp}</button>
                 </c:forEach>
             </p>
             <div style="display:flex; box-shadow: 1px 1px 11px rgba(172, 172, 172, 0.699); width:150px; height:30px; margin-bottom:10px">
-	            <input id="inputTag" type="text" style="display:none; border:none; font-size:14px;"/>
+	            <input placeholder="태그를 입력해주세요" id="inputTag" type="text" style="display:none; border:none; font-size:14px;"/>
 	            <a data-num="${dto.num }" href="javascript:" class="plus addTag btn" style="color: #598eff; 
 	            border-radius: 5px; height: 30px;  font-weight: 500; font-size: 20px;
 	            display:flex; align-items:center; justify-content:center; ">
@@ -263,11 +150,11 @@ input:focus {
 </div>
     <!------------------------------------ 옆 사이드바 (매장정보, 메뉴관리 탭) ----------------->
     <aside class="store__aside" style="width: 0;">
-        <button>매장 정보</button>
-        <button>메뉴 관리</button>
-        <button>리뷰 관리</button>
-        <button>주문 확인</button>
-        <button>자리 관리</button>
+        <button onclick="location.href='#'">매장 정보</button>
+        <button onclick="location.href='${pageContext.request.contextPath}/manageMenu.do'">메뉴 관리</button>
+        <button onclick="location.href='${pageContext.request.contextPath}/storeReview.do'">리뷰 관리</button>
+        <button onclick="location.href='${pageContext.request.contextPath}/storeOrder.do'">주문 확인</button>
+        <button onclick="location.href='#'">자리 관리</button>
     </aside>
 </div>
 <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
@@ -283,7 +170,7 @@ input:focus {
 			//새로운 버튼을 만듦(취소 버튼)
 			let deleteBtn=document.createElement("button");
 			// 새로운 버튼에 class와 data-num 정보를 지정
-			deleteBtn.setAttribute("class", "btn-close del-tag");
+			deleteBtn.setAttribute("class", "btn-close del-tag allTag");
 			deleteBtn.setAttribute("data-num", dataNum);
 			// 각 버튼에 자식 요소로 넣어줌
 			btns[i].appendChild(deleteBtn);
@@ -339,7 +226,7 @@ input:focus {
 					// 새로운 태그 버튼을 만들고 성분과 값을 부여함
 					let newBtn=document.createElement("button");
 					newBtn.innerText=storeTag;
-					newBtn.setAttribute("class", "btn btn-primary add-tag");
+					newBtn.setAttribute("class", "btn btn-primary add-tag allTag");
 					newBtn.setAttribute("data-num", dataNum);
 					// 붙어서 생기는 것을 방지하기 위해 야매
 					newBtn.style.marginRight="5px";
@@ -354,7 +241,7 @@ input:focus {
 					// 새롭게 만든 삭제 버튼에 태그 삭제 이벤트 부여
 					deleteTag(".add-del-tag", ".add-tag");
 					// 다시 버튼의 class를 원래대로 돌려놓음
-					newBtn.setAttribute("class", "btn btn-primary tag");
+					newBtn.setAttribute("class", "btn btn-primary tag allTag");
 					newDeleteBtn.setAttribute("class", "btn-close del-tag");
 				}
 			});
