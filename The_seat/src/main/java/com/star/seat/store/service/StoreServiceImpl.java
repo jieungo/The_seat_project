@@ -81,7 +81,7 @@ public class StoreServiceImpl implements StoreService{
 		String[] categories=theDto.getCategory().split(",");
 		// 새로운 array를 만들어서 거기에 하나씩 담아줌.
 		List<String> list=new ArrayList();
-		for(int i=0; i<categories.length; i++) {
+		for(int i=1; i<categories.length; i++) {
 			System.out.println(categories[i]);
 			list.add(categories[i]);
 		}

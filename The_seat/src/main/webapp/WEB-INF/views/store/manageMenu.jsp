@@ -42,6 +42,7 @@ type="text/css" />
                 <span style="color: rgb(173, 173, 173); font-size: 14px;">새로운 메뉴 추가하기</span>
             </div>
         </div>
+        <p>${menuList }</p>
         <c:forEach var="tmp" items="${menuList }">
         	<div class="card" style="max-width: 500px;">
             	<div class="row g-0">
@@ -106,17 +107,7 @@ type="text/css" />
                     <input class="form-control" type="text" name="price" id="menuprice" placeholder="상품가격">
                     <input class="form-control" type="text" name="content" id="menucontaine" placeholder="상품구성" required="required">
                     <span class="dropdown">카테고리 추가</span>
-                    <!--
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    	카테고리 목록
-                    </button>
-                    
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" > 
-                        <li><a class="dropdown-item" href="#">없음</a></li>
-                        <li><a class="dropdown-item" href="#">1</a></li>
-                        <li><a class="dropdown-item" href="#">2</a></li>
-                    </ul><br>
-                    -->
+ 
                     <select name="category" id="">
                     	<c:forEach var="tmp" items="${categoryList }">
                     		<option value="${tmp }">${tmp }</option>
