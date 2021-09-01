@@ -144,7 +144,18 @@ img {
 }
 
 .store__aside > button:first-child {
-	border-top: none;
+    border: 1px solid gray;
+    background-color: white;
+    border-radius: 0 5px 5px 0;
+    border: 1px solid lightgray;
+    width: 15vw;
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 700;
+    transition: color 0.2s ease-in-out;
 }
 
 

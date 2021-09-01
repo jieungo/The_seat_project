@@ -12,142 +12,10 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
 />
+<link rel="stylesheet"
+href="${pageContext.request.contextPath}/resources/css/manageMenu.css"
+type="text/css" />
 
-<style>
-
-body {
-    background-color: #598eff;
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgb(78, 78, 78);
-}
-
-/* 버튼 기본 스타일링 */
-button {
-    outline: none;
-    border: none;
-    background-color: transparent;
-    color: rgb(78, 78, 78);
-}
-
-/* 링크 기본 스타일링 */
-a {
-    text-decoration: none;
-    color: rgb(78, 78, 78);
-}
-
-/* 리스트 기본 스타일링 */
-ul {
-    padding: 0 5px;
-    margin: 0;
-    list-style: none;
-}
-
-::-webkit-scrollbar {
-    display: none;
-}
-
-.circle-btn {
-    background-color: #598eff;
-    color: white;
-    width: 40px;
-    height: 40px;
-    border-radius: 100%;
-    box-shadow: 4px 6px 11px rgba(172, 172, 172, 0.699);
-    margin-bottom: 10px;
-}
-
-.menu__article {
-    display: flex;
-    justify-content: center;
-    background-color: white;
-    border-radius: 10px  0 0 10px;
-    height: 80%;
-    width: 50%;
-    position: relative;
-}
-
-.menu__list {
-    margin-top: 60px;
-}
-
-.menu__category {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-left: 20px;
-    width: 40%; 
-    background-color: white; 
-    z-index: 999; 
-    position: fixed;
-}
-
-.menu__category  a {
-    margin-left: 15px;
-}
-
-.menu__category  a:focus, a:hover {
-    padding-bottom: 5px;
-    border-bottom: 3px solid #598eff;
-    color: rgb(78, 78, 78);
-}
-
-.menu__add {
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: center;
-}
-
-img {
-    width: 150px; 
-    height: 150px;
-}
-
-.starIcon {
-    color: rgb(253, 197, 14);
-}
-
-.card {
-    border: none;
-    box-shadow: 4px 6px 11px rgba(172, 172, 172, 0.699);
-}
-
-.store__aside {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: space-evenly;
-    height: 100%;
-    float: right;
-    position: absolute;
-    left: 100%;
-}
-
-.store__aside > button {
-    border: 1px solid gray;
-    background-color: white;
-    border-radius: 0 5px 5px 0;
-    border: 1px solid lightgray;
-    width: 15vw;
-    height: 20vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
-    font-weight: 700;
-    transition: color 0.2s ease-in-out;
-}
-
-.store__aside button:focus {
-    color: #598eff;
-    border-left: none;
-}
-
-</style>
 </head>
 <body>
 <!-- navbar 추가-->
@@ -212,11 +80,11 @@ img {
 <!------------------------------------ 옆 사이드바 (매장정보, 메뉴관리 탭) ----------------->
 
     <aside class="store__aside">
-        <button>매장 정보</button>
-        <button>메뉴 관리</button>
-        <button>리뷰 관리</button>
-        <button>주문 확인</button>
-        <button>자리 관리</button>
+        <button onclick="location.href='#'">매장 정보</button>
+        <button onclick="location.href='${pageContext.request.contextPath}/manageMenu.do'">메뉴 관리</button>
+        <button onclick="location.href='${pageContext.request.contextPath}/storeReview.do'">리뷰 관리</button>
+        <button onclick="location.href='${pageContext.request.contextPath}/storeOrder.do'">주문 확인</button>
+        <button onclick="location.href='#'">자리 관리</button>
     </aside>
     
 <!--------------------------------------- 메뉴 등록 모달창 ------------------------------>

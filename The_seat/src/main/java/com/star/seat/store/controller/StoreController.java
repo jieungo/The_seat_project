@@ -180,4 +180,25 @@ public class StoreController {
 		return "storeDetail";
 	}
 	
+	// 매장 리뷰 관리 페이지로 이동
+	@RequestMapping("/storeReview")
+	public ModelAndView storeReview(ModelAndView mView){
+		mView.setViewName("storeReview");
+		return mView;
+	}
+	
+	// 매장 메뉴 관리 페이지로 이동
+	@RequestMapping("/manageMenu")
+	public ModelAndView manageMenu(ModelAndView mView){
+		mView.setViewName("manageMenu");
+		return mView;
+	}
+	
+	// 매장 주문 확인 페이지로 이동
+	@RequestMapping("/storeOrder")
+	public ModelAndView storeOrder(ModelAndView mView){
+		mView.setViewName("storeOrder");
+		return mView;
+	}
+	
 }
