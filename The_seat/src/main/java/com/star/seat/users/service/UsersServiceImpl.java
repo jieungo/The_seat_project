@@ -65,7 +65,7 @@ public class UsersServiceImpl implements UsersService {
 	}
 
 	@Override
-	public void getInfo(HttpSession session, ModelAndView mView) {
+	public void getInfo(ModelAndView mView, HttpSession session) {
 		//로그인된 아이디를 읽어온다.
 		
 		if(session.getAttribute("email") != null) {
