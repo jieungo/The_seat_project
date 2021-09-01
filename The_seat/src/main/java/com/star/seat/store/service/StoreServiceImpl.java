@@ -59,7 +59,7 @@ public class StoreServiceImpl implements StoreService{
 		List<String> list=new ArrayList();
 		if(myDto.getStoreTag()!=null) {
 			String[] tags=myDto.getStoreTag().split(",");
-			for(int i=0; i<tags.length; i++) {
+			for(int i=1; i<tags.length; i++) {
 				System.out.println(tags[i]);
 				list.add(tags[i]);
 			}
@@ -110,7 +110,7 @@ public class StoreServiceImpl implements StoreService{
 		String[] tags=myDto.getStoreTag().split(",");
 		// 새로운 array를 만들어서 거기에 하나씩 담아줌.
 		List<String> list=new ArrayList();
-		for(int i=1; i<tags.length; i++) {
+		for(int i=0; i<tags.length; i++) {
 			System.out.println(tags[i]);
 			list.add(tags[i]);
 		}

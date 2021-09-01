@@ -122,16 +122,17 @@ img {
     align-items: stretch;
     justify-content: space-evenly;
     height: 100%;
-    float: right;
     position: absolute;
     left: 100%;
+    padding: 0;
+    
 }
 
 .store__aside > button {
-    border: 1px solid gray;
+    border: 1px solid lightgray;
+    border-bottom: none;
     background-color: white;
     border-radius: 0 5px 5px 0;
-    border: 1px solid lightgray;
     width: 15vw;
     height: 20vh;
     display: flex;
@@ -141,6 +142,11 @@ img {
     font-weight: 700;
     transition: color 0.2s ease-in-out;
 }
+
+.store__aside > button:first-child {
+	border-top: none;
+}
+
 
 .store__aside button:focus {
     color: #598eff;
@@ -156,7 +162,7 @@ img {
 <div class="container menu__article">
     <section class="menu__category mt-4">
         <ul>
-            <li>
+            <li class="category__list">
                 <a href="#">전체</a>
             </li>
             
@@ -164,7 +170,7 @@ img {
     <button style="color:rgb(253, 197, 14); font-weight: 500;">카테고리 추가</button>
     </section>
     <article class="menu__list pe-3 ps-3" style="height:450px; text-overflow: hidden; overflow-x: auto;">
-        <div class="card mb-5 mt-3 ms-3" style="max-width: 480px; height: 220px; margin-top: 20px;">
+        <div class="card mb-5 mt-3 ms-3" style="max-width: 480px; min-width: 400px; height: 220px; margin-top: 20px;">
             <div class="menu__add card-body">
                 <button type="button" class="circle-btn" data-bs-toggle="modal" data-bs-target="#modal-menuAddForm">
                     <div style="font-size: 20px; font-weight: 500;">+</div>
@@ -201,11 +207,11 @@ img {
 <!------------------------------------ 옆 사이드바 (매장정보, 메뉴관리 탭) ----------------->
 
     <aside class="store__aside">
-        <button>매장 정보</button>
-        <button>메뉴 관리</button>
-        <button>리뷰 관리</button>
-        <button>주문 확인</button>
-        <button>자리 관리</button>
+        <button onclick="location.href='#'">매장 정보</button>
+        <button onclick="location.href='${pageContext.request.contextPath}/manageMenu.do'">메뉴 관리</button>
+        <button onclick="location.href='${pageContext.request.contextPath}/storeReview.do'">리뷰 관리</button>
+        <button onclick="location.href='${pageContext.request.contextPath}/storeOrder.do'">주문 확인</button>
+        <button onclick="location.href='#'">자리 관리</button>
     </aside>
     
 <!--------------------------------------- 메뉴 등록 모달창 ------------------------------>

@@ -5,8 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>login page</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
@@ -17,12 +15,17 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
 	crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/loginform.css"
+	href="${pageContext.request.contextPath}/resources/css/loginform.css?ver-3"
 	type="text/css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap"
+	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 	<div class="container">
@@ -30,7 +33,7 @@
 			<!-- 왼쪽 텍스트 -->
 			<section class="col col__section">
 				<p>이젠, 빈자리 찾아 해매지 말자!</p>
-				<span style="font-size: 4em;">자리..<br>있어요?
+				<span style="font-size: 4em; font-family: 'Do Hyeon', sans-serif;">자리..<br>있어요?
 				</span>
 			</section>
 
@@ -82,72 +85,73 @@
 				</button>
 
 				<button type="button" class="text-btn" data-bs-toggle="modal"
-					data-bs-target="#modal-signupForm">Signup</button>
-			</section>
-
-			<div
-				class="modal animate__animated animate__bounce animate__fadeInDown"
-				tabindex="-1" id="modal-signupForm" aria-labelledby="signupForm"
-				aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h3 class="modal-title">
-								<strong>회원가입</strong>
-							</h3>
-							<button type="button" class="btn-close" data-bs-dismiss="modal"
-								aria-label="Close"></button>
-						</div>
-						<div class="modal-body">
-							<form id="signupForm"
-								action="${pageContext.request.contextPath}/users/signup.do"
-								method="post" class="needs-validation">
-								<div>
-
-									<input id="idSignup" class="form-control" type="text"
-										placeholder="이메일" required="required" /><span>@</span> <select
-										name="emailAddrSignup" id="emailAddrSignup">
-										<option value="naver.com">네이버</option>
-										<option value="gmail.com">구글</option>
-										<option value="daum.net">다음</option>
-									</select> <input type="hidden" name="email" id="email">
-									<div class="invalid-feedback">사용할수 없는 이메일 입니다.</div>
-								</div>
-								<div>
-									<input class="form-control" type="password" name="pwd" id="pwd"
-										placeholder="비밀번호" required="required"> <small
-										class="form-text">5글자~10글자 이내로 입력하세요.</small>
-									<div class="invalid-feedback">비밀번호를 확인 하세요.</div>
-								</div>
-								<div>
-									<input class="form-control" type="password" name="pwd2"
-										id="pwd2" placeholder="비밀번호를 한번 더 입력해주세요" required="required">
-									<div class="invalid-feedback">비밀번호를 확인 하세요.</div>
-								</div>
-								<div>
-									<input class="form-control" type="text" name="name" id="name"
-										placeholder="이름" required="required"> <input
-										class="form-control" type="hidden" name="profile" id="profile"
-										value="profile">
-								</div>
-								<div>
-									<input class="form-control" type="text" pattern="[0-9]+"
-										maxlength="11" name="phoneNumber" id="phoneNumber"
-										placeholder="'-'을 제외한 휴대폰번호" required="required">
-								</div>
-								<div class="line"
-									style="background-color: #2e8eff; width: 30vw;"></div>
-								<div class="row signup__menu">
-									<input class="form-control col-2" type="text" name="tag"
-										id="signup__menu-like" style="width: 25vw;"
-										placeholder="죽기전에 먹고죽을 딱한가지 음식은?">
-								</div>
-								<button type="submit">가입완료</button>
-							</form>
-						</div>
-					</div>
+									data-bs-target="#modal-signupForm">Signup</button>
+				
+				
+				<div
+				    class="modal animate__animated animate__bounce animate__fadeInDown"
+				    tabindex="-1" id="modal-signupForm" aria-labelledby="signupForm"
+				    aria-hidden="true">
+				    <div class="modal-dialog">
+				        <div class="modal-content">
+				            <div class="modal-header">
+				                <h3 class="modal-title">
+				                    <strong>회원가입</strong>
+				                </h3>
+				                <button type="button" class="btn-close" data-bs-dismiss="modal"
+				                    aria-label="Close"></button>
+				            </div>
+				            <div class="modal-body">
+				                <form id="signupForm"
+				                    action="${pageContext.request.contextPath}/users/signup.do"
+				                    method="post" class="needs-validation" style="max-width:500px;">
+				                    <div>
+				
+				                        <input id="idSignup" class="form-control" type="text"
+				                            placeholder="이메일" required="required" /><span>@</span> <select
+				                            name="emailAddrSignup" id="emailAddrSignup">
+				                            <option value="naver.com">네이버</option>
+				                            <option value="gmail.com">구글</option>
+				                            <option value="daum.net">다음</option>
+				                        </select> <input type="hidden" name="email" id="email">
+				                        <div class="invalid-feedback">사용할수 없는 이메일 입니다.</div>
+				                    </div>
+				                    <div style="display: flex; flex-direction: column; align-items: center;">
+				                        <input class="form-control" type="password" name="pwd" id="pwd"
+				                            placeholder="비밀번호 (5~10글자 이내)" required="required"> 
+				                        <div class="invalid-feedback">비밀번호를 확인 하세요.</div>
+				                            <small
+				                            class="form-text">5글자~10글자 이내로 입력하세요.</small>
+				                    </div>
+				                    <div>
+				                        <input class="form-control" type="password" name="pwd2"
+				                            id="pwd2" placeholder="비밀번호를 한번 더 입력해주세요" required="required">
+				                        <div class="invalid-feedback">비밀번호를 확인 하세요.</div>
+				                    </div>
+				                    <div>
+				                        <input class="form-control" type="text" name="name" id="name"
+				                            placeholder="이름" required="required"> <input
+				                            class="form-control" type="hidden" name="profile" id="profile"
+				                            value="profile">
+				                    </div>
+				                    <div>
+				                        <input class="form-control" type="text" pattern="[0-9]+"
+				                            maxlength="11" name="phoneNumber" id="phoneNumber"
+				                            placeholder="'-'을 제외한 휴대폰번호" required="required">
+				                    </div>
+				                    <div class="line mt-2 mb-2"
+				                        style="background-color: #2e8eff; width: 100%; height: 2px;"></div>
+				                    <div class="row signup__menu">
+				                        <input class="form-control " type="text" name="tag"
+				                            id="signup__menu-like" style="width: 25vw;"
+				                            placeholder="죽기전에 먹고죽을 딱한가지 음식은?">
+				                    </div>
+				                    <button type="submit" class="submit-btn mt-2 mb-2">가입완료</button>
+				                </form>
+				            </div>
+				        </div>
+				    </div>
 				</div>
-			</div>
 		</div>
 	</div>
 
