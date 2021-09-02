@@ -5,6 +5,7 @@ public class OrderDto {
 	private String email;
 	private String storeName;
 	private String storeLogo;
+	private int num;
 	private int tableNum;
 	private String menu;
 	private int menuCount;
@@ -16,13 +17,14 @@ public class OrderDto {
 	
 	public OrderDto () {}
 
-	public OrderDto(int orderNum, String email, String storeName, String storeLogo, int tableNum, String menu,
+	public OrderDto(int orderNum, String email, String storeName, String storeLogo, int num, int tableNum, String menu,
 			int menuCount, int price, int amount, String regdate, int startRowNum, int endRowNum) {
 		super();
 		this.orderNum = orderNum;
 		this.email = email;
 		this.storeName = storeName;
 		this.storeLogo = storeLogo;
+		this.num = num;
 		this.tableNum = tableNum;
 		this.menu = menu;
 		this.menuCount = menuCount;
@@ -63,6 +65,14 @@ public class OrderDto {
 
 	public void setStoreLogo(String storeLogo) {
 		this.storeLogo = storeLogo;
+	}
+
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
 	}
 
 	public int getTableNum() {

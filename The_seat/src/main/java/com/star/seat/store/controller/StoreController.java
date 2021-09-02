@@ -1,7 +1,6 @@
 package com.star.seat.store.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,7 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.star.seat.menu.service.MenuService;
 import com.star.seat.store.dto.StoreDto;
 import com.star.seat.store.service.StoreService;
-import com.star.seat.users.service.UsersService;
 
 @Controller
 public class StoreController {
@@ -170,7 +167,7 @@ public class StoreController {
 	}
 
 	// 매장 상세 정보 페이지로 이동
-	@RequestMapping(value = "/store/storeDetail.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/store/storeDetail.do",method = RequestMethod.GET)
 	public String goStoreDetail(StoreDto dto, HttpServletRequest request) {
 		
 		service.getMyStore_num(dto, request);
@@ -181,9 +178,9 @@ public class StoreController {
 	}
 	
 	// 매장 리뷰 관리 페이지로 이동
-	@RequestMapping("/storeReview")
+	@RequestMapping("/store/storeReview")
 	public ModelAndView storeReview(ModelAndView mView){
-		mView.setViewName("storeReview");
+		mView.setViewName("store/storeReview");
 		return mView;
 	}
 }

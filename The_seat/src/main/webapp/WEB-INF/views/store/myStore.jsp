@@ -62,6 +62,8 @@
 	                <input type="text" name="storeName" class="updateData" value="${dto.storeName }" style="display:none;"/>
 	                <p>매장 주소 : <strong class="storeData">${dto.storeAddr } </strong></p>
 	                <input type="text" name="storeAddr" class="updateData" value="${dto.storeAddr }" style="display:none;"/>
+	                <p>매장 주소 : <strong class="storeData">${dto.storeAddr } </strong></p>
+	                <input type="text" name="storePhone" class="updateData" value="${dto.storePhone }" style="display:none;"/>
 	                <p>영업 시간 : <strong class="storeData">${dto.openingTime } </strong></p>
 	                <input type="text" name="openingTime" class="updateData" value="${dto.openingTime }" style="display:none;"/>
 	            </form>

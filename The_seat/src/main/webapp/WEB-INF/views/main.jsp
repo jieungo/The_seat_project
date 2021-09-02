@@ -90,6 +90,8 @@
 		</c:forEach>
 	</div>
 </div>
+<p>테스트용 리뷰 링크</p>
+<a href="${pageContext.request.contextPath}/store/test.do">테슽흐</a>
 </body>
 <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 

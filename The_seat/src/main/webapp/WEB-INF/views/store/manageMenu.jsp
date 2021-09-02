@@ -42,7 +42,6 @@ type="text/css" />
                 <span style="color: rgb(173, 173, 173); font-size: 14px;">새로운 메뉴 추가하기</span>
             </div>
         </div>
-        <p>${menuList }</p>
         <c:forEach var="tmp" items="${menuList }">
         	<div class="card" style="max-width: 500px;">
             	<div class="row g-0">
@@ -121,7 +120,7 @@ type="text/css" />
     </div>
 
 <!--------------------------------------- 카테고리 추가 모달창 ------------------------------>
-    
+    \\\\\\\
     <div class="modal" tabindex="-1" id="modal-categoryBtn" aria-labelledby="menuAddForm" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

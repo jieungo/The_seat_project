@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+.order {
+	display:flex;
+	justify-content:space-between;
+}
+
+ul {
+	list-style: none;
+}

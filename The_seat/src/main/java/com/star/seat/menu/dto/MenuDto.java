@@ -4,6 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class MenuDto {
 	private int num;
+	private int storeNum;
 	private String storeName;
 	private String menuImage;
 	private String menuName;
@@ -16,11 +17,12 @@ public class MenuDto {
 	public MenuDto() {
 		
 	}
-	
-	public MenuDto(int num, String storeName, String menuImage, String menuName, String content, int price, String best,
-			String category, MultipartFile imageFile) {
+
+	public MenuDto(int num, int storeNum, String storeName, String menuImage, String menuName, String content,
+			int price, String best, String category, MultipartFile imageFile) {
 		super();
 		this.num = num;
+		this.storeNum = storeNum;
 		this.storeName = storeName;
 		this.menuImage = menuImage;
 		this.menuName = menuName;
@@ -37,6 +39,14 @@ public class MenuDto {
 
 	public void setNum(int num) {
 		this.num = num;
+	}
+
+	public int getStoreNum() {
+		return storeNum;
+	}
+
+	public void setStoreNum(int storeNum) {
+		this.storeNum = storeNum;
 	}
 
 	public String getStoreName() {
@@ -103,5 +113,6 @@ public class MenuDto {
 		this.imageFile = imageFile;
 	}
 	
+
 	
 }
