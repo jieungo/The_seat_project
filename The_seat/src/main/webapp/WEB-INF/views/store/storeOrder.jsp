@@ -18,21 +18,21 @@
 
 <div class="container myStore_container-gray">
 
-    <div id="inner" class="inner_container">
     
     <!-------------------------- 주문내역 타이틀 및 날짜 검색 ---------------------------->
-
-        <header class="store__order-header">
-            <h4>주문 내역</h4>
-            <form action="#">
-                <input type="date">
-                <button class="search-btn" type="submit">
-                    <i class="fas fa-search"></i>
-                </button>
-            </form>
-        </header>
-
+    
+    <header class="store__order-header">
+        <h4>주문 내역</h4>
+        <form action="#">
+            <input type="date">
+            <button class="search-btn" type="submit">
+                <i class="fas fa-search"></i>
+            </button>
+        </form>
+    </header>
+    
     <!------------------------------ 주문내역 텍스트 및 박스 --------------------------------------->
+    <div id="inner" class="inner_container">
         
         <div class="store__order-user">
             <h5>규환 님의 주문</h5>
@@ -92,11 +92,11 @@
     </div>
     <!------------------------------------ 옆 사이드바 (매장정보, 메뉴관리 탭) ----------------->
     <aside class="store__aside" style="width: 0;">
-        <button onclick="location.href='#'">매장 정보</button>
-        <button onclick="location.href='${pageContext.request.contextPath}/manageMenu.do'">메뉴 관리</button>
-        <button onclick="location.href='${pageContext.request.contextPath}/storeReview.do'">리뷰 관리</button>
-        <button onclick="location.href='${pageContext.request.contextPath}/storeOrder.do'">주문 확인</button>
-        <button onclick="location.href='#'">자리 관리</button>
+        <button>매장 정보</button>
+        <button>메뉴 관리</button>
+        <button>리뷰 관리</button>
+        <button>주문 확인</button>
+        <button>자리 관리</button>
     </aside>
 </div>
 <script src="https://kit.fontawesome.com/2ebe86210e.js" crossorigin="anonymous"></script>

@@ -72,38 +72,34 @@ public class StoreServiceImpl implements StoreService{
 	// (사장님의) 매장 정보 하나를 불러오는 method(해당 매장 DB 번호 이용)
 	@Override
 	public void getMyStore_num(StoreDto dto, HttpServletRequest request) {		
-		StoreDto theDto=dao.getMyStore_num(dto);	
-	
-		System.out.println(theDto.getStoreTag());
-		
-		// 카테고리 리스트를 만들어서 request에 넣을 준비
-		// DB의 내용을 , 로 구분해서 String array로 만들어주고
-		String[] categories=theDto.getCategory().split(",");
-		// 새로운 array를 만들어서 거기에 하나씩 담아줌.
-		List<String> catList=new ArrayList();
-		for(int i=1; i<categories.length; i++) {
-			System.out.println(categories[i]);
-			catList.add(categories[i]);
-		}
-		
-		// 태그 리스트를 만들어서 request에 넣을 준비
-		// 만약 DB에 매장 tag 정보가 없다면
-		if(theDto.getStoreTag()==null) {
-			// 이스터 에그를 추가해주고
-			theDto.setStoreTag("easter egg");
-		}
-		// DB의 내용을 , 로 구분해서 String array로 만들어주고
-		String[] tags=theDto.getStoreTag().split(",");
-		// 새로운 array를 만들어서 거기에 하나씩 담아줌.
-		List<String> tagList=new ArrayList();
-		for(int i=1; i<tags.length; i++) {
-			System.out.println(tags[i]);
-			tagList.add(tags[i]);
-		}
-		
-		request.setAttribute("tagList", tagList);
-		request.setAttribute("categoryList", catList);
-		request.setAttribute("dto", theDto);
+
+		  StoreDto theDto=dao.getMyStore_num(dto);   
+		   
+	      System.out.println(theDto.getStoreTag());
+	      
+	      // 카테고리 리스트를 만들어서 request에 넣을 준비
+	      // DB의 내용을 , 로 구분해서 String array로 만들어주고
+	      String[] categories=theDto.getCategory().split(",");
+	      // 새로운 array를 만들어서 거기에 하나씩 담아줌.
+	      List<String> catList=new ArrayList();
+	      for(int i=1; i<categories.length; i++) {
+	         System.out.println(categories[i]);
+	         catList.add(categories[i]);
+	      }
+	      
+	      // 태그 리스트를 만들어서 request에 넣을 준비
+	      // DB의 내용을 , 로 구분해서 String array로 만들어주고
+	      String[] tags=theDto.getStoreTag().split(",");
+	      // 새로운 array를 만들어서 거기에 하나씩 담아줌.
+	      List<String> tagList=new ArrayList();
+	      for(int i=1; i<tags.length; i++) {
+	         System.out.println(tags[i]);
+	         tagList.add(tags[i]);
+	      }
+	      
+	      request.setAttribute("tagList", tagList);
+	      request.setAttribute("categoryList", catList);
+	      request.setAttribute("dto", theDto);
 	}
 	
 	// 매장 검색목록 불러오는 method

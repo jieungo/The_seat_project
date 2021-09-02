@@ -31,6 +31,10 @@ button:focus {
     border: none;
 }
 
+select:focus {
+    outline: none;
+}
+
 /* 리스트 기본 스타일링 */
 ul {
     padding: 0;
@@ -38,96 +42,56 @@ ul {
     list-style: none;
 }
 
-.store__order-header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+.display-box {
     width: 100%;
-}
-
-.store__order-header > h4 {
-    font-weight: 700;
-}
-
-.store__order-header > form > input {
-    border: none;
-    border-radius: 20px;
-    padding: 8px 10px;
-    text-align: center;
-    box-shadow: 1px 1px 11px rgba(172, 172, 172, 0.699);
-    font-size: 14px;
-}
-
-.search-btn {
-    background-color: #598eff;
-    color: white;
-    border-radius: 100%;
-    width: 30px;
-    height: 30px;
-    font-size: 16px;
-    margin-left: 5px;
-    box-shadow: 1px 1px 11px rgba(172, 172, 172, 0.699);
-}
-
-.store__order-user {
-    display: flex;
-    flex-direction: column;
-    justify-content:flex-start;
-    width: 100%;
-}
-
-.store__order-user > h5, h6 {
-    font-weight: 600;
-}
-
-.store__order-user > h5 {
-    color: #598eff;
-}
-
-.white-box {
-    width: 100%;
-    height: 100%;
+    height: 80%;
     display: flex;
     justify-content: space-between;
     text-align: center;
     margin-top: 10px;
 }
 
-.order,
-.reserve {
+.seat,
+.select {
     background-color: white;
-    width: 55%;
+    width: 70%;
     height: 400px;
-    padding: 15px;
 }
 
-.box-title{
-    margin: 5px 0;
-    margin-bottom: 15px;
+.seat {
+    margin-right: 20px;
 }
 
-.reserve {
+.select {
     width: 40%;
 }
 
-.line {
-    height: 1.5px;
-    background-color: gray;
-    width: 100%;
+.seat__box {
+    border: 1px solid lightgray;
+    background-color: rgb(243, 243, 243);
+    height: 60%;
+    margin-top: 5px;
+    position: relative;
+}
+
+.seat-title {
+    color: gray;
+}
+
+.select-title {
+    display: flex;
+    justify-content: space-around;
+}
+
+.select-title > p {
     margin-bottom: 5px;
 }
 
-.dot {
-    border: 1px dashed gray;
-    margin-bottom: 5px;
-}
-
-.myStore_container-gray {
+.myStore_container{
     display: flex;
     justify-content: center;
     flex-direction: column;
-    background-color: #ECECEC;
+    background-color: white;
     border-radius: 10px  0 0 10px;
     height: 600px;
     max-width: 700px;
@@ -135,49 +99,15 @@ ul {
     padding: 30px;
 }
 
-::-webkit-scrollbar {
-    display: none;
-}
-
 .inner_container {
     display: flex; 
     align-items: center; 
     flex-direction: column;
     height: 100%;
-    margin-top: 30px;
-}
-
-.order-list__body {
-    text-overflow: hidden; 
-    overflow-x: auto;
-    height: 450px;
-}
-
-.order__list {
-    width: 100%;
-    height: 250px;
-    text-overflow: hidden; 
-    overflow-x: auto;
-}
-
-.list-item {
-    padding: 10px 0;
-    font-size: 14px;
-}
-
-.order__total {
-    font-weight: 500;
-}
-
-.down-icon{
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-    height: 50%;
+    margin-top: 40px;
 }
 
 .reserve-body {
-    margin-top: 30px;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -194,13 +124,14 @@ ul {
     margin-left: 30px;
 }
 
-.reserve-btn {
+.submit-btn {
     color: #598eff;
     box-shadow: 1px 1px 11px rgba(172, 172, 172, 0.699);
-    width: 90%;
+    width: 50%;
     height: 10%;
     border-radius: 20px;
     font-weight: 600;
+    margin-top: 20px;
 }
 
 .store__aside {
@@ -229,11 +160,68 @@ ul {
     transition: color 0.2s ease-in-out;
 }
 
-.store__aside button:focus {
+.store__aside button:nth-child(5) {
     color: #598eff;
     border-left: none;
 }
 
-.store__aside button:nth-child(4) {
-    background-color: #ECECEC;
+
+
+.line {
+    height: 1.5px;
+    background-color: lightgray;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.box {
+    border: 1px solid gray;
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: lightgray;
+    font-weight: 600;
+}
+
+.seat__select {
+    margin: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+#seat__select-box {
+    margin-left: 10px;
+    width: 60px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding-left: 15px;
+}
+
+.seat-NumState {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.useState {
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    font-size: 14px;
+    height: 30px;
+}
+
+.seat-NumState > div > p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.seat-NumState > div {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 5px;
 }

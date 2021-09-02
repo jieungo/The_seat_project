@@ -7,10 +7,10 @@
 		FROM
 			(SELECT result1.*, ROWNUM as rnum
 			FROM
-				(SELECT orderNum, email, storeName, storeLogo, tableNum, menu, menuCount, price, amount, regdate
+				(SELECT orderNum, email, storeName, storeLogo, num, tableNum, menu, menuCount, price, amount, regdate
 				FROM order_
 				WHERE email = #{email }
-				GROUP BY orderNum, email, storeName, storeLogo, tableNum, menu, menuCount, price, amount, regdate
+				GROUP BY orderNum, email, storeName, storeLogo, num, tableNum, menu, menuCount, price, amount, regdate
 				ORDER BY orderNum DESC) result1)
 		WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
 	</select>
@@ -29,8 +29,8 @@
 	
 	<insert id="insertOrder" parameterType="orderDto">
 		INSERT INTO order_
-		(orderNum, email, storeName, storeLogo, tableNum, menu, menuCount, price, amount, regdate)
-		VALUES(#{orderNum },#{email }, #{storeName }, #{storeLogo }, #{tableNum }, #{menu }, #{menuCount }, #{price },#{amount }, SYSDATE)
+		(orderNum, email, storeName, storeLogo, num, tableNum, menu, menuCount, price, regdate)
+		VALUES(#{orderNum },#{email }, #{storeName }, #{storeLogo }, #{num }, #{tableNum }, #{menu }, #{menuCount }, #{price }, SYSDATE)
 	</insert>
 
 	<delete id="deleteOrder" parameterType="int">

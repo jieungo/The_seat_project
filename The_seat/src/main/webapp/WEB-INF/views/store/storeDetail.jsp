@@ -44,6 +44,11 @@
 	font-wight: bolder;
 	color: rgb(96, 92, 99);
 }
+#bestMenu {
+	display: flex;
+	justify-content: space-around;
+
+}
 </style>
 </head>
 <body>
@@ -75,28 +80,28 @@
 				<div class="carousel-inner" style="min-height: 500px;">
 					<div class="carousel-item active" data-bs-interval="10000">
 						<img src="${pageContext.request.contextPath}${dto.image_1 }"
-							class="d-block w-100" alt="FirstBestmenu">
+							class="d-block w-100" alt="매장대표이미지1">
 						<div class="carousel-caption d-none d-md-block">
 							<h5>First Best Menu</h5>
 						</div>
 					</div>
 					<div class="carousel-item" data-bs-interval="2000">
 						<img src="${pageContext.request.contextPath}${dto.image_2 }"
-							class="d-block w-100" alt="SecondBestmenu">
+							class="d-block w-100" alt="매장대표이미지2">
 						<div class="carousel-caption d-none d-md-block">
 							<h5>Second Best Menu</h5>
 						</div>
 					</div>
 					<div class="carousel-item">
 						<img src="${pageContext.request.contextPath}${dto.image_3 }"
-							class="d-block w-100" alt="ThirdBestmenu">
+							class="d-block w-100" alt="매장대표이미지3">
 						<div class="carousel-caption d-none d-md-block">
 							<h5>Third Best Menu</h5>
 						</div>
 					</div>
 					<div class="carousel-item">
 						<img src="${pageContext.request.contextPath}${dto.image_4 }"
-							class="d-block w-100" alt="ThirdBestmenu">
+							class="d-block w-100" alt="매장대표이미지4">
 						<div class="carousel-caption d-none d-md-block">
 							<h5>Fourth Best Menu</h5>
 						</div>
@@ -120,7 +125,11 @@
 				<!--------------- 파라미터 값으로 매장 정보를 받아온다. ----------------------->
 					<div class="card-header bg-transparent border-dark-light">
 						<h5>별점 : ⭐ 4.9 (100+)</h5>
-						<h3 style="line-height: 1.8;">${dto.storeTag }</h3>
+						<h3 style="line-height: 1.8;">
+	                     <c:forEach var="tmp" items="${tagList }">
+	                        <span>#${tmp } </span>
+	                     </c:forEach>
+                  		</h3>
 					</div>
 					<div class="card-body" style="margin-top: 10px; line-height: 60px;">
 						<h4 class="card-title" style="line-height: 2;">
@@ -139,113 +148,25 @@
 							data-bs-target="#Modalgrid">자리 잡으러 가기 ❕</button>
 					</div>
 			</div>
-
-			<!------------------------------ 리뷰 보기 Modal -------------------------------->
-			<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
-				data-bs-keyboard="false" tabindex="-1"
-				aria-labelledby="staticBackdropLabel" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="staticBackdropLabel">리뷰 보기 ⭐</h5>
-							<button type="button" class="btn-close" data-bs-dismiss="modal"
-								aria-label="Close"></button>
-						</div>
-						<div class="modal-body">
-							<div class="card mb-3" style="max-width: 540px; border: none;">
-								<div class="row g-0">
-									<div class="col-md-4">
-										<h5>신현미 님</h5>
-										<!-- <p>★★★★★ 등록일 : 2021.08.19</p> -->
-										<img
-											src="${pageContext.request.contextPath}/resources/img/review1.jpg"
-											class="img-fluid rounded-start" alt="TwosomeReview">
-									</div>
-									<div class="col-md-8">
-										<div class="card-body">
-											<h5 class="card-title">★★★★★</h5>
-											<p class="card-text">케이크가 정말 맛있어요 ๑❤‿❤๑</p>
-											<p class="card-text">
-												<small class="text-muted">등록일 : 2021.08.19</small>
-											</p>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<hr />
-						<div class="modal-body">...</div>
-						<hr />
-						<div class="modal-body">...</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-bs-dismiss="modal">창닫기</button>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!--------------------------------- 자리 잡기 Modal --------------------------------->
-			<div class="modal fade" id="Modalgrid" tabindex="-1" role="dialog"
-				aria-labelledby="Modalgrid" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="ModalLabel">
-								${dto.storeName } <br />( 6 / 8 )
-							</h5>
-							<button type="button" class="btn-close" data-bs-dismiss="modal"
-								aria-label="Close"></button>
-						</div>
-						<p style="text-align: right; margin-top: 20px; margin-right: 40px;">자리를 선택해 주세요 ☺</p>
-						<div class="modal-body">
-							<div class="container-fluid">
-								<img src="${pageContext.request.contextPath}/resources/img/chair.png "class="img-thumbnail" alt="seatImage">
-								<hr />
-								<!------------------- Modal 에서 선택한 자리 정보를 주문 페이지에 get 방식으로 값을 전달해준다. ----------------->
-								<form action="${pageContext.request.contextPath}/order.do"
-									method="get">
-									<p>
-										자리 선택 <select name="자리 선택" id="seatChoice">
-											<option value="1">1</option>
-											<option value="2">2</option>
-											<option value="3">3</option>
-											<option value="4">4</option>
-											<option value="5">5</option>
-											<option value="6">6</option>
-											<option value="7">7</option>
-											<option value="8">8</option>
-										</select>
-									</p>
-								</form>
-								<hr />
-								<div class="card">
-									<div class="card-header">✦ 알림사항</div>
-									<div class="card-body">
-										<p class="card-text">5, 6번 좌석은 4인 이상부터 이용이 가능합니다.</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-bs-dismiss="modal">창닫기</button>
-							<button type="button" class="btn btn-warning"
-								onclick="location.href='${pageContext.request.contextPath}/order.do'">주문하기</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+<!---------------------------------------- 메뉴판 만들기 ------------------------------------------->
+		<!-- 베스트 메뉴 4가지 -->
 		<div>
-			<c:forEach var="tmp" items="${menuList }">
-				<c:if test="${tmp.best=='yes' }">
-					<span>${tmp.menuName }</span>
+			<p style="font-size:30px;"><strong>베스트 메뉴</strong></p>
+		</div>
+		<div id="bestMenu">
+			<c:forEach var="tmp" items="${menuList }" >
+				<c:if test="${tmp.best == 'yes' }">
+					<div style="width:300px; overflow:hidden;">
+						<img src="${pageContext.request.contextPath}${tmp.menuImage }" style="width:100%; object-fit:cover;"/>
+					</div>
 				</c:if>
 			</c:forEach>
-				
 		</div>
+
 		<!---------------------------------------- 메뉴판 만들기 ------------------------------------------->
+
+		<!-- 메뉴 -->
+
 		<div class="card mb-5"
 			style="max-width: auto; height: 700px; margin-top: 30px; background-color: rgb(86, 162, 255);">
 			<span
@@ -260,49 +181,144 @@
 							style="width: 400px; margin-left: 70px; margin-top: 50px;">${tmp.menuName }</button>
 						<span
 							style="width: 300px; margin-left: 300px; font-size: 1.5em; color: rgb(96, 92, 99);">${tmp.price }</span>
+						<!------------모달창-------------- 메뉴 이름 누르면 그에 맞는 이미지 Modal 활성화 -------------------------------->
+						<div class="modal fade" id="exampleModal" tabindex="-1"
+							aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel"></h5>
+										<button type="button" class="btn-close" data-bs-dismiss="modal"
+											aria-label="Close"></button>
+									</div>
+									<div class="modal-body">
+										<div class="card" style="width: 18rem;">
+											<img src="${pageContext.request.contextPath}${tmp.menuImage }"
+												class="card-img-top" alt="MenuImage">
+											<div class="card-body">
+												<p class="card-text"></p>
+											</div>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-bs-dismiss="modal">창닫기</button>
+									</div>
+								</div>
+							</div>
+						</div>
 					</c:forEach>
 				</div>
 			</div>
 		</div>
+	</div>
+</div>
 
-		<!-------------------------------- 메뉴 이름 누르면 그에 맞는 이미지 Modal 활성화 -------------------------------->
-		<div class="modal fade" id="exampleModal" tabindex="-1"
-			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel"></h5>
-						<button type="button" class="btn-close" data-bs-dismiss="modal"
-							aria-label="Close"></button>
-					</div>
-					<div class="modal-body">
-						<div class="card" style="width: 18rem;">
-							<img src="${pageContext.request.contextPath}"
-								class="card-img-top" alt="MenuImage">
-							<div class="card-body">
-								<p class="card-text"></p>
+	
+<!--------------모달창-------------- 리뷰 보기 Modal -------------------------------->
+	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+		data-bs-keyboard="false" tabindex="-1"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="staticBackdropLabel">리뷰 보기 ⭐</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="card mb-3" style="max-width: 540px; border: none;">
+						<div class="row g-0">
+							<div class="col-md-4">
+								<h5>신현미 님</h5>
+								<!-- <p>★★★★★ 등록일 : 2021.08.19</p> -->
+								<img
+									src="${pageContext.request.contextPath}/resources/img/review1.jpg"
+									class="img-fluid rounded-start" alt="TwosomeReview">
+							</div>
+							<div class="col-md-8">
+								<div class="card-body">
+									<h5 class="card-title">★★★★★</h5>
+									<p class="card-text">케이크가 정말 맛있어요 ๑❤‿❤๑</p>
+									<p class="card-text">
+										<small class="text-muted">등록일 : 2021.08.19</small>
+									</p>
+								</div>
 							</div>
 						</div>
 					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
-							data-bs-dismiss="modal">창닫기</button>
-					</div>
+				</div>
+				<hr />
+				<div class="modal-body">...</div>
+				<hr />
+				<div class="modal-body">...</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">창닫기</button>
 				</div>
 			</div>
 		</div>
 	</div>
+
+<!-----------------모달창------------- 자리 잡기 Modal --------------------------------->
+	<div class="modal fade" id="Modalgrid" tabindex="-1" role="dialog"
+		aria-labelledby="Modalgrid" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="ModalLabel">
+						${dto.storeName } <br />( 6 / 8 )
+					</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<p style="text-align: right; margin-top: 20px; margin-right: 40px;">자리를 선택해 주세요 ☺</p>
+				<div class="modal-body">
+					<div class="container-fluid">
+						<img src="${pageContext.request.contextPath}/resources/img/chair.png "class="img-thumbnail" alt="seatImage">
+						<hr />
+						<!------------------- Modal 에서 선택한 자리 정보를 주문 페이지에 get 방식으로 값을 전달해준다. ----------------->
+						
+						<p>
+							자리 선택 <select name="자리 선택" id="seatChoice">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+							</select>
+						</p>
+						<hr />
+						<div class="card">
+							<div class="card-header">✦ 알림사항</div>
+							<div class="card-body">
+								<p class="card-text">5, 6번 좌석은 4인 이상부터 이용이 가능합니다.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">창닫기</button>
+					<button type="button" class="btn btn-warning" id="orderBtn">주문하기</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 <script>
-	//메뉴 이름을 클릭했을 때 이미지를 Modal 로 출력되게 하는 기능
-	document.querySelector("#menuBtn").addEventListenter("click", function(){
-		let menuName=document.querySelectorAll(".menuName").value;
-		for(let i=0; i<menuName.length; i++){
-			menuName[i].addEventListener("click", function(){
-				
-			});
-		}
-	});
+	
+	
+	document.querySelector("#orderBtn").addEventListener("click", function(){
+		let num = ${dto.num};
+		let orderNum = Date.now();
+		let tableNum = document.querySelector("#seatChoice").value;
+		location.href="${pageContext.request.contextPath}/order/order.do?num="+num+"&tableNum="+tableNum+"&orderNum="+orderNum;
+	})
 </script>
 </body>
 </html>
