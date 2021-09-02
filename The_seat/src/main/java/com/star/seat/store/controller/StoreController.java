@@ -179,8 +179,21 @@ public class StoreController {
 	
 	// 매장 리뷰 관리 페이지로 이동
 	@RequestMapping("/store/storeReview")
-	public ModelAndView storeReview(ModelAndView mView){
-		mView.setViewName("store/storeReview");
-		return mView;
+	public String storeReview(){
+		return "store/storeReview";
 	}
+	
+	// 매장 리뷰 관리 페이지로 이동
+	@RequestMapping("/store/storeOrder")
+	public String storeOrder(){
+		return "store/storeOrder";
+	}
+	
+	// 매장 리뷰 관리 페이지로 이동
+	@RequestMapping("/store/storeSeat")
+	public String storeSeat(){
+		return "store/storeSeat";
+	}
+		
+		
 }

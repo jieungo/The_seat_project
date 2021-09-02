@@ -86,12 +86,12 @@ type="text/css" />
     
 <!------------------------------------ 옆 사이드바 (매장정보, 메뉴관리 탭) ----------------->
 
-    <aside class="store__aside">
+    <aside class="store__aside" style="width: 0;">
         <button onclick="location.href='#'">매장 정보</button>
-        <button onclick="${pageContext.request.contextPath}/store/manageMenu.do?num=${dto.num}&storeName=${dto.storeName}">메뉴 관리</button>
-        <button onclick="location.href='${pageContext.request.contextPath}/storeReview.do'">리뷰 관리</button>
-        <button onclick="location.href='${pageContext.request.contextPath}/storeOrder.do'">주문 확인</button>
-        <button onclick="location.href='#'">자리 관리</button>
+        <button onclick="location.href='${pageContext.request.contextPath}/store/manageMenu.do?num=${dto.num}&storeName=${dto.storeName}'">메뉴 관리</button>
+        <button onclick="location.href='${pageContext.request.contextPath}/store/storeReview.do'">리뷰 관리</button>
+        <button onclick="location.href='${pageContext.request.contextPath}/store/storeOrder.do'">주문 확인</button>
+        <button onclick="location.href='${pageContext.request.contextPath}/store/storeSeat.do'">자리 관리</button>
     </aside>
     
 <!--------------------------------------- 메뉴 등록 모달창 ------------------------------>
