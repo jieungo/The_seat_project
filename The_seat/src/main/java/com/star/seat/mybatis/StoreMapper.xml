@@ -4,9 +4,9 @@
 	<!-- 매장 추가 method -->
 	<insert id="addStore" parameterType="string">
 		insert into store
-		(num, owner, storeName, storeAddr, openingTime,
+		(num, owner, storeName, storeAddr, storePhone, openingTime,
 			storeOpen, category, regdate)
-		values(store_seq.nextval, #{email}, 'Default', 'Default', '00:00 ~ 24:00',
+		values(store_seq.nextval, #{email}, 'Default', 'Default', '010-1234-5677', '00:00 ~ 24:00',
 			'no', 'Default', sysdate)
 	</insert>
 	
@@ -52,7 +52,7 @@
 	<!-- 매장 정보(이름, 주소, 시간)를 수정하는 method -->
 	<update id="updateStore" parameterType="storeDto">
 		update store
-		set storeName=#{storeName}, storeAddr=#{storeAddr}, openingTime=#{openingTime}
+		set storeName=#{storeName}, storeAddr=#{storeAddr}, storePhone=#{storePhone}, openingTime=#{openingTime}
 		where num=#{num}
 	</update>
 	

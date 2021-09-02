@@ -237,6 +237,14 @@
 				</div>
 			</div>
 		</div>
+		<div>
+			<c:forEach var="tmp" items="${menuList }">
+				<c:if test="${tmp.best=='yes' }">
+					<span>${tmp.menuName }</span>
+				</c:if>
+			</c:forEach>
+				
+		</div>
 		<!---------------------------------------- 메뉴판 만들기 ------------------------------------------->
 		<div class="card mb-5"
 			style="max-width: auto; height: 700px; margin-top: 30px; background-color: rgb(86, 162, 255);">

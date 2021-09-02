@@ -181,9 +181,9 @@ public class StoreController {
 	}
 	
 	// 매장 리뷰 관리 페이지로 이동
-	@RequestMapping("/storeReview")
+	@RequestMapping("/store/storeReview")
 	public ModelAndView storeReview(ModelAndView mView){
-		mView.setViewName("storeReview");
+		mView.setViewName("store/storeReview");
 		return mView;
 	}
 }

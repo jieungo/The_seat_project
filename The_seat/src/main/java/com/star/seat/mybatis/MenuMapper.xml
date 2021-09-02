@@ -1,31 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="store">
+<mapper namespace="menu">
 	<!-- 해당 매장의 메뉴 정보를 추가하는 method -->
 	<insert id="addMenu" parameterType="menuDto">
 		insert into storeMenu
-		(num, storeName, menuImage, menuName, content, price, best, category)
-		values(storeMenu_seq.nextval, #{storeName}, #{menuImage}, #{menuName}, #{content}, #{price}, 'no', #{category})
+		(num, storeNum, storeName, menuImage, menuName, content, price, best, category)
+		values(storeMenu_seq.nextval, #{storeNum},#{storeName}, #{menuImage}, #{menuName}, #{content}, #{price}, 'no', #{category})
 	</insert>
 	
 	<!-- 해당 매장의 메뉴 정보를 가져오는 method (사장님)-->
 	<select id="getMenuList" parameterType="hashmap" resultType="menuDto">
-		select *
-		from
-			(select storeMenu.num as num, storeMenu.storeName as storeName, menuImage, menuName, content, price, best, storeMenu.category as category
-			from storeMenu
-			inner join store
-			on store.storeName=storeMenu.storeName
-			where store.owner=#{sDto.owner} and store.storeName=#{sDto.storeName}
-			and storeMenu.category=#{mDto.category})
+		select storeMenu.num as num, storeMenu.storeName as storeName, menuImage, menuName, content, price, best, storeMenu.category as category
+		from storeMenu
+		inner join store
+		on store.storeName=storeMenu.storeName and store.num=storeMenu.storeNum
+		where store.owner=#{sDto.owner} and store.num=#{sDto.num}
+		and storeMenu.category=#{mDto.category}
 	</select>
 	
 	<select id="getMenuList2" parameterType="storeDto" resultType="menuDto">
 		select storeMenu.num as num, storeMenu.storeName as storeName, menuImage, menuName, content, price, best, storeMenu.category as category
 		from storeMenu
 		inner join store
-		on store.storeName=storeMenu.storeName
-		where store.owner=#{owner} and store.storeName=#{storeName}
+		on store.storeName=storeMenu.storeName and store.num=storeMenu.storeNum
+		where store.owner=#{owner} and store.num=#{num}
 	</select>
 	
 	<!-- 해당 매장의 메뉴 정보를 가져오는 method (유저)-->
