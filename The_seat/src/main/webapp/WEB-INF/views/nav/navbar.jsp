@@ -170,7 +170,6 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item"><a class="nav-link active"
                aria-current="page" href="#"></a></li> 
-
             <li class="nav-item"><c:choose>
                   <c:when test="${sessionScope.email ne null }">
                      <a class="nav-link"
