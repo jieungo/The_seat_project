@@ -58,6 +58,7 @@ CREATE TABLE order_(
 	email VARCHAR2(100) not null,
 	storeName VARCHAR2(100) not null,
 	storeLogo VARCHAR2(100),
+	num VARCHAR2(100),
 	tableNum NUMBER,
 	menu VARCHAR2(100),
 	menuCount NUMBER,
