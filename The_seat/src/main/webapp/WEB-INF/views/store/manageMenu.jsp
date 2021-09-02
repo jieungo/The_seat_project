@@ -36,10 +36,17 @@ type="text/css" />
     <article class="menu__list pe-3 ps-3" style="height:450px; text-overflow: hidden; overflow-x: auto;">
         <div class="card mb-5 mt-3 ms-3" style="max-width: 480px; height: 220px; margin-top: 20px;">
             <div class="menu__add card-body">
-                <button type="button" class="circle-btn" data-bs-toggle="modal" data-bs-target="#modal-menuAddForm">
-                    <div style="font-size: 20px; font-weight: 500;">+</div>
-                </button>
+            <c:choose>
+            	<c:when test="${empty categoryList }">
+                	<span style="color: rgb(173, 173, 173); font-size: 14px;">카테고리를 먼저 추가해주세요.</span>
+            	</c:when>
+            	<c:when test="${not empty categoryList}">
+            		<button id="addMenuBtn" type="button" class="circle-btn" data-bs-toggle="modal" data-bs-target="#modal-menuAddForm">
+	                    <div style="font-size: 20px; font-weight: 500;">+</div>
+	                </button>
                 <span style="color: rgb(173, 173, 173); font-size: 14px;">새로운 메뉴 추가하기</span>
+            	</c:when>
+            </c:choose>
             </div>
         </div>
         <c:forEach var="tmp" items="${menuList }">
@@ -120,7 +127,6 @@ type="text/css" />
     </div>
 
 <!--------------------------------------- 카테고리 추가 모달창 ------------------------------>
-    \\\\\\\
     <div class="modal" tabindex="-1" id="modal-categoryBtn" aria-labelledby="menuAddForm" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -174,6 +180,7 @@ type="text/css" />
 	        reader.readAsDataURL(input.files[0]);
 	    }
 	}
+	
 	
 	// 모달에서 메뉴 등록 버튼을 눌렀을 때 동작하는 곳
 	document.querySelector("#menuAddForm").addEventListener("submit", function(e){

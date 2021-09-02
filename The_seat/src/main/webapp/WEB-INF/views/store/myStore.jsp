@@ -102,7 +102,7 @@
 	                <input type="hidden" name="num" value="${dto.num }"/>
 	                <input type="hidden" name="image_1" value="check"/>
 	                <input type="file" id="repImage1" name="imageFile" style="display:none"/>
-	                <button class="updateImgBtn" type="submit" style="display:none">로고 등록</button>
+	                <button class="updateImgBtn" type="submit" style="display:none">등록</button>
 	            </form>
 	        </div>
 	
@@ -127,7 +127,7 @@
 	                <input type="hidden" name="num" value="${dto.num }"/>
 	                <input type="hidden" name="image_2" value="check"/>
 	                <input type="file" id="repImage2" name="imageFile" style="display:none"/>
-	                <button class="updateImgBtn" type="submit" style="display:none"></button>
+	                <button class="updateImgBtn" type="submit" style="display:none">등록</button>
 	            </form>
 	            
 	            <form class="p-0" action="${pageContext.request.contextPath}/uploadImage.do" id="imageForm3" method="post" enctype="multipart/form-data">
@@ -135,7 +135,7 @@
 	                <input type="hidden" name="num" value="${dto.num }"/>
 	                <input type="hidden" name="image_3" value="check"/>
 	                <input type="file" id="repImage3" name="imageFile" style="display:none"/>
-	                <button class="updateImgBtn" type="submit" style="display:none"></button>
+	                <button class="updateImgBtn" type="submit" style="display:none">등록</button>
 	            </form>
 	
 	            <form class=" p-0" action="${pageContext.request.contextPath}/uploadImage.do" id="imageForm4" method="post" enctype="multipart/form-data">
@@ -143,7 +143,7 @@
 	                <input type="hidden" name="num" value="${dto.num }"/>
 	                <input type="hidden" name="image_4" value="check"/>
 	                <input type="file" id="repImage4" name="imageFile" style="display:none"/>
-	                <button class="updateImgBtn" type="submit" style="display:none"></button>
+	                <button class="updateImgBtn" type="submit" style="display:none">등록</button>
 	            </form>
 	        </div>
 	

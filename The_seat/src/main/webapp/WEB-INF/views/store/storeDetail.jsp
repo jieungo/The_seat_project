@@ -147,9 +147,12 @@
 					<div class="card-header bg-transparent border-dark-light">
 						<h5>별점 : ⭐ 4.9 (100+)</h5>
 						<h3 style="line-height: 1.8;">
-	                     <c:forEach var="tmp" items="${tagList }">
+						<c:if test="${not empty tagList  }">
+							 <c:forEach var="tmp" items="${tagList }">
 	                        <span>#${tmp } </span>
 	                     </c:forEach>
+						</c:if>
+	                    
                   		</h3>
 					</div>
 					<div class="card-body" style="margin-top: 10px; line-height: 60px;">
