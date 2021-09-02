@@ -9,7 +9,7 @@
 		<typeAlias type="com.star.seat.store.dto.StoreDto" alias="storeDto"/>
 		<typeAlias type="com.star.seat.menu.dto.MenuDto" alias="menuDto"/>
 		<typeAlias type="com.star.seat.order.dto.OrderDto" alias="orderDto"/>
-		
+		<typeAlias type="com.star.seat.review.dto.ReviewDto" alias="reviewDto"/>
 	</typeAliases>
 	
 	<!-- 필요한 Mapper xml 등록하기  -->
@@ -18,6 +18,7 @@
 		<mapper resource="com/star/seat/mybatis/StoreMapper.xml"/>
 		<mapper resource="com/star/seat/mybatis/MenuMapper.xml"/>
 		<mapper resource="com/star/seat/mybatis/OrderMapper.xml"/>
+		<mapper resource="com/star/seat/mybatis/ReviewMapper.xml"/>
 	</mappers>
 </configuration>
 

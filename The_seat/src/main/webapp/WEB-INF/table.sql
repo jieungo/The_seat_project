@@ -13,6 +13,7 @@ create table store(
 	owner varchar2(100) not null,
 	storeName varchar2(100) not null,
 	storeAddr clob not null,
+	storePhone varchar2(100) not null,
 	storeTag clob,
 	openingTime clob,
 	image_logo clob,
@@ -30,6 +31,7 @@ create sequence store_seq;
 
 CREATE TABLE storeMenu(
 	num number primary key,
+	storeNum number,
 	storeName varchar2(100) not null,
 	menuImage clob,
 	menuName varchar2(100) not null,
@@ -43,11 +45,13 @@ create sequence storeMenu_seq;
 
 CREATE TABLE storeReview(
 	num NUMBER PRIMARY KEY,
+	storeNum number,
 	storeName VARCHAR2(100) NOT NULL,
 	writer VARCHAR2(100) NOT NULL,
 	content VARCHAR2(100) NOT NULL,
 	star NUMBER,
-	targetNum NUMBER,
+	targetNum number,
+	imagePath clob,
 	regdate DATE
 );
 

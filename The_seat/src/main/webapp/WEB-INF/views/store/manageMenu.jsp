@@ -42,7 +42,6 @@ type="text/css" />
                 <span style="color: rgb(173, 173, 173); font-size: 14px;">새로운 메뉴 추가하기</span>
             </div>
         </div>
-        <p>${menuList }</p>
         <c:forEach var="tmp" items="${menuList }">
         	<div class="card" style="max-width: 500px;">
             	<div class="row g-0">

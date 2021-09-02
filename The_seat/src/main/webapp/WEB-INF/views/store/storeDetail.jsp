@@ -163,7 +163,10 @@
 			</c:forEach>
 		</div>
 
+		<!---------------------------------------- 메뉴판 만들기 ------------------------------------------->
+
 		<!-- 메뉴 -->
+
 		<div class="card mb-5"
 			style="max-width: auto; height: 700px; margin-top: 30px; background-color: rgb(86, 162, 255);">
 			<span

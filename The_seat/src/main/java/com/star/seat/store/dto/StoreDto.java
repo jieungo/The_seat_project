@@ -7,6 +7,7 @@ public class StoreDto {
 	private String owner;
 	private String storeName;
 	private String storeAddr;
+	private String storePhone;
 	private String storeTag;
 	private String openingTime;
 	private String image_logo;
@@ -22,21 +23,21 @@ public class StoreDto {
 	private String group;
 	private String keyword;
 	private MultipartFile imageFile;
-	private String category2;
 	
 	public StoreDto() {
 	
 	}
 
-	public StoreDto(int num, String owner, String storeName, String storeAddr, String storeTag, String openingTime,
-			String image_logo, String image_1, String image_2, String image_3, String image_4, String storeOpen,
-			String imageCheck, String category, String regdate, String area, String group, String keyword,
-			MultipartFile imageFile, String category2) {
+	public StoreDto(int num, String owner, String storeName, String storeAddr, String storePhone, String storeTag,
+			String openingTime, String image_logo, String image_1, String image_2, String image_3, String image_4,
+			String storeOpen, String imageCheck, String category, String regdate, String area, String group,
+			String keyword, MultipartFile imageFile) {
 		super();
 		this.num = num;
 		this.owner = owner;
 		this.storeName = storeName;
 		this.storeAddr = storeAddr;
+		this.storePhone = storePhone;
 		this.storeTag = storeTag;
 		this.openingTime = openingTime;
 		this.image_logo = image_logo;
@@ -52,7 +53,6 @@ public class StoreDto {
 		this.group = group;
 		this.keyword = keyword;
 		this.imageFile = imageFile;
-		this.category2 = category2;
 	}
 
 	public int getNum() {
@@ -85,6 +85,14 @@ public class StoreDto {
 
 	public void setStoreAddr(String storeAddr) {
 		this.storeAddr = storeAddr;
+	}
+
+	public String getStorePhone() {
+		return storePhone;
+	}
+
+	public void setStorePhone(String storePhone) {
+		this.storePhone = storePhone;
 	}
 
 	public String getStoreTag() {
@@ -206,13 +214,7 @@ public class StoreDto {
 	public void setImageFile(MultipartFile imageFile) {
 		this.imageFile = imageFile;
 	}
-	
-	public String getCategory2() {
-		return category2;
-	}
 
-	public void setCategory2(String category2) {
-		this.category2 = category2;
-	}
+
 	
 }

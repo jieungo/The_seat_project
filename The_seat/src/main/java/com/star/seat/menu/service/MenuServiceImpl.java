@@ -36,6 +36,7 @@ public class MenuServiceImpl implements MenuService{
 		sDto=sDao.getMyStore_num(sDto);
 		System.out.println(sDto.getStoreName());
 		
+		dto.setStoreNum(num);
 		dto.setStoreName(sDto.getStoreName());
 		
 		// 파일을 저장할 실제 경로 얻어오기
@@ -88,6 +89,7 @@ public class MenuServiceImpl implements MenuService{
 
 		sDto=sDao.getMyStore_num(sDto);
 		MenuDto mDto=new MenuDto();
+		mDto.setStoreNum(sDto.getNum());
 		mDto.setCategory(category);
 		//List<MenuDto> list=dao.getMenuList(sDto);
 		Map<String, Object> map=new HashMap<>();

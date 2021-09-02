@@ -72,6 +72,7 @@ public class StoreServiceImpl implements StoreService{
 	// (사장님의) 매장 정보 하나를 불러오는 method(해당 매장 DB 번호 이용)
 	@Override
 	public void getMyStore_num(StoreDto dto, HttpServletRequest request) {		
+
 		  StoreDto theDto=dao.getMyStore_num(dto);   
 		   
 	      System.out.println(theDto.getStoreTag());
@@ -189,6 +190,7 @@ public class StoreServiceImpl implements StoreService{
 		System.out.println(dto.getNum());
 		System.out.println(dto.getStoreName());
 		System.out.println(dto.getStoreAddr());
+		System.out.println(dto.getStorePhone());
 		System.out.println(dto.getOpeningTime());
 		
 		dao.updateStore(dto);
