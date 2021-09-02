@@ -19,6 +19,7 @@
 	crossorigin="anonymous"></script>
 <style>
 	a:link{
+		color: black;
 		text-decoration: none;
 	}
  	a:visited {
@@ -45,6 +46,8 @@
 		margin-bottom: 30px;
 		border-radius: 5px;
 		border: solid 2px gray;
+		text-align-last: center;
+		text-align: center;
 	}
 	img{
 		width: 100px;
