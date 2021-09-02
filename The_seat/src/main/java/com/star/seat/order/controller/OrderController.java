@@ -52,11 +52,5 @@ public class OrderController {
 		request.setAttribute("orderNum", orderNum);
 		return "order/order";
 	}
-		
-	// 매장 주문 확인 페이지로 이동
-	@RequestMapping("/store/storeOrder")
-	public ModelAndView storeOrder(ModelAndView mView){
-		mView.setViewName("store/storeOrder");
-		return mView;
-	}
+	
 }
