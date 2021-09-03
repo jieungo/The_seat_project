@@ -1,6 +1,7 @@
 package com.star.seat.review.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,6 +42,21 @@ public class ReviewController {
 		
 		Map<String, Object> map=new HashMap<>();
 		map.put("beAdded", true);
+		
+		return map;
+	}
+	
+	// 해당 매장 리뷰 목록을 불러오는 method
+	@RequestMapping(value = "/store/getReview.do", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> getReviewList(ReviewDto dto){
+		System.out.println(dto.getStoreNum());
+		
+		List<ReviewDto> list=service.getReviewList(dto);
+		
+		Map<String, Object> map=new HashMap<>();
+		map.put("beTaken", true);
+		map.put("reviewList", list);
 		
 		return map;
 	}
