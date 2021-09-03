@@ -23,7 +23,10 @@ public class ReviewController {
 	// 리뷰 작성 테스트 페이지로 이동(테스트라 나중에 지울 것임)
 	// 테스트 페이지 안에 모달
 	@RequestMapping("/store/test.do")
-	public String test() {
+	public String test(ReviewDto dto, HttpServletRequest request) {
+		
+		service.getAllReview(dto, request);
+		
 		return "store/test";
 	}
 	
