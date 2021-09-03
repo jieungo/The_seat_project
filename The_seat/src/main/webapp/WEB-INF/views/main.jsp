@@ -93,9 +93,4 @@
 	<a href="${pageContext.request.contextPath}/store/test.do">테슽흐</a>
 </div>
 </body>
-<script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
-
-<script>
-
-</script>
 </html>

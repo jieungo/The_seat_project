@@ -77,8 +77,8 @@
 		<section style="text-align: center; margin-top: 10px;">
 			<!---------------------- DB 연동해서 파라미터 값으로 칼럼 값을 받아온다.  --------------------->
 			<img src="${pageContext.request.contextPath}${dto.image_logo }"
-				alt="storeLogo" width="60px;" /> <span
-				style="font-size: 2.5em; font-weight: bold; color: rgb(85, 152, 252); text-shadow: 2px 6px 2px #d3d3d3; text-align: center;">${dto.storeName }</span>
+				alt="storeLogo" style="width:60px; border-radius: 100%;" /> <span
+				style="font-size: 2.5em; font-weight: bold; color: rgb(85, 152, 252); text-shadow: 2px 6px 2px #d3d3d3; text-align: center;">  ${dto.storeName }</span>
 		</section>
 		<div class="row">
 			<!--------------------- 매장의 베스트 메뉴 4가지를 Carousel 로 띄우기  -------------------------->
@@ -180,8 +180,8 @@
 		<div id="bestMenu">
 			<c:forEach var="tmp" items="${menuList }" >
 				<c:if test="${tmp.best == 'yes' }">
-					<div style="width:300px; overflow:hidden;">
-						<img src="${pageContext.request.contextPath}${tmp.menuImage }" style="width:100%; object-fit:cover;"/>
+					<div style="width:300px; overflow:hidden; ">
+						<img src="${pageContext.request.contextPath}${tmp.menuImage }" style="width:100%; object-fit:cover; "/>
 					</div>
 				</c:if>
 			</c:forEach>
@@ -198,6 +198,7 @@
 			<div class="card mb-5"
 				style="max-width: 1130px; height: 600px; margin-top: 30px; margin-left: 80px; border-radius: 10px; background-color: white;">
 				<div class="col">
+				<!-- 메뉴 리스트 오브잭트 배열 가져와서 꺼내기! -->
 					<c:forEach var="tmp" items="${menuList }">
 						<input type="hidden" class="menuName" />
 						<button data-num="${tmp.num }" type="button" id="menuBtn"
@@ -232,6 +233,7 @@
 							</div>
 						</div>
 					</c:forEach>
+					
 				</div>
 			</div>
 		</div>
@@ -303,8 +305,9 @@
 						<hr />
 						<!------------------- Modal 에서 선택한 자리 정보를 주문 페이지에 get 방식으로 값을 전달해준다. ----------------->
 						
-						<p>
-							자리 선택 <select name="자리 선택" id="seatChoice">
+						<p>자리 선택 
+							<select name="자리 선택" id="seatChoice">
+							<!-- storeSeat 테이블에서 지정한 만큼 -->
 								<option value="1">1</option>
 								<option value="2">2</option>
 								<option value="3">3</option>
@@ -335,10 +338,16 @@
 
 <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 <script>
+//--------------------주문하러 가기(버튼 누르면)
 document.querySelector("#orderBtn").addEventListener("click", function(){
   let num = ${dto.num};
-  let orderNum = Date.now();
+  //버튼 눌럿을때 millisecond 을 추출
+  let str = String(Date.now());
+  //너무 길어서 필요한 만큼만 orderNum 으로 가져간다.
+  let orderNum = str.substring(str.length-6, str.length);
+  //선택한 좌석 번호 tableNum 으로 가져간다.
   let tableNum = document.querySelector("#seatChoice").value;
+  //get 방식으로 매장 고유번호를 num 으로 가져가고 orderNum,tableNum을 가져간다.
   location.href="${pageContext.request.contextPath}/order/order.do?num="+num+"&tableNum="+tableNum+"&orderNum="+orderNum;
 })
 </script>
