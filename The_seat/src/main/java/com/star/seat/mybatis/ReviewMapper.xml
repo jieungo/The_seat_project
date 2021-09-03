@@ -9,4 +9,18 @@
 		values(storeReview_seq.nextval, #{storeNum}, #{storeName},
 			 #{writer}, #{content}, #{star}, #{targetNum}, #{imagePath}, sysdate)
 	</insert>
+	
+	<!-- 모든 매장 리뷰 정보를 가져오는 method
+		아예 마이페이지로 갈 때 뿌려주면 됨 -->
+	<select id="getAllReview" resultType="reviewDto">
+		select *
+		from storeReview
+	</select>
+	
+	<!-- 해당 매장 리뷰 정보를 가져오는 method -->
+	<select id="getReviewList" parameterType="reviewDto" resultType="reviewDto">
+		select *
+		from storeReview
+		where storeNum=#{storeNum}
+	</select>
 </mapper>

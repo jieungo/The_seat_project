@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.star.seat.menu.service.MenuService;
 import com.star.seat.order.dto.OrderDto;
@@ -31,10 +30,10 @@ public class OrderController {
 	private MenuService mService;
 	
 	
-	@RequestMapping("/order/insert")
+	@RequestMapping(value = "/order/insert.do", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> getList(OrderDto dto){
-		
+		System.out.println(dto.getOrderNum());
 		service.orderInsert(dto);
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("isSuccess",true);

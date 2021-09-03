@@ -256,6 +256,8 @@ type="text/css" />
 			</div>
 		</div>
 	</div>
+<!------------------------------ footer 불러오기 --------------------------->
+<jsp:include page="/WEB-INF/views/nav/footer.jsp" />
 </div>
 <form action="${pageContext.request.contextPath}/users/ajax_profile_upload.do" method="post" 
 	  id="imageForm" enctype="multipart/form-data" style="visibility:hidden;'">

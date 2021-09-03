@@ -22,6 +22,73 @@ type="text/css" />
 <!----------------------------- 네비바 ------------------------------------>
 <jsp:include page="../nav/navbar2.jsp" />
 
+<!---------------------------------- 가장 바깥의 배경 ---------------------------------->
+<div class="container menu__article">
+    <section class="menu__category mt-4">
+        <ul id="categories">
+            <li>
+                <a href="${pageContext.request.contextPath}/store/manageMenu.do?num=${dto.num}&storeName=${dto.storeName}">전체</a></li>
+            <c:forEach var="tmp" items="${categoryList }" varStatus="status">
+            	<li data-num="${dto.num }" data-num2="${status.index }" class="category">
+            		<a href="${pageContext.request.contextPath}/store/manageMenu.do?num=${dto.num}&storeName=${dto.storeName}&category=${tmp}">${tmp }</a></li>
+            </c:forEach>
+        </ul>
+    <button id="categoryBtn" style="color:rgb(253, 197, 14); font-weight: 500;" data-bs-toggle="modal" data-bs-target="#modal-categoryBtn">카테고리 추가</button>
+    </section>
+    <article class="menu__list pe-3 ps-3" style="height:450px; text-overflow: hidden; overflow-x: auto;">
+        <div class="card mb-5 mt-3 ms-3" style="max-width: 480px; height: 220px; margin-top: 20px;">
+            <div class="menu__add card-body" id="addBox">
+            <c:choose>
+            	<c:when test="${empty categoryList }">
+                	<span id="addMention" style="color: rgb(173, 173, 173); font-size: 14px;">카테고리를 먼저 추가해주세요.</span>
+            	</c:when>
+            	<c:when test="${not empty categoryList}">
+            		<button id="addMenuBtn" type="button" class="circle-btn" data-bs-toggle="modal" data-bs-target="#modal-menuAddForm">
+	                    <div style="font-size: 20px; font-weight: 500;">+</div>
+	                </button>
+                <span id="addMention" style="color: rgb(173, 173, 173); font-size: 14px;">새로운 메뉴 추가하기</span>
+            	</c:when>
+            </c:choose>
+            </div>
+        </div>
+        <c:forEach var="tmp" items="${menuList }">
+        	<div class="card" style="max-width: 500px;">
+            	<div class="row g-0">
+            		<c:choose>
+            			<c:when test="${tmp.best == 'no' }">
+            				<button class="mt-3 pe-2 starBtn" style="display: flex; justify-content:flex-end;">
+			                    <i data-num="${tmp.num }" class="starIcon far fa-star"></i>
+			                </button>
+            			</c:when>
+            			<c:otherwise>
+            				<button class="mt-3 pe-2 starBtn" style="display: flex; justify-content:flex-end;">
+			                    <i data-num="${tmp.num }" class="starIcon far fa-star fas"></i>
+			                </button>
+            			</c:otherwise>
+            		</c:choose>
+                	<div class="col-md-4 ms-4">
+	                    <img src="${pageContext.request.contextPath}${tmp.menuImage}" class="rounded" alt="menu_image">
+	                </div>
+	                <div class="col-md-6">
+	                    <div class="card-body p-2" style="width: 200px;">
+	                        <h6 class="card-text">${tmp.menuName } <!-- <p class="card-text">존맛탱 케이크</p> --> </h6>
+	                        <h6 class="card-text">${tmp.price }  <!-- <p class="card-text">10,000원</p> --> </h6>
+	                        <h6 class="card-text">${tmp.content } <!-- <p class="card-text">생크림, 시나몬, 밀가루</p> --> </h6>
+	                    </div>
+	                </div>
+	                <div class="menu__card-edit mb-2 pe-2" style="display: flex; justify-content: flex-end;">
+	                    <button>수정</button>
+	                    <button data-num="${tmp.num }" class="deleteBtn">삭제</button>
+	                </div>
+	            </div>
+	        </div>
+        </c:forEach>
+
+    </article>
+    
+<!------------------------------------ 옆 사이드바 (매장정보, 메뉴관리 탭) ----------------->
+
+
 <div class="menu_container">
     <div class="inner_container">
 	    <div style="margin:0 100px;">
@@ -163,6 +230,11 @@ type="text/css" />
 	// 이미지를 고르면 썸네일에 등장하도록 하는 영역
 	viewThumbNail("#image");
 	
+	// 이미지 링크 클릭 시 동작
+	document.querySelector("#imgLink").addEventListener("click", function(e){
+		document.querySelector("#image").click();
+	});
+	
 	// 이미지 파일을 선택했을 때 동작하는 method
 	function viewThumbNail(rel){
 		document.querySelector(rel).addEventListener("change", function(e){
@@ -272,7 +344,7 @@ type="text/css" />
 	// 카테고리 안에 x 버튼 넣어서 로딩하기
 	// 페이지 로딩되는 시점에 작동할 함수
 	window.onload=function(){
-		// 태그에 해당하는 버튼들의 array
+		// 카테고리에 해당하는 버튼들의 array
 		let links=document.querySelectorAll(".category");
 		for(let i=0; i<links.length; i++){
 			// 버튼의 data-num 성분의 값을 가져옴
@@ -289,10 +361,14 @@ type="text/css" />
 		deleteCategory(".del-category", ".category");
 	};
 	
+	let originCatOptions=document.querySelectorAll(".categoryOption");
+	let newCatOptions=document.querySelectorAll(".categoryOption");
+	console.log("ori:"+originCatOptions.length);
+	console.log("new:"+newCatOptions.length);
 	// 매장 카테고리를 추가하는 method
 	document.querySelector("#addCategoryForm").addEventListener("submit", test);
 	
-	// 태그를 추가하는 함수에 들어갈 함수
+	// 카테고리를 추가하는 함수에 들어갈 함수
 	function test(e){
 		e.preventDefault();
 		// 태그를 추가할 버튼의 data-num 성분을 읽어옴
@@ -316,10 +392,23 @@ type="text/css" />
 			}).then(function(data){
 				console.log(data);
 				// 데이터를 받으면
+				let newCategory=document.querySelector("#inputCategory");
+				// 나중에 쓸 값
+				let newCategory2=document.querySelector("#inputCategory").value;
 				if(data.beAdded){
 					// 카테고리 추가 input 창을 reset함
-					document.querySelector("#inputCategory").value="";
+					newCategory.value="";
 
+					// 메뉴 등록 모달 창에 select 추가
+					let option=document.createElement("option");
+					option.value=newCategory2;
+					option.innerText=newCategory2;
+					option.setAttribute("class", "categoryOption");
+					option.setAttribute("data-num2", newCatOptions.length);
+					document.querySelector("#category").appendChild(option);
+					newCatOptions=document.querySelectorAll(".categoryOption");
+					console.log("new:"+newCatOptions.length);
+					
 					// 해당 매장의 DB 번호를 받아서
 					let dataNum=${dto.num};
 					
@@ -333,6 +422,7 @@ type="text/css" />
 					let newLi=document.createElement("li");
 					newLi.setAttribute("class", "add-category");
 					newLi.setAttribute("data-num", dataNum);
+					newLi.setAttribute("data-num2", newCatOptions.length-1);
 					newLi.appendChild(newLink);
 					
 					// 새로운 취소 버튼을 만들고 성분과 값을 부여함
@@ -348,23 +438,48 @@ type="text/css" />
 					newLi.setAttribute("class", "category");
 					newDeleteBtn.setAttribute("class", "btn-close del-category");
 					
+					// 메뉴 추가를 할 수 있도록 추가 버튼을 만들어주면서 멘트 변경
+					if(document.querySelector("#addMenuBtn")==null){
+						// 멘트 변경
+						document.querySelector("#addMention").innerText="새로운 메뉴 추가하기";
+						// div 추가
+						let div=document.createElement("div");
+						div.setAttribute("style", "fone-size: 20px; font-weight: 500;");
+						div.innerText="+";
+						
+						// btn 추가
+						let btn=document.createElement("button");
+						btn.setAttribute("id", "addMenuBtn");
+						btn.setAttribute("type", "button");
+						btn.setAttribute("class", "circle-btn");
+						btn.setAttribute("data-bs-toggle", "modal");
+						btn.setAttribute("data-bs-target", "#modal-menuAddForm");
+						// btn에 div를 자식 요소로
+						btn.appendChild(div);
+						// btn도 자식요소로
+						document.querySelector("#addBox").prepend(btn);	
+					}
+		
 					// 모달 창을 닫는다.
 					document.querySelector("#modal-close").click();
 				}
 			});
 		}
 	}
-
+	
 	// 카테고리를 삭제하는 함수 (추가된 삭제 버튼, 추가된 태그 버튼)
 	function deleteCategory(addDeleteCategory, addCategory){
-		// 추가된 삭제 버튼, 태그버튼들
+		
+		// 추가된 삭제 버튼, 카테고리들
 		let deleteBtns=document.querySelectorAll(addDeleteCategory);
 		let categories=document.querySelectorAll(addCategory);
+		
 		// 버튼의 개수만큼 반복
 		for(let i=0; i<deleteBtns.length; i++){
 			// 버튼의 data-num 성분의 값과 태그 값을 얻어서 object로 담음
 			let num=deleteBtns[i].getAttribute("data-num");
 			let category=categories[i].innerText;
+			
 			console.log(category);
 			let obj={num, category};
 			// 삭제 버튼을 눌렀을 때 작동할 이벤트
@@ -383,6 +498,21 @@ type="text/css" />
 							// 해당 카테고리 버튼과 삭제버튼을 지움.
 							categories[i].remove();
 							deleteBtns[i].remove();
+							// 모달에 있는 해당 select option을 지움
+							let catIndex=categories[i].getAttribute("data-num2");
+							newCatOptions[catIndex].remove();
+							// 그리고 data-num2 reset
+							categories=document.querySelectorAll(".category");
+							newCatOptions=document.querySelectorAll(".categoryOption");
+							if(newCatOptions.length==0){
+								document.querySelector("#addMenuBtn").remove();
+								document.querySelector("#addMention").innerText="카테고리를 먼저 추가해주세요.";
+							} else {
+								for(let j=0; j<categories.length; j++){
+									categories[j].setAttribute("data-num2", j);
+									newCatOptions[j].setAttribute("data-num2", j);
+								}	
+							}
 						}
 					});	
 				}
