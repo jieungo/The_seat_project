@@ -17,7 +17,7 @@
 <!-------------------------------
 <div>
      navbar 추가
-	<jsp:include page="../nav/navbar.jsp" />
+	<jsp:include page="/WEB-INF/views/nav/navbar.jsp" />
 </div>
 -------------------------------->
 <div class="container myStore_container pe-0 ps-0">

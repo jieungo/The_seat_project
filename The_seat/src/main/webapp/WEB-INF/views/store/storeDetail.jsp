@@ -24,19 +24,30 @@
 	width: 140px;
 	height: 60px;
 	border: none;
-	border-radius: 45px;
 	text-transform: uppercase;
 	letter-spacing: 2.5px;
 	font-weight: 500;
 	color: #000;
 	background-color: #fff;
-	border-radius: 45px;
+	border-radius: 5x;
 	box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
 	transition: all 0.3s ease 0s;
 	cursor: pointer;
 	outline: none;
 }
-
+/*.reviewBtn {
+	background-color: #6DA2D9;
+	box-shadow: 0 0 0 1px #6698cb inset,
+				0 0 0 2px rgba(255,255,255,0.15) inset,
+				0 8px 0 0 rgba(110, 164, 219, .7),
+				0 8px 0 1px rgba(0,0,0,.4),
+				0 8px 8px 1px rgba(0,0,0,0.5);
+}
+.reviewBtn:active {
+	box-shadow: 0 0 0 1px #6191C2 inset,
+				0 0 0 2px rgba(255,255,255,0.15) inset,
+				0 0 0 1px rgba(0,0,0,0.4);
+}*/
 #reviewBtn:hover {
 	background-color: rgb(142, 192, 242);
 	box-shadow: 0px 15px 20px rgb(142, 192, 242);
@@ -48,12 +59,22 @@
 	background-color: rgb(108, 156, 252);
 	color: white;
 	margin-top: 10px;
-	width: 450px;
+	width: 400px;
 	height: 50px;
-	border-radius: 7px;
+	border-radius: 5px;
 	border: none;
 	font-size: 1.5em;
 	font-weight: bold;
+  	transition: all .3s ease;
+  	letter-spacing: 2px;
+  	text-transform: uppercase;
+  	outline: none;
+  	align-self: center;
+  	cursor: pointer;
+}
+
+#seatBtn:hover{
+	animation: random-bg .5s linear infinite, grow 1300ms ease infinite;
 }
 
 #menuBtn {
@@ -63,17 +84,45 @@
 	font-weight: bold;
 	color: rgb(96, 92, 99);
 }
+
 #bestMenu {
 	display: flex;
 	justify-content: space-around;
-
 }
+
+@keyframes random-bg {
+  	from {
+    filter: hue-rotate(0);
+  }
+  to {
+    filter: hue-rotate(360deg);
+  }
+}
+
+@keyframes grow {
+  0% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.3);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.3);
+  }
+  70% {
+    transform: scale(1);
+  }
+}
+
 </style>
 </head>
 <body>
 	<div class="container">
 		<!---------------------- 네비바를 import 한다. ------------------------->
-		<jsp:include page="../nav/navbar.jsp" />
+		<jsp:include page="/WEB-INF/views/nav/navbar.jsp" />
 		<section style="text-align: center; margin-top: 10px;">
 			<!---------------------- DB 연동해서 파라미터 값으로 칼럼 값을 받아온다.  --------------------->
 			<img src="${pageContext.request.contextPath}${dto.image_logo }"
@@ -81,7 +130,7 @@
 				style="font-size: 2.5em; font-weight: bold; color: rgb(85, 152, 252); text-shadow: 2px 6px 2px #d3d3d3; text-align: center;">${dto.storeName }</span>
 		</section>
 		<div class="row">
-			<!--------------------- 매장의 베스트 메뉴 4가지를 Carousel 로 띄우기  -------------------------->
+			<!--------------------- 매장의 대표 이미지 4개를 Carousel 로 띄우기  -------------------------->
 			<div id="carouselExampleDark"
 				class="col carousel carousel-dark slide" data-bs-ride="carousel"
 				style="width: 500px; margin-top: 50px; margin-bottom: 30px;">
@@ -204,7 +253,7 @@
 							data-bs-toggle="modal" data-bs-target="#exampleModal"
 							style="width: 400px; margin-left: 70px; margin-top: 50px;">${tmp.menuName }</button>
 						<span
-							style="width: 300px; margin-left: 300px; font-size: 1.5em; color: rgb(96, 92, 99);">${tmp.price }</span>
+							style="width: 300px; margin-left: 300px; font-size: 1.5em; font-weight: bold; color: rgb(96, 92, 99);">${tmp.price }</span>
 						<!------------모달창-------------- 메뉴 이름 누르면 그에 맞는 이미지 Modal 활성화 -------------------------------->
 						<div class="modal fade" id="exampleModal" tabindex="-1"
 							aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -299,7 +348,7 @@
 				<p style="text-align: right; margin-top: 20px; margin-right: 40px;">자리를 선택해 주세요 ☺</p>
 				<div class="modal-body">
 					<div class="container-fluid">
-						<img src="${pageContext.request.contextPath}/resources/img/chair.png "class="img-thumbnail" alt="seatImage">
+						<img src="${pageContext.request.contextPath}/resources/img/chair.png" class="img-thumbnail" alt="seatImage">
 						<hr />
 						<!------------------- Modal 에서 선택한 자리 정보를 주문 페이지에 get 방식으로 값을 전달해준다. ----------------->
 						
@@ -332,6 +381,7 @@
 			</div>
 		</div>
 	</div>
+<jsp:include page="/WEB-INF/views/nav/footer.jsp" />
 
 <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 <script>

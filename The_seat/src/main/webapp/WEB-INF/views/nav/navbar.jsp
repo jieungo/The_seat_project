@@ -16,7 +16,7 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
    *{
       font-family: 'IBM Plex Sans KR', sans-serif;
    }
-   .navbar{
+   .navbar{ 
        position: relative;
        display: flex;
        flex-wrap: wrap;
@@ -26,7 +26,8 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
        padding-top: .5rem;
        padding-bottom: .5rem;
    }
-   .modal-backdrop {
+   
+   /*.modal-backdrop {
        position: fixed;
        top: 0;
        left: 0;
@@ -34,7 +35,12 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
        width: 100vw;
        height: 100vh;
        background-color: black;
-   }
+   }*/
+   
+   /*.modal-backdrop.fade.show {
+   		background-repeat: norepeat;
+	}*/
+	
    #area, #group{
       width: 110px;
       margin-left: 40px;
@@ -55,12 +61,12 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
       margin-bottom: 30px;
       border: none;
       border-radius: 2px;
-           border-bottom: solid 4px rgb(108, 146, 252);
+      border-bottom: solid 4px rgb(108, 146, 252);
       text-align-last: center;
       text-align: center;
    }
     #keyword:focus{
-           outline:none;
+      outline:none;
    }
    #searchBtn{
       width: 110px;
@@ -73,7 +79,7 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
       background-color: white;
    }
 </style>
-<nav class="navbar navbar-light bg-light">
+<nav class="navbar navbar-light">
 	<div style="display:flex; align-items:center;">
 	   <img id="chair" style="width: 50px; height: 50px;"
 	      src="${pageContext.request.contextPath}/resources/img/chair.png"
@@ -81,8 +87,7 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
 	      <br/>
 	      <a class="navbar-brand" style="font-family: 'Do Hyeon', sans-serif;"
 	      href="${pageContext.request.contextPath}/main.do">자리..<br>있어요?</a>
-	</div>	
-   </a>
+	</div>
    <form action="${pageContext.request.contextPath}/main.do" method="get">
       <div class="container" style="margin-top:0; margin-right:250px;">
          <select name="area" id="area">
