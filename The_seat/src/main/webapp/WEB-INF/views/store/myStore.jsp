@@ -13,7 +13,8 @@
 	href="${pageContext.request.contextPath}/resources/css/myStore.css"
 	type="text/css" />
 </head>
-<body>
+
+    <body>
 
     <jsp:include page="../nav/navbar2.jsp" />
     <div class="myStore_container pe-0 ps-0">
