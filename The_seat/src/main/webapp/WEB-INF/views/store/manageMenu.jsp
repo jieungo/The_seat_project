@@ -13,12 +13,14 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
 />
 <link rel="stylesheet"
-href="${pageContext.request.contextPath}/resources/css/manageMenu.css"
+href="${pageContext.request.contextPath}/resources/css/manageMenu.css?ver=3"
 type="text/css" />
 
 </head>
+
 <body>
-<!-- navbar 추가-->
+<!----------------------------- 네비바 ------------------------------------>
+<jsp:include page="../nav/navbar2.jsp" />
 
 <!---------------------------------- 가장 바깥의 배경 ---------------------------------->
 <div class="container menu__article">
@@ -86,74 +88,142 @@ type="text/css" />
     
 <!------------------------------------ 옆 사이드바 (매장정보, 메뉴관리 탭) ----------------->
 
-    <aside class="store__aside" style="width: 0;">
-        <button onclick="location.href='#'">매장 정보</button>
-        <button onclick="location.href='${pageContext.request.contextPath}/store/manageMenu.do?num=${dto.num}&storeName=${dto.storeName}'">메뉴 관리</button>
-        <button onclick="location.href='${pageContext.request.contextPath}/store/storeReview.do'">리뷰 관리</button>
-        <button onclick="location.href='${pageContext.request.contextPath}/store/storeOrder.do'">주문 확인</button>
-        <button onclick="location.href='${pageContext.request.contextPath}/store/storeSeat.do'">자리 관리</button>
-    </aside>
-    
-<!--------------------------------------- 메뉴 등록 모달창 ------------------------------>
-    
-    <div class="modal" tabindex="-1" id="modal-menuAddForm" aria-labelledby="menuAddForm" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title"><strong>메뉴 등록</strong> </h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="menuAddForm" action="${pageContext.request.contextPath}/store/addMenu.do" method="post" enctype="multipart/form-data">                 
-                    <a href="javascript:" id="imgLink">
-                    	<img id="thumbImg" src="" alt="" />
-                    </a>
-                    
-                    <input type="hidden" name="num" value="${storeDBNum }" />
-                    <input class="form-control" type="file" name="imageFile" id="image" style="display:none">
-                    <input class="form-control" type="text" name="menuName" id="menuname" placeholder="상품명" required="required">
-                    <input class="form-control" type="text" name="price" id="menuprice" placeholder="상품가격">
-                    <input class="form-control" type="text" name="content" id="menucontaine" placeholder="상품구성" required="required">
-                    <span class="dropdown">카테고리 추가</span>
- 
-                    <select name="category" id="category">
-                    	<c:forEach var="tmp" items="${categoryList }" varStatus="status">
-                    		<option data-num2="${status.index }" class="categoryOption" value="${tmp }">${tmp }</option>
-                    	</c:forEach>
-                    </select>
-                    <button id="addBtn" type="submit">완료</button>
-                </form>
-            </div>
-        </div>
-    </div>
-    </div>
 
-<!--------------------------------------- 카테고리 추가 모달창 ------------------------------>
-    <div class="modal" tabindex="-1" id="modal-categoryBtn" aria-labelledby="menuAddForm" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title"><strong>카테고리 추가</strong> </h4>
-                <button id="modal-close" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form data-num="${dto.num }" id="addCategoryForm" action="${pageContext.request.contextPath}/store/addCategory.do" method="post">                 
-                    <label class="form-label" for="category">추가할 카테고리 이름</label>
-                    <input type="hidden" name="num" value="${storeDBNum}" />
-                    <input class="form-control" type="text" id="inputCategory" name="category"/>
-                    <button id="addCategory" type="submit">완료</button>
-                </form>
+<div class="menu_container">
+    <div class="inner_container">
+	    <div style="margin:0 100px;">
+<!----------------------------- 카테고리 ------------------------------------>
+		    <section class="menu__category mt-4">
+		        <ul id="categories">
+		            <li>
+		                <a href="${pageContext.request.contextPath}/store/manageMenu.do?num=${dto.num}&storeName=${dto.storeName}">전체</a></li>
+		            <c:forEach var="tmp" items="${categoryList }">
+		                <li data-num="${dto.num }" class="category">
+		                    <a href="${pageContext.request.contextPath}/store/manageMenu.do?num=${dto.num}&storeName=${dto.storeName}&category=${tmp}">${tmp }</a></li>
+		            </c:forEach>
+		        </ul>
+		    	<button id="categoryBtn" style="color:rgb(253, 197, 14); font-weight: 500;" data-bs-toggle="modal" data-bs-target="#modal-categoryBtn">카테고리 추가</button>
+		    </section>
+		    <article class="menu__list pe-3 ps-3" style="height:450px; text-overflow: hidden; overflow-x: auto;">
+<!----------------------------- 메뉴 추가 카드 ------------------------------------>
+		        <div class="card mb-5 mt-3 ms-3" style="max-width: 480px; height: 220px; margin-top: 20px;">
+		            <div class="menu__add card-body">
+		            <c:choose>
+		                <c:when test="${empty categoryList }">
+		                    <span style="color: rgb(173, 173, 173); font-size: 14px;">카테고리를 먼저 추가해주세요.</span>
+		                </c:when>
+		                <c:when test="${not empty categoryList}">
+		                    <button id="addMenuBtn" type="button" class="circle-btn" data-bs-toggle="modal" data-bs-target="#modal-menuAddForm">
+		                        <div style="font-size: 20px; font-weight: 500;">+</div>
+		                    </button>
+		                <span style="color: rgb(173, 173, 173); font-size: 14px;">새로운 메뉴 추가하기</span>
+		                </c:when>
+		            </c:choose>
+		            </div>
+		        </div>
+<!----------------------------- 메뉴 카드 리스트 ------------------------------------>
+		        <c:forEach var="tmp" items="${menuList }">
+		            <div class="card mb-5 mt-3 ms-3" style="max-width: 480px; height: 220px; margin-top: 20px;">
+		                <div class="row g-0">
+		                    <c:choose>
+		                        <c:when test="${tmp.best == 'no' }">
+		                            <button class="mt-3 pe-2 starBtn" style="display: flex; justify-content:flex-end;">
+		                                <i data-num="${tmp.num }" class="starIcon far fa-star"></i>
+		                            </button>
+		                        </c:when>
+		                        <c:otherwise>
+		                            <button class="mt-3 pe-2 starBtn" style="display: flex; justify-content:flex-end;">
+		                                <i data-num="${tmp.num }" class="starIcon far fa-star fas"></i>
+		                            </button>
+		                        </c:otherwise>
+		                    </c:choose>
+		                    <div class="col-md-4 ms-4">
+		                        <img src="${pageContext.request.contextPath}${tmp.menuImage}" class="rounded" alt="menu_image">
+		                    </div>
+		                    <div class="col-md-6">
+		                        <div class="card-body p-2" style="width: 200px;">
+		                            <h6 class="card-text">${tmp.menuName } <!-- <p class="card-text">존맛탱 케이크</p> --> </h6>
+		                            <h6 class="card-text">${tmp.price }  <!-- <p class="card-text">10,000원</p> --> </h6>
+		                            <h6 class="card-text">${tmp.content } <!-- <p class="card-text">생크림, 시나몬, 밀가루</p> --> </h6>
+		                        </div>
+		                    </div>
+		                    <div class="menu__card-edit mb-2 pe-2" style="display: flex; justify-content: flex-end;">
+		                        <button>수정</button>
+		                        <button data-num="${tmp.num }" class="deleteBtn">삭제</button>
+		                    </div>
+		                </div>
+		            </div>
+		        </c:forEach>
+		    </article>
+		</div>
+<!----------------------------- 사이드바 (매장정보, 메뉴관리 탭) ------------------------------------>
+         <aside class="aside">
+             <button onclick="location.href='#'">매장 정보</button>
+             <button onclick="location.href='${pageContext.request.contextPath}/store/manageMenu.do?num=${dto.num}&storeName=${dto.storeName}'">메뉴 관리</button>
+             <button onclick="location.href='${pageContext.request.contextPath}/store/storeReview.do'">리뷰 관리</button>
+             <button onclick="location.href='${pageContext.request.contextPath}/store/storeOrder.do'">주문 확인</button>
+             <button onclick="location.href='${pageContext.request.contextPath}/store/storeSeat.do'">자리 관리</button>
+         </aside>
+    </div>
+    
+        <!--------------------------------------- 메뉴 등록 모달창 ------------------------------>
+        
+        <div class="modal" tabindex="-1" id="modal-menuAddForm" aria-labelledby="menuAddForm" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><strong>메뉴 등록</strong> </h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="menuAddForm" action="${pageContext.request.contextPath}/store/addMenu.do" method="post" enctype="multipart/form-data">                 
+                        <img id="thumbImg" src="" alt="" />
+                        
+                        <input type="hidden" name="num" value="${storeDBNum }" />
+                        <input class="form-control" type="file" name="imageFile" id="image">
+                        <input class="form-control" type="text" name="menuName" id="menuname" placeholder="상품명" required="required">
+                        <input class="form-control" type="text" name="price" id="menuprice" placeholder="상품가격">
+                        <input class="form-control" type="text" name="content" id="menucontaine" placeholder="상품구성" required="required">
+                        <span class="dropdown">카테고리 추가</span>
+     
+                        <select name="category" id="">
+                            <c:forEach var="tmp" items="${categoryList }">
+                                <option value="${tmp }">${tmp }</option>
+                            </c:forEach>
+                        </select>
+                        <button id="addBtn" type="submit">완료</button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
+        </div>
+    
+    <!--------------------------------------- 카테고리 추가 모달창 ------------------------------>
+        <div class="modal" tabindex="-1" id="modal-categoryBtn" aria-labelledby="menuAddForm" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><strong>카테고리 추가</strong> </h4>
+                    <button id="modal-close" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form data-num="${dto.num }" id="addCategoryForm" action="${pageContext.request.contextPath}/store/addCategory.do" method="post">                 
+                        <label class="form-label" for="category">추가할 카테고리 이름</label>
+                        <input type="hidden" name="num" value="${storeDBNum}" />
+                        <input class="form-control" type="text" id="inputCategory" name="category"/>
+                        <button id="addCategory" type="submit">완료</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div> 
 </div>
 
-<!-------------------------- 아이콘 링크 ---------------------->
+<!----------------------------- 외부 링크 ------------------------------------>
 
 <script src="https://kit.fontawesome.com/2ebe86210e.js" crossorigin="anonymous"></script>
-
 <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
+
 <script>
 
 	
