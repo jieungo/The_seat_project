@@ -57,7 +57,7 @@
 </head>
 <body>
 <div class="container">
-	<jsp:include page="nav/navbar.jsp" />
+	<jsp:include page="/WEB-INF/views/nav/navbar.jsp" />
 
 	<c:if test="${ not empty dto.keyword }">
 		<p>
@@ -92,10 +92,7 @@
 	<p>테스트용 리뷰 링크</p>
 	<a href="${pageContext.request.contextPath}/store/test.do">테슽흐</a>
 </div>
+<!------------------------------ footer 불러오기 --------------------------->
+<jsp:include page="/WEB-INF/views/nav/footer.jsp" />
 </body>
-<script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
-
-<script>
-
-</script>
 </html>
