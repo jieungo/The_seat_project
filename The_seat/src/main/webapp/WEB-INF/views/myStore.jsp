@@ -546,7 +546,8 @@ input:focus {
 		ajaxPromise("${pageContext.request.contextPath}/storeOnOff.do", "post", obj)
 		.then(function(response){
 			return response.json();
-		}).then(function(data){
+		})
+		.then(function(data){
 			console.log(data);
 			if(data.beSwitched && storeOpen=="yes"){
 				self.innerText="매장 닫기";
