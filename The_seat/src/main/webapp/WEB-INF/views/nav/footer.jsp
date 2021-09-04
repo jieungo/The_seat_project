@@ -10,8 +10,9 @@
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
 <style>
 .footer-distributed {
-	background: rgb(221, 221, 221);
-	margin-top: 120px;
+	background: rgb(234, 234, 234); /*rgb(221, 221, 221);*/
+	margin-top: 80px;
+	margin-bottom: 0%;
 	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
 	box-sizing: border-box;
 	width: 100%;
@@ -34,7 +35,6 @@
 /* The company logo */
 .footer-distributed h3 {
 	color: rgb(86, 86, 86);
-	
 	margin: 0;
 }
 
@@ -104,7 +104,7 @@
 
 .footer-distributed .footer-center p a {
 	color: lightseagreen;
-	text-decoration: none;;
+	text-decoration: none;
 }
 
 .footer-distributed .footer-links a:before {
@@ -161,13 +161,24 @@
 	margin-bottom: 5px;
 }
 
-/* If you don't want the footer to be responsive, remove these media queries */
+.footer-distributed a:hover {
+	transform:scale(1.1);
+	-webkit-transform:scale(1.1);
+}
+
+.footer-links a:hover {
+	/*text-decoration:underline;*/
+	border-bottom: solid 2px lightseagreen;
+	font-weight: bold;
+}
+
+/* 반응형 footer 로 만들기 위해 */
 @media ( max-width : 880px) {
 	.footer-distributed {
 		font: bold 14px sans-serif;
 	}
 	.footer-distributed .footer-left, .footer-distributed .footer-center,
-		.footer-distributed .footer-right {
+	.footer-distributed .footer-right {
 		display: block;
 		width: 100%;
 		margin-bottom: 40px;
@@ -185,7 +196,8 @@
 	<footer class="footer-distributed">
 		<div class="footer-left">
 			<h3>
-				<span><img src="${pageContext.request.contextPath}/resources/img/chair.png" alt="logo" style="width: 50px; height: 50px;" /></span>자리..있어요?
+				<span><img src="${pageContext.request.contextPath}/resources/img/chair.png" alt="logo" style="width: 50px; height: 50px;" /></span>
+				자리.. 있어요?
 			</h3>
 			<p class="footer-links">
 				<a href="#" class="link-1">Home</a> <a href="#">Blog</a> <a href="#">Pricing</a>
