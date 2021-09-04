@@ -10,8 +10,10 @@ body {
     width: 100vw;
     display: flex;
     align-items: center;
+    flex-direction:column;
     justify-content: center;
     color: rgb(78, 78, 78);
+    font-size: 16px;
 }
 
 /* 버튼 기본 스타일링 */
@@ -44,6 +46,60 @@ img {
     height: 100%;
 }
 
+.review_container {
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    border-radius: 10px;
+    height: 80%;
+}
+
+.inner_container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.aside {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-evenly;
+    height: 100%;
+    left: 100%;
+    padding: 0;
+}
+    
+.aside > button {
+    border: 1px solid lightgray;
+    border-bottom: none;
+    background-color: white;
+    border-radius: 0 5px 5px 0;
+    width: 15vw;
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 700;
+    transition: color 0.2s ease-in-out;
+}
+
+.aside > button:first-child {
+    border-top: none;
+}
+
+.aside button:nth-child(3) {
+    color: #598eff;
+    border-left: none;
+}
+
+
 .arrow_box-user {
 	position: relative;
 	background: #ffffff;
@@ -54,7 +110,7 @@ img {
 .arrow_box-user:before {
 	right: 100%;
 	top: 50%;
-	border: solid transparent;
+	border: solid 1px lightgray;
 	content: "";
 	height: 0;
 	width: 0;
@@ -96,77 +152,17 @@ img {
 	margin-top: -30px;
 }
 
-.myStore_container {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    background-color: white;
-    border-radius: 10px  0 0 10px;
-    height: 80%;
-    max-width: 700px;
-    position: relative;
-}
-
-::-webkit-scrollbar {
-    display: none;
-}
-
-.inner_container {
-    display: flex; 
-    align-items: center; 
-    flex-direction: column;
-    text-overflow: hidden; 
-    overflow-x: auto;
-    height: 450px;
-}
-
-.store__aside {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: space-evenly;
-    height: 100%;
-    position: absolute;
-    left: 100%;
-    padding: 0;
-    
-}
-
-.store__aside > button {
-    border: 1px solid lightgray;
-    border-bottom: none;
-    background-color: white;
-    border-radius: 0 5px 5px 0;
-    width: 15vw;
-    height: 20vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
-    font-weight: 700;
-    transition: color 0.2s ease-in-out;
-}
-
-.store__aside > button:first-child {
-	border-top: none;
-}
-
-
-.store__aside button:focus {
-    color: #598eff;
-    border-left: none;
-}
 
 .user-review {
-    width: 70%;
     min-width: 280px;
-    margin-top: 40px;
+    margin-bottom: 40px;
+    margin-left: 30px;
 }
 
 .owner-review {
-    width: 60%;
+    width: 70%;
     margin-left: 80px;
-    margin-top: 40px;
+    margin-bottom: 40px;
 }
 
 .user-review__title {
@@ -210,11 +206,11 @@ small {
     font-size: 14px;
     width: 270px;
     height: auto;
-    margin: 0 20px;
 }
 
 .owner-review__text {
     padding-top: 0;
+    height: 150px;
 }
 
 .owner-review__text > textarea {
@@ -222,6 +218,7 @@ small {
     border: none;
     width: 100%;
     resize: none;
+    height: 150px;
 }
 
 .owner-review__text > textarea:focus {

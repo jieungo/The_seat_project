@@ -11,16 +11,15 @@
 	href="${pageContext.request.contextPath}/resources/css/storeOrder.css"
 	type="text/css" />
 </head>
-</head>
+
 <body>
 
     <!------------------------------- navbar 추가 -------------------------------->
 
-<div class="container myStore_container-gray">
+<div class="myStore_container-gray">
 
-    
+    <div style="margin-left: 50px; width:600px">
     <!-------------------------- 주문내역 타이틀 및 날짜 검색 ---------------------------->
-    
     <header class="store__order-header">
         <h4>주문 내역</h4>
         <form action="#">
@@ -90,14 +89,15 @@
             </section>
         </div>
     </div>
-    <!------------------------------------ 옆 사이드바 (매장정보, 메뉴관리 탭) ----------------->
-    <aside class="store__aside" style="width: 0;">
-        <button onclick="location.href='#'">매장 정보</button>
-        <button onclick="location.href='${pageContext.request.contextPath}/store/manageMenu.do?num=${dto.num}&storeName=${dto.storeName}'">메뉴 관리</button>
-        <button onclick="location.href='${pageContext.request.contextPath}/store/storeReview.do'">리뷰 관리</button>
-        <button onclick="location.href='${pageContext.request.contextPath}/store/storeOrder.do'">주문 확인</button>
-        <button onclick="location.href='${pageContext.request.contextPath}/store/storeSeat.do'">자리 관리</button>
-    </aside>
+</div>
+        <!------------------------------------ 옆 사이드바 (매장정보, 메뉴관리 탭) ----------------->
+        <aside class="store__aside">
+            <button>매장 정보</button>
+            <button>메뉴 관리</button>
+            <button>리뷰 관리</button>
+            <button>주문 확인</button>
+            <button>자리 관리</button>
+        </aside>
 </div>
 <script src="https://kit.fontawesome.com/2ebe86210e.js" crossorigin="anonymous"></script>
 <script>
