@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -19,81 +19,196 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 <!-- 스타일 링크 -->
 <link rel="stylesheet"
-href="${pageContext.request.contextPath}/resources/css/order.css"
-type="text/css" />
+	href="${pageContext.request.contextPath}/resources/css/order.css"
+	type="text/css" />
 <!-- 타이틀 로고 -->
-<link rel="shortcut icon" type="image⁄x-icon" href="${pageContext.request.contextPath}/resources/img/summer.jpg">
+<link rel="shortcut icon" type="image⁄x-icon"
+	href="${pageContext.request.contextPath}/resources/img/summer.jpg">
+
+<style>
+	#backBtn {
+		border: none;
+		background-color: white;
+	}
+	
+	#categories {
+		display: flex;
+		margin-top: 20px;
+	}
+	
+	#categories a {
+		margin-left: 15px;
+		text-decoration: none;
+		color: black;
+		font-size: 25px;
+	}
+	
+	#categories a:hover, a:focus {
+		padding-bottom: 5px;
+		border-bottom: 3px solid rgb(114, 149, 255);
+		color: #636363;
+	}
+	
+	#orderMenu {
+		border: none;
+		background-color: #fff;
+	}
+	
+</style>
 
 </head>
 <body>
-<div class="container">
-	<jsp:include page="../nav/navbar.jsp" />
-	<h1>${dto.storeName } 에서 ${tableNum }번 자리!</h1>
-	<div class="order">
-		<section>
-			<h2>메뉴</h2>
-			
-			<h3>베스트 메뉴</h3>
-			
+	<div class="container">
+		<jsp:include page="/WEB-INF/views/nav/navbar.jsp" />
+		<div class="container">
+			<button id="backBtn"
+				onclick="location.href='javascript:history.back();'">
+				<img src="${pageContext.request.contextPath}/resources/img/back.png"
+					alt="back" style="margin-bottom: 15px; width: 48px; height: 50px;" />
+			</button>
+			<span style="font-size: 2.5em;">주문하기</span> 
+			<span style="margin-left: 20px; font-size: 20px; color: rgb(89, 89, 89);">${dto.storeName }에서 ${tableNum }번 자리 👨‍🍳
+			</span>
+		</div>
+		<div class="order">
+			<section>
+				<ul id="categories">
+					<li><a
+						href="${pageContext.request.contextPath}/store/manageMenu.do?num=${dto.num}&storeName=${dto.storeName}">전체</a>
+					</li>
+					<c:forEach var="tmp" items="${categoryList }">
+						<li data-num="${dto.num }" class="category"><a
+							href="${pageContext.request.contextPath}/store/manageMenu.do?num=${dto.num}&storeName=${dto.storeName}&category=${tmp}">${tmp }</a></li>
+					</c:forEach>
+				</ul>
+				<!-- 여기부터 -->
+
+				<div class="row">
+					<div class="col text-center" style="margin-top: 40px;">
+						<div class="row row-cols-1 row-cols-md-2 g-4" style="width:100%; height: 800px; !important; overflow: auto;">
+							<div class="col">
+								<div class="card" style="width:100%; height: 400px !important; overflow: auto;">
+									<img src="${pageContext.request.contextPath}/resources/img/pizza.jpg" class="card-img-top" alt="...">
+									<div class="card-body" style="background-color: rgb(176, 215, 252); color: rgb(104, 104, 104); font-weight: bold;">
+										<h5 class="card-title">블랙 타이거 피자</h5>
+										<p class="card-text">50,000 ￦</p>
+									</div>
+								</div>
+							</div>
+							<div class="col">
+								<div class="card" style="width:100%; height: 400px !important; overflow: auto;">
+									<img src="${pageContext.request.contextPath}/resources/img/hyunmibab.jpg" class="card-img-top" alt="...">
+									<div class="card-body" style="background-color: rgb(176, 215, 252); color: rgb(104, 104, 104); font-weight: bold;">
+										<h5 class="card-title">가뿐한끼 현미밥</h5>
+										<p class="card-text">100,000 ￦</p>
+									</div>
+								</div>
+							</div>
+							<div class="col">
+								<div class="card" style="width:100%; height: 400px !important; overflow: auto;">
+									<img src="${pageContext.request.contextPath}/resources/img/sandwich.jpg" class="card-img-top" alt="...">
+									<div class="card-body" style="background-color: rgb(176, 215, 252); color: rgb(104, 104, 104); font-weight: bold;">
+										<h5 class="card-title">야채 샌드위치</h5>
+										<p class="card-text">30,000 ￦</p>
+									</div>
+								</div>
+							</div>
+							<div class="col">
+								<div class="card" style="width:100%; height: 400px !important; overflow: auto;">
+									<img src="${pageContext.request.contextPath}/resources/img/juice.png" class="card-img-top" alt="...">
+									<div class="card-body" style="background-color: rgb(176, 215, 252); color: rgb(104, 104, 104); font-weight: bold;">
+										<h5 class="card-title">딸기맹고 스무디</h5>
+										<p class="card-text">20,000 ￦</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- 또다시 -->
+					<div class="col">
+						<div class="col">
+							<div class="card">
+								<img src="..." class="card-img-top" alt="...">
+								<div class="card-body">
+									<h5 class="card-title">Card title</h5>
+									<p class="card-text">This is a longer card with supporting
+										text below as a natural lead-in to additional content. This
+										content is a little bit longer.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 여기까지 -->
+				<h3>베스트 메뉴</h3>
+
 				<div>
-				<c:forEach var="tmp" items="${menuList }" >
-					<c:if test="${tmp.best == 'yes' }">
-							<form class="orderMenu" action="${pageContext.request.contextPath}/order/insert.do">
-								<input type="hidden" name="orderNum" value="${orderNum }"/>
-								<input type="hidden" name="email" value="${email }"/>
-								<input type="hidden" name="storeName" value="${dto.storeName }"/>
-								<input type="hidden" name="storeLogo" value="${dto.image_logo }"/>
-								<input type="hidden" name="menu" value="${tmp.menuName }"/>
-								<input type="hidden" name="tableNum" value="${tableNum }"/>
-								<input type="hidden" name="price" value="${tmp.price}"/>
-								<input type="hidden" name="num" value="${dto.num }"/>
-								<button type="submit">${tmp.menuName }</button>
+					<c:forEach var="tmp" items="${menuList }">
+						<c:if test="${tmp.best == 'yes' }">
+							<form class="orderMenu"
+								action="${pageContext.request.contextPath}/order/insert.do">
+								<input type="hidden" name="orderNum" value="${orderNum }" />
+							 	<input type="hidden" name="email" value="${email }" /> 
+							 	<input type="hidden" name="storeName" value="${dto.storeName }" /> 
+									<input type="hidden" name="storeLogo" value="${dto.image_logo }" /> 
+									<input type="hidden" name="menu" value="${tmp.menuName }" /> 
+									<input type="hidden" name="tableNum" value="${tableNum }" /> 
+									<input type="hidden" name="price" value="${tmp.price}" /> 
+									<input type="hidden" name="num" value="${dto.num }" />
+								<button type="submit" id="orderMenu">${tmp.menuName }</button>
 								<input type="number" name="menuCount" min="1" max="9" value="1">
 							</form>
-					</c:if>
-				</c:forEach>
+						</c:if>
+					</c:forEach>
 				</div>
-				
-			<h3>전체 메뉴</h3>
-			
+
+				<h3>전체 메뉴</h3>
+
 				<div>
-				<c:forEach var="tmp" items="${menuList }">
-					<form class="orderMenu" action="${pageContext.request.contextPath}/order/insert.do">
-						<input type="hidden" name="orderNum" value="${orderNum }"/>
-						<input type="hidden" name="email" value="${email }"/>
-						<input type="hidden" name="storeName" value="${dto.storeName }"/>
-						<input type="hidden" name="storeLogo" value="${dto.image_logo }"/>
-						<input type="hidden" name="menu" value="${tmp.menuName }"/>
-						<input type="hidden" name="tableNum" value="${tableNum }"/>
-						<input type="hidden" name="price" value="${tmp.price}"/>
-						<input type="hidden" name="num" value="${dto.num }"/>
-						<button type="submit">${tmp.menuName }</button>
-						<input type="number" name="menuCount" min="1" max="9" value="1">
-					</form>
-				</c:forEach>
+					<c:forEach var="tmp" items="${menuList }">
+						<form class="orderMenu"
+							action="${pageContext.request.contextPath}/order/insert.do">
+							<input type="hidden" name="orderNum" value="${orderNum }" />
+							<input type="hidden" name="email" value="${email }" />
+							<input type="hidden" name="storeName" value="${dto.storeName }" /> 
+							<input type="hidden" name="storeLogo" value="${dto.image_logo }" /> 
+							<input type="hidden" name="menu" value="${tmp.menuName }" />
+							<input type="hidden" name="tableNum" value="${tableNum }" /> 
+							<input type="hidden" name="price" value="${tmp.price}" /> 
+							<input type="hidden" name="num" value="${dto.num }" />
+							<button type="submit" id="orderMenu">${tmp.menuName }</button>
+							<input type="number" name="menuCount" min="1" max="9" value="1">
+						</form>
+					</c:forEach>
 				</div>
-		</section>
-		
-		<section>
-			<h2>주문 목록</h2>
-			
-			<div id="orderList"></div>
-			<div>
-				<p>총 결제 금액: <span id="amount" style="font-size:30px;">0</span></p>
-			</div>
-			<div>
-				<button id="reset">다시 담기</button>
-			</div>
-			<div>
-				<button id="goOrder">주문하기</button>
-			</div>
-			
-		</section>
+			</section>
+
+			<section>
+				<h2>주문 목록</h2>
+
+				<div id="orderList"></div>
+				<div>
+					<p>
+						총 결제 금액: <span id="amount" style="font-size: 30px;">0</span>
+					</p>
+				</div>
+				<div>
+					<button id="reset">다시 담기</button>
+				</div>
+				<div>
+					<button id="goOrder">주문하기</button>
+				</div>
+
+			</section>
+		</div>
+
+		<!------------------------------ footer 불러오기 --------------------------->
+		<jsp:include page="/WEB-INF/views/nav/footer.jsp" />
+
 	</div>
-	
-</div>
-<script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
-<script>
+
+	<script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
+	<script>
 	let orderList = [];
 	let amountList = [];
 	let orderMenu={};

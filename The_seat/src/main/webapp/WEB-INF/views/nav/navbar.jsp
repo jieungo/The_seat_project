@@ -65,8 +65,15 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
       text-align-last: center;
       text-align: center;
    }
-    #keyword:focus{
+    #keyword:hover{
       outline:none;
+      transform:scale(1.1);
+	  -webkit-transform:scale(1.1);
+	  font-weight: bold;
+   }
+   #keyword:focus{
+      outline:none;
+	  font-weight: bold;
    }
    #searchBtn{
       width: 110px;
@@ -77,6 +84,10 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
    #burgerBtn{
       border: none;
       background-color: white;
+   }
+   #burgerBtn:hover{
+   	  transform:scale(1.1);
+	  -webkit-transform:scale(1.1);
    }
 </style>
 <nav class="navbar navbar-light">
@@ -164,7 +175,7 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
                   <span id="userName" style="font-weight: bold; font-size: 33px;"></span> 님 로그인 중..
                </c:when>
                <c:otherwise>
-                  <span>반갑습니다 ☺</span>
+                  <span style="font-size: 1.5em;">반갑습니다 😊</span>
                </c:otherwise>
             </c:choose>
          </h5>

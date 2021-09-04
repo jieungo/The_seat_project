@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>storeDetail.jsp</title>
+<title>${dto.storeName }</title>
 <!-- 외부 css 링크 로딩하기 -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
@@ -16,113 +16,139 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
 	crossorigin="anonymous"></script>
+<!------------------ 타이틀 로고 -------------------->
+<link rel="shortcut icon" type="image⁄x-icon" href="${pageContext.request.contextPath}/resources/img/snow.jpg">
 <style>
-#reviewBtn {
-	background-color: rgb(108, 156, 252);
-	margin-top: 20px;
-	font-weight: bold;
-	width: 140px;
-	height: 60px;
-	border: none;
-	text-transform: uppercase;
-	letter-spacing: 2.5px;
-	font-weight: 500;
-	color: #000;
-	background-color: #fff;
-	border-radius: 5x;
-	box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-	transition: all 0.3s ease 0s;
-	cursor: pointer;
-	outline: none;
-}
-/*.reviewBtn {
-	background-color: #6DA2D9;
-	box-shadow: 0 0 0 1px #6698cb inset,
-				0 0 0 2px rgba(255,255,255,0.15) inset,
-				0 8px 0 0 rgba(110, 164, 219, .7),
-				0 8px 0 1px rgba(0,0,0,.4),
-				0 8px 8px 1px rgba(0,0,0,0.5);
-}
-.reviewBtn:active {
-	box-shadow: 0 0 0 1px #6191C2 inset,
-				0 0 0 2px rgba(255,255,255,0.15) inset,
-				0 0 0 1px rgba(0,0,0,0.4);
-}*/
-#reviewBtn:hover {
-	background-color: rgb(142, 192, 242);
-	box-shadow: 0px 15px 20px rgb(142, 192, 242);
-	color: #fff;
-	transform: translateY(-7px);
-}
 
-#seatBtn {
-	background-color: rgb(108, 156, 252);
-	color: white;
-	margin-top: 10px;
-	width: 400px;
-	height: 50px;
-	border-radius: 5px;
-	border: none;
-	font-size: 1.5em;
-	font-weight: bold;
-  	transition: all .3s ease;
-  	letter-spacing: 2px;
-  	text-transform: uppercase;
-  	outline: none;
-  	align-self: center;
-  	cursor: pointer;
-}
+	/*************리뷰 보는 버튼 css************/
+	#reviewBtn {
+		background-color: rgb(108, 156, 252);
+		margin-top: 20px;
+		font-weight: bold;
+		width: 140px;
+		height: 60px;
+		border: none;
+		text-transform: uppercase;
+		letter-spacing: 2.5px;
+		font-weight: 500;
+		color: #000;
+		background-color: #fff;
+		border-radius: 5x;
+		box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+		transition: all 0.3s ease 0s;
+		cursor: pointer;
+		outline: none;
+	}
+	/*.reviewBtn {
+		background-color: #6DA2D9;
+		box-shadow: 0 0 0 1px #6698cb inset,
+					0 0 0 2px rgba(255,255,255,0.15) inset,
+					0 8px 0 0 rgba(110, 164, 219, .7),
+					0 8px 0 1px rgba(0,0,0,.4),
+					0 8px 8px 1px rgba(0,0,0,0.5);
+	}
+	.reviewBtn:active {
+		box-shadow: 0 0 0 1px #6191C2 inset,
+					0 0 0 2px rgba(255,255,255,0.15) inset,
+					0 0 0 1px rgba(0,0,0,0.4);
+	}*/
+	#reviewBtn:hover {
+		background-color: rgb(142, 192, 242);
+		box-shadow: 0px 15px 20px rgb(142, 192, 242);
+		color: #fff;
+		transform: translateY(-7px);
+	}
+	
+	/************ 자리 잡는 버튼 css ************/
+	#seatBtn {
+		background-color: rgb(108, 156, 252);
+		color: white;
+		margin-top: 10px;
+		width: 400px;
+		height: 50px;
+		border-radius: 5px;
+		border: none;
+		font-size: 1.5em;
+		font-weight: bold;
+	  	transition: all .3s ease;
+	  	letter-spacing: 2px;
+	  	text-transform: uppercase;
+	  	outline: none;
+	  	align-self: center;
+	  	cursor: pointer;
+	}
+	
+	#seatBtn:hover{
+		animation: random-bg .5s linear infinite, grow 1300ms ease infinite;
+	}
+	
+	@keyframes random-bg {
+	  	from {
+	    filter: hue-rotate(0);
+	  }
+	  to {
+	    filter: hue-rotate(360deg);
+	  }
+	}
+	
+	@keyframes grow {
+	  0% {
+	    transform: scale(1);
+	  }
+	  14% {
+	    transform: scale(1.3);
+	  }
+	  28% {
+	    transform: scale(1);
+	  }
+	  42% {
+	    transform: scale(1.3);
+	  }
+	  70% {
+	    transform: scale(1);
+	  }
+	}
+	
+	/********** 메뉴 이름 버튼 css ************/
+	#menuBtn {
+		background-color: white;
+		border: none;
+		font-size: 1.5em;
+		font-weight: bold;
+		color: rgb(96, 92, 99);
+	}
+	
+	/************** 베스트 메뉴 보이는 이미지 css **************/
+	#bestMenu {
+		display: flex;
+		justify-content: space-around;
+	}
+	
+	/********* 투명 스크롤바 css ********/
+	::-webkit-scrollbar {
+	  	display: none;
+	}
 
-#seatBtn:hover{
-	animation: random-bg .5s linear infinite, grow 1300ms ease infinite;
-}
-
-#menuBtn {
-	background-color: white;
-	border: none;
-	font-size: 1.5em;
-	font-weight: bold;
-	color: rgb(96, 92, 99);
-}
-
-#bestMenu {
-	display: flex;
-	justify-content: space-around;
-}
-
-@keyframes random-bg {
-  	from {
-    filter: hue-rotate(0);
-  }
-  to {
-    filter: hue-rotate(360deg);
-  }
-}
-
-@keyframes grow {
-  0% {
-    transform: scale(1);
-  }
-  14% {
-    transform: scale(1.3);
-  }
-  28% {
-    transform: scale(1);
-  }
-  42% {
-    transform: scale(1.3);
-  }
-  70% {
-    transform: scale(1);
-  }
-}
-
+	/********* 자리 잡는 모달에서 select 박스 css ********/
+	#seatChoice {
+	    margin-left: 10px;
+	    width: 60px;
+	    border: 1px solid lightgray;
+	    border-radius: 5px;
+	    padding-left: 15px;
+	}
+	
+	#seatChoice:focus{
+		outline: none;
+	}
+	
 </style>
 </head>
 <body>
 <div class="container">
 	<!---------------------- 네비바를 import 한다. ------------------------->
 	<jsp:include page="/WEB-INF/views/nav/navbar.jsp" />
+	
 	<section style="text-align: center; margin-top: 10px;">
 		<!---------------------- DB 연동해서 파라미터 값으로 칼럼 값을 받아온다.  --------------------->
 		<img src="${pageContext.request.contextPath}${dto.image_logo }"
@@ -145,35 +171,27 @@
 				<button type="button" data-bs-target="#carouselExampleDark"
 					data-bs-slide-to="3" aria-label="Slide 4"></button>
 			</div>
-			<div class="carousel-inner" style="min-height: 500px;">
+			<div class="carousel-inner" style="width:100%; height: 500px !important; overflow: auto;">
 				<div class="carousel-item active" data-bs-interval="10000">
 					<img src="${pageContext.request.contextPath}${dto.image_1 }"
 						class="d-block w-100" alt="매장대표이미지1">
-					<div class="carousel-caption d-none d-md-block">
-						<h5>First Best Menu</h5>
-					</div>
+					<!-- <div class="carousel-caption d-none d-md-block"><h5>First</h5></div> -->
 				</div>
 				<div class="carousel-item" data-bs-interval="2000">
 					<img src="${pageContext.request.contextPath}${dto.image_2 }"
 						class="d-block w-100" alt="매장대표이미지2">
-					<div class="carousel-caption d-none d-md-block">
-						<h5>Second Best Menu</h5>
-					</div>
+					<!-- <div class="carousel-caption d-none d-md-block"><h5>Second</h5></div> -->
 				</div>
 				<div class="carousel-item">
 					<img src="${pageContext.request.contextPath}${dto.image_3 }"
 						class="d-block w-100" alt="매장대표이미지3">
-					<div class="carousel-caption d-none d-md-block">
-						<h5>Third Best Menu</h5>
-					</div>
+					<!-- <div class="carousel-caption d-none d-md-block"><h5>Third</h5></div> -->
 				</div>
 				<div class="carousel-item">
 					<img src="${pageContext.request.contextPath}${dto.image_4 }"
 
 						class="d-block w-100" alt="매장대표이미지4">
-					<div class="carousel-caption d-none d-md-block">
-						<h5>Fourth Best Menu</h5>
-					</div>
+					<!-- <div class="carousel-caption d-none d-md-block"><h5>Fourth</h5></div> -->
 				</div>
 			</div>
 			<button class="carousel-control-prev" type="button"
@@ -254,7 +272,7 @@
 						data-bs-toggle="modal" data-bs-target="#exampleModal"
 						style="width: 400px; margin-left: 70px; margin-top: 50px;">${tmp.menuName }</button>
 					<span
-						style="width: 300px; margin-left: 300px; font-size: 1.5em; font-weight: bold; color: rgb(96, 92, 99);">${tmp.price }</span>
+						style="width: 300px; margin-left: 300px; font-size: 1.5em; font-weight: bold; color: rgb(96, 92, 99);">${tmp.price } ￦</span>
 					<!------------모달창-------------- 메뉴 이름 누르면 그에 맞는 이미지 Modal 활성화 -------------------------------->
 					<div class="modal fade" id="exampleModal" tabindex="-1"
 						aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -287,6 +305,7 @@
 			</div>
 		</div>
 	</div>
+<!------------------------------ footer 불러오기 --------------------------->
 <jsp:include page="/WEB-INF/views/nav/footer.jsp" />
 </div>
 
@@ -353,7 +372,6 @@
 				<div class="container-fluid">
 					<img src="${pageContext.request.contextPath}/resources/img/chair.png" class="img-thumbnail" alt="seatImage">
 					<hr />
-					<!------------------- Modal 에서 선택한 자리 정보를 주문 페이지에 get 방식으로 값을 전달해준다. ----------------->
 					
 					<p>자리 선택 
 						<select name="자리 선택" id="seatChoice">
