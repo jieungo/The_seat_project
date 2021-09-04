@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.star.seat.order.service.OrderService;
+import com.star.seat.store.service.StoreService;
 import com.star.seat.users.dto.UsersDto;
 import com.star.seat.users.service.UsersService;
 
@@ -25,6 +26,9 @@ public class UsersController {
 	
 	@Autowired
 	private UsersService service;
+	
+	@Autowired
+	private StoreService sService;
 	
 	@Autowired
 	private OrderService order_service;
@@ -118,8 +122,11 @@ public class UsersController {
 	public ModelAndView Info(ModelAndView mView,HttpServletRequest request, 
 			HttpSession session) {
 		
+		//접속중인 회원의 회원정보 가져가기
 		service.getInfo(mView, session);
-		
+		//접속중인 회원이 갖은 매장 리스트 가져가기
+		sService.getMyStores(request, session);
+		//접속중인 회원의 주문내역 가져가기
 		order_service.getList(mView, request, session);
 		
 		mView.setViewName("users/info");

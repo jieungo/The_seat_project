@@ -168,7 +168,11 @@ type="text/css" />
 	
 	// 주문하기
 	document.querySelector("#goOrder").addEventListener("click",function(){
+		//주문할때 시간정보전달
+		let regdate = new Date();
 		for(let i=0; i<orderList.length; i++){
+			//주문할때 시간정보 regdate로 넣어주기
+			orderList[i].regdate=regdate;
 			// {orderNum:"123",email:"123",storeName:"근영식당",storeLogo:"/images/kim1.png",num:"201",tableNum:"1",menu:"보리굴비",menuCount:"1",price:"13000"}
 			orderList[i].amount=amount;
 			ajaxPromise("${pageContext.request.contextPath}/order/insert.do","post",orderList[i])

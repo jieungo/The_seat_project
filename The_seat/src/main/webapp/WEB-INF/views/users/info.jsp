@@ -27,7 +27,7 @@ type="text/css" />
 </head>
 <body>
 <div class="container">
-	<jsp:include page="../nav/navbar.jsp" />
+	<jsp:include page="/WEB-INF/views/nav/navbar.jsp" />
 	
 <!--------------------- 마이페이지 상단 프로필 -------------------------->
 	<header>
@@ -37,7 +37,7 @@ type="text/css" />
 			<div>
 				<h3>${dto.name}님의 마이페이지
 					<c:choose>
-						<c:when test="<%-- {dto.storeName ne null } --%>"> 
+						<c:when test="${myStoreList ne null }"> 
 							<span>(Owner)</span>
 						</c:when>
 						<c:otherwise>
@@ -57,7 +57,6 @@ type="text/css" />
 				<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
 			</svg>
 		</button>
-		
 	</header>
 	
 	<div class="divide-line out-divide-line" style="text-align: center;"></div>
@@ -112,7 +111,8 @@ type="text/css" />
 			</div>
 		</c:otherwise>
 	</c:choose>
-
+<!------------------------------ footer 불러오기 --------------------------->
+<jsp:include page="/WEB-INF/views/nav/footer.jsp" />
 </div>
 
 
@@ -151,7 +151,7 @@ type="text/css" />
 					<div>
 						<label for="image">클릭해서 이미지 변경!</label>
 			         	<input type="hidden" name="profile" 
-								value="${ dto.profile eq 'profile' ? 'profile' : dto.profile}"/>
+								value="${dto.profile eq 'profile' ? 'profile' : dto.profile}"/>
 					</div>
 					<div>
 						<input class="form-control" type="text" name="name" id="name"
@@ -256,8 +256,7 @@ type="text/css" />
 			</div>
 		</div>
 	</div>
-<!------------------------------ footer 불러오기 --------------------------->
-<jsp:include page="/WEB-INF/views/nav/footer.jsp" />
+
 </div>
 <form action="${pageContext.request.contextPath}/users/ajax_profile_upload.do" method="post" 
 	  id="imageForm" enctype="multipart/form-data" style="visibility:hidden;'">
@@ -382,6 +381,7 @@ type="text/css" />
 	//------------------------------회원 탈퇴--------------------------------------------
 	
 	document.querySelector("#withdrawal").addEventListener("click",function(){
+		
 		ajaxPromise("${pageContext.request.contextPath}/users/delete.do")
 		.then(function(response){
 			return response.json();

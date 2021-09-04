@@ -68,7 +68,7 @@ CREATE TABLE order_(
 	menuCount NUMBER,
 	price NUMBER,
 	amount NUMBER,
-	regdate DATE
+	regdate VARCHAR2(100)
 );
 
 CREATE TABLE storeSeat(
