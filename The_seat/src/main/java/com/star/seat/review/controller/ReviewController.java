@@ -25,8 +25,6 @@ public class ReviewController {
 	@RequestMapping("/store/test.do")
 	public String test(ReviewDto dto, HttpServletRequest request) {
 		
-		service.getAllReview(dto, request);
-		
 		return "store/test";
 	}
 	
