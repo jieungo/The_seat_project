@@ -10,11 +10,42 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 </head>
 <body>
-	<button class="reviewListBtn" data-bs-toggle="modal" data-bs-target="#modal-reviewList">리뷰 보기</button>
-	<button class="reviewBtn" data-bs-toggle="modal" data-bs-target="#reviewModal">리뷰 작성</button>
+	<button data-num="" class="reviewListBtn" data-bs-toggle="modal" data-bs-target="#modal-reviewList">리뷰 보기</button>
+	<button data-num="" class="reviewBtn" data-bs-toggle="modal" data-bs-target="#reviewModal">리뷰 작성</button>
+	<button data-num="" class="reviewUpdateBtn" data-bs-toggle="modal" data-bs-target="#reviewUpdateModal">리뷰 수정</button>
 	
 	<!-- 리뷰 작성 modal -->
 	<div class="modal" tabindex="-1" id="reviewModal" aria-labelledby="menuAddForm" aria-hidden="true">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <h4 class="modal-title"><strong>리뷰 등록</strong> </h4>
+	                <button id="addCloseBtn" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	            </div>
+	            <div class="modal-body">
+	            	<a id="reviewImgLink" href="javascript:">
+		                <img src="#" alt="" id="reviewImg" name="review" class="image mt-3"
+		                style="width: 150px; height: 150px; "/>
+		            </a>
+	                <form id="reviewAddForm" action="${pageContext.request.contextPath}/store/addReview.do" method="post" enctype="multipart/form-data">                 
+	                    <select name="star" id="">
+	                    	<c:forEach var="tmp" items="1,2,3,4,5">
+	                    		<option name="starOption" value="${tmp }">${tmp }</option>
+	                    	</c:forEach>
+	                    </select>
+	                    <input id="inputImg" name="imageFile" type="file" style="display:none;"/>
+	                    <input type="hidden" name="storeNum" value="182" />
+	                    <input type="hidden" name="storeName" value="Default2" />
+	                    <textarea name="content" id="content" cols="30" rows="10" placeholer="리뷰를 작성해주세요."></textarea>
+	                    <button id="addBtn" type="submit">작성 완료</button>
+	                </form>
+	            </div>
+	        </div>
+	    </div>
+    </div>
+    
+    <!-- 리뷰 수정 modal -->
+	<div class="modal" tabindex="-1" id="reviewUpdateModal" aria-labelledby="menuAddForm" aria-hidden="true">
 	    <div class="modal-dialog">
 	        <div class="modal-content">
 	            <div class="modal-header">
@@ -42,6 +73,9 @@
 	        </div>
 	    </div>
     </div>
+    
+    
+    
     <!-- 리뷰 list modal -->
 	<div class="modal" tabindex="-1" id="modal-reviewList" aria-labelledby="modal-reviewList" aria-hidden="true">
 	    <div class="modal-dialog">
@@ -77,7 +111,7 @@
 	});
 	
 	viewThumbNail("#inputImg", "#reviewImg");
-	updateImage("#reviewAddForm",);
+	updateImage("#reviewAddForm");
 	
 	// 이미지 파일을 선택했을 때 동작하는 method
 	function viewThumbNail(rel, imageID){
@@ -104,7 +138,7 @@
 	    }
 	}
 	
-	// 매장 로고 등록 시 동작하는 method
+	// 매장에 대한 리뷰 등록 시 동작하는 method
 	function updateImage(rel){
 		document.querySelector(rel).addEventListener("submit", function(e){
 			// 일단 form 제출을 막음
@@ -116,7 +150,7 @@
 			}).then(function(data){
 				console.log(data);
 				if(data.beAdded){
-					document.querySelector("#reviewBtn").click();
+					document.querySelector("#addCloseBtn").click();
 					alert("리뷰를 등록하였습니다.");
 				}
 			});
@@ -139,9 +173,38 @@
 				if(data.beTaken){
 					let reviewList=data.reviewList;
 					console.log(reviewList);
+					for(let j=0; j<reviewList.length; j++){
+						let pWriter=document.createElement("p");
+						let pStar=document.createElement("p");
+						let pContent=document.createElement("p");
+						let pRegdate=document.createElement("p");
+						
+						pWriter.innerText="아이디 : "+reviewList[j].writer;
+						pStar.innerText="별점 : "+reviewList[j].star;
+						pContent.innerText="내용 : "+reviewList[j].content;
+						pRegdate.innerText="등록일 : "+reviewList[j].regdate;
+						
+						let newdiv=document.createElement("div");
+						newdiv.appendChild(pWriter);
+						newdiv.appendChild(pStar);
+						newdiv.appendChild(pContent);
+						newdiv.appendChild(pRegdate);
+						
+						document.querySelector(".reviewBox").appendChild(newdiv);
+					}
 				}
 			});
 		});	
 	}
+	
+	// 리뷰 수정 모달에 data 불러오기
+	let reviewUpdateBtns=document.querySelectorAll(".reviewUpdateBtn");
+	for(let i=0; i<reviewUpdateBtns.length; i++){
+		reviewUpdateBtns.addEventListener("click", function{
+			
+		})
+	}
+	
+	//
 </script>
 </html>

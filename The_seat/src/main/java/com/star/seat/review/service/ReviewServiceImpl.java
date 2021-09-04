@@ -55,19 +55,9 @@ public class ReviewServiceImpl implements ReviewService{
 		dao.addReview(dto);
 	}
 	
-	// 모든 매장 리뷰 정보를 가져오는 method
-	// 아예 마이페이지로 갈 때 뿌려주면 됨
-	@Override
-	public void getAllReview(ReviewDto dto, HttpServletRequest request) {
-		List<ReviewDto> list=dao.getAllReview();
-		request.setAttribute("allReviewList", list);
-	}
-	
 	// 해당 매장 리뷰 정보를 가져오는 method
 	@Override
 	public List<ReviewDto> getReviewList(ReviewDto dto) {
-		
-		
 		
 		return dao.getReviewList(dto);
 	}

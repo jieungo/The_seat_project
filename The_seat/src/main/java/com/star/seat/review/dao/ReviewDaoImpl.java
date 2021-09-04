@@ -19,13 +19,6 @@ public class ReviewDaoImpl implements ReviewDao{
 		session.insert("addReview", dto);	
 	}
 	
-	// 모든 매장 리뷰 정보를 가져오는 method
-	// 아예 마이페이지로 갈 때 뿌려주면 됨
-	@Override
-	public List<ReviewDto> getAllReview() {
-		return session.selectList("getAllReview");	
-	}
-	
 	// 해당 매장 리뷰 정보를 가져오는 method
 	@Override
 	public List<ReviewDto> getReviewList(ReviewDto dto) {
