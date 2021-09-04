@@ -20,13 +20,15 @@ public class OrderDaoImpl implements OrderDao{
 		return session.selectList("order.getOrderList", dto);
 	}
 	
-	//email 이 같고 orderNum 이 같은 주문내역 불러오기
+	
+	//orderNum 이 같은 주문내역의 menu, menuCount, price 가져오기
 	@Override
-	public List<OrderDto> getListOne(String orderNum) {
-		return session.selectList("order.getListOne",orderNum);
+	public List<OrderDto> getOrderMenuList(OrderDto dto) {
+		
+		return session.selectList("order.getOrderMenuList", dto);
 	}
 	
-	//email 로 총 주문내역 갯수 구하기 
+	//orderNum 이 같은 주문내역의 menu, menuCount, price 가져오기
 	@Override
 	public int getCount(String email) {
 		return session.selectOne("order.getCount", email);
@@ -43,5 +45,12 @@ public class OrderDaoImpl implements OrderDao{
 	public void delete(int orderNum) {
 		session.delete("Order.deleteOrder",orderNum);
 	}
+
+
+
+
+
+
+	
 	
 }

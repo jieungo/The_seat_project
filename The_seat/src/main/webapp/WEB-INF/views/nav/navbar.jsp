@@ -158,7 +158,7 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
       <div class="offcanvas-header">
          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
             <c:choose>
-               <c:when test="${sessionScope.email ne null }">
+               <c:when test="${email ne null }">
                   <img id="userProfile" alt="프로필 이미지"
                         style="width: 60px; height: 60px; border-radius:100%;">
                   <span id="userName" style="font-weight: bold; font-size: 33px;"></span> 님 로그인 중..
@@ -176,7 +176,7 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
             <li class="nav-item"><a class="nav-link active"
                aria-current="page" href="#"></a></li> 
             <li class="nav-item"><c:choose>
-                  <c:when test="${sessionScope.email ne null }">
+                  <c:when test="${email ne null }">
                      <a class="nav-link"
                         href="${pageContext.request.contextPath}/users/info.do">마이페이지</a>
                   </c:when>
@@ -189,7 +189,7 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
 
             <div class="toggle">
                <c:choose>
-                  <c:when test="${sessionScope.email !=null && myStoreList.size() != 0}">
+                  <c:when test="${email !=null && myStoreList.size() != 0}">
                      <c:forEach var="tmp" items="${myStoreList }" varStatus="status">
                         <li><a href="${pageContext.request.contextPath}/store/myStore.do?num=${status.count }"
                            class="store">${tmp.storeName }</a></li>
@@ -205,7 +205,7 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
             <li><a data-num="0" id="addBtn0" href="#">+매장 추가</a></li>
             <br>
             <br>
-            <c:if test="${sessionScope.email ne null }">
+            <c:if test="${email ne null }">
                <li class="nav-item"><a class="nav-link"
                   href="${pageContext.request.contextPath}/users/logout.do">
                      로그아웃 </a></li>
@@ -217,7 +217,7 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
 <script
    src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 <script>
-   if(${sessionScope.email ne null }){
+   if(${email ne null }){
       // session 정보로 이름 정보 가져오기
       ajaxPromise("${pageContext.request.contextPath}/users/getData.do").then(
             function(response) {
