@@ -61,7 +61,7 @@ type="text/css" />
 	
 	<div class="divide-line out-divide-line" style="text-align: center;"></div>
 	
-<!--------------------------- 마이페이지 하단 주문내역 ------------------------------->
+<!--------------------------- 마이페이지 하단 주문내역 ---------------------------------->
 <!--------------------------- 카드로 만들기 c:forEach  사용------------------------------>
 
 	<c:choose>
@@ -74,28 +74,43 @@ type="text/css" />
 			  <div class="col">
 			    <div class="card">
 			      <div class="card-head">
-			      	<p>${tmp.orderNum }</p>
+			      	<p>주문번호 ${tmp.orderNum }</p>
 			      	<h3>${tmp.storeName }</h3>
 			      	<p>${tmp.regdate }</p>
 			      </div>
 			      <div>
 				  <!-- 매장평점 -->
-				  <span>매장평점: 
+				  <span>매장평점:
 					  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
 		                   <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-		              </svg> 
+		              </svg>
 		          </span> 
 				  <!-- 내가 준 평점 -->
-				  <span> / 내가 준 평점: 
+				  <span> / 내가 준 평점:
 					  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
 		                  	<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-		              </svg> 
+		              </svg>
 		          </span>
 		   		  </div>
-			      <img src="${pageContext.request.contextPath}${tmp.storeLogo }" class="card-img-top" alt="...">
+		   		  <div>
+		   		  	<img src="${pageContext.request.contextPath}${tmp.storeLogo }" class="card-img-top" alt="...">
+		   		  </div>
 			      <div class="card-body">
-			        <button>주문내역 상세보기</button>
-			        <br />
+			      	<button class="orderDetailBtn" value="${tmp.orderNum }" style="display:block">주문내역 상세 보기</button>
+			      	<button class="orderDetailOffBtn" style="display:none">주문내역 상세 접기</button>
+			      	<table class="orderTable" style="display:none;">
+			      		<thead>
+			      			<tr>
+				      			<th>메뉴</th>
+				      			<th>수량</th>
+				      			<th>가격</th>
+			      			</tr>
+			      		</thead>
+			      		<tbody class="orderDetail">
+			      		
+			      		</tbody>
+			      	</table>
+			        <br/>
 			        <span>결제 금액</span> <span>${tmp.amount }</span>
 			        <p class="card-text"></p>
 			        <div>
@@ -115,14 +130,11 @@ type="text/css" />
 <jsp:include page="/WEB-INF/views/nav/footer.jsp" />
 </div>
 
-
-
 <!------------모달창------------------프로필 편집------------------------------------->
 
 <div class="modal animate__animated animate__bounce animate__fadeInDown" tabindex="-1" id="modal-updateForm" aria-labelledby="updateForm" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
-		
 			<div class="modal-header">
 				<h4 class="modal-title">
 					<strong>프로필 편집</strong>
@@ -130,7 +142,7 @@ type="text/css" />
 				<button type="button" class="btn-close" data-bs-dismiss="modal"
 					aria-label="Close"></button>
 			</div>
-			
+
 			<div class="modal-body">
 				<!-- 프로필 이미지 변경 -->
 				<a id="profileLink" href="javascript:" >
@@ -428,6 +440,84 @@ type="text/css" />
 	phoneNum.onkeyup = function() {
 		this.value = autoHypenPhone(this.value);
 	}
+	
+	//--------------------------------주문 내역 상세정보 띄우기-----------------
+	let orderDetailBtn = document.querySelectorAll(".orderDetailBtn");
+	let orderDetailOffBtn = document.querySelectorAll(".orderDetailOffBtn");
+	let orderDetail = document.querySelectorAll(".orderDetail");
+	let orderTable = document.querySelectorAll(".orderTable");
+	
+	
+	
+	for(let i=0; i<orderDetailBtn.length; i++){
+		
+		//클릭하면
+		orderDetailBtn[i].addEventListener("click",function(){
+			let orderNum = this.value;
+			//버튼이 갖고 있던 ordernum 정보를 ajax 로 넘겨주고
+			ajaxPromise("${pageContext.request.contextPath}/order/orderMenu.do","post","orderNum="+orderNum)
+			.then(function(response){
+				return response.json();
+			})
+			.then(function(data){
+				// orderNum 이 일치하는 메뉴와 수량, 가격을 리스트로 받아온다.
+				let td;
+				for(let j=0; j<data.list.length; j++){
+					// orderTable 에 td로 차례로 넣어주고
+					let menu = data.list[j].menu;
+					let menuCount = data.list[j].menuCount;
+					let price = data.list[j].price;
+					let td = document.createElement( "TD" ); 
+				     td.innerHTML = menu;  
+				     let td1 = document.createElement( "TD" );
+				     td1.innerHTML = menuCount; ; 
+				     let td2 = document.createElement( "TD" );
+				     td2.innerHTML = price; 
+				 //    td.style.border = "1px solid #92acbb"; 
+				 //    td.style.padding = "3px"; 
+				     
+					let tr = document.createElement( "TR" ); 
+					     tr.appendChild( td );
+					     tr.appendChild( td1 ); 
+					     tr.appendChild( td2 ); 
+					orderDetail[i].appendChild( tr ); 
+				};
+				// 테이블을 보이게 한다.
+				orderTable[i].style.display="block";
+				orderDetailOffBtn[i].style.display="block";
+				orderDetailBtn[i].style.display="none";
+			});
+		});
+		
+		orderDetailOffBtn[i].addEventListener("click",function(){
+			// 클릭하면 생성되었던 td 를 전부 지우고
+			while (orderDetail[i].hasChildNodes()) {	
+				orderDetail[i].removeChild(orderDetail[i].firstChild );
+			};
+			//테이블을 안보이게 한다.
+			orderTable[i].style.display="none";
+			orderDetailOffBtn[i].style.display="none";
+			orderDetailBtn[i].style.display="block";
+		});
+		
+	}
+	
+	let today = new Date();
+	let year = today.getFullYear(); // 년도
+	let month = today.getMonth() + 1;  // 월
+	let date = today.getDate();  // 일
+	let day; // 요일
+	if(today.getDay()==0){ day="일요일" }
+	else if(today.getDay()==1){ day="월요일"}
+	else if(today.getDay()==2){ day="화요일"}
+	else if(today.getDay()==3){ day="수요일"}
+	else if(today.getDay()==4){ day="목요일"}
+	else if(today.getDay()==5){ day="금요일"}
+	else if(today.getDay()==6){ day="토요일"}
+	let hours = today.getHours(); // 시
+	let minutes = today.getMinutes(); //분
+	let regdate = year + " 년 " + month + " 월 " + date + " 일 " + day + " " + hours + " 시 " + minutes+ " 분";
+	
 </script>
 </body>
 </html>

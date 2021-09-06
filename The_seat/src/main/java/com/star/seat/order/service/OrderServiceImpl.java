@@ -1,6 +1,8 @@
 package com.star.seat.order.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -79,5 +81,14 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public void orderInsert(OrderDto dto) {
 		dao.insert(dto);
+	}
+
+	@Override
+	public Map<String, Object> getOrderMenuList(OrderDto dto) {
+		List<OrderDto> list = dao.getOrderMenuList(dto);
+		System.out.println(list);
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("list",list);
+		return map;
 	}
 }

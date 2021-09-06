@@ -52,4 +52,12 @@ public class OrderController {
 		return "order/order";
 	}
 	
+	// 주문내역 메뉴 상세 AJAX
+	@RequestMapping(value = "/order/orderMenu.do", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> orderMenuDetail (OrderDto dto){
+		System.out.println(dto.getOrderNum());
+		return service.getOrderMenuList(dto);
+	}
+	
 }

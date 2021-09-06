@@ -68,6 +68,7 @@ CREATE TABLE order_(
 	menuCount NUMBER,
 	price NUMBER,
 	amount NUMBER,
+	reviewExist VARCHAR2(20),
 	regdate VARCHAR2(100)
 );
 
