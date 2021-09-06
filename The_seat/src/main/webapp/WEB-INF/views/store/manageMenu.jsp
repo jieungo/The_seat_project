@@ -22,14 +22,13 @@ type="text/css" />
 <jsp:include page="../nav/navbar2.jsp" />
     <div class="menu_container">
         <div class="inner_container">
-                <div style="margin:0 100px;">
                 <section class="menu__category mt-4">
                     <ul id="categories">
                         <li>
                             <a href="${pageContext.request.contextPath}/store/manageMenu.do?num=${dto.num}&storeName=${dto.storeName}">전체</a></li>
                         <c:forEach var="tmp" items="${categoryList }" varStatus="status">
 			            	<li data-num="${dto.num }" data-num2="${status.index }" class="category">
-			            		<a href="${pageContext.request.contextPath}/store/manageMenu.do?num=${dto.num}&storeName=${dto.storeName}&category=${tmp}">${tmp }</a></li>
+			            	<a href="${pageContext.request.contextPath}/store/manageMenu.do?num=${dto.num}&storeName=${dto.storeName}&category=${tmp}">${tmp }</a></li>
 			            </c:forEach>
                     </ul>
                 <button id="categoryBtn" style="color:rgb(253, 197, 14); font-weight: 500;" data-bs-toggle="modal" data-bs-target="#modal-categoryBtn">카테고리 추가</button>
@@ -67,13 +66,13 @@ type="text/css" />
                                     </c:otherwise>
                                 </c:choose>
                                 <div class="col-md-4 ms-4">
-                                    <img src="${pageContext.request.contextPath}${tmp.menuImage}" class="rounded" alt="menu_image">
+                                    <img src="${pageContext.request.contextPath}${tmp.menuImage}" class="rounded" alt="menu_image" id="menuImage">
                                 </div>
                                 <div class="col-md-6">
                                     <div class="card-body p-2" style="width: 200px; margin:20px">
-                                        <h6 class="card-text">${tmp.menuName } <!-- <p class="card-text">존맛탱 케이크</p> --> </h6>
-                                        <h6 class="card-text">${tmp.price }  <!-- <p class="card-text">10,000원</p> --> </h6>
-                                        <h6 class="card-text">${tmp.content } <!-- <p class="card-text">생크림, 시나몬, 밀가루</p> --> </h6>
+                                        <h6 class="card-text">${tmp.menuName }</h6>
+                                        <h6 class="card-text">${tmp.price }</h6>
+                                        <h6 class="card-text">${tmp.content }</h6>
                                     </div>
                                 </div>
                                 <div class="menu__card-edit mb-2 pe-2" style="display: flex; justify-content: flex-end;">
@@ -84,7 +83,6 @@ type="text/css" />
                         </div>
                     </c:forEach>
                 </article>
-            </div>
                 <aside class="aside">
                     <button onclick="location.href='#'">매장 정보</button>
                     <button onclick="location.href='${pageContext.request.contextPath}/store/manageMenu.do?num=${dto.num}&storeName=${dto.storeName}'">메뉴 관리</button>
@@ -444,6 +442,23 @@ type="text/css" />
 			});
 		}
 	}
+	
+/* 	//이미지 변경하기
+	
+	let menuImage = document.querySelectorAll('.menuImage');
+	let updateImgBtns = document.querySelectorAll('.updateImgBtn');
+	
+	for(let i=0; i<menuImage; i++) {
+		menuImage.addEventListener('click', function(e){
+			e.preventDefault();
+			updateImgBtns[i].style.display='block';
+			
+	} */
+		
+		
+		
+	})
+	
 	
 </script>
 </body>

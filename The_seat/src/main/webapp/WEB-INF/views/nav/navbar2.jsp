@@ -122,7 +122,7 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
       });
    }
    
-   document.querySelector("home").addEventListener("click", function() {
+   document.querySelector("#home").addEventListener("click", function() {
       location.href = "${pageContext.request.contextPath}/main.do";
    });
    
