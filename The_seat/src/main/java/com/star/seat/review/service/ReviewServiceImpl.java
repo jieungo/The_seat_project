@@ -11,11 +11,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.star.seat.review.dao.ReviewDao;
 import com.star.seat.review.dto.ReviewDto;
+import com.star.seat.store.dao.StoreDao;
+import com.star.seat.store.dto.StoreDto;
 
 @Service
 public class ReviewServiceImpl implements ReviewService{
 	@Autowired
 	private ReviewDao dao;
+	@Autowired
+	private StoreDao sDao;
 	
 	// 작성한 리뷰 정보를 추가하는 method
 	@Override
@@ -52,6 +56,20 @@ public class ReviewServiceImpl implements ReviewService{
 		String email=(String)request.getSession().getAttribute("email");
 		dto.setWriter(email);
 		
+		StoreDto sDto=new StoreDto();
+		sDto.setNum(dto.getStoreNum());
+		sDto=sDao.getMyStore_num(sDto);
+		dto.setStoreName(sDto.getStoreName());
+		
+		int num=dao.getSequence();
+		dto.setNum(num);
+		dto.setGroupNum(num);
+		
+		// 해당
+		if(email.equals(sDto.getOwner())){
+			dto.setTargetNum(num);
+		}
+		
 		dao.addReview(dto);
 	}
 	
@@ -60,5 +78,17 @@ public class ReviewServiceImpl implements ReviewService{
 	public List<ReviewDto> getReviewList(ReviewDto dto) {
 		
 		return dao.getReviewList(dto);
+	}
+	
+	// 해당 DB번호의 리뷰 정보를 삭제하는 method
+	@Override
+	public void deleteReview(ReviewDto dto) {
+		dao.deleteReview(dto);	
+	}
+	
+	// 해당 DB번호의 리뷰 정보를 수정하는 method
+	@Override
+	public void updateReview(ReviewDto dto) {
+		dao.updateReview(dto);	
 	}
 }

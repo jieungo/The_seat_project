@@ -51,6 +51,8 @@ CREATE TABLE storeReview(
 	content VARCHAR2(100) NOT NULL,
 	star NUMBER,
 	targetNum number,
+	groupNum number,
+	orderNum number,
 	imagePath clob,
 	regdate DATE
 );

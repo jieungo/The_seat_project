@@ -11,6 +11,8 @@ public class ReviewDto {
 	private String content;
 	private int star;
 	private int targetNum;
+	private int groupNum;
+	private float orderNum;
 	private String imagePath;
 	private String regdate;
 	private MultipartFile imageFile;
@@ -21,7 +23,7 @@ public class ReviewDto {
 	}
 
 	public ReviewDto(int num, int storeNum, String storeName, String writer, String content, int star, int targetNum,
-			String imagePath, String regdate, MultipartFile imageFile) {
+			int groupNum, float orderNum, String imagePath, String regdate, MultipartFile imageFile) {
 		super();
 		this.num = num;
 		this.storeNum = storeNum;
@@ -30,6 +32,8 @@ public class ReviewDto {
 		this.content = content;
 		this.star = star;
 		this.targetNum = targetNum;
+		this.groupNum = groupNum;
+		this.orderNum = orderNum;
 		this.imagePath = imagePath;
 		this.regdate = regdate;
 		this.imageFile = imageFile;
@@ -89,6 +93,22 @@ public class ReviewDto {
 
 	public void setTargetNum(int targetNum) {
 		this.targetNum = targetNum;
+	}
+
+	public int getGroupNum() {
+		return groupNum;
+	}
+
+	public void setGroupNum(int groupNum) {
+		this.groupNum = groupNum;
+	}
+
+	public float getOrderNum() {
+		return orderNum;
+	}
+
+	public void setOrderNum(float orderNum) {
+		this.orderNum = orderNum;
 	}
 
 	public String getImagePath() {
