@@ -117,15 +117,17 @@ type="text/css" />
 					<!-- 리뷰작성 Btn -->
 					<!-- 리뷰보기 Btn -->	
 						<c:choose>
-							<c:when test="${tmp.reviewExist eq 'YES' }">
+							<c:when test="${tmp.reviewExist == 'YES' }">
 								<button data-num="${tmp.num }" class="reviewListBtn circle-btn" data-bs-toggle="modal" data-bs-target="#modal-reviewList">리뷰 보기</button>
-								<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="reviewBtn" data-bs-toggle="modal" data-bs-target="#reviewModal" style="display:none">리뷰 작성</button>
-								<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="reviewUpdateBtn" data-bs-toggle="modal" data-bs-target="#reviewUpdateModal">리뷰 수정</button>
+								<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="reviewBtn circle-btn" data-bs-toggle="modal" data-bs-target="#reviewModal" style="display:none">리뷰 작성</button>
+								<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="reviewUpdateBtn circle-btn" data-bs-toggle="modal" data-bs-target="#reviewUpdateModal">리뷰 수정</button>
+								<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="reviewDeleteBtn circle-btn">리뷰 삭제</button>
 							</c:when>
-							<c:when test="${tmp.reviewExist eq 'NO' }">
+							<c:when test="${tmp.reviewExist == 'NO' }">
 								<button data-num="${tmp.num }" class="reviewListBtn circle-btn" data-bs-toggle="modal" data-bs-target="#modal-reviewList">리뷰 보기</button>
-								<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="reviewBtn" data-bs-toggle="modal" data-bs-target="#reviewModal">리뷰 작성</button>
-								<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="reviewUpdateBtn" data-bs-toggle="modal" data-bs-target="#reviewUpdateModal" style="display:none">리뷰 수정</button>
+								<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="reviewBtn circle-btn" data-bs-toggle="modal" data-bs-target="#reviewModal">리뷰 작성</button>
+								<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="reviewUpdateBtn circle-btn" data-bs-toggle="modal" data-bs-target="#reviewUpdateModal" style="display:none">리뷰 수정</button>
+								<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="reviewDeleteBtn circle-btn" style="display:none">리뷰 삭제</button>
 							</c:when>
 						</c:choose>	
 					</div>
@@ -243,7 +245,7 @@ type="text/css" />
 	                style="width: 150px; height: 150px; "/>
 	            </a>
                 <form data-num2="" id="reviewAddForm" action="${pageContext.request.contextPath}/store/addReview.do" method="post" enctype="multipart/form-data">                 
-                    <select name="star" id="">
+                    <select name="star">
                     	<c:forEach var="tmp" items="1,2,3,4,5">
                     		<option name="starOption" value="${tmp }">${tmp }</option>
                     	</c:forEach>
@@ -251,7 +253,7 @@ type="text/css" />
                     <input id="inputImg" name="imageFile" type="file" style="display:none;"/>
                     <input type="hidden" name="storeNum" id="insertNum" value="" />
                     <input type="hidden" name="orderNum" id="insertOrderNum" value="" />
-                    <textarea name="content" id="content" cols="30" rows="10" placeholer="리뷰를 작성해주세요."></textarea>
+                    <textarea name="content" id="inputContent" cols="30" rows="10" placeholer="리뷰를 작성해주세요."></textarea>
                     <button id="addBtn" type="submit">작성 완료</button>
                 </form>
             </div>
@@ -265,7 +267,7 @@ type="text/css" />
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title"><strong>리뷰 수정</strong> </h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button id="updateCloseBtn" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
             	<a id="updateImgLink" href="javascript:">
@@ -273,15 +275,15 @@ type="text/css" />
 	                style="width: 150px; height: 150px; "/>
 	            </a>
                 <form id="reviewUpdateForm" action="${pageContext.request.contextPath}/store/updateReview.do" method="post" enctype="multipart/form-data">                 
-                    <select name="star" id="">
+                    <select name="star">
                     	<c:forEach var="tmp" items="1,2,3,4,5">
-                    		<option name="starOption" value="${tmp }">${tmp }</option>
+                    		<option class="updateStar" name="starOption" value="${tmp }">${tmp }</option>
                     	</c:forEach>
                     </select>
-                    <input id="inputImg" name="imageFile" type="file" style="display:none;"/>
+                    <input id="inputUpdateImg" name="imageFile" type="file" style="display:none;"/>
                     <input type="hidden" name="storeNum" id="updateNum" value="" />
                     <input type="hidden" name="orderNum" id="updateOrderNum" value="" />
-                    <textarea name="content" id="content" cols="30" rows="10"></textarea>
+                    <textarea name="content" id="updateContent" cols="30" rows="10"></textarea>
                     <button id="updateBtn" type="submit">수정 완료</button>
                 </form>
             </div>
@@ -540,10 +542,14 @@ type="text/css" />
 	
 	//--------------------------리뷰-----------------------------------------------------------------------------------------------------------
 	document.querySelector("#reviewImgLink").addEventListener("click", function(){
-	document.querySelector("#inputImg").click();
+		document.querySelector("#inputImg").click();
+	});
+	document.querySelector("#updateImgLink").addEventListener("click", function(){
+		document.querySelector("#inputUpdateImg").click();
 	});
 	
 	viewThumbNail("#inputImg", "#reviewImg");
+	viewThumbNail("#inputUpdateImg", "#updateImg");
 	
 	// 이미지 파일을 선택했을 때 동작하는 method
 	function viewThumbNail(rel, imageID){
@@ -611,6 +617,7 @@ type="text/css" />
 					alert("리뷰를 등록하였습니다.");
 					document.querySelector("button.reviewBtn[data-num2=\'"+num+"\']").style.display="none";
 					document.querySelector("button.reviewUpdateBtn[data-num2=\'"+num+"\']").style.display="block";
+					document.querySelector("button.reviewDeleteBtn[data-num2=\'"+num+"\']").style.display="block";
 				}
 			});
 		});
@@ -720,6 +727,33 @@ type="text/css" />
 	    });
 	}
 	
+	// 리뷰 삭제 버튼을 눌렀을 때 동작하는 부분
+	let reviewDeleteBtns=document.querySelectorAll(".reviewDeleteBtn");
+	for(let i=0; i<reviewDeleteBtns.length; i++){
+		reviewDeleteBtns[i].addEventListener("click", function(e){
+			e.preventDefault();
+			
+			let wantDelete=confirm("이 주문에 대한 리뷰를 삭제하시겠습니까?");
+			if(wantDelete){
+				let orderNum=this.getAttribute("data-num2");
+				console.log(orderNum);
+				
+				ajaxPromise("${pageContext.request.contextPath}/store/deleteReview.do", "post", "orderNum="+orderNum)
+				.then(function(response){
+					return response.json();
+				}).then(function(data){
+					console.log(data);
+					if(data.beDeleted){
+						alert("리뷰를 삭제하였습니다.");
+						document.querySelector("button.reviewBtn[data-num2=\'"+orderNum+"\']").style.display="block";
+						document.querySelector("button.reviewUpdateBtn[data-num2=\'"+orderNum+"\']").style.display="none";
+						document.querySelector("button.reviewDeleteBtn[data-num2=\'"+orderNum+"\']").style.display="none";
+					}			
+				});	
+			}
+		});
+	}
+	
 	// 리뷰 수정 버튼을 눌렀을 때 동작하는 부분
 	let reviewUpdateBtns=document.querySelectorAll(".reviewUpdateBtn");
 	for(let i=0; i<reviewUpdateBtns.length; i++){
@@ -737,10 +771,47 @@ type="text/css" />
 			document.querySelector("#updateOrderNum").value=num2;
 			document.querySelector("#reviewUpdateForm").setAttribute("data-num2", num2);
 		
-			//
+			// ajax로 해당 리뷰의 내용을 가져옴
+			ajaxPromise("${pageContext.request.contextPath}/store/getReviewData.do", "post", "orderNum="+num2)
+			.then(function(response){
+				return response.json();
+			}).then(function(data){
+				console.log(data);
+				if(data.beSuccess){
+					console.log(data.reviewData);
+					let path="${pageContext.request.contextPath}"+data.reviewData.imagePath;
+					document.querySelector("#updateImg").setAttribute("src", path);
+					document.querySelector("#updateOrderNum").value=data.reviewData.orderNum;
+					document.querySelector("#updateContent").innerText=data.reviewData.content;
+					document.querySelector("option.updateStar[value=\'"+data.reviewData.star+"\']").selected=true;
+				}
+			});
 		});
 	}
 	
+	updateReview("#reviewUpdateForm");
+	
+	// 수정 완료 버튼을 눌렀을 때 동작하는 부분
+	function updateReview(rel){
+		document.querySelector(rel).addEventListener("submit", function(e){
+			// 일단 form 제출을 막음
+			e.preventDefault();
+			
+			let num=this.getAttribute("data-num2");
+			console.log(num);
+			
+			ajaxFormPromise(this)
+			.then(function(response){
+				return response.json();
+			}).then(function(data){
+				console.log(data);
+				if(data.beUpdated){
+					document.querySelector("#updateCloseBtn").click();
+					alert("리뷰를 수정하였습니다.");
+				}
+			});
+		});
+	}
 </script>
 </body>
 </html>

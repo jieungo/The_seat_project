@@ -85,12 +85,26 @@ public class ReviewController {
 		return map;
 	}
 	
+	// 해당 리뷰 정보를 가져오는 method
+	@RequestMapping(value = "/store/getReviewData.do", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> getReviewData(ReviewDto dto){
+		
+		ReviewDto rDto=service.getReviewData(dto);
+		
+		Map<String, Object> map=new HashMap<>();
+		map.put("beSuccess", true);
+		map.put("reviewData", rDto);
+		
+		return map;
+	}
+	
 	// 해당 리뷰를 수정하는 method
 	@RequestMapping(value = "/store/updateReview.do", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> updateReview(ReviewDto dto){
+	public Map<String, Object> updateReview(ReviewDto dto, HttpServletRequest request){
 		
-		service.updateReview(dto);
+		service.updateReview(dto, request);
 		
 		Map<String, Object> map=new HashMap<>();
 		map.put("beUpdated", true);
