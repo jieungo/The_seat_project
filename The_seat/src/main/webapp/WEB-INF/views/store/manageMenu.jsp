@@ -36,18 +36,18 @@ type="text/css" />
                 </section>
                 <article class="menu__list pe-3 ps-3" style="height:450px; text-overflow: hidden; overflow-x: auto;">
                     <div class="card mb-5 mt-3 ms-3" style="width: 450px; height: 220px; margin-top: 20px;">
-                        <div class="menu__add card-body">
-                        <c:choose>
-                            <c:when test="${empty categoryList }">
-                                <span style="color: rgb(173, 173, 173); font-size: 14px;">카테고리를 먼저 추가해주세요.</span>
-                            </c:when>
-                            <c:when test="${not empty categoryList}">
-                                <button id="addMenuBtn" type="button" class="circle-btn" data-bs-toggle="modal" data-bs-target="#modal-menuAddForm">
-                                    <div style="font-size: 20px; font-weight: 500;">+</div>
-                                </button>
-                            <span style="color: rgb(173, 173, 173); font-size: 14px;">새로운 메뉴 추가하기</span>
-                            </c:when>
-                        </c:choose>
+                        <div class="menu__add card-body" id="addBox">
+			            <c:choose>
+			            	<c:when test="${empty categoryList }">
+			                	<span id="addMention" style="color: rgb(173, 173, 173); font-size: 14px;">카테고리를 먼저 추가해주세요.</span>
+			            	</c:when>
+			            	<c:when test="${not empty categoryList}">
+			            		<button id="addMenuBtn" type="button" class="circle-btn" data-bs-toggle="modal" data-bs-target="#modal-menuAddForm">
+				                    <div style="font-size: 20px; font-weight: 500;">+</div>
+				                </button>
+			                <span id="addMention" style="color: rgb(173, 173, 173); font-size: 14px;">새로운 메뉴 추가하기</span>
+			            	</c:when>
+			            </c:choose>
                         </div>
                     </div>
                     
@@ -104,7 +104,9 @@ type="text/css" />
                 </div>
                 <div class="modal-body">
                     <form id="menuAddForm" action="${pageContext.request.contextPath}/store/addMenu.do" method="post" enctype="multipart/form-data">                 
-                        <img id="thumbImg" src="" alt="" />
+                        <a href="javascript:" id="imgLink">
+	                    	<img id="thumbImg" src="" alt="" />
+	                    </a>
                         
                         <input type="hidden" name="num" value="${storeDBNum }" />
                         <input class="form-control" type="file" name="imageFile" id="image">
@@ -113,7 +115,7 @@ type="text/css" />
                         <input class="form-control" type="text" name="content" id="menucontaine" placeholder="상품구성" required="required">
                         <span class="dropdown">카테고리 추가</span>
      
-                        <select name="category" id="">
+                        <select name="category" id="category">
                             <c:forEach var="tmp" items="${categoryList }" varStatus="status">
 	                    		<option data-num2="${status.index }" class="categoryOption" value="${tmp }">${tmp }</option>
 	                    	</c:forEach>
@@ -228,6 +230,7 @@ type="text/css" />
 			}
 		});	
 	}
+	
 	//해당 매장의 메뉴를 best로 설정 및 취소하는 method
 	let icons = document.querySelectorAll('.starIcon');
 	let storeNum=${storeDBNum};

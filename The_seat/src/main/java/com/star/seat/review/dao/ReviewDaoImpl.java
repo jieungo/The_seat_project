@@ -13,6 +13,12 @@ public class ReviewDaoImpl implements ReviewDao{
 	@Autowired
 	private SqlSession session;
 	
+	// sequence의 다음 숫자를 가져오는 method
+	@Override
+	public int getSequence() {
+		return session.selectOne("getSequence");
+	}
+	
 	// 작성한 리뷰 정보를 추가하는 method
 	@Override
 	public void addReview(ReviewDto dto) {
@@ -23,5 +29,17 @@ public class ReviewDaoImpl implements ReviewDao{
 	@Override
 	public List<ReviewDto> getReviewList(ReviewDto dto) {
 		return session.selectList("getReviewList", dto);
+	}
+
+	// 해당 DB번호의 리뷰 정보를 삭제하는 method
+	@Override
+	public void deleteReview(ReviewDto dto) {
+		session.delete("deleteReview", dto);
+	}
+	
+	// 해당 DB번호의 리뷰 정보를 수정하는 method
+	@Override
+	public void updateReview(ReviewDto dto) {
+		session.update("updateReview", dto);	
 	}
 }

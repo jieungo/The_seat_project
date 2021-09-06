@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="review">
+	<!-- sequence의 다음 숫자를 가져오는 method -->
+	<select id="getSequence" resultType="int">
+		select storeReview_seq.nextval
+		from dual
+	</select>
+
 	<!-- 작성한 리뷰 정보를 추가하는 method -->
 	<insert id="addReview">
 		insert into storeReview
 		(num, storeNum, storeName, writer, content, star,
-			 targetNum, imagePath, regdate)
-		values(storeReview_seq.nextval, #{storeNum}, #{storeName},
-			 #{writer}, #{content}, #{star}, #{targetNum}, #{imagePath}, sysdate)
+			 targetNum, groupNum, orderNum, imagePath, regdate)
+		values(#{num}, #{storeNum}, #{storeName}, #{writer},
+			#{content}, #{star}, #{targetNum}, #{groupNum}, #{orderNum}, #{imagePath}, sysdate)
 	</insert>
 	
 	<!-- 해당 매장 리뷰 정보를 가져오는 method -->
@@ -15,6 +21,20 @@
 		select *
 		from storeReview
 		where storeNum=#{storeNum}
-		order by num asc, targetNum asc
+		order by groupNum desc, num asc
 	</select>
+	
+	<!-- 해당 DB번호의 리뷰 정보를 삭제하는 method -->
+	<delete id="deleteReview" parameterType="reviewDto">
+		delete
+		from storeReview
+		where num=#{num}
+	</delete>
+	
+	<!-- 해당 DB번호의 리뷰 정보를 수정하는 method -->
+	<update id="updateReview" parameterType="reviewDto">
+		update storeReview
+		set content=#{content}
+		where num=#{num} and orderNum=#{orderNum}
+	</update>
 </mapper>
