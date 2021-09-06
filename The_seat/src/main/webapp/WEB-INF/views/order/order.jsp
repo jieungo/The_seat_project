@@ -26,11 +26,13 @@
 	href="${pageContext.request.contextPath}/resources/img/summer.jpg">
 
 <style>
+	/* 주문하기 옆에 위치한 전 페이지로 이동하는 버튼 css */
 	#backBtn {
 		border: none;
 		background-color: white;
 	}
 	
+	/* 메뉴 카테고리 css */
 	#categories {
 		display: flex;
 		margin-top: 20px;
@@ -40,7 +42,7 @@
 		margin-left: 15px;
 		text-decoration: none;
 		color: black;
-		font-size: 25px;
+		font-size: 30px;
 	}
 	
 	#categories a:hover, a:focus {
@@ -49,17 +51,178 @@
 		color: #636363;
 	}
 	
+	/* 메뉴 이름 버튼 css */
 	#orderMenu {
 		border: none;
-		background-color: #fff;
+		background-color: rgb(176, 215, 252); 
+		color: rgb(104, 104, 104);
+		font-weight: bold;
 	}
+	
+	/* 메뉴 정보가 보이는 카드 css */
 	.card {
 		width: 100% !important;
 		height: 400px !important;
 		overflow: auto;
 	}
-</style>
+	
+	/* 주문내역 영수증 문구 위치 및 모양 css */
+	.orderR {
+ 		position: relative;
+ 		margin-left: 180px;
+	}
 
+	.orderR .text_top {
+  		position: absolute;
+  		top: 50px;
+  		left: 90px;
+	}
+	
+	.text_top {
+		display: flex;
+	}
+	
+	.text_middle {
+		position: absolute;
+		top: 120px;
+		left: 100px;
+	}
+	
+	.text_bottom {
+		position: absolute;
+		bottom: 200px;
+		right: 180px;
+	}
+	
+	/* 다시담기 버튼 css */
+	#reset {
+  		position: absolute;
+  		bottom: 130px;
+  		left : 90px;
+  		background-color: #fc5555;
+  		border: none;
+  		color: #ffffff;
+  		cursor: pointer;
+	 	display: inline-block;
+  		font-size: 22px;
+  		line-height: 1em;
+	  	outline: none;
+	  	padding: 12px 30px 10px;
+	  	text-transform: uppercase;
+	  	font-weight: 700;
+	}
+	
+	#reset:before,
+	#reset:after {
+  		border-color: transparent;
+	  	-webkit-transition: all 0.25s;
+	  	transition: all 0.25s;
+	  	border-style: solid;
+	  	border-width: 0;
+	  	content: "";
+	  	height: 24px;
+	  	position: absolute;
+	  	width: 24px;
+	}
+	#reset:before {
+  		border-color: #fc5555;
+  		border-right-width: 2px;
+  		border-top-width: 2px;
+  		right: -5px;
+  		top: -5px;
+	}
+	#reset:after {
+	  	border-bottom-width: 2px;
+	  	border-color: #fc5555;
+	  	border-left-width: 2px;
+	  	bottom: -5px;
+	  	left: -5px;
+	}
+	#reset:hover,
+	#reset.hover {
+  		background-color: #fc5555;
+	}
+	#reset:hover:before,
+	#reset.hover:before,
+	#reset:hover:after,
+	#reset.hover:after {
+  		height: 100%;
+ 	 	width: 100%;
+	}
+	
+	/* 주문하기 버튼 css */
+	#goOrder {
+		position: absolute;
+  		bottom: 130px;
+  		right : 120px;
+  		background-color: #fc5555;
+  		border: none;
+  		color: #ffffff;
+  		cursor: pointer;
+	 	display: inline-block;
+  		font-size: 22px;
+  		line-height: 1em;
+	  	outline: none;
+	  	padding: 12px 30px 10px;
+	  	text-transform: uppercase;
+	  	font-weight: 700;
+	}
+	
+	#goOrder:before,
+	#goOrder:after {
+  		border-color: transparent;
+	  	-webkit-transition: all 0.25s;
+	  	transition: all 0.25s;
+	  	border-style: solid;
+	  	border-width: 0;
+	  	content: "";
+	  	height: 24px;
+	  	position: absolute;
+	  	width: 24px;
+	}
+	#goOrder:before {
+  		border-color: #fc5555;
+  		border-right-width: 2px;
+  		border-top-width: 2px;
+  		right: -5px;
+  		top: -5px;
+	}
+	#goOrder:after {
+	  	border-bottom-width: 2px;
+	  	border-color: #fc5555;
+	  	border-left-width: 2px;
+	  	bottom: -5px;
+	  	left: -5px;
+	}
+	#goOrder:hover,
+	#goOrder.hover {
+  		background-color: #fc5555;
+	}
+	#goOrder:hover:before,
+	#goOrder.hover:before,
+	#goOrder:hover:after,
+	#goOrder.hover:after {
+  		height: 100%;
+ 	 	width: 100%;
+	}
+	
+	/* 메뉴 수량 input 박스 css*/
+	#menuCount {
+		text-align-last: center;
+      	text-align: center;
+      	border: none;
+      	border-radius: 7px;
+      	font-size: 20px;
+      	font-weight: bold;
+      	color: rgb(104, 104, 104);
+	}
+	
+	#menuCount:focus {
+		outline: none;
+	}
+	
+	
+</style>
 </head>
 <body>
 	<div class="container">
@@ -89,7 +252,7 @@
 				
 				<!----------------- 주문페이지에서 메뉴 고르기 ------------------>
 				<div class="row">
-					<div class="col text-center" style="margin-top: 40px;">
+					<div class="col text-center" style="margin-top: 45px;">
 						<div class="row row-cols-1 row-cols-md-2 g-4" style="width:100%; height: 800px; !important; overflow: auto;">
 							<c:forEach var="tmp" items="${menuList }">
 								<c:if test="${tmp.best == 'yes' }">
@@ -102,26 +265,42 @@
 										<input type="hidden" name="tableNum" value="${tableNum }" /> 
 										<input type="hidden" name="price" value="${tmp.price}" /> 
 										<input type="hidden" name="num" value="${dto.num }" />
-										<button type="submit" id="orderMenu">${tmp.menuName }</button>
-										<input type="number" name="menuCount" min="1" max="9" value="1">
-									</form>
-									<div class="col">
-										<div class="card">
-											<img src="${pageContext.request.contextPath}${tmp.menuImage }" class="card-img-top" alt="...">
-											<div class="card-body" style="background-color: rgb(176, 215, 252); color: rgb(104, 104, 104); font-weight: bold;">
-												<h5 class="card-title">${tmp.menuName }</h5>
-												<p class="card-text">${tmp.price } ￦</p>
+										
+										<div class="col">
+											<div class="card">
+												<img src="${pageContext.request.contextPath}${tmp.menuImage }" class="card-img-top" alt="menuImage">
+												<div class="card-body" style="background-color: rgb(176, 215, 252); color: rgb(104, 104, 104); font-weight: bold;">
+													<h5 class="card-title"><button type="submit" id="orderMenu">${tmp.menuName }</button></h5>
+													<p class="card-text">${tmp.price } ￦</p>
+													<input type="number" id="menuCount" name="menuCount" min="1" max="9" value="1">
+												</div>
 											</div>
 										</div>
-									</div>
+									</form>
 								</c:if>
 							</c:forEach>
 						</div>
 					</div>
+					
 					<!--------------------------- 주문내역 영수증 ---------------------------->
-					<div class="col">
-						<img src="${pageContext.request.contextPath}/resources/img/p.svg" class="card-img-top"  alt="receipt"
-					 		style="width: 90%; height: 600px;">
+					<div class="col orderR" style="margin-top: 45px;">
+						<img src="${pageContext.request.contextPath}/resources/img/p.svg" alt="receipt"
+					 		style="width: 90%; height: 700px;">
+			 			<div class="text_top">
+							<h3>메뉴</h3>
+							<h3 style="margin-left: 90px;">수량</h3>
+							<h3 style="margin-left: 110px;">금액</h3>
+						</div>
+						<div class="text_middle">
+							<h5 id="orderList"></h5>
+						</div>
+    					<div class="text_bottom">
+	      					<h4>
+								총 결제 금액 <span id="amount" style="font-size: 25px; color: rgb(71, 150, 255);">0</span>
+							</h4>
+    					</div>
+						<button id="reset">다시 담기</button>
+						<button id="goOrder">주문 하기</button>
 					</div>
 				</div>
 				
@@ -147,12 +326,12 @@
 					</c:forEach>
 				</div>
 				-->
+				<!--
 				<h3>전체 메뉴</h3>
 
 				<div>
 					<c:forEach var="tmp" items="${menuList }">
-						<form class="orderMenu"
-							action="${pageContext.request.contextPath}/order/insert.do">
+						<form class="orderMenu" action="${pageContext.request.contextPath}/order/insert.do">
 							<input type="hidden" name="orderNum" value="${orderNum }" />
 							<input type="hidden" name="email" value="${email }" />
 							<input type="hidden" name="storeName" value="${dto.storeName }" /> 
@@ -185,6 +364,7 @@
 				</div>
 
 			</section>
+			-->
 		</div>
 
 		<!------------------------------ footer 불러오기 --------------------------->
@@ -234,7 +414,7 @@
 			
 			let span2 = document.createElement('span');
 			span2.setAttribute('class','orderMenuCount');
-			span2.innerText=" 수량 "+menuCount+"개 ";
+			span2.innerText=" "+menuCount+"개 ";
 			document.querySelector("#orderList").appendChild(span2);
 			
 			let span3 = document.createElement('span');

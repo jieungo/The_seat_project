@@ -16,6 +16,9 @@ public interface ReviewService {
 	// 해당 DB번호의 리뷰 정보를 삭제하는 method
 	public void deleteReview(ReviewDto dto);
 	
+	// 해당 DB번호의 리뷰 정보를 가져오는 method
+	public ReviewDto getReviewData(ReviewDto dto);
+	
 	// 해당 DB번호의 리뷰 정보를 수정하는 method
-	public void updateReview(ReviewDto dto);
+	public void updateReview(ReviewDto dto, HttpServletRequest request);
 }

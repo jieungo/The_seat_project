@@ -33,6 +33,10 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
 		justify-content:space-between;
 		flex-direction:row;
 	}
+	
+	#home {
+		cursor:pointer;
+	}
    
 </style>
 

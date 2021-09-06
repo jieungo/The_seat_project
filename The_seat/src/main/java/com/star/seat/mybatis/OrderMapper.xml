@@ -24,6 +24,7 @@
 				FROM order_
 				WHERE num = #{num }
 				GROUP BY orderNum, email, storeName, storeLogo, num, tableNum, amount, reviewExist, cancel, confirm, regdate
+
 				ORDER BY orderNum DESC) result1)
 		WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
 	</select>

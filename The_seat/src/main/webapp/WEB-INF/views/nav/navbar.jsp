@@ -23,15 +23,23 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
 	  color: black;
 	  text-decoration: none;
 	}
-   .navbar{ 
-       position: relative;
+	
+	a:hover {
+	  color: black;
+	}
+	
+   .navbars{ 
        display: flex;
-       flex-wrap: wrap;
-       flex-direction: row;
        align-items: center;
-       justify-content: space-between;
+       justify-content: center;
        padding-top: .5rem;
        padding-bottom: .5rem;
+       position: fixed;
+       top:0;
+       z-index:999;
+       width:100%;
+       background-color:white;
+       box-shadow: 1px 1px 11px rgba(172, 172, 172, 0.699);
    }
 	
    #area, #group{
@@ -44,6 +52,7 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
       text-align-last: center;
       text-align: center;
    }
+   
    #area, #group:focus{
       outline: none;
    }
@@ -83,7 +92,7 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
 	  -webkit-transform:scale(1.1);
    }
 </style>
-<nav class="navbar navbar-light">
+<nav class="navbars navbar-light">
 	<div style="display:flex; align-items:center;">
 	   <img id="chair" style="width: 50px; height: 50px;"
 	      src="${pageContext.request.contextPath}/resources/img/chair.png"

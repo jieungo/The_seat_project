@@ -26,6 +26,7 @@
 	href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap"
 	rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
 	<div class="container">
@@ -202,14 +203,16 @@
              .then(function(data){
                 console.log(data.login.isValemail);
                 if(data.login.isValemail){
-                   alert(data.login.result.name+"님 로그인되었습니다.");
-                   location.href="${pageContext.request.contextPath}/main.do";
+                   swal('로그인 성공!',data.login.result.name+"님 로그인되었습니다.",'success')
+                   .then(function(){
+	                   location.href="${pageContext.request.contextPath}/main.do";                	   
+                   })
                 } else {
-                   alert("아이디와 비밀번호를 확인해 주세요");
+                	swal('로그인 실패!',"아이디와 비밀번호를 확인해 주세요",'warning');
                 };
              });
           }else{
-             alert("아이디가 존재하지 않습니다. 다시 확인해 주세요.")
+             swal('로그인 실패!',"아이디가 존재하지 않습니다. 다시 확인해 주세요.",'error');
           };
        });
        //ajax 로 폼 내용 전송하고 json으로 응답 받기
@@ -332,15 +335,17 @@
       const isFormValid = isEmailValid && isPwdValid ;
          
       if(!isFormValid) {
-         alert("입력이 올바르지 않습니다. 다시 회원가입 해주세요.")
+         swal('회원가입 실패',"입력이 올바르지 않습니다. 다시 회원가입 해주세요.",'error');
       } else {
          ajaxFormPromise(signupForm)
          .then(function(response){
             return response.json();
          })
          .then(function(data){
-            alert("회원 가입을 축하드립니다.");
-            location.href="${pageContext.request.contextPath}/users/loginform.do";
+            swal('회원가입 성공!',"회원 가입을 축하드립니다.", 'success')
+            .then(function(){
+	            location.href="${pageContext.request.contextPath}/users/loginform.do";	
+            })
          });                        
       };
    });

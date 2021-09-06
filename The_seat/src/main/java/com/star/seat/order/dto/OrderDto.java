@@ -23,6 +23,7 @@ public class OrderDto {
 	public OrderDto(int orderNum, String email, String storeName, String storeLogo, int num, int tableNum, String menu,
 			int menuCount, int price, int amount, String reviewExist, String confirm, String cancel, String regdate,
 			int startRowNum, int endRowNum) {
+
 		super();
 		this.orderNum = orderNum;
 		this.email = email;
@@ -145,7 +146,6 @@ public class OrderDto {
 	public void setCancel(String cancel) {
 		this.cancel = cancel;
 	}
-
 	public String getRegdate() {
 		return regdate;
 	}

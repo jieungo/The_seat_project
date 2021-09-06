@@ -13,7 +13,7 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
 />
 <link rel="stylesheet"
-href="${pageContext.request.contextPath}/resources/css/manageMenu.css?ver=5"
+href="${pageContext.request.contextPath}/resources/css/manageMenu.css?ver=6"
 type="text/css" />
 </head>
 
@@ -107,7 +107,7 @@ type="text/css" />
 	                    </a>
                         
                         <input type="hidden" name="num" value="${storeDBNum }" />
-                        <input class="form-control" type="file" name="imageFile" id="image">
+                        <input class="form-control" type="file" name="imageFile" id="image" style="visibility:hidden; margin:0;">
                         <input class="form-control" type="text" name="menuName" id="menuname" placeholder="상품명" required="required">
                         <input class="form-control" type="text" name="price" id="menuprice" placeholder="상품가격">
                         <input class="form-control" type="text" name="content" id="menucontaine" placeholder="상품구성" required="required">
@@ -118,7 +118,7 @@ type="text/css" />
 	                    		<option data-num2="${status.index }" class="categoryOption" value="${tmp }">${tmp }</option>
 	                    	</c:forEach>
                         </select>
-                        <button id="addBtn" type="submit">완료</button>
+                        <button id="addBtn" type="submit" class="submitBtn">완료</button>
                     </form>
                 </div>
             </div>
@@ -133,12 +133,12 @@ type="text/css" />
                     <h4 class="modal-title"><strong>카테고리 추가</strong> </h4>
                     <button id="modal-close" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body menu__add-modal">
                     <form data-num="${dto.num }" id="addCategoryForm" action="${pageContext.request.contextPath}/store/addCategory.do" method="post">                 
-                        <label class="form-label" for="category">추가할 카테고리 이름</label>
+                        <label class="form-label mb-4" for="category" style="font-weight: 500;">추가할 카테고리 이름</label>
                         <input type="hidden" name="num" value="${storeDBNum}" />
                         <input class="form-control" type="text" id="inputCategory" name="category"/>
-                        <button id="addCategory" type="submit">완료</button>
+                        <button id="addCategory" type="submit" class="submitBtn mt-4">완료</button>
                     </form>
                 </div>
             </div>
@@ -442,22 +442,6 @@ type="text/css" />
 			});
 		}
 	}
-	
-/* 	//이미지 변경하기
-	
-	let menuImage = document.querySelectorAll('.menuImage');
-	let updateImgBtns = document.querySelectorAll('.updateImgBtn');
-	
-	for(let i=0; i<menuImage; i++) {
-		menuImage.addEventListener('click', function(e){
-			e.preventDefault();
-			updateImgBtns[i].style.display='block';
-			
-	} */
-		
-		
-		
-	})
 	
 	
 </script>
