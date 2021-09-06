@@ -1,11 +1,10 @@
 @charset "UTF-8";
 
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
 
-    * {
-     box-sizing: border-box;
-     margin: 0;
- }
- 
 body {
      background-color: #598eff;
      height: 100vh;
@@ -93,7 +92,6 @@ input:focus {
     align-items: center; 
     justify-content: center;
 }
-
 
 .inner_container {
     display: flex;
@@ -183,6 +181,27 @@ input:focus {
     padding-left:0;
 }
 
+#category {
+	width: 30%;
+	border: 2px solid #598eff;
+	border-radius: 5px;
+	text-align: center;
+	color: gray;
+	display: inline-block;
+	margin:20px;
+}
+#menuAddForm {
+	text-align: center;
+	margin-top: 20px;
+}
+
+#menuAddForm > input {
+	margin-bottom: 10px;
+}
+
+.menu__add-modal {
+	text-align: center;
+}
 
 .starIcon {
     color: rgb(253, 197, 14);
@@ -191,4 +210,14 @@ input:focus {
 .card {
     border: none;
     box-shadow: 4px 6px 11px rgba(172, 172, 172, 0.699);
+}
+
+.submitBtn {
+	background-color: white;
+    color: #598eff;
+    box-shadow: 1px 1px 11px rgba(172, 172, 172, 0.699);
+	border-radius: 5px;
+    width: 50%;
+    font-weight: 600;
+	margin: 20px 0;
 }

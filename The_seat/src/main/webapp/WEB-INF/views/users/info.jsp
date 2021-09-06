@@ -25,7 +25,7 @@ type="text/css" />
 <link rel="shortcut icon" type="image⁄x-icon" href="${pageContext.request.contextPath}/resources/img/summer.jpg">
 
 </head>
-<body>
+<body style="margin-top:150px;">
 <div class="container">
 	<jsp:include page="/WEB-INF/views/nav/navbar.jsp" />
 	

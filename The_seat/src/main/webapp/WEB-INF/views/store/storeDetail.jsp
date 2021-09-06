@@ -144,10 +144,10 @@
 	
 </style>
 </head>
-<body>
+<!---------------------- 네비바를 import 한다. ------------------------->
+<jsp:include page="/WEB-INF/views/nav/navbar.jsp" />
+<body style="margin-top:150px;">
 <div class="container">
-	<!---------------------- 네비바를 import 한다. ------------------------->
-	<jsp:include page="/WEB-INF/views/nav/navbar.jsp" />
 	
 	<section style="text-align: center; margin-top: 10px;">
 		<!---------------------- DB 연동해서 파라미터 값으로 칼럼 값을 받아온다.  --------------------->
@@ -300,15 +300,14 @@
 						</div>
 					</div>
 				</c:forEach>
-					
 				</div>
 			</div>
 		</div>
 	</div>
-<!------------------------------ footer 불러오기 --------------------------->
-<jsp:include page="/WEB-INF/views/nav/footer.jsp" />
 </div>
 
+<!------------------------------ footer 불러오기 --------------------------->
+<jsp:include page="/WEB-INF/views/nav/footer.jsp" />
 	
 <!--------------모달창-------------- 리뷰 보기 Modal -------------------------------->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
