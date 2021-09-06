@@ -11,6 +11,7 @@ public class OrderDto {
 	private int menuCount;
 	private int price;
 	private int amount;
+	private String reviewExist;
 	private String regdate;
 	private int startRowNum;
 	private int endRowNum;
@@ -18,7 +19,7 @@ public class OrderDto {
 	public OrderDto () {}
 
 	public OrderDto(int orderNum, String email, String storeName, String storeLogo, int num, int tableNum, String menu,
-			int menuCount, int price, int amount, String regdate, int startRowNum, int endRowNum) {
+			int menuCount, int price, int amount, String reviewExist, String regdate, int startRowNum, int endRowNum) {
 		super();
 		this.orderNum = orderNum;
 		this.email = email;
@@ -30,6 +31,7 @@ public class OrderDto {
 		this.menuCount = menuCount;
 		this.price = price;
 		this.amount = amount;
+		this.reviewExist = reviewExist;
 		this.regdate = regdate;
 		this.startRowNum = startRowNum;
 		this.endRowNum = endRowNum;
@@ -113,6 +115,14 @@ public class OrderDto {
 
 	public void setAmount(int amount) {
 		this.amount = amount;
+	}
+
+	public String getReviewExist() {
+		return reviewExist;
+	}
+
+	public void setReviewExist(String reviewExist) {
+		this.reviewExist = reviewExist;
 	}
 
 	public String getRegdate() {

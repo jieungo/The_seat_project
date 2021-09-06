@@ -7,10 +7,10 @@
 		FROM
 			(SELECT result1.*, ROWNUM as rnum
 			FROM
-				(SELECT orderNum, email, storeName, storeLogo, num, tableNum, amount, regdate
+				(SELECT orderNum, email, storeName, storeLogo, num, tableNum, amount, reviewExist, regdate
 				FROM order_
 				WHERE email = #{email }
-				GROUP BY orderNum, email, storeName, storeLogo, num, tableNum, amount, regdate
+				GROUP BY orderNum, email, storeName, storeLogo, num, tableNum, amount, reviewExist, regdate
 				ORDER BY orderNum DESC) result1)
 		WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
 	</select>

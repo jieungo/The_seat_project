@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.star.seat.order.dto.OrderDto;
 import com.star.seat.review.dto.ReviewDto;
 
 @Repository
@@ -37,9 +38,21 @@ public class ReviewDaoImpl implements ReviewDao{
 		session.delete("deleteReview", dto);
 	}
 	
+	// 해당 DB번호의 리뷰 정보를 가져오는 method
+	@Override
+	public ReviewDto getReviewData(ReviewDto dto) {
+		return session.selectOne("getReviewData", dto);
+	}
+	
 	// 해당 DB번호의 리뷰 정보를 수정하는 method
 	@Override
 	public void updateReview(ReviewDto dto) {
 		session.update("updateReview", dto);	
+	}
+	
+	// 해당 주문 번호에 해당하는 review 존재 여부를 조정하는 method;
+	@Override
+	public void reviewExist(OrderDto dto) {
+		session.update("reviewExist", dto);
 	}
 }
