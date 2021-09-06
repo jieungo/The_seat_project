@@ -21,6 +21,7 @@ String search = request.getParameter("keyword");
 	integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
 	crossorigin="anonymous"></script>
 <style>
+	
 	a:link {
 		color: black;
 		text-decoration: none;
@@ -61,11 +62,40 @@ String search = request.getParameter("keyword");
 		width: 100px;
 		height: 100px;
 	}
+	
+	.main-card {
+		/* border: 1px solid lightgray; */
+		border-radius: 5px;
+		background-color: white;
+		transition: all 0.2s ease-in-out;
+		max-width: 500px;
+		min-width: 300px;
+		min-height: 200px;
+		margin: auto;
+		display:flex;
+		align-items:center;
+		padding:15px;
+	}
+	
+	.main-card:hover {
+		transform: scale(1.1);
+		box-shadow: 4px 6px 11px rgba(172, 172, 172, 0.699);
+	}
+	
+	.main-card {
+		display: flex;
+		justify-content:space-between;
+		padding:15px;
+		margin-bottom: 20px;
+	}
+	
+	
+	
 </style>
 </head>
-<body>
+<body style="margin-top:200px; background-color:#f6f6f6;">
+	<jsp:include page="/WEB-INF/views/nav/navbar.jsp" />
 	<div class="container">
-		<jsp:include page="/WEB-INF/views/nav/navbar.jsp" />
 
 		<c:if test="${ not empty dto.keyword }">
 			<p>
@@ -76,18 +106,17 @@ String search = request.getParameter("keyword");
 	</div>
 
 	<!-- 임시 검색 결과 -->
-	<div class="container" style="margin-top: 20px;">
-		<div class="row row-cols-3 row-cols-md-2 g-4">
+	<div class="container" style="margin-top: 20px; width:80%;">
+		<div class="row row-cols-3 row-cols-md-2 g-4" >
 			<c:forEach var="tmp" items="${list }">
 				<a
 					href="${pageContext.request.contextPath}/store/storeDetail.do?num=${tmp.num}">
-					<div class="col">
-						<div class="row g-0">
-							<div class="col-md-4">
+						<div class="row g-0 main-card">
+							<div class="col-md-4" style="height:100%">
 								<img src="${pageContext.request.contextPath}${tmp.image_logo } "
 									class="img-fluid" alt="storeImageLogo">
 							</div>
-							<div class="col-md-8">
+							<div class="col-md-6">
 								<div class="card-body">
 									<h5 class="card-title">이름 : ${tmp.storeName }</h5>
 									<p class="card-text">주소 : ${tmp.storeAddr }</p>
@@ -97,16 +126,14 @@ String search = request.getParameter("keyword");
 								</div>
 							</div>
 						</div>
-					</div>
+					
 				</a>
 			</c:forEach>
 		</div>
 		<p>테스트용 리뷰 링크</p>
 		<a href="${pageContext.request.contextPath}/store/test.do">테슽흐</a>
-
-		<!------------------------------ footer 불러오기 --------------------------->
-		<jsp:include page="/WEB-INF/views/nav/footer.jsp" />
-
 	</div>
+	<!------------------------------ footer 불러오기 --------------------------->
+	<jsp:include page="/WEB-INF/views/nav/footer.jsp" />
 </body>
 </html>

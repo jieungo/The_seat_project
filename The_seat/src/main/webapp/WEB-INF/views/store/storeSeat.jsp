@@ -19,7 +19,7 @@
 <jsp:include page="../nav/navbar2.jsp" />
 
 <div class="myStore_container" style="display: flex; flex-direction: row; justify-content: space-between">
-	<div style="display: flex; flex-direction: column; padding: 20px 30px; width: 750px;">
+	<div style="display: flex; flex-direction: column; padding: 20px 30px; width: 650px;">
         
     <!-------------------------------- 타이틀 ---------------------------------->
         <header class="store__order-header">
