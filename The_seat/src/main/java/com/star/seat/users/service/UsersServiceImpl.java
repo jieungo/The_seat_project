@@ -191,4 +191,17 @@ public class UsersServiceImpl implements UsersService {
 		//Map 객체를 리턴해 준다. 
 		return map;
 	}
+
+	@Override
+	public Map<String, Object> getOrderData(HttpServletRequest request) {
+		
+		//로그인된 아이디를 읽어온다. 
+		String email=(String)request.getParameter("email");
+		//DB 에서 회원 정보를 얻어와서 
+		UsersDto dto=dao.getData(email);
+		//ModelAndView 객체에 담아준다.
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("dto", dto);
+		return map;
+	}
 }

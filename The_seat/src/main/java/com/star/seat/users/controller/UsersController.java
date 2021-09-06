@@ -133,11 +133,20 @@ public class UsersController {
 		return mView;
 	}
 	
+	//로그인된 정보를 이용하여 회원정보 가져오기
 	@RequestMapping("/users/getData")
 	@ResponseBody
 	public Map<String, Object> getUser(HttpSession session) {
 		
 		return service.getData(session);
+	}
+	
+	//주문 정보의 email을 이용하여 회원정보 가져오기
+	@RequestMapping(value = "/users/getOrderData",
+			method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> getOrderUser(HttpServletRequest request) {
+		return service.getOrderData(request);
 	}
 	
 	//로그아웃

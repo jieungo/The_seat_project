@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.star.seat.menu.service.MenuService;
+import com.star.seat.order.service.OrderService;
 import com.star.seat.store.dto.StoreDto;
 import com.star.seat.store.service.StoreService;
 
@@ -24,6 +25,8 @@ public class StoreController {
 	private StoreService service;
 	@Autowired
 	private MenuService mService;
+	@Autowired
+	private OrderService oService;
 	
 	// 검색 결과 메인 페이지를 요청할 때의 method
 	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
@@ -183,10 +186,13 @@ public class StoreController {
 		return "store/storeReview";
 	}
 	
-	// 매장 리뷰 관리 페이지로 이동
+	// 매장 주문관리 페이지로 이동
 	@RequestMapping("/store/storeOrder")
-	public String storeOrder(){
-		return "store/storeOrder";
+	public ModelAndView storeOrder(ModelAndView mView,HttpServletRequest request, 
+			HttpSession session){
+		oService.getStoreList(mView, request, session);
+		mView.setViewName("store/storeOrder");
+		return mView;
 	}
 	
 	// 매장 리뷰 관리 페이지로 이동

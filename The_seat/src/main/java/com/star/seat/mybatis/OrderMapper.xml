@@ -7,10 +7,23 @@
 		FROM
 			(SELECT result1.*, ROWNUM as rnum
 			FROM
-				(SELECT orderNum, email, storeName, storeLogo, num, tableNum, amount, regdate
+				(SELECT orderNum, email, storeName, storeLogo, num, tableNum, amount, reviewExist, cancel, confirm, regdate
 				FROM order_
 				WHERE email = #{email }
-				GROUP BY orderNum, email, storeName, storeLogo, num, tableNum, amount, regdate
+				GROUP BY orderNum, email, storeName, storeLogo, num, tableNum, amount, reviewExist, cancel, confirm, regdate
+				ORDER BY orderNum DESC) result1)
+		WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
+	</select>
+	
+	<select id="getStoreOrderList" parameterType="orderDto" resultType="orderDto">
+		SELECT *
+		FROM
+			(SELECT result1.*, ROWNUM as rnum
+			FROM
+				(SELECT orderNum, email, storeName, storeLogo, num, tableNum, amount, reviewExist, cancel, confirm, regdate
+				FROM order_
+				WHERE num = #{num }
+				GROUP BY orderNum, email, storeName, storeLogo, num, tableNum, amount, reviewExist, cancel, confirm, regdate
 				ORDER BY orderNum DESC) result1)
 		WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
 	</select>
@@ -27,6 +40,12 @@
 		WHERE email= #{email }
 	</select>
 	
+	<select id="getStoreCount" parameterType="int" resultType="int">
+		SELECT NVL(MAX(ROWNUM), 0)
+		FROM order_
+		WHERE num= #{num }
+	</select>
+	
 	<select id="getOrderMenuList" parameterType="orderDto" resultType="orderDto">
 		SELECT menu, menuCount, price
 		FROM order_
@@ -35,8 +54,8 @@
 	
 	<insert id="insertOrder" parameterType="orderDto">
 		INSERT INTO order_
-		(orderNum, email, storeName, storeLogo, num, tableNum, menu, menuCount, price, amount, reviewExist, regdate)
-		VALUES(#{orderNum },#{email }, #{storeName }, #{storeLogo }, #{num }, #{tableNum }, #{menu }, #{menuCount }, #{price }, #{amount }, 'NO' , #{regdate })
+		(orderNum, email, storeName, storeLogo, num, tableNum, menu, menuCount, price, amount, reviewExist, confirm, cancel, regdate)
+		VALUES(#{orderNum },#{email }, #{storeName }, #{storeLogo }, #{num }, #{tableNum }, #{menu }, #{menuCount }, #{price }, #{amount }, 'NO' , 'NO' , 'NO' , #{regdate })
 	</insert>
 
 	<delete id="deleteOrder" parameterType="int">
@@ -44,4 +63,9 @@
 		WHERE orderNum=#{orderNum}
 	</delete>
 	
+	<update id="updateState" parameterType="orderDto">
+		UPDATE order_
+		SET cancel=#{cancel } ,confirm=#{confirm }
+		WHERE orderNum=#{orderNum }
+	</update>
 </mapper>

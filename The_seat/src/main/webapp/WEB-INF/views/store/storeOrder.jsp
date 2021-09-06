@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,62 +29,100 @@
         </form>
     </header>
     <!------------------------------ 주문내역 텍스트 및 박스 --------------------------------------->
-    <div id="inner" class="inner_container" style="display: flex;"> 
-        <div class="store__order-user">
-            <h5>규환 님의 주문</h5>
-            <h6>5,000원 (결제완료)</h6>
-        </div>
-
-        <div class="white-box">
-            <section class="order">
-                <div class="order__body">
-                    <h5 class="box-title">주문내역</h5>
-                    <div class="line"></div>
-                    <ul class="order__list">
-                        <li class="list-item row">
-                            <span class="col">아메리카노 (ICED)</span>
-                            <span class="col">2</span>
-                            <span class="col">5,000</span>
-                        </li>
-                        <li class="list-item row">
-                            <span class="col">레드벨벳케이크</span>
-                            <span class="col">3</span>
-                            <span class="col">15,000</span>
-                        </li>
-                        <div class="down-icon">
-                            <i class="fas fa-caret-down"></i>
-                        </div>
-                    </ul>
-                    <div class="dot"></div>
-                    <ul class="order__total">
-                        <li class="list-item row">
-                            <span class="col">총합계</span>
-                            <span class="col">5</span>
-                            <span class="col">20,000</span>
-                        </li>
-                    </ul>
-                </div>
-            </section>
-    <!------------------------------ 예약정보 박스 --------------------------------------->
-            <section class="reserve">
-                <h5 class="box-title">예약정보</h5>
-                <div class="reserve-body">
-                    <div class="reserve-info">
-                        <sapn>전화번호</sapn>
-                        <strong>012-345-6789</strong>
-                    </div>
-                    <div class="reserve-info">
-                        <sapn>좌석정보</sapn>
-                        <strong>2번 좌석</strong>
-                    </div>
-                    <div class="reserve-info">
-                        <sapn>방문시간</sapn>
-                        <strong>21/09/13 13:00</strong>
-                    </div>
-                </div>
-                <button class="reserve-btn">확인</button>
-            </section>
-        </div>
+    <div class="box" style=" overflow-y: scroll;">
+    	<c:choose>
+    		<c:when test="${empty orderList }">
+    			<h2>주문내역이 없습니다.</h2>
+    			<h3>매장을 잘 관리해 주세요!!</h3>
+    		</c:when>
+    		<c:otherwise>
+    			<c:forEach var="tmp" items="${orderList }">
+				    <div id="inner" class="inner_container" style="display: flex;"> 
+				        <div class="store__order-user">
+				        	<p>주문번호 ${tmp.orderNum }</p><span class="orderNum" style="display:none;">${tmp.orderNum }</span>
+				            <h5 class="name"></h5><span class="email" style="display:none;">${tmp.email }</span>
+				            <h6>${tmp.amount } (결제완료)</h6>
+				        </div>
+				        <div class="white-box">
+				            <section class="order">
+				                <div class="order__body">
+				                    <h5 class="box-title">주문내역</h5>
+				                    <div class="line"></div>
+				                    <div class="box" style=" height: 300px; overflow-y: scroll;">
+					                    <table>
+					                    	<thead>
+					                    		<tr>
+					                    			<th>메뉴명</th>
+					                    			<th>수량</th>
+					                    			<th>가격</th>
+					                    		</tr>
+					                    	</thead>
+					                    	<tbody class="orderDetail" >
+					                    		
+					                    	</tbody>
+					                    </table>
+				                   
+				                    <div class="dot"></div>
+				                    <ul class="order__total">
+				                        <li class="list-item row">
+				                            <span class="col">총 금액</span>
+				                            <span class="col">${tmp.amount }</span>
+				                        </li>
+				                    </ul>
+				                    </div>
+				                </div>
+				            </section>
+				    <!------------------------------ 예약정보 박스 --------------------------------------->
+				            <section class="reserve">
+				                <h5 class="box-title">예약정보</h5>
+				                <div class="reserve-body">
+				                    <div class="reserve-info">
+				                        <span>전화번호</span>
+				                        <strong class="phone"></strong>
+				                    </div>
+				                    <div class="reserve-info">
+				                        <span>좌석정보</span>
+				                        <strong>${tmp.tableNum }번 좌석</strong>
+				                    </div>
+				                    <div class="reserve-info">
+				                        <span>주문 시간</span>
+				                        <strong>${tmp.regdate }</strong>
+				                    </div>
+				                </div>
+				                <c:choose>
+				                	<c:when test="${tmp.cancel eq 'NO' }">
+				                		<c:choose>
+						                	<c:when test="${tmp.confirm eq 'NO' }">
+						                		<button class="reserve-btn confirm">확인</button>
+						                	</c:when>
+						                	<c:when test="${tmp.confirm eq 'YES' }">
+						                		<button class="reserve-btn confirm" disabled>완료</button>
+						                	</c:when>
+						                </c:choose>
+				                	</c:when>
+				                	<c:when test="${tmp.cancel eq 'YES' }">
+				                		<c:when test="${tmp.cancel eq 'YES' }">
+					                		<button class="reserve-btn cancelComplete">주문 취소 확인</button>
+					                		<button class="reserve-btn cancelReject">주문 취소 거절</button>
+					                	</c:when>
+					                	<c:when test="${tmp.cancel eq 'COMPLETE' }">
+					                		<button class="reserve-btn cancel" disabled>취소 완료</button>
+					                	</c:when>
+					                	<c:when test="${tmp.cancel eq 'REJECT' }">
+					                		<button class="reserve-btn cancel" disabled>취소 거절 후 완료</button>
+					                	</c:when>
+				                	</c:when>
+				                </c:choose>
+				                
+				                
+				            </section>
+				        </div>
+				    </div>
+				    <div class="line box" style="margin-bottom:50px;"></div>
+				</c:forEach>
+    		</c:otherwise>
+    	</c:choose>
+	    
     </div>
 </div>
         <!------------------------------------ 옆 사이드바 (매장정보, 메뉴관리 탭) ----------------->
@@ -96,7 +135,75 @@
          </aside>
 </div>
 <script src="https://kit.fontawesome.com/2ebe86210e.js" crossorigin="anonymous"></script>
+<script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 <script>
+let orderEmail = document.querySelectorAll(".email");
+let orderName = document.querySelectorAll(".name");
+let phone = document.querySelectorAll(".phone");
+let orderNumber = document.querySelectorAll(".orderNum");
+let orderDetail = document.querySelectorAll(".orderDetail");
+let orderConfirm = document.querySelectorAll(".confirm");
+
+
+for(let i=0; i<orderEmail.length; i++){
+	let email = orderEmail[i].innerText;
+	ajaxPromise("${pageContext.request.contextPath}/users/getOrderData.do","post","email="+email)
+	.then(function(response) {
+		return response.json();
+	})
+	.then(function(data) {
+		let name = data.dto.name;
+		let phoneNumber = data.dto.phoneNumber;
+		orderName[i].innerText=name+"님이 주문하셨습니다.";
+		phone[i].innerText=phoneNumber;
+	});
+	
+	let orderNum = orderNumber[i].innerText;
+	
+	ajaxPromise("${pageContext.request.contextPath}/order/orderMenu.do","post","orderNum="+orderNum)
+	.then(function(response){
+		return response.json();
+	})
+	.then(function(data){
+		// orderNum 이 일치하는 메뉴와 수량, 가격을 리스트로 받아온다.
+		let td;
+		for(let j=0; j<data.list.length; j++){
+			// orderTable 에 td로 차례로 넣어주고
+			let menu = data.list[j].menu;
+			let menuCount = data.list[j].menuCount;
+			let price = data.list[j].price;
+			let td = document.createElement( "TD" ); 
+		     td.innerHTML = menu;  
+		     let td1 = document.createElement( "TD" );
+		     td1.innerHTML = menuCount; ; 
+		     let td2 = document.createElement( "TD" );
+		     td2.innerHTML = price; 
+		     
+			let tr = document.createElement( "TR" ); 
+			     tr.appendChild( td );
+			     tr.appendChild( td1 ); 
+			     tr.appendChild( td2 ); 
+			orderDetail[i].appendChild( tr ); 
+		};
+	});
+	
+	orderConfirm[i].addEventListener("click", function(){
+		
+		ajaxPromise("${pageContext.request.contextPath}/order/updateState.do","post","orderNum="+orderNum+"&confirm=YES")
+		.then(function(response){
+			return response.json();
+		})
+		.then(function(data){
+			if(data.isSuccess == true){
+				orderConfirm[i].innerText = '완료';
+				orderConfirm[i].setAttribute('disabled',true);
+			}
+		})
+	})
+}
+
+
+
 
 </script>
 </body>

@@ -29,11 +29,10 @@ public class OrderController {
 	@Autowired
 	private MenuService mService;
 	
-	
+	// 주문하기
 	@RequestMapping(value = "/order/insert.do", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> getList(OrderDto dto){
-		System.out.println(dto.getOrderNum());
 		service.orderInsert(dto);
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("isSuccess",true);
@@ -56,8 +55,19 @@ public class OrderController {
 	@RequestMapping(value = "/order/orderMenu.do", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> orderMenuDetail (OrderDto dto){
-		System.out.println(dto.getOrderNum());
 		return service.getOrderMenuList(dto);
 	}
+	
+	// 주문내역 메뉴 상세 AJAX
+		@RequestMapping(value = "/order/updateState.do", method = RequestMethod.POST)
+		@ResponseBody
+		public Map<String, Object> updateState(OrderDto dto, HttpServletRequest request){
+			String confirm  = (String)request.getParameter("confirm");
+			int orderNum = Integer.parseInt(request.getParameter("orderNum"));
+			dto.setCancel("NO");
+			dto.setOrderNum(orderNum);
+			dto.setConfirm(confirm);
+			return service.updateState(dto);
+		}
 	
 }
