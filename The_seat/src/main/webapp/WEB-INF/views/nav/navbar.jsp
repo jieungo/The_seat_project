@@ -1,21 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<!----------------------- bootstrap css 링크 로딩하기 ----------------------------->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" 
 integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+<!-- bootstrap js 링크 로딩하기
+	   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+	   integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+-->
+<!-------------------------- 구글 폰트 읽어오는 링크 로딩하기 ---------------------->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!--------------------------- 구글 폰트 종류 ----------------------------->
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
-<script
-   src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-   integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
-   crossorigin="anonymous"></script>
+
 <style>
    *{
       font-family: 'IBM Plex Sans KR', sans-serif;
    }
+   a{
+	  color: black;
+	  text-decoration: none;
+	}
    .navbar{ 
        position: relative;
        display: flex;
@@ -26,20 +33,6 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
        padding-top: .5rem;
        padding-bottom: .5rem;
    }
-   
-   /*.modal-backdrop {
-       position: fixed;
-       top: 0;
-       left: 0;
-       z-index: 1040;
-       width: 100vw;
-       height: 100vh;
-       background-color: black;
-   }*/
-   
-   /*.modal-backdrop.fade.show {
-   		background-repeat: norepeat;
-	}*/
 	
    #area, #group{
       width: 110px;

@@ -53,7 +53,11 @@
 		border: none;
 		background-color: #fff;
 	}
-	
+	.card {
+		width: 100% !important;
+		height: 400px !important;
+		overflow: auto;
+	}
 </style>
 
 </head>
@@ -72,96 +76,77 @@
 		</div>
 		<div class="order">
 			<section>
+				<!------ 카테고리에 따라 메뉴 다르게 보이기 ------->
 				<ul id="categories">
 					<li><a
-						href="${pageContext.request.contextPath}/store/manageMenu.do?num=${dto.num}&storeName=${dto.storeName}">전체</a>
+						href="${pageContext.request.contextPath}/order/order.do?num=${dto.num}&storeName=${dto.storeName}">전체</a>
 					</li>
 					<c:forEach var="tmp" items="${categoryList }">
 						<li data-num="${dto.num }" class="category"><a
-							href="${pageContext.request.contextPath}/store/manageMenu.do?num=${dto.num}&storeName=${dto.storeName}&category=${tmp}">${tmp }</a></li>
+							href="${pageContext.request.contextPath}/order/order.do?num=${dto.num}&storeName=${dto.storeName}&category=${tmp}">${tmp }</a></li>
 					</c:forEach>
 				</ul>
-				<!-- 여기부터 -->
-
+				
+				<!----------------- 주문페이지에서 메뉴 고르기 ------------------>
 				<div class="row">
 					<div class="col text-center" style="margin-top: 40px;">
 						<div class="row row-cols-1 row-cols-md-2 g-4" style="width:100%; height: 800px; !important; overflow: auto;">
-							<div class="col">
-								<div class="card" style="width:100%; height: 400px !important; overflow: auto;">
-									<img src="${pageContext.request.contextPath}/resources/img/pizza.jpg" class="card-img-top" alt="...">
-									<div class="card-body" style="background-color: rgb(176, 215, 252); color: rgb(104, 104, 104); font-weight: bold;">
-										<h5 class="card-title">블랙 타이거 피자</h5>
-										<p class="card-text">50,000 ￦</p>
+							<c:forEach var="tmp" items="${menuList }">
+								<c:if test="${tmp.best == 'yes' }">
+									<form class="orderMenu" action="${pageContext.request.contextPath}/order/insert.do">
+										<input type="hidden" name="orderNum" value="${orderNum }" />
+									 	<input type="hidden" name="email" value="${email }" /> 
+									 	<input type="hidden" name="storeName" value="${dto.storeName }" /> 
+										<input type="hidden" name="storeLogo" value="${dto.image_logo }" /> 
+										<input type="hidden" name="menu" value="${tmp.menuName }" /> 
+										<input type="hidden" name="tableNum" value="${tableNum }" /> 
+										<input type="hidden" name="price" value="${tmp.price}" /> 
+										<input type="hidden" name="num" value="${dto.num }" />
+										<button type="submit" id="orderMenu">${tmp.menuName }</button>
+										<input type="number" name="menuCount" min="1" max="9" value="1">
+									</form>
+									<div class="col">
+										<div class="card">
+											<img src="${pageContext.request.contextPath}${tmp.menuImage }" class="card-img-top" alt="...">
+											<div class="card-body" style="background-color: rgb(176, 215, 252); color: rgb(104, 104, 104); font-weight: bold;">
+												<h5 class="card-title">${tmp.menuName }</h5>
+												<p class="card-text">${tmp.price } ￦</p>
+											</div>
+										</div>
 									</div>
-								</div>
-							</div>
-							<div class="col">
-								<div class="card" style="width:100%; height: 400px !important; overflow: auto;">
-									<img src="${pageContext.request.contextPath}/resources/img/hyunmibab.jpg" class="card-img-top" alt="...">
-									<div class="card-body" style="background-color: rgb(176, 215, 252); color: rgb(104, 104, 104); font-weight: bold;">
-										<h5 class="card-title">가뿐한끼 현미밥</h5>
-										<p class="card-text">100,000 ￦</p>
-									</div>
-								</div>
-							</div>
-							<div class="col">
-								<div class="card" style="width:100%; height: 400px !important; overflow: auto;">
-									<img src="${pageContext.request.contextPath}/resources/img/sandwich.jpg" class="card-img-top" alt="...">
-									<div class="card-body" style="background-color: rgb(176, 215, 252); color: rgb(104, 104, 104); font-weight: bold;">
-										<h5 class="card-title">야채 샌드위치</h5>
-										<p class="card-text">30,000 ￦</p>
-									</div>
-								</div>
-							</div>
-							<div class="col">
-								<div class="card" style="width:100%; height: 400px !important; overflow: auto;">
-									<img src="${pageContext.request.contextPath}/resources/img/juice.png" class="card-img-top" alt="...">
-									<div class="card-body" style="background-color: rgb(176, 215, 252); color: rgb(104, 104, 104); font-weight: bold;">
-										<h5 class="card-title">딸기맹고 스무디</h5>
-										<p class="card-text">20,000 ￦</p>
-									</div>
-								</div>
-							</div>
+								</c:if>
+							</c:forEach>
 						</div>
 					</div>
-					<!-- 또다시 -->
+					<!--------------------------- 주문내역 영수증 ---------------------------->
 					<div class="col">
-						<div class="col">
-							<div class="card">
-								<img src="..." class="card-img-top" alt="...">
-								<div class="card-body">
-									<h5 class="card-title">Card title</h5>
-									<p class="card-text">This is a longer card with supporting
-										text below as a natural lead-in to additional content. This
-										content is a little bit longer.</p>
-								</div>
-							</div>
-						</div>
+						<img src="${pageContext.request.contextPath}/resources/img/p.svg" class="card-img-top"  alt="receipt"
+					 		style="width: 90%; height: 600px;">
 					</div>
 				</div>
-				<!-- 여기까지 -->
-				<h3>베스트 메뉴</h3>
-
+				
+				
+				<!--
+				<h3>베스트 메뉴</h3> 
 				<div>
 					<c:forEach var="tmp" items="${menuList }">
 						<c:if test="${tmp.best == 'yes' }">
-							<form class="orderMenu"
-								action="${pageContext.request.contextPath}/order/insert.do">
+							<form class="orderMenu" action="${pageContext.request.contextPath}/order/insert.do">
 								<input type="hidden" name="orderNum" value="${orderNum }" />
 							 	<input type="hidden" name="email" value="${email }" /> 
 							 	<input type="hidden" name="storeName" value="${dto.storeName }" /> 
-									<input type="hidden" name="storeLogo" value="${dto.image_logo }" /> 
-									<input type="hidden" name="menu" value="${tmp.menuName }" /> 
-									<input type="hidden" name="tableNum" value="${tableNum }" /> 
-									<input type="hidden" name="price" value="${tmp.price}" /> 
-									<input type="hidden" name="num" value="${dto.num }" />
+								<input type="hidden" name="storeLogo" value="${dto.image_logo }" /> 
+								<input type="hidden" name="menu" value="${tmp.menuName }" /> 
+								<input type="hidden" name="tableNum" value="${tableNum }" /> 
+								<input type="hidden" name="price" value="${tmp.price}" /> 
+								<input type="hidden" name="num" value="${dto.num }" />
 								<button type="submit" id="orderMenu">${tmp.menuName }</button>
 								<input type="number" name="menuCount" min="1" max="9" value="1">
 							</form>
 						</c:if>
 					</c:forEach>
 				</div>
-
+				-->
 				<h3>전체 메뉴</h3>
 
 				<div>
@@ -182,7 +167,7 @@
 					</c:forEach>
 				</div>
 			</section>
-
+			
 			<section>
 				<h2>주문 목록</h2>
 

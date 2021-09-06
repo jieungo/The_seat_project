@@ -124,8 +124,8 @@
 		justify-content: space-around;
 	}
 	
-	/********* 투명 스크롤바 css ********/
-	::-webkit-scrollbar {
+	/********* 클래스 하나에만 적용하는 투명 스크롤바 css ********/
+	.carousel-inner::-webkit-scrollbar {
 	  	display: none;
 	}
 
@@ -263,8 +263,8 @@
 		<span
 			style="color: white; font-size: 45px; text-shadow: 2px 6px 2px gray; margin-left: 85px; margin-top: 25px;">Menu</span>
 		<div class="card mb-5"
-			style="max-width: 1130px; height: 600px; margin-top: 30px; margin-left: 80px; border-radius: 10px; background-color: white;">
-			<div class="col">
+			style="width: 1130px; height: 600px important; overflow: auto; margin-top: 30px; margin-left: 80px; border-radius: 10px; background-color: white;">
+			<div class="col" style="margin-bottom: 30px;">
 			<!-- 메뉴 리스트 오브잭트 배열 가져와서 꺼내기! -->
 				<c:forEach var="tmp" items="${menuList }">
 					<input type="hidden" class="menuName" />
