@@ -36,7 +36,7 @@
 	<insert id="insertOrder" parameterType="orderDto">
 		INSERT INTO order_
 		(orderNum, email, storeName, storeLogo, num, tableNum, menu, menuCount, price, amount, reviewExist, regdate)
-		VALUES(#{orderNum },#{email }, #{storeName }, #{storeLogo }, #{num }, #{tableNum }, #{menu }, #{menuCount }, #{price }, #{amount }, "NO" , #{regdate })
+		VALUES(#{orderNum },#{email }, #{storeName }, #{storeLogo }, #{num }, #{tableNum }, #{menu }, #{menuCount }, #{price }, #{amount }, 'NO' , #{regdate })
 	</insert>
 
 	<delete id="deleteOrder" parameterType="int">

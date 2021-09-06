@@ -269,7 +269,21 @@
 	// 주문하기
 	document.querySelector("#goOrder").addEventListener("click",function(){
 		//주문할때 시간정보전달
-		let regdate = new Date();
+		let today = new Date();
+		let year = today.getFullYear(); // 년도
+		let month = today.getMonth() + 1;  // 월
+		let date = today.getDate();  // 일
+		let day; // 요일
+		if(today.getDay()==0){ day="일요일" }
+		else if(today.getDay()==1){ day="월요일"}
+		else if(today.getDay()==2){ day="화요일"}
+		else if(today.getDay()==3){ day="수요일"}
+		else if(today.getDay()==4){ day="목요일"}
+		else if(today.getDay()==5){ day="금요일"}
+		else if(today.getDay()==6){ day="토요일"}
+		let hours = today.getHours(); // 시
+		let minutes = today.getMinutes(); //분
+		let regdate = year + " 년 " + month + " 월 " + date + " 일 " + day + " " + hours + " 시 " + minutes+ " 분";
 		for(let i=0; i<orderList.length; i++){
 			//주문할때 시간정보 regdate로 넣어주기
 			orderList[i].regdate=regdate;
@@ -280,7 +294,11 @@
 				return response.json();
 			})
 			.then(function(data){
-				console.log(data); 
+				if(data.isSuccess && i==orderList.length-1){
+					alert("주문이 완료 되었습니다.");
+					location.href="${pageContext.request.contextPath}/main.do";
+					
+				}
 			});
 		}
 	})
