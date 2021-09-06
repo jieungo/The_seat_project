@@ -8,17 +8,15 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/storeOrder.css"
+	href="${pageContext.request.contextPath}/resources/css/storeOrder.css?ver=2"
 	type="text/css" />
 </head>
 
 <body>
-
     <!------------------------------- navbar 추가 -------------------------------->
-
-<div class="myStore_container-gray">
-
-    <div style="margin-left: 50px; width:600px">
+<jsp:include page="../nav/navbar2.jsp" />
+<div class="myStore_container-gray" style="display: flex; flex-direction: row; justify-content: space-between">
+<div style="width:750px; display: flex; flex-direction: column; padding: 20px 30px;">
     <!-------------------------- 주문내역 타이틀 및 날짜 검색 ---------------------------->
     <header class="store__order-header">
         <h4>주문 내역</h4>
@@ -29,10 +27,8 @@
             </button>
         </form>
     </header>
-    
     <!------------------------------ 주문내역 텍스트 및 박스 --------------------------------------->
-    <div id="inner" class="inner_container">
-        
+    <div id="inner" class="inner_container" style="display: flex;"> 
         <div class="store__order-user">
             <h5>규환 님의 주문</h5>
             <h6>5,000원 (결제완료)</h6>
@@ -91,13 +87,13 @@
     </div>
 </div>
         <!------------------------------------ 옆 사이드바 (매장정보, 메뉴관리 탭) ----------------->
-        <aside class="store__aside">
-            <button>매장 정보</button>
-            <button>메뉴 관리</button>
-            <button>리뷰 관리</button>
-            <button>주문 확인</button>
-            <button>자리 관리</button>
-        </aside>
+        <aside class="aside">
+             <button onclick="location.href='#'">매장 정보</button>
+             <button onclick="location.href='${pageContext.request.contextPath}/store/manageMenu.do?num=${dto.num}&storeName=${dto.storeName}'">메뉴 관리</button>
+             <button onclick="location.href='${pageContext.request.contextPath}/store/storeReview.do'">리뷰 관리</button>
+             <button onclick="location.href='${pageContext.request.contextPath}/store/storeOrder.do'">주문 확인</button>
+             <button onclick="location.href='${pageContext.request.contextPath}/store/storeSeat.do'">자리 관리</button>
+         </aside>
 </div>
 <script src="https://kit.fontawesome.com/2ebe86210e.js" crossorigin="anonymous"></script>
 <script>

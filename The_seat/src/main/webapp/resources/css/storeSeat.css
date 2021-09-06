@@ -9,6 +9,7 @@ body {
     height: 100vh;
     width: 100vw;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     color: rgb(78, 78, 78);
@@ -54,22 +55,20 @@ ul {
 .seat,
 .select {
     background-color: white;
-    width: 70%;
+    padding-right: 20px;
     height: 400px;
 }
 
-.seat {
-    margin-right: 20px;
-}
-
 .select {
-    width: 40%;
+    width: 250px;
+    padding-right: 0px;
 }
 
 .seat__box {
     border: 1px solid lightgray;
     background-color: rgb(243, 243, 243);
     height: 60%;
+    width: 350px;
     margin-top: 5px;
     position: relative;
 }
@@ -87,16 +86,14 @@ ul {
     margin-bottom: 5px;
 }
 
-.myStore_container{
+.myStore_container {
     display: flex;
     justify-content: center;
     flex-direction: column;
     background-color: white;
-    border-radius: 10px  0 0 10px;
-    height: 600px;
-    max-width: 700px;
-    position: relative;
-    padding: 30px;
+    border-radius: 10px;
+    height: 550px;
+   	width: 900px;
 }
 
 .inner_container {
@@ -131,41 +128,8 @@ ul {
     height: 10%;
     border-radius: 20px;
     font-weight: 600;
-    margin-top: 20px;
+    margin-top: 10px;
 }
-
-.store__aside {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: space-evenly;
-    height: 100%;
-    position: absolute;
-    left: 100%;
-    padding: 0;
-}
-
-.store__aside > button {
-    border: 1px solid #ECECEC;
-    background-color: white;
-    border-radius: 0 5px 5px 0;
-    border: 1px solid #ECECEC;
-    width: 15vw;
-    height: 20vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
-    font-weight: 700;
-    transition: color 0.2s ease-in-out;
-}
-
-.store__aside button:nth-child(5) {
-    color: #598eff;
-    border-left: none;
-}
-
-
 
 .line {
     height: 1.5px;
@@ -212,16 +176,53 @@ ul {
     font-size: 14px;
     height: 30px;
 }
-
 .seat-NumState > div > p {
     margin: 0;
     font-size: 14px;
     font-weight: 500;
 }
-
 .seat-NumState > div {
     display: flex;
     justify-content: space-around;
     align-items: center;
     margin-top: 5px;
+}
+
+.store__order-header > h4 {
+    font-weight: 700;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.aside {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-evenly;
+    height: 100%;
+    left: 100%;
+    padding: 0;
+}
+
+.aside > button {
+    border: 1px solid #ECECEC;
+    background-color: white;
+    border-radius: 0 5px 5px 0;
+    border: 1px solid #ECECEC;
+    width: 15vw;
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 700;
+    transition: color 0.2s ease-in-out;
+}
+
+.aside button:nth-child(5) {
+    background-color: white;
+    color: #598eff;
+    border-left: none;
 }

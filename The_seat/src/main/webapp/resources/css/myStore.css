@@ -2,6 +2,7 @@
 
 * {
     box-sizing: border-box;
+    margin:0;
 }
 
 body {
@@ -58,18 +59,15 @@ input:focus {
     justify-content: center;
     background-color: white;
     border-radius: 10px;
-    height: 80%;
-    max-width: 900px;
+    height: 550px;
+    width: 900px;
 }
 
 .inner_container {
-    /* text-overflow: hidden; 
-    overflow-x: auto; */
-    height: 100%;
-    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
+    width: 100%;
     justify-content: space-between;
 }
 
@@ -104,9 +102,6 @@ input:focus {
 
 .aside > button:first-child {
     border-top: none;
-}
-
-.aside button:focus {
     color: #598eff;
     border-left: none;
 }
@@ -122,4 +117,8 @@ input:focus {
 .allTag {
     color: white;
     font-size:14px;
+}
+
+.updateImgLink {
+	text-decoration: none;
 }
