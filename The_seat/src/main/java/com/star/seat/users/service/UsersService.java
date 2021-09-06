@@ -18,6 +18,7 @@ public interface UsersService {
 	public Map<String, Object> loginProcess(UsersDto dto, HttpSession session);
 	public void getInfo(ModelAndView mView, HttpSession session);
 	public Map<String, Object> getData(HttpSession session);
+	public Map<String, Object> getOrderData(HttpServletRequest request);
 	public Map<String, Object> updateUserPwd(HttpSession session, UsersDto dto);
 	public Map<String, Object> saveProfileImage(HttpServletRequest request, 
 			MultipartFile mFile);

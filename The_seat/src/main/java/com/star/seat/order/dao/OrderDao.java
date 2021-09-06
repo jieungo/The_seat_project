@@ -8,12 +8,17 @@ public interface OrderDao {
 	
 	// 같은 email 주문내역 얻어오기
 	public List<OrderDto> getList(OrderDto dto);
+	// 같은 num 주문내역 얻어오기
+	public List<OrderDto> getStoreList(OrderDto dto);
 	// email 총 주문내역 수 얻어오기
 	public int getCount(String email);
+	public int getStoreCount(int num);
 	//orderNum 이 같은 주문내역의 menu, menuCount, price 가져오기
 	public List<OrderDto> getOrderMenuList(OrderDto dto);
 	// 주문하기
 	public void insert(OrderDto dto);
+	// 주문 정보 상태 변경
+	public void updateState(OrderDto dto);
 	//orderNum 으로 주문정보 삭제(주문 취소)
 	public void delete(int orderNum);
 }

@@ -20,6 +20,11 @@ public class OrderDaoImpl implements OrderDao{
 		return session.selectList("order.getOrderList", dto);
 	}
 	
+	//num 이 같은 주문내역
+	@Override
+	public List<OrderDto> getStoreList(OrderDto dto) {
+		return session.selectList("order.getStoreOrderList", dto);
+	}
 	
 	//orderNum 이 같은 주문내역의 menu, menuCount, price 가져오기
 	@Override
@@ -46,11 +51,14 @@ public class OrderDaoImpl implements OrderDao{
 		session.delete("Order.deleteOrder",orderNum);
 	}
 
+	@Override
+	public int getStoreCount(int num) {
+		return session.selectOne("order.getStoreCount", num);
+	}
 
+	@Override
+	public void updateState(OrderDto dto) {
+		session.update("order.updateState", dto);
+	}
 
-
-
-
-	
-	
 }

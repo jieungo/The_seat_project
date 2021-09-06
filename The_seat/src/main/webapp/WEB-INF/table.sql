@@ -71,6 +71,8 @@ CREATE TABLE order_(
 	price NUMBER,
 	amount NUMBER,
 	reviewExist VARCHAR2(20),
+	cancel VARCHAR2(20), --> default: 'NO' -> 'YES'(client) -> 'COMPLETE' or 'REJECT' (owner)
+	confirm VARCHAR2(20), --> default: 'NO' -> 'YES'(owner)
 	regdate VARCHAR2(100)
 );
 
