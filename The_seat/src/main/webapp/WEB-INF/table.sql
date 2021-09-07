@@ -77,8 +77,13 @@ CREATE TABLE order_(
 );
 
 CREATE TABLE storeSeat(
-
-
+	num VARCHAR2(100) NOT NULL,
+	seatImage CLOB,
+	seatContent CLOB,
+	totalSeat CLOB,
+	emptySeat CLOB,
+	notEmptySeat CLOB,
+	notUse CLOB
 );
 
 CREATE TABLE info(

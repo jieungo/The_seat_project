@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="seat">
+
+	<!-- 작성한 자리 정보 추가-->
+	<insert id="insertSeat" parameterType="seatDto">
+		insert into storeSeat
+		(num, seatImage, seatContent, totalSeat, emptySeat, notEmptySeat, notUse)
+		values (#{num }, 0, 0, 0, 0, 0, 0)
+	</insert>
+	
+	<select id="getSeat" parameterType="seatDto" resultType="seatDto">
+		SELECT *
+		FROM storeSeat
+		WHERE num=#{num }
+	</select>
+	
+	<update id="updateSeat" parameterType="seatDto">
+		UPDATE storeSeat
+		SET seatImage=#{seatImage },seatContent=#{seatContent },totalSeat=#{totalSeat },emptySeat=#{emptySeat },notEmptySeat=#{notEmptySeat },notUse=#{notUse }
+		WHERE num=#{num }
+	</update>
+	
+</mapper>

@@ -37,11 +37,11 @@ type="text/css" />
 			<div>
 				<h3>${dto.name}님의 마이페이지
 					<c:choose>
-						<c:when test="${myStoreList ne null }"> 
-							<span>(Owner)</span>
+						<c:when test="${myStoreList.size() eq 0 }"> 
+							<span>(Guest)</span>
 						</c:when>
 						<c:otherwise>
-							<span>(Guest)</span>
+							<span>(Owner)</span>
 						</c:otherwise>
 					</c:choose>
 				</h3>
@@ -351,8 +351,6 @@ type="text/css" />
 			return response.json();
 		})
 		.then(function(data){
-			// data 는 {imagePath:"/upload/xxx.jpg"} 형식의 object 이다.
-			console.log(data);
 			// 클릭하는 자리에 이미지 넣어주기
 			let img=`<img id="profileImage" style="width:100px; border-radius: 100%;" src="${pageContext.request.contextPath}\${data.imagePath}"/>`;
 			
