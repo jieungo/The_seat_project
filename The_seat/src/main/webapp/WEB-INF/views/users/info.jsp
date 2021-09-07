@@ -26,14 +26,14 @@ type="text/css" />
 
 </head>
 <body style="margin-top:150px;">
+<jsp:include page="/WEB-INF/views/nav/navbar.jsp" />
 <div class="container">
-	<jsp:include page="/WEB-INF/views/nav/navbar.jsp" />
 	
 <!--------------------- 마이페이지 상단 프로필 -------------------------->
 	<header>
 		<div class="my-page__profile mt-2 mb-2">
 			<img class="me-5" src="${pageContext.request.contextPath}${dto.profile }" alt="프로필 이미지"
-				style="width: 100px; border-radius: 100%;">
+				style="width: 100px; height: 100px; border-radius: 100%;">
 			<div>
 				<h3>${dto.name}님의 마이페이지
 					<c:choose>
@@ -138,9 +138,9 @@ type="text/css" />
 			</div>
 		</c:otherwise>
 	</c:choose>
+</div>
 <!------------------------------ footer 불러오기 --------------------------->
 <jsp:include page="/WEB-INF/views/nav/footer.jsp" />
-</div>
 
 <!------------모달창------------------프로필 편집------------------------------------->
 
@@ -166,7 +166,7 @@ type="text/css" />
 							</svg>
 						</c:when>
 						<c:otherwise>
-							<img id="profileImage" style="width:100px; border-radius: 100%;" src="${pageContext.request.contextPath}${dto.profile}" />
+							<img id="profileImage" style="width:100px; height:100px; border-radius: 100%;" src="${pageContext.request.contextPath}${dto.profile}" />
 						</c:otherwise>
 					</c:choose>
 				</a>

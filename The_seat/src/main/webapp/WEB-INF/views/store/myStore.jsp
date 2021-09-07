@@ -10,7 +10,7 @@
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 	<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/myStore.css?ver=7"
+	href="${pageContext.request.contextPath}/resources/css/myStore.css?ver=8"
 	type="text/css" />
 </head>
 
@@ -19,7 +19,9 @@
 <div class="myStore_container pe-0 ps-0">
      <!------------------------------ 매장 로고 관리 영역 -------------------------->
      <div class="inner_container">
-         <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-left:30px;">
+     
+         <div style="display: flex; width:40%; justify-content: center; align-items: center; flex-direction: column; 
+         padding-left:10px; margin-top:10px; height:550px; text-overflow: hidden; overflow-x: auto;">
              <div>
                  <a class="updateImgLink" href="javascript:">
                      <img src="${pageContext.request.contextPath}${dto.image_logo}" alt="" id="image_logo" name="logo" class="image mt-3"
@@ -31,11 +33,11 @@
                      <input type="hidden" name="num" value="${dto.num }"/>
                      <input type="hidden" name="image_logo" value="check"/>
                      <input type="file" id="logoImage" name="imageFile" style="display:none"/>
-                     <button class="updateImgBtn" type="submit" style="display:none">등록</button>
+                     <button class="updateImgBtn mt-1" type="submit" style="display:none; margin:auto; font-size:14px; font-weight:600">등록</button>
                  </form>
              </div>
          <!------------------------- 매장 정보 관리 영역 ----------------------------->
-             <div class="mt-3 mb-3">
+             <div class="mt-1 mb-1">
                  <form id="updateForm" action="${pageContext.request.contextPath}/storeUpdate.do" 
                  method="post">
                      <a href="javascript:" id="updateBtn" class="mb-2" style="display:block; text-align: end;">
@@ -44,26 +46,26 @@
                              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                          </svg>
                      </a>
-                     <p id="updateBox" style="display:none; text-align:end; font-size:14px ">
+                     <p id="updateBox" style="display:none; text-align:end; font-size:14px;">
                          <a href="javascript:" id="update">수정완료</a>
                          <a href="javascript:" id="updateCancel">취소</a>
                      </p>
      
                      <input type="hidden" name="num" value="${dto.num }"/>
-                     <p>매장 이름 : <strong class="storeData">${dto.storeName } </strong></p>
+                     <p class="m-0">매장 이름 : <strong class="storeData">${dto.storeName } </strong></p>
                      <input type="text" name="storeName" class="updateData" value="${dto.storeName }" style="display:none;"/>
-                     <p>매장 주소 : <strong class="storeData">${dto.storeAddr } </strong></p>
+                     <p class="m-0">매장 주소 : <strong class="storeData">${dto.storeAddr } </strong></p>
                      <input type="text" name="storeAddr" class="updateData" value="${dto.storeAddr }" style="display:none;"/>
-                     <p>매장 주소 : <strong class="storeData">${dto.storeAddr } </strong></p>
+                     <p class="m-0">매장 번호 : <strong class="storeData">${dto.storePhone } </strong></p>
                      <input type="text" name="storePhone" class="updateData" value="${dto.storePhone }" style="display:none;"/>
-                     <p>영업 시간 : <strong class="storeData">${dto.openingTime } </strong></p>
+                     <p class="m-0">영업 시간 : <strong class="storeData">${dto.openingTime } </strong></p>
                      <input type="text" name="openingTime" class="updateData" value="${dto.openingTime }" style="display:none;"/>
                  </form>
              </div>
          <!--------------------------- 매장 태그 관리 영역 --------------------------->
-             <div style="display:flex; justify-content:center; align-items:center; flex-direction:column">
+             <div style="display:flex; justify-content:center; align-items:center; flex-direction:column ; text-align:center ;">
                  <span style="font-size: 14px; color: lightgray;">매장을 나타내는 태그 추가하기</span>
-                 <p id="btns" class="mt-1" >
+                 <p id="btns" class="mt-1" style="width:250px;">
                      <c:forEach var="tmp" items="${list }">
                          <button data-num="${dto.num }" name="tag" class="btn btn-primary tag mb-1 allTag">${tmp}</button>
                      </c:forEach>
@@ -80,8 +82,8 @@
              </div>     
          </div>
          <!--------------------------- 매장 대표 이미지 관리 영역1 ---------------------->
-         <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;
-         			margin:0 40px">
+         <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-right:20px;
+         		width:50%">
              <div style="text-align: center; width:100%;">
                  <a class="updateImgLink" href="javascript:">
                      <img src="${pageContext.request.contextPath}${dto.image_1}" alt="" id="image_1" name="image1" class="image" 
@@ -137,10 +139,10 @@
                  </form>
              </div>
      
-             <div style="width: 100%;">
+             <div style="width: 100%; text-align:center;">
                  <button id="storeOnOffBtn" class="btn">매장 열기</button>
              </div>
-         </div>
+      </div>
          <!------------------------------------ 사이드바 (매장정보, 메뉴관리 탭) ----------------->
          <aside class="aside">
              <button onclick="location.href='#'">매장 정보</button>

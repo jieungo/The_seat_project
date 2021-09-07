@@ -39,8 +39,8 @@ ul {
 }
 
 img {
-    width: 100px; 
-    height: 100px;
+    width: 80px; 
+    height: 80px;
 }
 
 input {
@@ -121,4 +121,15 @@ input:focus {
 
 .updateImgLink {
 	text-decoration: none;
+}
+
+#updateBox a{
+	text-decoration: none;
+    color: rgb(78, 78, 78);
+    padding:5px 0;
+}
+
+#updateBox a:hover {
+	color: #598eff;
+	font-weight: 600;
 }

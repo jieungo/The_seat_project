@@ -224,9 +224,9 @@
 	
 </style>
 </head>
-<body>
+<body style="margin-top:150px;">
+	<jsp:include page="/WEB-INF/views/nav/navbar.jsp" />
 	<div class="container">
-		<jsp:include page="/WEB-INF/views/nav/navbar.jsp" />
 		<div class="container">
 			<button id="backBtn"
 				onclick="location.href='javascript:history.back();'">
@@ -366,11 +366,9 @@
 			</section>
 			-->
 		</div>
-
+	</div>
 		<!------------------------------ footer 불러오기 --------------------------->
 		<jsp:include page="/WEB-INF/views/nav/footer.jsp" />
-
-	</div>
 
 	<script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 	<script>
