@@ -66,7 +66,7 @@ type="text/css" />
 
 	<c:choose>
 		<c:when test="${empty list }">
-			<h1>아직 이용 내역이 없습니다. ㅠㅠ </h1><span><a href="${pageContext.request.contextPath}/main.do">->이용하러가기</a></span>
+			<h1>아직 이용 내역이 없습니다 😓</h1><span><a href="${pageContext.request.contextPath}/main.do">->이용하러가기</a></span>
 		</c:when>
 		<c:otherwise>
 			<div class="row row-cols-1 row-cols-md-3 g-4">
