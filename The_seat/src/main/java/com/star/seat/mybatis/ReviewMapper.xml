@@ -8,7 +8,7 @@
 	</select>
 
 	<!-- 작성한 리뷰 정보를 추가하는 method -->
-	<insert id="addReview">
+	<insert id="addReview" parameterType="reviewDto">
 		insert into storeReview
 		(num, storeNum, storeName, writer, content, star,
 			 targetNum, groupNum, orderNum, imagePath, regdate)
@@ -51,4 +51,11 @@
 		set reviewExist=#{reviewExist}
 		where orderNum=#{orderNum}
 	</update>
+	
+	<!-- 해당 리뷰 번호로 되어있는 targetNum 정보가 있는지 여부를 알아내는 method -->
+	<select id="getMyReview" parameterType="reviewDto" resultType="reviewDto">
+		select *
+		from storeReview
+		where targetNum=#{num}
+	</select>
 </mapper>

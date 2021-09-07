@@ -50,9 +50,16 @@ public class ReviewDaoImpl implements ReviewDao{
 		session.update("updateReview", dto);	
 	}
 	
-	// 해당 주문 번호에 해당하는 review 존재 여부를 조정하는 method;
+	// 해당 주문 번호에 해당하는 review 존재 여부를 조정하는 method
 	@Override
 	public void reviewExist(OrderDto dto) {
 		session.update("reviewExist", dto);
+	}
+	
+	// 해당 리뷰 번호로 되어있는 targetNum 정보가 있는지 여부를 알아내는 method
+	@Override
+	public ReviewDto getMyReview(ReviewDto dto) {
+		
+		return session.selectOne("getMyReview", dto);
 	}
 }
