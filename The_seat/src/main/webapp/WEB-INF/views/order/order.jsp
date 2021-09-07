@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>주문페이지</title>
+<!-- 부트스트랩 링크 불러오기 -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -15,6 +16,7 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
 	crossorigin="anonymous"></script>
+<!-- 애니메이션 링크 불러오기 -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 <!-- 스타일 링크 -->
@@ -24,7 +26,6 @@
 <!-- 타이틀 로고 -->
 <link rel="shortcut icon" type="image⁄x-icon"
 	href="${pageContext.request.contextPath}/resources/img/summer.jpg">
-
 <style>
 	/* 주문하기 옆에 위치한 전 페이지로 이동하는 버튼 css */
 	#backBtn {
@@ -61,9 +62,14 @@
 	
 	/* 메뉴 정보가 보이는 카드 css */
 	.card {
-		width: 100% !important;
-		height: 400px !important;
+		width: 100%;
+		height: 400px;
 		overflow: auto;
+	}
+	
+	/* 클래스 하나에만 적용하는 투명 스크롤바 css */
+	.card::-webkit-scrollbar {
+	  	display: none;
 	}
 	
 	/* 주문내역 영수증 문구 위치 및 모양 css */
@@ -74,7 +80,7 @@
 
 	.orderR .text_top {
   		position: absolute;
-  		top: 50px;
+  		top: 55px;
   		left: 90px;
 	}
 	
@@ -84,8 +90,8 @@
 	
 	.text_middle {
 		position: absolute;
-		top: 120px;
-		left: 100px;
+		top: 130px;
+		left: 90px;
 	}
 	
 	.text_bottom {
@@ -98,7 +104,7 @@
 	#reset {
   		position: absolute;
   		bottom: 130px;
-  		left : 90px;
+  		left : 120px;
   		background-color: #fc5555;
   		border: none;
   		color: #ffffff;
@@ -154,7 +160,7 @@
 	#goOrder {
 		position: absolute;
   		bottom: 130px;
-  		right : 120px;
+  		right : 100px;
   		background-color: #fc5555;
   		border: none;
   		color: #ffffff;
@@ -221,19 +227,41 @@
 		outline: none;
 	}
 	
+	/******* 스크롤바 css *******/
+	.foodMenu::-webkit-scrollbar {
+    	width: 15px;
+  	}
+  	.foodMenu::-webkit-scrollbar-thumb {
+    	background-color: rgb(196, 196, 196);
+    	border-radius: 10px;
+    	background-clip: padding-box;
+    	border: 2px solid transparent;
+  	}
+  	.foodMenu::-webkit-scrollbar-track {
+    	background-color: rgb(229, 229, 229);
+   	 	border-radius: 10px;
+    	box-shadow: inset 0px 0px 5px white;
+  	}
+	
+	/* 장바구니 이미지에 그림자 효과 주기 */
+	.img2 {
+		filter: drop-shadow(5px 5px 5px #b7b5b5)
+	}
+	
 	
 </style>
 </head>
-<body>
+<body style="margin-top: 150px;">
+<!-- 네비바 import 하기 -->
+<jsp:include page="/WEB-INF/views/nav/navbar.jsp" />
 	<div class="container">
-		<jsp:include page="/WEB-INF/views/nav/navbar.jsp" />
 		<div class="container">
 			<button id="backBtn"
 				onclick="location.href='javascript:history.back();'">
 				<img src="${pageContext.request.contextPath}/resources/img/back.png"
 					alt="back" style="margin-bottom: 15px; width: 48px; height: 50px;" />
 			</button>
-			<span style="font-size: 2.5em;">주문하기</span> 
+			<span style="color: rgb(84, 84, 84); font-size: 2.5em; font-weight: bold; text-shadow: 2px 6px 2px #d3d3d3;">주문하기</span> 
 			<span style="margin-left: 20px; font-size: 20px; color: rgb(89, 89, 89);">${dto.storeName }에서 ${tableNum }번 자리 👨‍🍳
 			</span>
 		</div>
@@ -253,7 +281,7 @@
 				<!----------------- 주문페이지에서 메뉴 고르기 ------------------>
 				<div class="row">
 					<div class="col text-center" style="margin-top: 45px;">
-						<div class="row row-cols-1 row-cols-md-2 g-4" style="width:100%; height: 800px; !important; overflow: auto;">
+						<div class="row row-cols-1 row-cols-md-2 g-4 foodMenu" style="width:100%; height: 800px; overflow: auto;">
 							<c:forEach var="tmp" items="${menuList }">
 								<c:if test="${tmp.best == 'yes' }">
 									<form class="orderMenu" action="${pageContext.request.contextPath}/order/insert.do">
@@ -270,7 +298,9 @@
 											<div class="card">
 												<img src="${pageContext.request.contextPath}${tmp.menuImage }" class="card-img-top" alt="menuImage">
 												<div class="card-body" style="background-color: rgb(176, 215, 252); color: rgb(104, 104, 104); font-weight: bold;">
-													<h5 class="card-title"><button type="submit" id="orderMenu">${tmp.menuName }</button></h5>
+													<h5 class="card-title">
+														<button type="submit" id="orderMenu">${tmp.menuName }</button>
+													</h5>
 													<p class="card-text">${tmp.price } ￦</p>
 													<input type="number" id="menuCount" name="menuCount" min="1" max="9" value="1">
 												</div>
@@ -283,13 +313,13 @@
 					</div>
 					
 					<!--------------------------- 주문내역 영수증 ---------------------------->
-					<div class="col orderR" style="margin-top: 45px;">
-						<img src="${pageContext.request.contextPath}/resources/img/p.svg" alt="receipt"
-					 		style="width: 90%; height: 700px;">
+					<div class="col orderR" style="margin-top: 50px; margin-left: 40px;">
+						<img src="${pageContext.request.contextPath}/resources/img/p.svg" alt="receipt" class="img2"
+					 		style="width: 100%; height: 700px;">
 			 			<div class="text_top">
-							<h3>메뉴</h3>
-							<h3 style="margin-left: 90px;">수량</h3>
-							<h3 style="margin-left: 110px;">금액</h3>
+							<h3 style="margin-left: 50px;">메뉴</h3>
+							<h3 style="margin-left: 100px;">수량</h3>
+							<h3 style="margin-left: 130px;">금액</h3>
 						</div>
 						<div class="text_middle">
 							<h5 id="orderList"></h5>
@@ -367,11 +397,10 @@
 			-->
 		</div>
 
-		<!------------------------------ footer 불러오기 --------------------------->
-		<jsp:include page="/WEB-INF/views/nav/footer.jsp" />
-
 	</div>
-
+<!------------------------------ footer 불러오기 --------------------------->
+<jsp:include page="/WEB-INF/views/nav/footer.jsp" />
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 	<script>
 	let orderList = [];
@@ -458,7 +487,7 @@
 		else if(today.getDay()==1){ day="월요일"}
 		else if(today.getDay()==2){ day="화요일"}
 		else if(today.getDay()==3){ day="수요일"}
-		else if(today.getDay()==4){ day="목요일"}
+		else if(today.getDay()==4){ day="목요일"} 
 		else if(today.getDay()==5){ day="금요일"}
 		else if(today.getDay()==6){ day="토요일"}
 		let hours = today.getHours(); // 시
@@ -475,9 +504,8 @@
 			})
 			.then(function(data){
 				if(data.isSuccess && i==orderList.length-1){
-					alert("주문이 완료 되었습니다.");
+					swal("주문 완료!", "메인 페이지로 이동합니다.", "success")
 					location.href="${pageContext.request.contextPath}/main.do";
-					
 				}
 			});
 		}

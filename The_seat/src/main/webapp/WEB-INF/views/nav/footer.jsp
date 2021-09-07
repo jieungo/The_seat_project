@@ -10,7 +10,7 @@
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
 <style>
 .footer-distributed {
-	background: rgb(234, 234, 234); /*rgb(221, 221, 221);*/
+	background: rgb(234, 234, 234);
 	margin-top: 80px;
 	margin-bottom: 0%;
 	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);

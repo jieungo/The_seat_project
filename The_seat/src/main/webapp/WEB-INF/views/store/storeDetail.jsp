@@ -142,6 +142,66 @@
 		outline: none;
 	}
 	
+	/****** 베스트 메뉴 hover 하면 메뉴명과 가격 보이게 하는 css *****/
+	.banner_img {
+  		display:inline-block;
+  		position: relative;
+	}
+	.banner_img:hover:after,
+	.banner_img:hover > .hover_text {
+	  	display:block;
+	}
+	.banner_img:after, .hover_text{
+  		display:none;
+	}
+	.banner_img:after {
+	  	content:'';
+	  	position: absolute;
+	  	top: 0;
+	  	right: 0;
+	  	bottom: 0;
+	  	left: 0;
+	  	background: rgba(0, 0, 0, 0.5);
+	  	z-index: 10;
+	}
+	.banner_img {
+  		overflow: hidden;
+	}
+	.banner_img img{
+ 		height: 300px;
+	}
+	.banner_img:hover img{
+  		transform: scale(1.2);
+  		transition: 1s;
+	}
+	.hover_text {
+  		position: absolute;
+  		top: 120px;
+  		left: 50px;
+	  	color: #ffffff;
+	  	border-bottom: solid 2px #fff;
+	  	z-index: 20;
+	  	font-weight: 600;
+	  	font-size: 20px;
+	}
+	
+	/******* 스크롤바 css *******/
+	::-webkit-scrollbar {
+    	width: 15px;
+  	}
+  	::-webkit-scrollbar-thumb {
+    	background-color: rgb(196, 196, 196);
+    	border-radius: 10px;
+    	background-clip: padding-box;
+    	border: 2px solid transparent;
+  	}
+  	::-webkit-scrollbar-track {
+    	background-color: rgb(229, 229, 229);
+   	 	border-radius: 10px;
+    	box-shadow: inset 0px 0px 5px white;
+  	}
+ 
+  
 </style>
 </head>
 <!---------------------- 네비바를 import 한다. ------------------------->
@@ -152,7 +212,7 @@
 	<section style="text-align: center; margin-top: 10px;">
 		<!---------------------- DB 연동해서 파라미터 값으로 칼럼 값을 받아온다.  --------------------->
 		<img src="${pageContext.request.contextPath}${dto.image_logo }"
-			alt="storeLogo" style="width:60px; border-radius: 100%;" /> <span
+			alt="storeLogo" style="width:60px; border-radius: 100%;"/> <span
 			style="font-size: 2.5em; font-weight: bold; color: rgb(85, 152, 252); text-shadow: 2px 6px 2px #d3d3d3; text-align: center;">  ${dto.storeName }</span>
 	</section>
 	<div class="row">
@@ -171,7 +231,7 @@
 				<button type="button" data-bs-target="#carouselExampleDark"
 					data-bs-slide-to="3" aria-label="Slide 4"></button>
 			</div>
-			<div class="carousel-inner" style="width:100%; height: 500px !important; overflow: auto;">
+			<div class="carousel-inner" style="width:100%; height: 500px !important; overflow: auto; box-shadow : 10px 7px 7px #999;">
 				<div class="carousel-item active" data-bs-interval="10000">
 					<img src="${pageContext.request.contextPath}${dto.image_1 }"
 						class="d-block w-100" alt="매장대표이미지1">
@@ -220,7 +280,7 @@
                      </c:forEach>
 					</c:if>
                     
-                 		</h3>
+               		</h3>
 				</div>
 				<div class="card-body" style="margin-top: 10px; line-height: 60px;">
 					<h4 class="card-title" style="line-height: 2;">
@@ -242,13 +302,14 @@
 <!---------------------------------------- 메뉴판 만들기 ------------------------------------------->
 	<!-- 베스트 메뉴 4가지 -->
 	<div>
-		<p style="font-size:30px;"><strong>베스트 메뉴</strong></p>
+		<p style="font-size: 35px; font-weight: bold; color: rgb(84, 84, 84); text-shadow: 2px 6px 2px #d3d3d3;">Best Menu</p>
 	</div>
 	<div id="bestMenu">
 		<c:forEach var="tmp" items="${menuList }" >
 			<c:if test="${tmp.best == 'yes' }">
-				<div style="width:300px; overflow:hidden; ">
-					<img src="${pageContext.request.contextPath}${tmp.menuImage }" style="width:100%; object-fit:cover; "/>
+				<div class="banner_img" style="width:300px; overflow:hidden; box-shadow: 0 5px 18px -7px rgba(0,0,0,1);">
+					<img src="${pageContext.request.contextPath}${tmp.menuImage }" class="rounded" style="width:100%; object-fit:cover;"/>
+					<p class="hover_text">${tmp.menuName } <br> ${tmp.price } ￦</p>
 				</div>
 			</c:if>
 		</c:forEach>
@@ -259,11 +320,11 @@
 	<!-- 메뉴 -->
 
 	<div class="card mb-5"
-		style="max-width: auto; height: 700px; margin-top: 30px; background-color: rgb(86, 162, 255);">
+		style="max-width: auto; height: 700px; margin-top: 30px; background-color: rgb(86, 162, 255); box-shadow: 0 17px 20px -18px rgba(0, 0, 0, 1); ">
 		<span
-			style="color: white; font-size: 45px; text-shadow: 2px 6px 2px gray; margin-left: 85px; margin-top: 25px;">Menu</span>
+			style="color: white; font-size: 45px; font-weight: bold; text-shadow: 2px 6px 2px gray; margin-left: 85px; margin-top: 25px;">Menu</span>
 		<div class="card mb-5"
-			style="width: 1130px; height: 600px important; overflow: auto; margin-top: 30px; margin-left: 80px; border-radius: 10px; background-color: white;">
+			style="width: 1130px; height: 600px; overflow: auto; margin-top: 30px; margin-left: 80px; border-radius: 10px; background-color: white;">
 			<div class="col" style="margin-bottom: 30px;">
 			<!-- 메뉴 리스트 오브잭트 배열 가져와서 꺼내기! -->
 				<c:forEach var="tmp" items="${menuList }">
@@ -279,16 +340,16 @@
 						<div class="modal-dialog modal-dialog-centered">
 							<div class="modal-content">
 								<div class="modal-header">
-									<h5 class="modal-title" id="exampleModalLabel"></h5>
+									<h5 class="modal-title" id="exampleModalLabel">${tmp.menuName }</h5>
 									<button type="button" class="btn-close" data-bs-dismiss="modal"
 										aria-label="Close"></button>
 								</div>
 								<div class="modal-body">
-									<div class="card" style="width: 18rem;">
+									<div class="card">
 										<img src="${pageContext.request.contextPath}${tmp.menuImage }"
-											class="card-img-top" alt="MenuImage">
-										<div class="card-body">
-											<p class="card-text"></p>
+											class="img-thumbnail" alt="MenuImage">
+										<div class="card-body text-center">
+											<p class="card-text">${tmp.content }</p>
 										</div>
 									</div>
 								</div>
