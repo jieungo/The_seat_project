@@ -145,7 +145,7 @@
          <aside class="aside">
              <button onclick="location.href='#'">매장 정보</button>
              <button onclick="location.href='${pageContext.request.contextPath}/store/manageMenu.do?num=${dto.num}&storeName=${dto.storeName}'">메뉴 관리</button>
-             <button onclick="location.href='${pageContext.request.contextPath}/store/storeReview.do'">리뷰 관리</button>
+             <button onclick="location.href='${pageContext.request.contextPath}/store/storeReview.do?num=${dto.num}&storeName=${dto.storeName}'">리뷰 관리</button>
              <button onclick="location.href='${pageContext.request.contextPath}/store/storeOrder.do?num=${dto.num}'">주문 확인</button>
              <button onclick="location.href='${pageContext.request.contextPath}/store/storeSeat.do'">자리 관리</button>
          </aside>

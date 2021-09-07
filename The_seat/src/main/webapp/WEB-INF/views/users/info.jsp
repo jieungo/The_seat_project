@@ -115,7 +115,7 @@ type="text/css" />
 			        <p class="card-text"></p>
 			        <div>
 					<!-- 리뷰작성 Btn -->
-					<!-- 리뷰보기 Btn -->	
+					<!-- 리뷰보기 Btn -->
 						<c:choose>
 							<c:when test="${tmp.reviewExist == 'YES' }">
 								<button data-num="${tmp.num }" class="reviewListBtn circle-btn" data-bs-toggle="modal" data-bs-target="#modal-reviewList">리뷰 보기</button>

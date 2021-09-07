@@ -87,7 +87,23 @@ public class ReviewServiceImpl implements ReviewService{
 	@Override
 	public List<ReviewDto> getReviewList(ReviewDto dto) {
 		
-		return dao.getReviewList(dto);
+		List<ReviewDto> list=dao.getReviewList(dto);
+		System.out.println(dto.getStoreNum());
+		for(int i=0; i<list.size(); i++) {
+			// 해당 댓글의 DB 번호를 불러옴
+			int num=list.get(i).getNum();
+			// 그 번호를 dto의 targetNum에 넣어줌
+			dto.setNum(num);
+			System.out.println("test: "+list.get(i).getReviewCheck());
+			// 만약 그 targetNum으로 된 것이 있으면 yes, 없으면 no
+			if(dao.getMyReview(dto)!=null) {
+				list.get(i).setReviewCheck("yes");
+			} else {
+				list.get(i).setReviewCheck("no");
+			}
+		}
+		
+		return list;
 	}
 	
 	// 해당 DB번호의 리뷰 정보를 삭제하는 method
@@ -137,5 +153,20 @@ public class ReviewServiceImpl implements ReviewService{
 		dto.setImagePath("/upload/"+saveFileName);
 		
 		dao.updateReview(dto);	
+	}
+	
+	// 해당 리뷰 번호로 되어있는 targetNum 정보가 있는지 여부를 알아내는 method
+	@Override
+	public boolean getMyReview(ReviewDto dto) {
+		
+		//dto.setTargetNum(dto.getNum());
+		
+		boolean result=false;
+		
+		if(dao.getMyReview(dto)!=null) {
+			result=true;
+		}
+		
+		return result;
 	}
 }

@@ -61,7 +61,7 @@ public class ReviewController {
 	@RequestMapping(value = "/store/getReview.do", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> getReviewList(ReviewDto dto){
-		System.out.println(dto.getStoreNum());
+		System.out.println("storeNum: "+dto.getStoreNum());
 		
 		List<ReviewDto> list=service.getReviewList(dto);
 		
@@ -108,6 +108,23 @@ public class ReviewController {
 		
 		Map<String, Object> map=new HashMap<>();
 		map.put("beUpdated", true);
+		
+		return map;
+	}
+	
+	// 매장 관리 페이지에서 유저의 해당 리뷰에 대한 관리자의 리뷰가 존재하는지 여부를 알려주는 method
+	// 있으면 true, 없으면 false를 return하게 된다.
+	@RequestMapping(value = "/store/getMyReview.do", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> getMyReview(ReviewDto dto){
+		
+		System.out.println(dto.getNum());
+		
+		boolean result=service.getMyReview(dto);
+		System.out.println(result);
+		
+		Map<String, Object> map=new HashMap<>();
+		map.put("beChecked", result);
 		
 		return map;
 	}
