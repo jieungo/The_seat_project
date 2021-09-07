@@ -73,7 +73,8 @@ CREATE TABLE order_(
 	reviewExist VARCHAR2(20),
 	cancel VARCHAR2(20), --> default: 'NO' -> 'YES'(client) -> 'COMPLETE' or 'REJECT' (owner)
 	confirm VARCHAR2(20), --> default: 'NO' -> 'YES'(owner)
-	regdate VARCHAR2(100)
+	regdate VARCHAR2(100),
+	orderdate VARCHAR2(100)
 );
 
 CREATE TABLE storeSeat(

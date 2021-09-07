@@ -15,6 +15,7 @@ public class OrderDto {
 	private String confirm;
 	private String cancel;
 	private String regdate;
+	private String orderdate;
 	private int startRowNum;
 	private int endRowNum;
 	
@@ -22,8 +23,7 @@ public class OrderDto {
 
 	public OrderDto(int orderNum, String email, String storeName, String storeLogo, int num, int tableNum, String menu,
 			int menuCount, int price, int amount, String reviewExist, String confirm, String cancel, String regdate,
-			int startRowNum, int endRowNum) {
-
+			String orderdate, int startRowNum, int endRowNum) {
 		super();
 		this.orderNum = orderNum;
 		this.email = email;
@@ -39,6 +39,7 @@ public class OrderDto {
 		this.confirm = confirm;
 		this.cancel = cancel;
 		this.regdate = regdate;
+		this.orderdate = orderdate;
 		this.startRowNum = startRowNum;
 		this.endRowNum = endRowNum;
 	}
@@ -146,12 +147,21 @@ public class OrderDto {
 	public void setCancel(String cancel) {
 		this.cancel = cancel;
 	}
+
 	public String getRegdate() {
 		return regdate;
 	}
 
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
+	}
+
+	public String getOrderdate() {
+		return orderdate;
+	}
+
+	public void setOrderdate(String orderdate) {
+		this.orderdate = orderdate;
 	}
 
 	public int getStartRowNum() {
@@ -170,5 +180,4 @@ public class OrderDto {
 		this.endRowNum = endRowNum;
 	}
 
-	
 }

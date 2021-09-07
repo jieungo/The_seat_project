@@ -7,11 +7,11 @@
 		FROM
 			(SELECT result1.*, ROWNUM as rnum
 			FROM
-				(SELECT orderNum, email, storeName, storeLogo, num, tableNum, amount, reviewExist, cancel, confirm, regdate
+				(SELECT orderNum, email, storeName, storeLogo, num, tableNum, amount, reviewExist, cancel, confirm, regdate, orderdate
 				FROM order_
 				WHERE email = #{email }
-				GROUP BY orderNum, email, storeName, storeLogo, num, tableNum, amount, reviewExist, cancel, confirm, regdate
-				ORDER BY orderNum ASC) result1)
+				GROUP BY orderNum, email, storeName, storeLogo, num, tableNum, amount, reviewExist, cancel, confirm, regdate, orderdate
+				ORDER BY orderdate ASC) result1)
 		WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
 	</select>
 	
@@ -20,12 +20,12 @@
 		FROM
 			(SELECT result1.*, ROWNUM as rnum
 			FROM
-				(SELECT orderNum, email, storeName, storeLogo, num, tableNum, amount, reviewExist, cancel, confirm, regdate
+				(SELECT orderNum, email, storeName, storeLogo, num, tableNum, amount, reviewExist, cancel, confirm, regdate, orderdate
 				FROM order_
 				WHERE num = #{num }
-				GROUP BY orderNum, email, storeName, storeLogo, num, tableNum, amount, reviewExist, cancel, confirm, regdate
+				GROUP BY orderNum, email, storeName, storeLogo, num, tableNum, amount, reviewExist, cancel, confirm, regdate, orderdate
 
-				ORDER BY orderNum DESC) result1)
+				ORDER BY orderdate ASC) result1)
 		WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
 	</select>
 	
@@ -55,8 +55,8 @@
 	
 	<insert id="insertOrder" parameterType="orderDto">
 		INSERT INTO order_
-		(orderNum, email, storeName, storeLogo, num, tableNum, menu, menuCount, price, amount, reviewExist, confirm, cancel, regdate)
-		VALUES(#{orderNum },#{email }, #{storeName }, #{storeLogo }, #{num }, #{tableNum }, #{menu }, #{menuCount }, #{price }, #{amount }, 'NO' , 'NO' , 'NO' , #{regdate })
+		(orderNum, email, storeName, storeLogo, num, tableNum, menu, menuCount, price, amount, reviewExist, confirm, cancel, regdate, orderdate)
+		VALUES(#{orderNum },#{email }, #{storeName }, #{storeLogo }, #{num }, #{tableNum }, #{menu }, #{menuCount }, #{price }, #{amount }, 'NO' , 'NO' , 'NO' , #{regdate } , SYSDATE)
 	</insert>
 
 	<delete id="deleteOrder" parameterType="int">
