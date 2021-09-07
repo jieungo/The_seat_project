@@ -195,11 +195,4 @@ public class StoreController {
 		return mView;
 	}
 	
-	// 매장 리뷰 관리 페이지로 이동
-	@RequestMapping("/store/storeSeat")
-	public String storeSeat(){
-		return "store/storeSeat";
-	}
-		
-		
 }
