@@ -27,7 +27,7 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
 	}
 	 
 	 .navbarTwo {
-	 	width: 50%;
+	 	width: 30%;
 		padding-bottom: 30px;
 		display: flex;
 		justify-content:space-between;
@@ -37,7 +37,12 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
 	#home {
 		cursor:pointer;
 	}
-   
+   	
+	a:link {
+		color: black;
+		text-decoration: none;
+	}
+
 </style>
 
 <nav class="navbarTwo">

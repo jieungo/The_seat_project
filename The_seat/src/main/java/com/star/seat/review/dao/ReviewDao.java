@@ -24,6 +24,9 @@ public interface ReviewDao {
 	// 해당 DB번호의 리뷰 정보를 수정하는 method
 	public void updateReview(ReviewDto dto);
 	
-	// 해당 주문 번호에 해당하는 review 존재 여부를 조정하는 method;
+	// 해당 주문 번호에 해당하는 review 존재 여부를 조정하는 method
 	public void reviewExist(OrderDto dto);
+	
+	// 해당 리뷰 번호로 되어있는 targetNum 정보가 있는지 여부를 알아내는 method
+	public ReviewDto getMyReview(ReviewDto dto);
 }

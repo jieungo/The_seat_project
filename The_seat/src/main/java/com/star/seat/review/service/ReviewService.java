@@ -21,4 +21,7 @@ public interface ReviewService {
 	
 	// 해당 DB번호의 리뷰 정보를 수정하는 method
 	public void updateReview(ReviewDto dto, HttpServletRequest request);
+	
+	// 해당 리뷰 번호로 되어있는 targetNum 정보가 있는지 여부를 알아내는 method
+	public boolean getMyReview(ReviewDto dto);
 }

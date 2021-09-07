@@ -396,7 +396,6 @@
 			</section>
 			-->
 		</div>
-
 	</div>
 <!------------------------------ footer 불러오기 --------------------------->
 <jsp:include page="/WEB-INF/views/nav/footer.jsp" />

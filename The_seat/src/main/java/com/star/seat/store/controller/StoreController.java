@@ -1,6 +1,7 @@
 package com.star.seat.store.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.star.seat.menu.service.MenuService;
 import com.star.seat.order.service.OrderService;
+import com.star.seat.review.dto.ReviewDto;
+import com.star.seat.review.service.ReviewService;
 import com.star.seat.store.dto.StoreDto;
 import com.star.seat.store.service.StoreService;
 
@@ -27,6 +30,8 @@ public class StoreController {
 	private MenuService mService;
 	@Autowired
 	private OrderService oService;
+	@Autowired
+	private ReviewService rService;
 	
 	// 검색 결과 메인 페이지를 요청할 때의 method
 	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
@@ -181,8 +186,17 @@ public class StoreController {
 	}
 	
 	// 매장 리뷰 관리 페이지로 이동
-	@RequestMapping("/store/storeReview")
-	public String storeReview(){
+	@RequestMapping("/store/storeReview.do")
+	public String storeReview(StoreDto dto, HttpServletRequest request){
+		
+		ReviewDto rDto=new ReviewDto();
+		rDto.setStoreNum(dto.getNum());
+		System.out.println("myStoreNum: "+rDto.getStoreNum());
+		
+		List<ReviewDto> list=rService.getReviewList(rDto);
+		
+		request.setAttribute("reviewList", list);
+		
 		return "store/storeReview";
 	}
 	
