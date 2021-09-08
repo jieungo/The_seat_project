@@ -116,12 +116,12 @@
 
         <!------------------------------------ 옆 사이드바 (매장정보, 메뉴관리 탭) ----------------->
     <aside class="aside">
-         <button onclick="location.href='#'">매장 정보</button>
-         <button onclick="location.href='${pageContext.request.contextPath}/store/manageMenu.do?num=${dto.num}'">메뉴 관리</button>
-         <button onclick="location.href='${pageContext.request.contextPath}/store/storeReview.do'">리뷰 관리</button>
-         <button onclick="location.href='${pageContext.request.contextPath}/store/storeOrder.do'">주문 확인</button>
-         <button onclick="location.href='${pageContext.request.contextPath}/store/storeSeat.do'">자리 관리</button>
-     </aside>
+        <button onclick="location.href='${pageContext.request.contextPath}/store/myStore.do?num=${dto.num}'">매장 정보</button>
+        <button onclick="location.href='${pageContext.request.contextPath}/store/manageMenu.do?num=${dto.num}'">메뉴 관리</button>
+        <button onclick="location.href='${pageContext.request.contextPath}/store/storeReview.do?num=${dto.num}'">리뷰 관리</button>
+        <button onclick="location.href='${pageContext.request.contextPath}/store/storeOrder.do?num=${dto.num}'">주문 확인</button>
+        <button onclick="location.href='#'">자리 관리</button>
+    </aside>
 </div>
 
 <!-- seat 이미지 넣는용 지우지마용 -->

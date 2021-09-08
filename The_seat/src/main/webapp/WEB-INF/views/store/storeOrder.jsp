@@ -379,16 +379,18 @@ ul {
 </div>
         <!------------------------------------ 옆 사이드바 (매장정보, 메뉴관리 탭) ----------------->
         <aside class="aside">
-             <button onclick="location.href='#'">매장 정보</button>
-             <button onclick="location.href='${pageContext.request.contextPath}/store/manageMenu.do?num=${dto.num}&storeName=${dto.storeName}'">메뉴 관리</button>
-             <button onclick="location.href='${pageContext.request.contextPath}/store/storeReview.do'">리뷰 관리</button>
-             <button onclick="location.href='${pageContext.request.contextPath}/store/storeOrder.do'">주문 확인</button>
-             <button onclick="location.href='${pageContext.request.contextPath}/store/storeSeat.do'">자리 관리</button>
-         </aside>
+        <button onclick="location.href='${pageContext.request.contextPath}/store/myStore.do?num=${num}'">매장 정보</button>
+        <button onclick="location.href='${pageContext.request.contextPath}/store/manageMenu.do?num=${num}'">메뉴 관리</button>
+        <button onclick="location.href='${pageContext.request.contextPath}/store/storeReview.do?num=${num}'">리뷰 관리</button>
+        <button onclick="location.href='#'">주문 확인</button>
+        <button onclick="location.href='${pageContext.request.contextPath}/store/storeSeat.do?num=${num}'">자리 관리</button>
+    </aside>
 </div>
 <script src="https://kit.fontawesome.com/2ebe86210e.js" crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 <script>
+
+
 let orderEmail = document.querySelectorAll(".email");
 let orderName = document.querySelectorAll(".name");
 let phone = document.querySelectorAll(".phone");

@@ -47,7 +47,7 @@ public class StoreServiceImpl implements StoreService{
 		//email="test";
 		
 		int num=Integer.parseInt(request.getParameter("num"));
-		
+		request.setAttribute("num", num);
 		StoreDto dto=new StoreDto();
 		dto.setNum(num); // rnum으로 들어감
 		dto.setOwner(email);

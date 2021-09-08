@@ -8,10 +8,7 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
-<script
-   src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-   integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
-   crossorigin="anonymous"></script>
+
 <style>
 
 	body {
@@ -111,18 +108,16 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
             <li class="nav-item"><a class="nav-link"
                   href="#">
                     매장정보 </a></li>
-                     <li class="nav-item"><a class="nav-link"
-                  href="${pageContext.request.contextPath}/store/manageMenu.do?num=${dto.num}&storeName=${dto.storeName}">
-                   	메뉴관리 </a></li>
-                     <li class="nav-item"><a class="nav-link"
-                  href="${pageContext.request.contextPath}/store/storeReview.do?num=${dto.num}&storeName=${dto.storeName}">
-                     리뷰관리 </a></li>
-                     <li class="nav-item"><a class="nav-link"
-                  href="${pageContext.request.contextPath}/store/storeOrder.do?num=${dto.num}">
-                      주문확인</a></li>
-                     <li class="nav-item"><a class="nav-link"
-                  href="${pageContext.request.contextPath}/store/storeSeat.do?num=${dto.num}">
-                      자리관리 </a></li>
+                     <li class="nav-item">
+                     	<button id="manageMenu1">메뉴관리</button>
+                   	 </li>
+                     <li class="nav-item">
+                     	<button id="storeReview1" >리뷰관리 </button>
+                     </li>
+                     <li class="nav-item">
+                     <button id="storeOrder1">주문확인</button></li>
+                     <li class="nav-item">
+                     <button id="storeSeat1">자리관리 </button></li>
                <li class="nav-item"><a class="nav-link"
                   href="${pageContext.request.contextPath}/users/logout.do">
                      로그아웃 </a></li>
@@ -131,11 +126,22 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
       </div>
    </div>
 </nav>
-
 <script
    src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
    <script src="https://kit.fontawesome.com/2ebe86210e.js" crossorigin="anonymous"></script>
 <script>
+document.querySelector("#manageMenu1").addEventListener("click",function(){
+	location.href="${pageContext.request.contextPath}/store/manageMenu.do?num=${num}";
+});
+document.querySelector("#storeReview1").addEventListener("click",function(){
+	location.href="${pageContext.request.contextPath}/store/storeReview.do?num=${num}";
+});
+document.querySelector("#storeOrder1").addEventListener("click",function(){
+	location.href="${pageContext.request.contextPath}/store/storeOrder.do?num=${num}";
+});
+document.querySelector("#storeSeat1").addEventListener("click",function(){
+	location.href="${pageContext.request.contextPath}/store/storeSeat.do?num=${num}";
+});
    if(${sessionScope.email ne null }){
       // session 정보로 이름 정보 가져오기
       ajaxPromise("${pageContext.request.contextPath}/users/getData.do").then(
@@ -196,10 +202,8 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
          array[i].setAttribute("href", storePath + num);
       }
    }
-
-
-   // 네비바의 홈 로고 누르면 메인페이지로 이동
    
+   // 네비바의 홈 로고 누르면 메인페이지로 이동
    document.querySelector("#home").addEventListener("click", function() {
       location.href = "${pageContext.request.contextPath}/main.do";
    });

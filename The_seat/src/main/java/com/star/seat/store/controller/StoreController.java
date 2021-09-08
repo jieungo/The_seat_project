@@ -188,7 +188,8 @@ public class StoreController {
 	// 매장 리뷰 관리 페이지로 이동
 	@RequestMapping("/store/storeReview.do")
 	public String storeReview(StoreDto dto, HttpServletRequest request){
-		
+		String num = request.getParameter("num");
+		request.setAttribute("num", num);
 		ReviewDto rDto=new ReviewDto();
 		rDto.setStoreNum(dto.getNum());
 		System.out.println("myStoreNum: "+rDto.getStoreNum());
@@ -204,6 +205,8 @@ public class StoreController {
 	@RequestMapping("/store/storeOrder")
 	public ModelAndView storeOrder(ModelAndView mView,HttpServletRequest request, 
 			HttpSession session){
+		String num = request.getParameter("num");
+		request.setAttribute("num", num);
 		oService.getStoreList(mView, request, session);
 		mView.setViewName("store/storeOrder");
 		return mView;
