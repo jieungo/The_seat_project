@@ -20,12 +20,15 @@ public class SeatServiceImpl implements SeatService {
 	@Autowired
 	private SeatDao dao;
 	
+	@Override
 	public void insertSeat(SeatDto dto, HttpServletRequest request) {
+		
 		dao.insertSeat(dto);
 	}
 
 	@Override
 	public void updateSeat(SeatDto dto) {
+		
 		dao.updateSeat(dto);
 	}
 

@@ -804,7 +804,7 @@ type="text/css" />
 			}).then(function(data){
 				console.log(data);
 				if(data.beUpdated){
-					document.querySelector("#updateCloseBtn").click();
+					document.하querySelector("#updateCloseBtn").click();
 					alert("리뷰를 수정하였습니다.");
 				}
 			});

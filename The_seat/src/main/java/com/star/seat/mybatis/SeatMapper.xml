@@ -6,7 +6,7 @@
 	<insert id="insertSeat" parameterType="seatDto">
 		insert into storeSeat
 		(num, seatImage, seatContent, totalSeat, emptySeat, notEmptySeat, notUse)
-		values (#{num }, 0, 0, 0, 0, 0, 0)
+		values (#{num }, '', '', '', '', '', '')
 	</insert>
 	
 	<select id="getSeat" parameterType="seatDto" resultType="seatDto">
@@ -15,7 +15,7 @@
 		WHERE num=#{num }
 	</select>
 	
-	<update id="updateSeat" parameterType="seatDto">
+	<update id="updateSeat" parameterType="seatDto" >
 		UPDATE storeSeat
 		SET seatImage=#{seatImage },seatContent=#{seatContent },totalSeat=#{totalSeat },emptySeat=#{emptySeat },notEmptySeat=#{notEmptySeat },notUse=#{notUse }
 		WHERE num=#{num }
