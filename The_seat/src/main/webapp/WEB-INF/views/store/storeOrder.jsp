@@ -36,7 +36,6 @@ body {
 .box::-webkit-scrollbar{ display:none; }
 
 .box {
-	height:500px;
 	text-overflow: hidden; 
     overflow-x: auto;
     height: 450px;
@@ -300,7 +299,7 @@ ul {
 				                <div class="order__body">
 				                    <h5 class="box-title">주문내역</h5>
 				                    <div class="line"></div>
-				                    <div>
+				                    <div style="height:300px; text-overflow: hidden; overflow-x: auto;">
 					                    <table style="width:100%;">
 					                    	<thead class="mb-2">
 					                    		<tr class="row" style="display:flex; justify-content:space-between; align-items:center;
@@ -310,7 +309,7 @@ ul {
 					                    			<th class="col ps-0 pe-4" style="text-align:end;">가격</th>
 					                    		</tr>
 					                    	</thead>
-					                    	<tbody class="orderDetail col ps-3 pe-3" >
+					                    	<tbody class="orderDetail col ps-3 pe-3">
 					                    		
 					                    	</tbody>
 					                    </table>

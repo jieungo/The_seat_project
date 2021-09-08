@@ -504,7 +504,9 @@
 			.then(function(data){
 				if(data.isSuccess && i==orderList.length-1){
 					swal("주문 완료!", "메인 페이지로 이동합니다.", "success")
-					location.href="${pageContext.request.contextPath}/main.do";
+					.then(function(){
+						location.href="${pageContext.request.contextPath}/main.do";
+					})
 				}
 			});
 		}

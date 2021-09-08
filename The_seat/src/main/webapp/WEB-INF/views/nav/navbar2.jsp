@@ -14,7 +14,6 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
    crossorigin="anonymous"></script>
 <style>
 
-
 	body {
 		background-color: #598eff;
 		display:flex;
@@ -37,8 +36,10 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
 	#home {
 		cursor:pointer;
 	}
-   	
-	a:link {
+	
+	.nav-link,
+	.store,
+	#addBtn0 {
 		color: black;
 		text-decoration: none;
 	}
@@ -107,6 +108,21 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
             <br>
             <br>
             <c:if test="${sessionScope.email ne null }">
+            <li class="nav-item"><a class="nav-link"
+                  href="#">
+                    매장정보 </a></li>
+                     <li class="nav-item"><a class="nav-link"
+                  href="${pageContext.request.contextPath}/store/manageMenu.do?num=${dto.num}&storeName=${dto.storeName}">
+                   	메뉴관리 </a></li>
+                     <li class="nav-item"><a class="nav-link"
+                  href="${pageContext.request.contextPath}/store/storeReview.do?num=${dto.num}&storeName=${dto.storeName}">
+                     리뷰관리 </a></li>
+                     <li class="nav-item"><a class="nav-link"
+                  href="${pageContext.request.contextPath}/store/storeOrder.do?num=${dto.num}">
+                      주문확인</a></li>
+                     <li class="nav-item"><a class="nav-link"
+                  href="${pageContext.request.contextPath}/store/storeSeat.do?num=${dto.num}">
+                      자리관리 </a></li>
                <li class="nav-item"><a class="nav-link"
                   href="${pageContext.request.contextPath}/users/logout.do">
                      로그아웃 </a></li>

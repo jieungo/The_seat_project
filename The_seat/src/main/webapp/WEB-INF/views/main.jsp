@@ -112,9 +112,9 @@ String search = request.getParameter("keyword");
 				<a
 					href="${pageContext.request.contextPath}/store/storeDetail.do?num=${tmp.num}">
 						<div class="row g-0 main-card">
-							<div class="col-md-4" style="height:100%">
+							<div class="col-md-6" style="height:100%">
 								<img src="${pageContext.request.contextPath}${tmp.image_logo } "
-									class="img-fluid" alt="storeImageLogo">
+									class="img" style="object-fit:fill; width:100%; height:100%;" alt="storeImageLogo">
 							</div>
 							<div class="col-md-6">
 								<div class="card-body">

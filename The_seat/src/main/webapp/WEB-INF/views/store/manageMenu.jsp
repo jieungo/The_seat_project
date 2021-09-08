@@ -13,10 +13,18 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
 />
 <link rel="stylesheet"
-href="${pageContext.request.contextPath}/resources/css/manageMenu.css?ver=6"
+href="${pageContext.request.contextPath}/resources/css/manageMenu.css?ver=13"
 type="text/css" />
 </head>
+<style>
 
+.card-text {
+	font-size:14px;
+	display:block;
+	margin-bottom:10px;
+}
+
+</style>
 <body>
 <!----------------------------- 네비바 ------------------------------------>
 <jsp:include page="../nav/navbar2.jsp" />
@@ -69,14 +77,13 @@ type="text/css" />
                                     <img src="${pageContext.request.contextPath}${tmp.menuImage}" class="rounded" alt="menu_image" id="menuImage">
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="card-body p-2" style="width: 200px; margin:20px">
-                                        <h6 class="card-text">${tmp.menuName }</h6>
-                                        <h6 class="card-text">${tmp.price }</h6>
-                                        <h6 class="card-text">${tmp.content }</h6>
+                                    <div class="card-body p-1" style="width: 200px; margin:20px">
+                                        <span class="card-text">상품명 : ${tmp.menuName }</span>
+                                        <span class="card-text">상품가격 : ${tmp.price }</span>
+                                        <span class="card-text">상품구성 : ${tmp.content }</span>
                                     </div>
                                 </div>
                                 <div class="menu__card-edit mb-2 pe-2" style="display: flex; justify-content: flex-end;">
-                                    <button>수정</button>
                                     <button data-num="${tmp.num }" class="deleteBtn">삭제</button>
                                 </div>
                             </div>
