@@ -65,6 +65,9 @@ input:focus {
 
 .menu__list {
 	margin-top: 60px;
+	height:450px;
+	text-overflow:hidden;
+	overflow-x:auto;
 }
 
 .menu__category {
@@ -97,10 +100,10 @@ input:focus {
     margin-left: 10%;
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
     display: none;
 }
-
+ */
 
 .circle-btn {
 	background-color: #598eff;
@@ -200,6 +203,11 @@ input:focus {
 .card {
     border: none;
     box-shadow: 4px 6px 11px rgba(172, 172, 172, 0.699);
+    max-width: 450px; 
+    height: 220px; 
+    margin-top: 20px;
+    display:flex;
+    align-items:center;
 }
 
 .submitBtn {
@@ -220,3 +228,122 @@ input:focus {
 	color: #d60000;
 	font-weight:600;
 }
+
+
+.card-text {
+	font-size:14px;
+	display:block;
+	margin-bottom:10px;
+}
+
+.card-body {
+	width: 200px;
+	margin: 20px;
+}
+
+	/* 테블릿 세로 (해상도 768px ~ 1023px)*/
+
+@media screen and (max-width:1024px) {
+	
+	.menu_container {
+		height: 80%;
+		width: 95%;
+		position:relative;
+		padding-bottom: 10px;
+		font-weight:500;
+	}
+
+	.aside {
+		display:flex;
+		flex-direction: row;
+		width:100%;
+		position: absolute;
+		top: 0;
+		left:0;
+		height:auto;
+	}
+	
+	.aside > button {
+   		border-radius: 5px;
+   		font-weight: 700;
+		width: 20%;
+		height: 10vh;
+		border: 1px solid lightgray;
+	}
+	
+	.aside > button:nth-child(2) {
+		border: none;	
+	}
+	
+	.inner_container {
+		margin-top: 0px;
+		margin-left: 0px;
+		justify-content: center;
+	}
+	
+	.menu__category {
+		bottom: 0px;
+		top:auto;
+	}
+	
+	.menu__list {
+		height: 600px;
+		margin-top:50;
+	}
+}
+
+		/* 모바일 가로, 세로 */
+
+@media screen and (max-width:767px) {
+	
+	body {
+		height: auto;
+	}
+	
+	.menu_container {
+		height: 80%;
+		width: 100%;
+		flex-direction: column;
+		text-overflow: hidden; 
+   		overflow-x: auto;
+	}
+
+	.aside {
+		display:none;
+	}
+	
+	.inner_container {
+		flex-direction:column;
+		margin-top: 0;
+	}
+	
+	.navbarTwo {
+		margin-top: 30px;
+	}
+	
+	.card {
+		width:80%;
+		height:auto;
+	}
+	
+	.card-body {
+		margin: 0;
+		width: auto;
+	}
+	
+	.menu__category {
+		bottom: auto;
+		top:0;
+		width: 100%;
+	}
+	
+	.menu__list {
+		text-align:center;
+		margin-left:10px;
+	}
+	
+	.card_img {
+		margin-bottom:10px;
+	}
+}
+

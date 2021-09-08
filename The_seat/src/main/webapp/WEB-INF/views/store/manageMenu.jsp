@@ -13,18 +13,9 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
 />
 <link rel="stylesheet"
-href="${pageContext.request.contextPath}/resources/css/manageMenu.css?ver=13"
+href="${pageContext.request.contextPath}/resources/css/manageMenu.css?ver=14"
 type="text/css" />
 </head>
-<style>
-
-.card-text {
-	font-size:14px;
-	display:block;
-	margin-bottom:10px;
-}
-
-</style>
 <body>
 <!----------------------------- 네비바 ------------------------------------>
 <jsp:include page="../nav/navbar2.jsp" />
@@ -41,8 +32,8 @@ type="text/css" />
                     </ul>
                 <button id="categoryBtn" style="color:rgb(253, 197, 14); font-weight: 500;" data-bs-toggle="modal" data-bs-target="#modal-categoryBtn">카테고리 추가</button>
                 </section>
-                <article class="menu__list pe-3 ps-3" style="height:450px; text-overflow: hidden; overflow-x: auto;">
-                    <div class="card mb-5 mt-3 ms-3" style="width: 450px; height: 220px; margin-top: 20px;">
+                <article class="menu__list pe-3 ps-3">
+                    <div class="card menu__add-card mb-5 mt-3 ms-4">
                         <div class="menu__add card-body" id="addBox">
 			            <c:choose>
 			            	<c:when test="${empty categoryList }">
@@ -59,7 +50,7 @@ type="text/css" />
                     </div>
                     
                     <c:forEach var="tmp" items="${menuList }">
-                        <div class="card mb-5 mt-3 ms-3" style="max-width: 450px; height: 220px; margin-top: 20px;">
+                        <div class="card mb-5 mt-3 ms-4">
                             <div class="row g-0">
                                 <c:choose>
                                     <c:when test="${tmp.best == 'no' }">
@@ -73,11 +64,11 @@ type="text/css" />
                                         </button>
                                     </c:otherwise>
                                 </c:choose>
-                                <div class="col-md-4 ms-4">
+                                <div class="col-md-4 card_img">
                                     <img src="${pageContext.request.contextPath}${tmp.menuImage}" class="rounded" alt="menu_image" id="menuImage">
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="card-body p-1" style="width: 200px; margin:20px">
+                                    <div class="card-body p-1">
                                         <span class="card-text">상품명 : ${tmp.menuName }</span>
                                         <span class="card-text">상품가격 : ${tmp.price }</span>
                                         <span class="card-text">상품구성 : ${tmp.content }</span>
