@@ -262,21 +262,22 @@
 					alt="back" style="margin-bottom: 15px; width: 48px; height: 50px;" />
 			</button>
 			<span style="color: rgb(84, 84, 84); font-size: 2.5em; font-weight: bold; text-shadow: 2px 6px 2px #d3d3d3;">주문하기</span> 
-			<span style="margin-left: 20px; font-size: 20px; color: rgb(89, 89, 89);">${dto.storeName }에서 ${tableNum }번 자리 👨‍🍳
+			<span style="margin-left: 20px; font-size: 25px; font-weight: 500; color: rgb(89, 89, 89);">${dto.storeName }에서 ${tableNum }번 자리 👨‍🍳
 			</span>
 		</div>
 		<div class="order">
 			<section>
-				<!------ 카테고리에 따라 메뉴 다르게 보이기 ------->
+				<!------ 카테고리에 따라 메뉴 다르게 보이기
 				<ul id="categories">
 					<li><a
 						href="${pageContext.request.contextPath}/order/order.do?num=${dto.num}&storeName=${dto.storeName}">전체</a>
 					</li>
-					<c:forEach var="tmp" items="${categoryList }">
-						<li data-num="${dto.num }" class="category"><a
+					<c:forEach var="tmp" items="${categoryList }" varStatus="status">
+						<li data-num="${dto.num }" data-num2="${status.index }" class="category"><a
 							href="${pageContext.request.contextPath}/order/order.do?num=${dto.num}&storeName=${dto.storeName}&category=${tmp}">${tmp }</a></li>
 					</c:forEach>
 				</ul>
+				-------->
 				
 				<!----------------- 주문페이지에서 메뉴 고르기 ------------------>
 				<div class="row">
@@ -296,12 +297,13 @@
 										
 										<div class="col">
 											<div class="card">
-												<img src="${pageContext.request.contextPath}${tmp.menuImage }" class="card-img-top" alt="menuImage">
+											<h5 class="card-header">베스트</h5>
+												<img src="${pageContext.request.contextPath}${tmp.menuImage }" class="card-img-top" alt="menuImage" style="width: 100%; height: 230px; object-fit: fill;">
 												<div class="card-body" style="background-color: rgb(176, 215, 252); color: rgb(104, 104, 104); font-weight: bold;">
 													<h5 class="card-title">
 														<button type="submit" id="orderMenu">${tmp.menuName }</button>
 													</h5>
-													<p class="card-text">${tmp.price } ￦</p>
+													<p class="card-text" style="font-size: 20px;">${tmp.price } ￦</p>
 													<input type="number" id="menuCount" name="menuCount" min="1" max="9" value="1">
 												</div>
 											</div>
@@ -333,8 +335,9 @@
 						<button id="goOrder">주문 하기</button>
 					</div>
 				</div>
-				
-				
+			</section>
+		</div>
+	</div>
 				<!--
 				<h3>베스트 메뉴</h3> 
 				<div>
@@ -355,8 +358,7 @@
 						</c:if>
 					</c:forEach>
 				</div>
-				-->
-				<!--
+				
 				<h3>전체 메뉴</h3>
 
 				<div>
@@ -375,7 +377,6 @@
 						</form>
 					</c:forEach>
 				</div>
-			</section>
 			
 			<section>
 				<h2>주문 목록</h2>
@@ -395,10 +396,10 @@
 
 			</section>
 			-->
-		</div>
-	</div>
+			
 <!------------------------------ footer 불러오기 --------------------------->
 <jsp:include page="/WEB-INF/views/nav/footer.jsp" />
+
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 	<script>
@@ -442,17 +443,23 @@
 			
 			let span2 = document.createElement('span');
 			span2.setAttribute('class','orderMenuCount');
+			span2.setAttribute('style','margin-left: 50px;');
 			span2.innerText=" "+menuCount+"개 ";
 			document.querySelector("#orderList").appendChild(span2);
 			
 			let span3 = document.createElement('span');
 			span3.setAttribute('class','orderMenuPrice');
+			span3.setAttribute('style','margin-left: 100px;');
 			span3.innerText=(price.toString()
 			  .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","))+"원";
 			document.querySelector("#orderList").appendChild(span3);
 			
 			let br = document.createElement('br');
 			document.querySelector("#orderList").appendChild(br);
+			
+			//오더리스트 div 로 묶기
+			//let divs = document.createElement('div');
+			//document.querySelector("")
 
 			orderMenu = {orderNum,email,storeName,storeLogo,num,tableNum,menu,menuCount,price};
 			

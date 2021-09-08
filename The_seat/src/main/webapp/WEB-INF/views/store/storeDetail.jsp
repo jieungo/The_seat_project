@@ -22,36 +22,22 @@
 
 	/*************리뷰 보는 버튼 css************/
 	#reviewBtn {
-		background-color: rgb(108, 156, 252);
+		background-color: rgb(142, 192, 242);
 		margin-top: 20px;
-		font-weight: bold;
 		width: 140px;
 		height: 60px;
 		border: none;
 		text-transform: uppercase;
 		letter-spacing: 2.5px;
-		font-weight: 500;
-		color: #000;
-		background-color: #fff;
-		border-radius: 5x;
-		box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+		font-weight: 600;
+		color: #ffffff;
+		border-radius: 15px;
+		box-shadow: 1px 8px 11px rgba(172, 172, 172, 0.699);
 		transition: all 0.3s ease 0s;
 		cursor: pointer;
 		outline: none;
 	}
-	/*.reviewBtn {
-		background-color: #6DA2D9;
-		box-shadow: 0 0 0 1px #6698cb inset,
-					0 0 0 2px rgba(255,255,255,0.15) inset,
-					0 8px 0 0 rgba(110, 164, 219, .7),
-					0 8px 0 1px rgba(0,0,0,.4),
-					0 8px 8px 1px rgba(0,0,0,0.5);
-	}
-	.reviewBtn:active {
-		box-shadow: 0 0 0 1px #6191C2 inset,
-					0 0 0 2px rgba(255,255,255,0.15) inset,
-					0 0 0 1px rgba(0,0,0,0.4);
-	}*/
+	
 	#reviewBtn:hover {
 		background-color: rgb(142, 192, 242);
 		box-shadow: 0px 15px 20px rgb(142, 192, 242);
@@ -201,6 +187,12 @@
     	box-shadow: inset 0px 0px 5px white;
   	}
  
+ 	/* 매장 대표 이미지 꽉 채워서 보이게 하는 css */
+ 	.mainImg {
+ 		width: 100%;
+ 		height: 500px;
+ 		object-fit: fill;
+ 	}
   
 </style>
 </head>
@@ -231,26 +223,25 @@
 				<button type="button" data-bs-target="#carouselExampleDark"
 					data-bs-slide-to="3" aria-label="Slide 4"></button>
 			</div>
-			<div class="carousel-inner" style="width:100%; height: 500px !important; overflow: auto; box-shadow : 10px 7px 7px #999;">
+			<div class="carousel-inner" style="width:100%; height: 500px; overflow: auto; box-shadow : 10px 7px 7px #999;">
 				<div class="carousel-item active" data-bs-interval="10000">
 					<img src="${pageContext.request.contextPath}${dto.image_1 }"
-						class="d-block w-100" alt="매장대표이미지1">
+						class="d-block w-100 mainImg" alt="매장대표이미지1">
 					<!-- <div class="carousel-caption d-none d-md-block"><h5>First</h5></div> -->
 				</div>
 				<div class="carousel-item" data-bs-interval="2000">
 					<img src="${pageContext.request.contextPath}${dto.image_2 }"
-						class="d-block w-100" alt="매장대표이미지2">
+						class="d-block w-100 mainImg" alt="매장대표이미지2">
 					<!-- <div class="carousel-caption d-none d-md-block"><h5>Second</h5></div> -->
 				</div>
 				<div class="carousel-item">
 					<img src="${pageContext.request.contextPath}${dto.image_3 }"
-						class="d-block w-100" alt="매장대표이미지3">
+						class="d-block w-100 mainImg" alt="매장대표이미지3">
 					<!-- <div class="carousel-caption d-none d-md-block"><h5>Third</h5></div> -->
 				</div>
 				<div class="carousel-item">
 					<img src="${pageContext.request.contextPath}${dto.image_4 }"
-
-						class="d-block w-100" alt="매장대표이미지4">
+						class="d-block w-100 mainImg" alt="매장대표이미지4">
 					<!-- <div class="carousel-caption d-none d-md-block"><h5>Fourth</h5></div> -->
 				</div>
 			</div>
@@ -290,8 +281,7 @@
 						영업 시간 : <span>${dto.openingTime }</span>
 					</h4>
 					<h4 class="card-title" style="line-height: 2;">남은 자리 : 6 / 8</h4>
-					<button type="button" class="btn btn-primary" id="reviewBtn"
-						data-bs-toggle="modal" data-bs-target="#staticBackdrop">리뷰
+					<button type="button" id="reviewBtn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">리뷰
 						: 123개</button>
 				</div>
 				<div class="card-footer bg-transparent border-dark-light">
@@ -326,41 +316,41 @@
 		<div class="card mb-5"
 			style="width: 1130px; height: 600px; overflow: auto; margin-top: 30px; margin-left: 80px; border-radius: 10px; background-color: white;">
 			<div class="col" style="margin-bottom: 30px;">
-			<!-- 메뉴 리스트 오브잭트 배열 가져와서 꺼내기! -->
+				<!-- 메뉴 리스트 오브잭트 배열 가져와서 꺼내기! -->
 				<c:forEach var="tmp" items="${menuList }">
-					<input type="hidden" class="menuName" />
-					<button data-num="${tmp.num }" type="button" id="menuBtn"
-						data-bs-toggle="modal" data-bs-target="#exampleModal"
-						style="width: 400px; margin-left: 70px; margin-top: 50px;">${tmp.menuName }</button>
-					<span
-						style="width: 300px; margin-left: 300px; font-size: 1.5em; font-weight: bold; color: rgb(96, 92, 99);">${tmp.price } ￦</span>
-					<!------------모달창-------------- 메뉴 이름 누르면 그에 맞는 이미지 Modal 활성화 -------------------------------->
-					<div class="modal fade" id="exampleModal" tabindex="-1"
-						aria-labelledby="exampleModalLabel" aria-hidden="true">
-						<div class="modal-dialog modal-dialog-centered">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="exampleModalLabel">${tmp.menuName }</h5>
-									<button type="button" class="btn-close" data-bs-dismiss="modal"
-										aria-label="Close"></button>
-								</div>
-								<div class="modal-body">
-									<div class="card">
-										<img src="${pageContext.request.contextPath}${tmp.menuImage }"
-											class="img-thumbnail" alt="MenuImage">
-										<div class="card-body text-center">
-											<p class="card-text">${tmp.content }</p>
+						<input type="hidden" class="menuName" />
+						<button data-num="${tmp.num }" type="button" id="menuBtn"
+							data-bs-toggle="modal" data-bs-target="#exampleModal"
+							style="width: 400px; margin-left: 70px; margin-top: 50px;">${tmp.menuName }</button>
+						<span
+							style="width: 300px; margin-left: 300px; font-size: 1.5em; font-weight: bold; color: rgb(96, 92, 99);">${tmp.price } ￦</span>
+						<!------------모달창-------------- 메뉴 이름 누르면 그에 맞는 이미지 Modal 활성화 -------------------------------->
+						<div class="modal fade" id="exampleModal" tabindex="-1"
+							aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">${tmp.menuName }</h5>
+										<button type="button" class="btn-close" data-bs-dismiss="modal"
+											aria-label="Close"></button>
+									</div>
+									<div class="modal-body">
+										<div class="card">
+											<img src="${pageContext.request.contextPath}${tmp.menuImage }"
+												class="img-thumbnail" alt="MenuImage">
+											<div class="card-body text-center">
+												<p class="card-text">${tmp.content }</p>
+											</div>
 										</div>
 									</div>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary"
-										data-bs-dismiss="modal">창닫기</button>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-bs-dismiss="modal">창닫기</button>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-				</c:forEach>
+					</c:forEach>
 				</div>
 			</div>
 		</div>
@@ -427,7 +417,7 @@
 				<button type="button" class="btn-close" data-bs-dismiss="modal"
 					aria-label="Close"></button>
 			</div>
-			<p style="text-align: right; margin-top: 20px; margin-right: 40px;">자리를 선택해 주세요 ☺</p>
+			<p style="text-align: right; font-size: 20px; font-weight: 500; margin-top: 20px; margin-right: 40px;">자리를 선택해 주세요 😉</p>
 			<div class="modal-body">
 				<div class="container-fluid">
 					<img src="${pageContext.request.contextPath}/resources/img/chair.png" class="img-thumbnail" alt="seatImage">
@@ -468,7 +458,7 @@
 //--------------------주문하러 가기(버튼 누르면)
 document.querySelector("#orderBtn").addEventListener("click", function(){
   let num = ${dto.num};
-  //버튼 눌럿을때 millisecond 을 추출
+  //버튼 눌렀을때 millisecond 을 추출
   let str = String(Date.now());
   //너무 길어서 필요한 만큼만 orderNum 으로 가져간다.
   let orderNum = str.substring(str.length-6, str.length);
