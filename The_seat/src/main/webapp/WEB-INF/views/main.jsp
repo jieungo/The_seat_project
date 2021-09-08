@@ -114,7 +114,7 @@ String search = request.getParameter("keyword");
 						<div class="row g-0 main-card">
 							<div class="col-md-6" style="height:100%">
 								<img src="${pageContext.request.contextPath}${tmp.image_logo } "
-									class="img" style="object-fit:fill; width:100%; height:100%;" alt="storeImageLogo">
+									class="img" style="object-fit:fill; width:100%; height:180px;" alt="storeImageLogo">
 							</div>
 							<div class="col-md-6">
 								<div class="card-body">

@@ -16,183 +16,13 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
 	crossorigin="anonymous"></script>
+<!-- css 파일 로딩하기 -->
+<link rel="stylesheet"
+href="${pageContext.request.contextPath}/resources/css/storeDetail.css"
+type="text/css" />
 <!------------------ 타이틀 로고 -------------------->
 <link rel="shortcut icon" type="image⁄x-icon" href="${pageContext.request.contextPath}/resources/img/snow.jpg">
 <style>
-
-	/*************리뷰 보는 버튼 css************/
-	#reviewBtn {
-		background-color: rgb(142, 192, 242);
-		margin-top: 20px;
-		width: 140px;
-		height: 60px;
-		border: none;
-		text-transform: uppercase;
-		letter-spacing: 2.5px;
-		font-weight: 600;
-		color: #ffffff;
-		border-radius: 15px;
-		box-shadow: 1px 8px 11px rgba(172, 172, 172, 0.699);
-		transition: all 0.3s ease 0s;
-		cursor: pointer;
-		outline: none;
-	}
-	
-	#reviewBtn:hover {
-		background-color: rgb(142, 192, 242);
-		box-shadow: 0px 15px 20px rgb(142, 192, 242);
-		color: #fff;
-		transform: translateY(-7px);
-	}
-	
-	/************ 자리 잡는 버튼 css ************/
-	#seatBtn {
-		background-color: rgb(108, 156, 252);
-		color: white;
-		margin-top: 10px;
-		width: 400px;
-		height: 50px;
-		border-radius: 5px;
-		border: none;
-		font-size: 1.5em;
-		font-weight: bold;
-	  	transition: all .3s ease;
-	  	letter-spacing: 2px;
-	  	text-transform: uppercase;
-	  	outline: none;
-	  	align-self: center;
-	  	cursor: pointer;
-	}
-	
-	#seatBtn:hover{
-		animation: random-bg .5s linear infinite, grow 1300ms ease infinite;
-	}
-	
-	@keyframes random-bg {
-	  	from {
-	    filter: hue-rotate(0);
-	  }
-	  to {
-	    filter: hue-rotate(360deg);
-	  }
-	}
-	
-	@keyframes grow {
-	  0% {
-	    transform: scale(1);
-	  }
-	  14% {
-	    transform: scale(1.3);
-	  }
-	  28% {
-	    transform: scale(1);
-	  }
-	  42% {
-	    transform: scale(1.3);
-	  }
-	  70% {
-	    transform: scale(1);
-	  }
-	}
-	
-	/********** 메뉴 이름 버튼 css ************/
-	#menuBtn {
-		background-color: white;
-		border: none;
-		font-size: 1.5em;
-		font-weight: bold;
-		color: rgb(96, 92, 99);
-	}
-	
-	/************** 베스트 메뉴 보이는 이미지 css **************/
-	#bestMenu {
-		display: flex;
-		justify-content: space-around;
-	}
-	
-	/********* 클래스 하나에만 적용하는 투명 스크롤바 css ********/
-	.carousel-inner::-webkit-scrollbar {
-	  	display: none;
-	}
-
-	/********* 자리 잡는 모달에서 select 박스 css ********/
-	#seatChoice {
-	    margin-left: 10px;
-	    width: 60px;
-	    border: 1px solid lightgray;
-	    border-radius: 5px;
-	    padding-left: 15px;
-	}
-	
-	#seatChoice:focus{
-		outline: none;
-	}
-	
-	/****** 베스트 메뉴 hover 하면 메뉴명과 가격 보이게 하는 css *****/
-	.banner_img {
-  		display:inline-block;
-  		position: relative;
-	}
-	.banner_img:hover:after,
-	.banner_img:hover > .hover_text {
-	  	display:block;
-	}
-	.banner_img:after, .hover_text{
-  		display:none;
-	}
-	.banner_img:after {
-	  	content:'';
-	  	position: absolute;
-	  	top: 0;
-	  	right: 0;
-	  	bottom: 0;
-	  	left: 0;
-	  	background: rgba(0, 0, 0, 0.5);
-	  	z-index: 10;
-	}
-	.banner_img {
-  		overflow: hidden;
-	}
-	.banner_img img{
- 		height: 300px;
-	}
-	.banner_img:hover img{
-  		transform: scale(1.2);
-  		transition: 1s;
-	}
-	.hover_text {
-  		position: absolute;
-  		top: 120px;
-  		left: 50px;
-	  	color: #ffffff;
-	  	border-bottom: solid 2px #fff;
-	  	z-index: 20;
-	  	font-weight: 600;
-	  	font-size: 20px;
-	}
-	
-	/******* 스크롤바 css *******/
-	::-webkit-scrollbar {
-    	width: 15px;
-  	}
-  	::-webkit-scrollbar-thumb {
-    	background-color: rgb(196, 196, 196);
-    	border-radius: 10px;
-    	background-clip: padding-box;
-    	border: 2px solid transparent;
-  	}
-  	::-webkit-scrollbar-track {
-    	background-color: rgb(229, 229, 229);
-   	 	border-radius: 10px;
-    	box-shadow: inset 0px 0px 5px white;
-  	}
- 
- 	/* 매장 대표 이미지 꽉 채워서 보이게 하는 css */
- 	.mainImg {
- 		width: 100%;
- 		height: 500px;
- 		object-fit: fill;
- 	}
   
 </style>
 </head>
@@ -337,14 +167,15 @@
 									<div class="modal-body">
 										<div class="card">
 											<img src="${pageContext.request.contextPath}${tmp.menuImage }"
-												class="img-thumbnail" alt="MenuImage">
+												class="rounded" alt="MenuImage">
 											<div class="card-body text-center">
-												<p class="card-text">${tmp.content }</p>
+												<p class="card-text" style="font-size: 18px;">${tmp.content }</p>
 											</div>
 										</div>
 									</div>
 									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary"
+										<button type="button" style="border: none; background-color: #fff; font-size: 20px; font-weight: 500; 
+											color: rgb(86, 162, 255); border-bottom: solid 3px rgb(86, 162, 255);"
 											data-bs-dismiss="modal">창닫기</button>
 									</div>
 								</div>
@@ -398,7 +229,8 @@
 			<hr />
 			<div class="modal-body">...</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary"
+				<button type="button" style="border: none; background-color: #fff; font-size: 20px; font-weight: 500; 
+								color: rgb(86, 162, 255); border-bottom: solid 3px rgb(86, 162, 255);"
 					data-bs-dismiss="modal">창닫기</button>
 			</div>
 		</div>
@@ -446,9 +278,9 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary"
-					data-bs-dismiss="modal">창닫기</button>
-				<button type="button" class="btn btn-warning" id="orderBtn">주문하기</button>
+				<!-- <button type="button" style="border: none; background-color: #fff; font-size: 20px; font-weight: 500; color: rgb(86, 162, 255); border-bottom: solid 3px rgb(86, 162, 255);"
+					data-bs-dismiss="modal">창닫기</button>-->
+				<button type="button" id="orderBtn"><span>GO ! GO !</span><span>주문하러 가기 ☺</span></button>
 			</div>
 		</div>
 	</div>
