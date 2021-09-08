@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,9 +47,17 @@
 								</c:choose>
 							</a>
                         </div>
+                        
                         <div class="seat__select">
-                        	<input type="number" id="totalSeat" min="1" max="30" value="1">
-                            
+                        	<c:choose>
+                        		
+	                        	<c:when test="${dto.notUse eq null}">
+	                        		<input type="number" id="totalSeat" min="1" max="30" >
+	                        	</c:when>
+	                        	<c:otherwise>
+	                        		<input type="number" id="totalSeat" min="1" max="30" disabled>
+	                        	</c:otherwise>
+	                        </c:choose>
                         </div>
                 </section>
         <!------------------------------ 예약정보 박스 --------------------------------------->
@@ -58,32 +67,48 @@
                         <p><strong>자리상태</strong></p>
                     </div>
                     <div class="line"></div>
-                    <div class="seat-NumState">
-                        <div>
-                            <p>1번 자리</p>
-                            <select class="useState">
-                                <option value="canUse">이용가능</option>
-                                <option value="nowUse">이용중</option>
-                                <option value="cantUse">이용불가</option>
-                            </select>
-                        </div>
+                    <div class="seat-NumState" style="overflow: auto;">
+                        
+                       	<c:forEach var="tmp" items="${dto.totalSeat }">
+                       		<p>${tmp}  번 자리</p>
+	                        <select id="${tmp}" class="useState">
+		                        <c:if test="${fn:contains(dto.emptySeat, tmp) }">
+		                        	<option value="emptySeat" selected>이용가능</option>
+		                            <option value="notEmptySeat" >이용중</option>
+		                            <option value="notUse">이용불가</option>
+		                        </c:if>
+		                        <c:if test="${fn:contains(dto.notEmptySeat, tmp) }">
+		                        	<option value="emptySeat" >이용가능</option>
+		                            <option value="notEmptySeat" selected>이용중</option>
+		                            <option value="notUse">이용불가</option>
+		                        </c:if>
+		                        <c:if test="${fn:contains(dto.notUse, tmp) }">
+		                        	<option value="emptySeat" >이용가능</option>
+		                            <option value="notEmptySeat" >이용중</option>
+		                            <option value="notUse" selected>이용불가</option>
+		                        </c:if>
+	                        </select>
+                       	</c:forEach>
+                       
                     </div>
                 </section>
             </div>
-            <form id="updateForm" action="${pageContext.request.contextPath}/store/updateSeat.do">
+            <form id="updateForm" action="${pageContext.request.contextPath}/store/updateSeat.do" method="post">
             	<input type="hidden" name="num" 
-								value="${dto.num } }"/>
+								value="${dto.num}"/>
 				<input type="hidden" name="totalSeat" 
-								value="${dto.totalSeat } }"/>			
+								value="${dto.totalSeat }"/>			
             	<input type="hidden" name="seatImage" 
 								value="${dto.seatImage}"/>
+				<input type="hidden" name="seatContent" 
+								value="${dto.seatContent}"/>
 				<input type="hidden" name="emptySeat" 
-								value="${dto.emptySeat } }"/>
+								value="${dto.emptySeat}"/>
 				<input type="hidden" name="notEmptySeat" 
-								value="${dto.notEmptySeat } }"/>
+								value="${dto.notEmptySeat}"/>
 				<input type="hidden" name="notUse" 
-								value="${dto.notUse } }"/>
-            	<button type="submit" class="submit-btn">배치 변경</button>
+								value="${dto.notUse}"/>
+            	<button type="submit" id="updateStateBtn" class="submit-btn">배치 변경</button>
             </form>
             
         </div>
@@ -108,6 +133,21 @@
 <script src="https://kit.fontawesome.com/2ebe86210e.js" crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 <script>
+	let num = ${dto.num};
+	let notUse = [];
+	notUse.push(${dto.notUse});
+	let notEmptySeat = [];
+	notEmptySeat.push(${dto.notEmptySeat});
+	let emptySeat = [];
+	emptySeat.push(${dto.emptySeat});
+	console.log(emptySeat);
+	console.log(notEmptySeat);
+	console.log(notUse);
+	let totalSeat = [];
+	totalSeat.push(${dto.totalSeat});
+	let totalNum = totalSeat.length;
+	console.log(totalNum);
+	document.querySelector("#totalSeat").value=totalNum;
 	//자리 이미지 링크를 클릭하면 
 	document.querySelector("#seatLink").addEventListener("click", function(){
 		// input type="file" 을 강제 클릭 시킨다. 
@@ -134,23 +174,89 @@
 	});
 	
 	document.querySelector("#totalSeat").addEventListener("input",function(){
-		document.querySelector("#updateForm").totalSeat.value=this.value;
-		console.log(document.querySelector("#updateForm").totalSeat.value);
+		totalNum = this.value;
+		emptySeat = [];
+		totalSeat = [];
+		for(let i=1; i<=totalNum; i++){
+			emptySeat.push(i);
+			totalSeat.push(i);
+		}
+		document.querySelector("#updateForm").emptySeat.value=emptySeat;
+		document.querySelector("#updateForm").totalSeat.value=totalSeat;
 	})
 	
 	// 자리 정보 수정 ajax 요청하기 
 	document.querySelector("#updateForm").addEventListener("submit",function(e) {
 		e.preventDefault();
-		const updateForm = document.querySelector('#updateForm');
-		
-		ajaxFormPromise(updateForm)
+		ajaxFormPromise(this)
 		.then(function(response) {
 			return response.json();
 		})
 		.then(function(data) {
 			alert("자리 정보가 수정되었습니다.");
+			location.href="${pageContext.request.contextPath}/store/storeSeat.do?num="+num;
 		});
 	});
+	
+	let state = document.querySelectorAll(".useState");
+	for(let i=0; i<state.length; i++){
+		state[i].addEventListener("change",function(){
+			let seatNum = Number(state[i].id);
+			let seatState = state[i].value;
+			if(seatState == "emptySeat"){
+				let index1 = emptySeat.indexOf(seatNum); 
+				if (index1 <= -1) {
+					emptySeat.push(seatNum);
+				};
+				let index2 = notEmptySeat.indexOf(seatNum); 
+				if (index2 > -1) {
+					notEmptySeat.splice(index2,1);
+				};
+				let index3 = notUse.indexOf(seatNum); 
+				if (index3 > -1) {
+					notUse.splice(index3, 1);
+				};
+				console.log(emptySeat);
+				console.log(notEmptySeat);
+				console.log(notUse);
+			} else if (seatState == "notEmptySeat"){
+				let index1 = emptySeat.indexOf(seatNum); 
+				if (index1 > -1) {
+				  emptySeat.splice(index1, 1);
+				};
+				let index2 = notEmptySeat.indexOf(seatNum); 
+				if (index2 <= -1) {
+					notEmptySeat.push(seatNum);
+				};
+				let index3 = notUse.indexOf(seatNum); 
+				if (index3 > -1) {
+				  notUse.splice(index3, 1);
+				};
+				console.log(emptySeat);
+				console.log(notEmptySeat);
+				console.log(notUse);
+				
+			} else if (seatState == "notUse"){
+				let index1 = emptySeat.indexOf(seatNum); 
+				if (index1 > -1) {
+				  emptySeat.splice(index1,1);
+				};
+				let index2 = notEmptySeat.indexOf(seatNum); 
+				if (index2 > -1) {
+					notEmptySeat.splice(index2,1);
+				};
+				let index3 = notUse.indexOf(seatNum); 
+				if (index3 <= -1) {
+				  notUse.push(seatNum);
+				};
+			}
+			document.querySelector("#updateForm").emptySeat.value=emptySeat;
+			document.querySelector("#updateForm").notEmptySeat.value=notEmptySeat;
+			document.querySelector("#updateForm").notUse.value=notUse;
+			document.querySelector("#updateStateBtn").click();
+			location.href="${pageContext.request.contextPath}/store/storeSeat.do?num="+num;
+		});
+	};
 </script>
 </body>
 </html>

@@ -51,8 +51,6 @@ public class SeatController {
 			method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> updateSeat(SeatDto dto, HttpServletRequest request) {
-		
-		System.out.println(dto.getNum());
 		service.updateSeat(dto);
 		
 		Map<String, Object> map=new HashMap<>();

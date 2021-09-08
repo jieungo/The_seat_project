@@ -15,17 +15,17 @@ public class SeatDaoImpl implements SeatDao {
 	@Override
 	public void insertSeat(SeatDto dto) {
 		
-		session.insert("insertSeat", dto);
+		session.insert("seat.insertSeat", dto);
 	}
 
 	@Override
 	public void updateSeat(SeatDto dto) {
-		session.update("updateSeat", dto);
+		session.update("seat.updateSeat", dto);
 	}
 
 	@Override
 	public SeatDto getSeat(SeatDto dto) {
-		return session.selectOne("getSeat", dto);
+		return session.selectOne("seat.getSeat", dto);
 	}
 
 }
