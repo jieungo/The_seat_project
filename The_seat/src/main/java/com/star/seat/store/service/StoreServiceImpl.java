@@ -47,13 +47,13 @@ public class StoreServiceImpl implements StoreService{
 		//email="test";
 		
 		int num=Integer.parseInt(request.getParameter("num"));
-		request.setAttribute("num", num);
+		
 		StoreDto dto=new StoreDto();
 		dto.setNum(num); // rnum으로 들어감
 		dto.setOwner(email);
 		
 		StoreDto myDto=dao.getMyStore(dto);
-		
+		request.setAttribute("num", myDto.getNum());
 		// 만약 DB에 매장 tag 정보가 있다면
 		// 새로운 array를 만들어서 거기에 하나씩 담아줌.
 		List<String> list=new ArrayList();
