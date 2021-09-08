@@ -27,9 +27,10 @@ public class SeatController {
 	@RequestMapping("/store/storeSeat")
 	public ModelAndView getSeat(SeatDto dto, ModelAndView mView,HttpServletRequest request) {
 		int storeNum = Integer.parseInt(request.getParameter("num"));
+		request.setAttribute("num", storeNum);
 		dto.setNum(storeNum);
 		//dto에 num 정보 넣어서 같은 num 의 자리정보 dto 에 담아오기
-		service.getSeat(dto, mView);
+		service.getSeat(dto, mView, request);
 		mView.setViewName("store/storeSeat");
 		return mView;
 	}
@@ -43,6 +44,19 @@ public class SeatController {
 		
 		//서비스를 이용해서 이미지를 upload 폴더에 저장하고 리턴되는 Map 을 리턴해서 json 문자열 응답하기
 		return service.saveSeatImage(request, image);
+	}
+	
+	//ajax 자리 이미지 업로드 요청처리
+	@RequestMapping(value = "/seat/emptySeat",
+			method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> updateEmptySeat(HttpServletRequest request, SeatDto dto){
+		
+		service.updateEmptySeat(dto);
+		
+		Map<String, Object> map=new HashMap<>();
+		map.put("isSuccess", true);
+		return map;
 	}
 	
 	

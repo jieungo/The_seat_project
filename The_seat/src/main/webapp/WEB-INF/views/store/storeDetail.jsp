@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -280,7 +281,7 @@
 					<h4 class="card-title" style="line-height: 2;">
 						영업 시간 : <span>${dto.openingTime }</span>
 					</h4>
-					<h4 class="card-title" style="line-height: 2;">남은 자리 : 6 / 8</h4>
+					<h4 class="card-title" style="line-height: 2;">남은 자리 : <span id="emptySeatNum"></span> / <span id="totalSeatNum"></span></h4>
 					<button type="button" id="reviewBtn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">리뷰
 						: 123개</button>
 				</div>
@@ -412,7 +413,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="ModalLabel">
-					${dto.storeName } <br />( 6 / 8 )
+					${dto.storeName } <br /><span id="emptySeatNum1"></span> / <span id="totalSeatNum1"></span>
 				</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal"
 					aria-label="Close"></button>
@@ -420,27 +421,29 @@
 			<p style="text-align: right; font-size: 20px; font-weight: 500; margin-top: 20px; margin-right: 40px;">자리를 선택해 주세요 😉</p>
 			<div class="modal-body">
 				<div class="container-fluid">
-					<img src="${pageContext.request.contextPath}/resources/img/chair.png" class="img-thumbnail" alt="seatImage">
+					<img src="${pageContext.request.contextPath}${sDto.seatImage }" class="img-thumbnail" alt="seatImage">
 					<hr />
-					
 					<p>자리 선택 
 						<select name="자리 선택" id="seatChoice">
 						<!-- storeSeat 테이블에서 지정한 만큼 -->
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>
+							<c:forEach var="tmp" items="${sDto.totalSeat }">
+								<c:if test="${fn:contains(sDto.emptySeat, tmp) }">
+		                        	<option value="${tmp}" >${tmp}(이용가능)</option>
+		                        </c:if>
+		                        <c:if test="${fn:contains(sDto.notEmptySeat, tmp) }">
+		                            <option value="${tmp}" disabled>${tmp}(이용중)</option>
+		                        </c:if>
+		                        <c:if test="${fn:contains(sDto.notUse, tmp) }">
+		                            <option value="${tmp}" disabled>${tmp}(이용불가)</option>
+		                        </c:if>
+							</c:forEach>
 						</select>
 					</p>
 					<hr />
 					<div class="card">
 						<div class="card-header">✦ 알림사항</div>
 						<div class="card-body">
-							<p class="card-text">5, 6번 좌석은 4인 이상부터 이용이 가능합니다.</p>
+							<p class="card-text">${sDto.seatContent }</p>
 						</div>
 					</div>
 				</div>
@@ -455,6 +458,16 @@
 </div>
 <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 <script>
+let totalSeat = [];
+let emptySeat = [];
+totalSeat.push(${sDto.totalSeat });
+emptySeat.push(${sDto.emptySeat });
+
+document.querySelector("#totalSeatNum").innerText = totalSeat.length;
+document.querySelector("#emptySeatNum").innerText = emptySeat.length;
+document.querySelector("#totalSeatNum1").innerText = totalSeat.length;
+document.querySelector("#emptySeatNum1").innerText = emptySeat.length;
+
 //--------------------주문하러 가기(버튼 누르면)
 document.querySelector("#orderBtn").addEventListener("click", function(){
   let num = ${dto.num};

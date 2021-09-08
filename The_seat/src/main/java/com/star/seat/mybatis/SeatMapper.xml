@@ -21,4 +21,10 @@
 		WHERE num=#{num }
 	</update>
 	
+	<update id="updateEmptySeat" parameterType="seatDto" >
+		UPDATE storeSeat
+		SET emptySeat=#{emptySeat },notEmptySeat=#{notEmptySeat }
+		WHERE num=#{num }
+	</update>
+	
 </mapper>
