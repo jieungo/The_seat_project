@@ -1,6 +1,7 @@
 package com.star.seat.review.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,6 +17,9 @@ public interface ReviewService {
 	// 해당 DB번호의 리뷰 정보를 삭제하는 method
 	public void deleteReview(ReviewDto dto);
 	
+	// 해당 DB번호의 리뷰 정보를 삭제하는 method(사장님은 사장님것만 삭제)
+	public void deleteReview_owner(ReviewDto dto);
+	
 	// 해당 DB번호의 리뷰 정보를 가져오는 method
 	public ReviewDto getReviewData(ReviewDto dto);
 	
@@ -23,5 +27,5 @@ public interface ReviewService {
 	public void updateReview(ReviewDto dto, HttpServletRequest request);
 	
 	// 해당 리뷰 번호로 되어있는 targetNum 정보가 있는지 여부를 알아내는 method
-	public boolean getMyReview(ReviewDto dto);
+	public Map<String, Object> getMyReview(ReviewDto dto, HttpServletRequest request);
 }

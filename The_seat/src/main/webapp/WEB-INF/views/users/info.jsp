@@ -121,13 +121,11 @@ type="text/css" />
 								<button data-num="${tmp.num }" class="reviewListBtn circle-btn" data-bs-toggle="modal" data-bs-target="#modal-reviewList">리뷰 보기</button>
 								<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="reviewBtn circle-btn" data-bs-toggle="modal" data-bs-target="#reviewModal" style="display:none">리뷰 작성</button>
 								<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="reviewUpdateBtn circle-btn" data-bs-toggle="modal" data-bs-target="#reviewUpdateModal">리뷰 수정</button>
-								<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="reviewDeleteBtn circle-btn">리뷰 삭제</button>
 							</c:when>
 							<c:when test="${tmp.reviewExist == 'NO' }">
 								<button data-num="${tmp.num }" class="reviewListBtn circle-btn" data-bs-toggle="modal" data-bs-target="#modal-reviewList">리뷰 보기</button>
 								<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="reviewBtn circle-btn" data-bs-toggle="modal" data-bs-target="#reviewModal">리뷰 작성</button>
 								<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="reviewUpdateBtn circle-btn" data-bs-toggle="modal" data-bs-target="#reviewUpdateModal" style="display:none">리뷰 수정</button>
-								<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="reviewDeleteBtn circle-btn" style="display:none">리뷰 삭제</button>
 							</c:when>
 						</c:choose>	
 					</div>
@@ -267,6 +265,7 @@ type="text/css" />
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title"><strong>리뷰 수정</strong> </h4>
+                <button data-num="" data-num2="" id="reviewDeleteBtn">리뷰 삭제</button>
                 <button id="updateCloseBtn" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -615,7 +614,6 @@ type="text/css" />
 					alert("리뷰를 등록하였습니다.");
 					document.querySelector("button.reviewBtn[data-num2=\'"+num+"\']").style.display="none";
 					document.querySelector("button.reviewUpdateBtn[data-num2=\'"+num+"\']").style.display="block";
-					document.querySelector("button.reviewDeleteBtn[data-num2=\'"+num+"\']").style.display="block";
 				}
 			});
 		});
@@ -649,107 +647,88 @@ type="text/css" />
 					for(let j=0; j<reviewList.length; j++){
 						console.log(j);
 						if(reviewList[j].targetNum==0){
+							let path="${pageContext.request.contextPath}"+reviewList[j].imagePath;
+							let star=reviewList[j].star;
+							
+							let ownerComment="";
+							if(reviewList[j+1]==null || reviewList[j+1].targetNum==0){
+								ownerComment="사장님의 댓글이 아직 없습니다.";
+							} else if(reviewList[j+1]!=null && reviewList[j+1].targetNum!=0){
+								ownerComment=reviewList[j+1].content;
+							}
 							let testPrime=
 								`
-									<div class="user-review" >
-									    <div class="user-review__title">
-									        <h5><strong>`+reviewList[j].writer+` </strong></h5>
-									        <small>`+reviewList[j].regdate+` </small>
-									    </div>
-									    <div class="user-review__body arrow_box-user">
-									        <div class="user-review__text"> 
-									
-									            <!-- 별점이랑 리뷰내용 출력하기 -->
-									            <div class="fiveStar">
-									                <i class="starIcon fas fa-star"></i>
-									                <i class="starIcon fas fa-star"></i>
-									                <i class="starIcon fas fa-star"></i>
-									                <i class="starIcon fas fa-star"></i>
-									                <i class="starIcon far fa-star"></i>
-									            </div>
-									            <p>
-									            	`+reviewList[j].content+`
-									            </p>
-									
-									            <!-- 버튼 클릭시 글 작성 가능한 사장님 답글 말풍선 생성-->
-									            <button href="javascript:" id="userReview">
-									                <span class="user-review__reply">답글보기</span>
-									            </button>
-									        </div>
-									        <div class="img__wrapper">
-									            <img src="#" alt="" id="image_logo" name="logo" class="image"/>
-									        </div>
-									    </div>
+									<div class="user-review">
+										<div class="user-review__title">
+											<p>
+												<strong>`+reviewList[j].writer+`</strong>
+											</p>
+											<small>`+reviewList[j].regdate+`</small>
+										</div>
+										<div class="user-review__body arrow_box-user">
+											<div class="user-review__text">
+												<!-- 별점이랑 리뷰내용 출력하기 -->
+												<div class="fiveStar">
+													<c:forEach begin="1" end="5">
+														<i class="starIcon fas fa-star"></i>
+													</c:forEach>
+													<c:forEach begin="1" end="">
+														<i class="starIcon far fa-star"></i>
+													</c:forEach>
+												</div>
+												<p>`+reviewList[j].content+`</p>
+												<!-- 버튼 클릭시 글 작성 가능한 사장님 답글 말풍선 생성-->
+												<button data-num="${tmp.groupNum }" href="javascript:" class="userReview">
+													<span class="user-review__reply">답글 보기</span>
+												</button>
+											</div>
+											<div class="img__wrapper">
+												<img src=`+path+` alt="" id="image_logo" name="logo"
+													class="image" />
+											</div>
+										</div>
+									</div>
+									<!-- 사장님 답글 -->
+									<div class="owner-review ownerReview"
+										style="display: none;">
+										<div class="owner-review__title">
+											<small class="ownerRegdate"></small>
+										</div>
+										<div class="owner-review__body arrow_box-owner">
+											<div class="edit-btn">
+												<i class="fas fa-edit" style="display: none;"></i>
+											</div>
+											<div class="owner-review__text">
+												<h5>
+													<strong>사장님</strong>
+												</h5>
+												<p class="ownerComment" name="#" id="">`+ownerComment+`</p>
+											</div>
+										</div>
 									</div>
 								`;
 							test=test+testPrime;
-						} else {
-							let testPrime=
-								`
-								<div class="owner-review" id="ownerReview" style="display: none;">
-								    <div class="owner-review__title">
-								        <small>21/08/22 </small>
-								    </div>
-								    <div class="owner-review__body arrow_box-owner">
-								        <div class="edit-btn">
-								            <i class="fas fa-edit" id="updateBtn" style="display: none;"></i>
-								            <button id="update">수정 완료</button>
-								            <button id="updateCancel">취소</button>
-								        </div>
-								        <div class="owner-review__text">
-								            <h5><strong>사장님</strong></h5>
-								            <textarea name="#" id="" placeholder="답글을 입력해 주세요 :)">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, minus optio magni et sunt ipsam sed at porro quidem labore ipsum dolorum provident velit, nulla fugiat nobis! Temporibus, nam doloribus!</textarea>
-								        </div>
-								    </div>
-								</div>
-								`;
-							test=test+testPrime;
 						}
-						
-						//document.querySelector("#reviewBox").innerHTML=test;
 					}
 					document.querySelector("#reviewBox").innerHTML=test;
+					
+					// 댓글보기 버튼 클릭하면 사장님 답글 창 생성
+					let review = document.querySelectorAll('.userReview');
+					let ownerReviewBox = document.querySelectorAll('.ownerReview');
+					
+					for (let i=0; i<review.length; i++) {
+					    review[i].addEventListener('click', function(){
+					    	let dummy=ownerReviewBox[i];
+							if(dummy.style.display == "block"){
+								dummy.style.display = "none";
+							} else {
+								dummy.style.display = "block";
+							}
+					    });
+					}
 				}
 			});
 		});	
-	}
-	
-	// 댓글달기 버튼 클릭하면 사장님 답글 창 생성
-	   
-	let review = document.querySelectorAll('#userReview');
-	let ownerReview = document.querySelectorAll('#ownerReview');
-	
-	for (let i=0; i<review.length; i++) {
-	    review[i].addEventListener('click', function(){
-	        ownerReview[i].style.display="block";
-	    });
-	}
-	
-	// 리뷰 삭제 버튼을 눌렀을 때 동작하는 부분
-	let reviewDeleteBtns=document.querySelectorAll(".reviewDeleteBtn");
-	for(let i=0; i<reviewDeleteBtns.length; i++){
-		reviewDeleteBtns[i].addEventListener("click", function(e){
-			e.preventDefault();
-			
-			let wantDelete=confirm("이 주문에 대한 리뷰를 삭제하시겠습니까?");
-			if(wantDelete){
-				let orderNum=this.getAttribute("data-num2");
-				console.log(orderNum);
-				
-				ajaxPromise("${pageContext.request.contextPath}/store/deleteReview.do", "post", "orderNum="+orderNum)
-				.then(function(response){
-					return response.json();
-				}).then(function(data){
-					console.log(data);
-					if(data.beDeleted){
-						alert("리뷰를 삭제하였습니다.");
-						document.querySelector("button.reviewBtn[data-num2=\'"+orderNum+"\']").style.display="block";
-						document.querySelector("button.reviewUpdateBtn[data-num2=\'"+orderNum+"\']").style.display="none";
-						document.querySelector("button.reviewDeleteBtn[data-num2=\'"+orderNum+"\']").style.display="none";
-					}			
-				});	
-			}
-		});
 	}
 	
 	// 리뷰 수정 버튼을 눌렀을 때 동작하는 부분
@@ -768,7 +747,9 @@ type="text/css" />
 			document.querySelector("#updateNum").value=num;
 			document.querySelector("#updateOrderNum").value=num2;
 			document.querySelector("#reviewUpdateForm").setAttribute("data-num2", num2);
-		
+			document.querySelector("#reviewDeleteBtn").setAttribute("data-num", num);
+			document.querySelector("#reviewDeleteBtn").setAttribute("data-num2", num2);
+			
 			// ajax로 해당 리뷰의 내용을 가져옴
 			ajaxPromise("${pageContext.request.contextPath}/store/getReviewData.do", "post", "orderNum="+num2)
 			.then(function(response){
@@ -810,6 +791,31 @@ type="text/css" />
 			});
 		});
 	}
+	
+	// 리뷰 삭제 버튼을 눌렀을 때 동작하는 부분
+	let reviewDeleteBtn=document.querySelector("#reviewDeleteBtn");
+	reviewDeleteBtn.addEventListener("click", function(e){
+		e.preventDefault();
+		
+		let wantDelete=confirm("이 주문에 대한 리뷰를 삭제하시겠습니까?");
+		if(wantDelete){
+			let orderNum=this.getAttribute("data-num2");
+			console.log(orderNum);
+			
+			ajaxPromise("${pageContext.request.contextPath}/store/deleteReview.do", "post", "orderNum="+orderNum)
+			.then(function(response){
+				return response.json();
+			}).then(function(data){
+				console.log(data);
+				if(data.beDeleted){
+					alert("리뷰를 삭제하였습니다.");
+					document.querySelector("#updateCloseBtn").click();
+					document.querySelector("button.reviewBtn[data-num2=\'"+orderNum+"\']").style.display="block";
+					document.querySelector("button.reviewUpdateBtn[data-num2=\'"+orderNum+"\']").style.display="none";
+				}			
+			});	
+		}
+	});
 </script>
 </body>
 </html>

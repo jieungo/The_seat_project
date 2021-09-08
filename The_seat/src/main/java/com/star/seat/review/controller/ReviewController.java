@@ -85,11 +85,24 @@ public class ReviewController {
 		return map;
 	}
 	
+	// 해당 사장님리뷰를 삭제하는 method
+		@RequestMapping(value = "/store/deleteOwnerReview.do", method = RequestMethod.POST)
+		@ResponseBody
+		public Map<String, Object> deleteOwnerReview(ReviewDto dto){
+			
+			service.deleteReview_owner(dto);
+			
+			Map<String, Object> map=new HashMap<>();
+			map.put("beDeleted", true);
+			
+			return map;
+		}
+	
 	// 해당 리뷰 정보를 가져오는 method
 	@RequestMapping(value = "/store/getReviewData.do", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> getReviewData(ReviewDto dto){
-		
+
 		ReviewDto rDto=service.getReviewData(dto);
 		
 		Map<String, Object> map=new HashMap<>();
@@ -116,15 +129,12 @@ public class ReviewController {
 	// 있으면 true, 없으면 false를 return하게 된다.
 	@RequestMapping(value = "/store/getMyReview.do", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> getMyReview(ReviewDto dto){
+	public Map<String, Object> getMyReview(ReviewDto dto, HttpServletRequest request){
 		
 		System.out.println(dto.getNum());
 		
-		boolean result=service.getMyReview(dto);
-		System.out.println(result);
-		
-		Map<String, Object> map=new HashMap<>();
-		map.put("beChecked", result);
+		Map<String, Object> map=service.getMyReview(dto, request);
+		System.out.println(map.get("result"));
 		
 		return map;
 	}
