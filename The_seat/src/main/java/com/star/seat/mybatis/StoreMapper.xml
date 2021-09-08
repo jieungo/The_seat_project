@@ -15,18 +15,14 @@
 		select *
 		from store
 		where owner=#{email}
+		order by num
 	</select>
 	
 	<!-- 사장님의 매장 정보 하나만 가져오는 method(이메일과 rnum 이용) -->
 	<select id="getMyStore" parameterType="storeDto" resultType="storeDto">
 		select *
-		from
-			(select result1.*, rownum as rnum
-			from
-				(select *
-				from store
-				where owner=#{owner}) result1)
-		where rnum=#{num}
+		from store
+		where owner=#{owner} and num=#{num}
 	</select>
 	
 	<!-- 사장님의 매장 정보 하나만 가져오는 method(해당 매장 DB 번호 이용) -->
@@ -99,4 +95,11 @@
 		set category=#{category}
 		where num=#{num}
 	</update>
+	
+	<!-- 매장 정보를 삭제하는 method -->
+	<delete id="deleteStore" parameterType="storeDto">
+		delete
+		from store
+		where num=#{num} and owner=#{owner}
+	</delete>
 </mapper>

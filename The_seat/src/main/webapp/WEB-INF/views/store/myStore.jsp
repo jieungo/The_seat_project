@@ -140,6 +140,7 @@
      
              <div style="width: 60%; text-align:center; margin-bottom:15px;">
                  <button id="storeOnOffBtn" class="btn">매장 열기</button>
+                 <button data-num="${dto.num }" id="deleteStoreBtn">매장 삭제</button>
              </div>
       </div>
          <!------------------------------------ 사이드바 (매장정보, 메뉴관리 탭) ----------------->
@@ -443,6 +444,27 @@
 			}
 		});
 	}
+	
+	// 매장 정보를 삭제하는 method
+	document.querySelector("#deleteStoreBtn").addEventListener("click", function(e){
+		e.preventDefault();
+		
+		let wantDelete=confirm("이 매장의 정보를 삭제하시겠습니까?");
+		if(wantDelete){
+			// 이 매장의 DB 번호
+			let num=this.getAttribute("data-num");
+			ajaxPromise("${pageContext.request.contextPath}/store/deleteStore.do", "post", "num="+num)
+			.then(function(response){
+				return response.json();
+			}).then(function(data){
+				console.log(data);
+				if(data.beDeleted){
+					alert("매장 정보를 삭제하였습니다.");
+					location.href="${pageContext.request.contextPath}/main.do";
+				}
+			});
+		}
+	});
 </script>
 </body>
 </html>

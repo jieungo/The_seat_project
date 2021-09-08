@@ -57,13 +57,16 @@ public class StoreController {
 	// 매장 추가 링크를 눌러서 요청되는 경로에 대한 method
 	@RequestMapping("/newStore.do")
 	@ResponseBody
-	public Map<String, Object> addStore(HttpServletRequest request){
+	public Map<String, Object> addStore(HttpServletRequest request, HttpSession session){
 		Map<String, Object> map=new HashMap<>();
 		
-		// serviced에서 매장 정보 DB에 email 정보를 더해줌.
+		// service에서 매장 정보 DB에 email 정보를 더해줌.
 		service.addStore(request);
+		// session 영역 정보 변경
+		List<StoreDto> list=service.getMyStores(request, session);
 		
 		map.put("beSuccess", true);
+		map.put("newStoreList", list);
 		
 		return map;
 	}
@@ -210,6 +213,19 @@ public class StoreController {
 		oService.getStoreList(mView, request, session);
 		mView.setViewName("store/storeOrder");
 		return mView;
+	}
+	
+	// 매장 정보를 삭제하는 method
+	@RequestMapping(value = "/store/deleteStore.do", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deleteStore(StoreDto dto, HttpServletRequest request) {
+		
+		service.deleteStore(dto, request);
+		
+		Map<String, Object> map=new HashMap<>();
+		map.put("beDeleted", true);
+		
+		return map;
 	}
 	
 }

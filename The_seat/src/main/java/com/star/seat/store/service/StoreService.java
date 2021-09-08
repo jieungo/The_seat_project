@@ -1,5 +1,6 @@
 package com.star.seat.store.service;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +13,7 @@ public interface StoreService {
 	public void addStore(HttpServletRequest request);
 	
 	// 사장님의 매장 정보 목록을 불러오는 method
-	public void getMyStores(HttpServletRequest request, HttpSession session);
+	public List<StoreDto> getMyStores(HttpServletRequest request, HttpSession session);
 	
 	// 사장님의 매장 정보 하나를 불러오는 method(이메일과 rnum 이용)
 	public void getMyStore(HttpServletRequest request);
@@ -43,4 +44,7 @@ public interface StoreService {
 	
 	// 매장 메뉴의 카테고리를 삭제하는 method
 	public void deleteCategory(StoreDto dto);
+	
+	// 매장 정보를 삭제하는 method
+	public void deleteStore(StoreDto dto, HttpServletRequest request);
 }

@@ -204,7 +204,7 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
                <c:choose>
                   <c:when test="${email !=null && myStoreList.size() != 0}">
                      <c:forEach var="tmp" items="${myStoreList }" varStatus="status">
-                        <li><a href="${pageContext.request.contextPath}/store/myStore.do?num=${status.count }"
+                        <li><a href="${pageContext.request.contextPath}/store/myStore.do?num=${tmp.num }"
                            class="store">${tmp.storeName }</a></li>
                      </c:forEach>
                   </c:when>
@@ -244,10 +244,8 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
    document.querySelector("#chair").addEventListener("click", function() {
       location.href = "${pageContext.request.contextPath}/main.do";
    });
-   
-   
+    
    // 매장 추가 관리 영역
-   let dataNum = 0;
    let storePath = "${pageContext.request.contextPath}/store/myStore.do?num=";
    
    document.querySelector("#addBtn0").addEventListener("click", function(e) {
@@ -257,33 +255,33 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
       let callAdd = confirm("매장을 추가하시겠습니까?");
       // 확인을 눌렀다면
       if (callAdd) {
-         dataNum++;
-         let strDataNum = dataNum.toString();
          
          // ajax 응답으로 새 매장 정보를 DB에 추가
-         
          ajaxPromise("${pageContext.request.contextPath}/newStore.do")
          .then(function(response){
             return response.json();
          }).then(function(data){
             console.log(data);
+            if(data.beSuccess){
+            	let num=data.newStoreList.length;
+            	let newAnchor = document.createElement("a");
+                newAnchor.innerText = "Defaults";
+                //newAnchor.setAttribute("data-num", dataNum);
+                newAnchor.setAttribute("class", "store");
+                newAnchor.setAttribute("href", storePath+data.newStoreList[num].num);
+                
+                //newAnchor.setAttribute("id", "addBtn" + strDataNum);
+                document.querySelector(".toggle").appendChild(newAnchor);
+                //resetDataNum();
+            }
          });
-         
-         
-         let newAnchor = document.createElement("a");
-         newAnchor.innerText = "Default Name";
-         newAnchor.setAttribute("data-num", dataNum);
-         newAnchor.setAttribute("class", "store");
-         
-         newAnchor.setAttribute("id", "addBtn" + strDataNum);
-         document.querySelector(".toggle").appendChild(newAnchor);
-         resetDataNum();
       }
    });
    
    // 전체의 data-num을 조정하는 function
    function resetDataNum() {
       let array = document.querySelectorAll("a[class='store']");
+      
       for (let i = 0; i < array.length; i++) {
          let num=i+1;
          array[i].setAttribute("data-num", num);
