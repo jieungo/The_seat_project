@@ -23,7 +23,59 @@ href="${pageContext.request.contextPath}/resources/css/info.css"
 type="text/css" />
 <!-- 타이틀 로고 -->
 <link rel="shortcut icon" type="image⁄x-icon" href="${pageContext.request.contextPath}/resources/img/summer.jpg">
-
+<style>
+	.arrow_box-user {
+		position: relative;
+		background: #ffffff;
+		border: 1px solid #c7c7c7;
+	}
+	
+	.arrow_box-user:after, 
+	.arrow_box-user:before {
+		right: 100%;
+		top: 50%;
+		border: solid 1px lightgray;
+		content: "";
+		height: 0;
+		width: 0;
+		position: absolute;
+		pointer-events: none;
+	}
+	
+	.arrow_box-user:after {
+		border-color: rgba(255, 255, 255, 0);
+		border-right-color: #ffffff;
+		border-width: 30px;
+		margin-top: -30px;
+	}
+	
+	.arrow_box-user:before {
+		border-color: rgba(199, 199, 199, 0);
+		border-right-color: #c7c7c7;
+		border-width: 31px;
+		margin-top: -31px;
+	}
+	
+	.arrow_box-owner {
+		position: relative;
+		background: #d4d4d4;
+	}
+	
+	.arrow_box-owner:after {
+		left: 100%;
+		top: 50%;
+		border: solid transparent;
+		content: "";
+		height: 0;
+		width: 0;
+		position: absolute;
+		pointer-events: none;
+		border-color: rgba(212, 212, 212, 0);
+		border-left-color: #d4d4d4;
+		border-width: 30px;
+		margin-top: -30px;
+	}
+</style>
 </head>
 <body style="margin-top:150px;">
 <jsp:include page="/WEB-INF/views/nav/navbar.jsp" />
@@ -649,7 +701,13 @@ type="text/css" />
 						if(reviewList[j].targetNum==0){
 							let path="${pageContext.request.contextPath}"+reviewList[j].imagePath;
 							let star=reviewList[j].star;
-							
+							let starTest=``;
+							for(let i=0; i<star; i++){
+								starTest=starTest+`<i class="starIcon fas fa-star"></i>`;
+							}
+							for(let i=0; i<5-star; i++){
+								starTest=starTest+`<i class="starIcon far fa-star"></i>`;
+							}
 							let ownerComment="";
 							if(reviewList[j+1]==null || reviewList[j+1].targetNum==0){
 								ownerComment="사장님의 댓글이 아직 없습니다.";
@@ -669,12 +727,7 @@ type="text/css" />
 											<div class="user-review__text">
 												<!-- 별점이랑 리뷰내용 출력하기 -->
 												<div class="fiveStar">
-													<c:forEach begin="1" end="5">
-														<i class="starIcon fas fa-star"></i>
-													</c:forEach>
-													<c:forEach begin="1" end="">
-														<i class="starIcon far fa-star"></i>
-													</c:forEach>
+													`+starTest+`
 												</div>
 												<p>`+reviewList[j].content+`</p>
 												<!-- 버튼 클릭시 글 작성 가능한 사장님 답글 말풍선 생성-->

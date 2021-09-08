@@ -30,14 +30,15 @@ public class StoreServiceImpl implements StoreService{
 	
 	// 사장님의 매장 정보 목록을 불러오는 method
 	@Override
-	public void getMyStores(HttpServletRequest request, HttpSession session) {
+	public List<StoreDto> getMyStores(HttpServletRequest request, HttpSession session) {
 		String email=(String)request.getSession().getAttribute("email");
 		//email="test";
 		System.out.println(email);
 		List<StoreDto> list=dao.getMyStores(email);
 		System.out.println(list);
 		session.setAttribute("myStoreList", list);
-		//request.setAttribute("myStoreList", list);
+		
+		return list;
 	}
 	
 	// 사장님의 매장 정보 하나를 불러오는 method(이메일과 rnum 이용)
@@ -53,7 +54,7 @@ public class StoreServiceImpl implements StoreService{
 		dto.setOwner(email);
 		
 		StoreDto myDto=dao.getMyStore(dto);
-		request.setAttribute("num", myDto.getNum());
+		
 		// 만약 DB에 매장 tag 정보가 있다면
 		// 새로운 array를 만들어서 거기에 하나씩 담아줌.
 		List<String> list=new ArrayList();
@@ -65,6 +66,7 @@ public class StoreServiceImpl implements StoreService{
 			}
 		}
 		
+		request.setAttribute("num", myDto.getNum());
 		request.setAttribute("dto", myDto);
 		request.setAttribute("list", list);
 	}
@@ -345,5 +347,14 @@ public class StoreServiceImpl implements StoreService{
 		myDto.setCategory(strList);
 		// dto를 넣어서 update
 		dao.deleteCategory(myDto);
+	}
+	
+	// 매장 정보를 삭제하는 method
+	@Override
+	public void deleteStore(StoreDto dto, HttpServletRequest request) {
+		String email=(String)request.getSession().getAttribute("email");
+		dto.setOwner(email);
+		
+		dao.deleteStore(dto);	
 	}
 }

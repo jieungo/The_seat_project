@@ -50,4 +50,7 @@ public interface StoreDao {
 	// 매장 카테고리를 추가하는 method
 	// 사실상 update를 이용하는 것
 	public void deleteCategory(StoreDto dto);
+	
+	// 매장 정보를 삭제하는 method
+	public void deleteStore(StoreDto dto);
 }
