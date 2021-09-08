@@ -80,12 +80,6 @@ input:focus {
     margin-left: 15px;
 }
 
-.menu__category  a:focus, a:hover {
-    padding-bottom: 5px;
-    border-bottom: 3px solid #598eff;
-    color: rgb(78, 78, 78);
-}
-
 .menu__add {
     display: flex; 
     flex-direction: column; 
@@ -169,12 +163,6 @@ input:focus {
     color: rgb(78, 78, 78);
 }
 
-.menu__category  a:focus, a:hover {
-    padding-bottom: 5px;
-    border-bottom: 3px solid #598eff;
-    color: rgb(78, 78, 78);
-}
-
 #categories {
     display: flex;
     margin: 0;
@@ -190,6 +178,8 @@ input:focus {
 	display: inline-block;
 	margin:20px;
 }
+
+
 #menuAddForm {
 	text-align: center;
 	margin-top: 20px;
@@ -220,4 +210,13 @@ input:focus {
     width: 50%;
     font-weight: 600;
 	margin: 20px 0;
+}
+
+.deleteBtn {
+	font-size:14px;
+}
+
+.deleteBtn:hover {
+	color: #d60000;
+	font-weight:600;
 }
