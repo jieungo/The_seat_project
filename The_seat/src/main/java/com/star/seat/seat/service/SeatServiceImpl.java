@@ -31,12 +31,20 @@ public class SeatServiceImpl implements SeatService {
 		
 		dao.updateSeat(dto);
 	}
+	
+	@Override
+	public void updateEmptySeat(SeatDto dto) {
+		
+		dao.updateEmptySeat(dto);
+	}
 
 	@Override
-	public ModelAndView getSeat(SeatDto dto, ModelAndView mView) {
-		
-		dto= dao.getSeat(dto);
-		mView.addObject("dto", dto);
+	public ModelAndView getSeat(SeatDto dto, ModelAndView mView, HttpServletRequest request) {
+		int storeNum = Integer.parseInt(request.getParameter("num"));
+		SeatDto sDto = new SeatDto();
+		sDto.setNum(storeNum);
+		sDto= dao.getSeat(dto);
+		mView.addObject("sDto", sDto);
 		return mView;
 	};
 	

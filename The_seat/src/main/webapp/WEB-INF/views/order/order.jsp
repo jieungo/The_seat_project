@@ -435,7 +435,25 @@
 	let amountList = [];
 	let orderMenu={};
 	let amount = 0;
-	
+	let tableNum = ${tableNum };
+	console.log(tableNum);
+	console.log(${sDto.emptySeat });
+	let emptySeat = [];
+	emptySeat.push(${sDto.emptySeat });
+	let notEmptySeat = [];
+	notEmptySeat.push(${sDto.notEmptySeat });
+	let index1 = emptySeat.indexOf(tableNum); 
+	if (index1 > -1) {
+		emptySeat.splice(index1,1);
+	} else {
+		alert("이미 이용중인 자리 입니다. 다시 선택해 주세요!");
+		location.href="${pageContext.request.contextPath}/store/storeDetail.do?num=${dto.num}";
+	}
+	let index2 = notEmptySeat.indexOf(tableNum); 
+	if (index2 <= -1) {
+		notEmptySeat.push(tableNum);
+	};
+	let objSeat = {num:${dto.num }, emptySeat:emptySeat, notEmptySeat:notEmptySeat};
 	// 다시담기
 	document.querySelector("#reset").addEventListener("click",function(){
 		orderList = [];
@@ -506,9 +524,6 @@
 		});
 	}
 	
-	
-	
-	
 	// 주문하기
 	document.querySelector("#goOrder").addEventListener("click",function(){
 		//주문할때 시간정보전달
@@ -538,10 +553,16 @@
 			})
 			.then(function(data){
 				if(data.isSuccess && i==orderList.length-1){
-					swal("주문 완료!", "메인 페이지로 이동합니다.", "success")
-					.then(function(){
-						location.href="${pageContext.request.contextPath}/main.do";
+					ajaxPromise("${pageContext.request.contextPath}/seat/emptySeat.do","post",objSeat)
+					.then(function(response){
+						return response.json();
 					})
+					.then(function(data){
+						swal("주문 완료!", "메인 페이지로 이동합니다.", "success")
+						.then(function(){
+							location.href="${pageContext.request.contextPath}/main.do";
+						})
+					});
 				}
 			});
 		}

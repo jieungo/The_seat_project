@@ -33,16 +33,16 @@
             <div class="display-box">
                 <section class="seat">
                         <span class="seat-title" style="font-size: 13px;">
-                            ${dto.seatContent }
+                            ${sDto.seatContent }
                         </span>
                         <div class="seat__box">
                         	<a id="seatLink" href="javascript:" >
 	                        	<c:choose>
-									<c:when test="${dto.seatImage eq null}">
+									<c:when test="${sDto.seatImage eq null}">
 										<h1>매장 자리 이미지를 등록해 주세요!</h1>
 									</c:when>
 									<c:otherwise>
-										<img id="seatImage" style="width:100%; height:100%; object-fit: cover;" src="${pageContext.request.contextPath}${dto.seatImage}" />
+										<img id="seatImage" style="width:100%; height:100%; object-fit: cover;" src="${pageContext.request.contextPath}${sDto.seatImage}" />
 									</c:otherwise>
 								</c:choose>
 							</a>
@@ -51,13 +51,17 @@
                         <div class="seat__select">
                         	<c:choose>
                         		
-	                        	<c:when test="${dto.notUse eq null}">
+	                        	<c:when test="${sDto.notUse eq null}">
 	                        		<input type="number" id="totalSeat" min="1" max="30" >
 	                        	</c:when>
 	                        	<c:otherwise>
 	                        		<input type="number" id="totalSeat" min="1" max="30" disabled>
 	                        	</c:otherwise>
 	                        </c:choose>
+                        </div>
+                        <div>
+                        	<p>알림사항</p>
+                        	<textarea name="seatContent" id="content" cols="30" rows="2">${sDto.seatContent }</textarea>
                         </div>
                 </section>
         <!------------------------------ 예약정보 박스 --------------------------------------->
@@ -69,20 +73,20 @@
                     <div class="line"></div>
                     <div class="seat-NumState" style="overflow: auto;">
                         
-                       	<c:forEach var="tmp" items="${dto.totalSeat }">
+                       	<c:forEach var="tmp" items="${sDto.totalSeat }">
                        		<p>${tmp}  번 자리</p>
 	                        <select id="${tmp}" class="useState">
-		                        <c:if test="${fn:contains(dto.emptySeat, tmp) }">
+		                        <c:if test="${fn:contains(sDto.emptySeat, tmp) }">
 		                        	<option value="emptySeat" selected>이용가능</option>
 		                            <option value="notEmptySeat" >이용중</option>
 		                            <option value="notUse">이용불가</option>
 		                        </c:if>
-		                        <c:if test="${fn:contains(dto.notEmptySeat, tmp) }">
+		                        <c:if test="${fn:contains(sDto.notEmptySeat, tmp) }">
 		                        	<option value="emptySeat" >이용가능</option>
 		                            <option value="notEmptySeat" selected>이용중</option>
 		                            <option value="notUse">이용불가</option>
 		                        </c:if>
-		                        <c:if test="${fn:contains(dto.notUse, tmp) }">
+		                        <c:if test="${fn:contains(sDto.notUse, tmp) }">
 		                        	<option value="emptySeat" >이용가능</option>
 		                            <option value="notEmptySeat" >이용중</option>
 		                            <option value="notUse" selected>이용불가</option>
@@ -95,19 +99,19 @@
             </div>
             <form id="updateForm" action="${pageContext.request.contextPath}/store/updateSeat.do" method="post">
             	<input type="hidden" name="num" 
-								value="${dto.num}"/>
+								value="${sDto.num}"/>
 				<input type="hidden" name="totalSeat" 
-								value="${dto.totalSeat }"/>			
+								value="${sDto.totalSeat }"/>			
             	<input type="hidden" name="seatImage" 
-								value="${dto.seatImage}"/>
-				<input type="hidden" name="seatContent" 
-								value="${dto.seatContent}"/>
+								value="${sDto.seatImage}"/>
+				<input type="hidden" id="seatContent" name="seatContent" 
+								value="${sDto.seatContent}"/>
 				<input type="hidden" name="emptySeat" 
-								value="${dto.emptySeat}"/>
+								value="${sDto.emptySeat}"/>
 				<input type="hidden" name="notEmptySeat" 
-								value="${dto.notEmptySeat}"/>
+								value="${sDto.notEmptySeat}"/>
 				<input type="hidden" name="notUse" 
-								value="${dto.notUse}"/>
+								value="${sDto.notUse}"/>
             	<button type="submit" id="updateStateBtn" class="submit-btn">배치 변경</button>
             </form>
             
@@ -116,10 +120,10 @@
 
         <!------------------------------------ 옆 사이드바 (매장정보, 메뉴관리 탭) ----------------->
     <aside class="aside">
-        <button onclick="location.href='${pageContext.request.contextPath}/store/myStore.do?num=${dto.num}'">매장 정보</button>
-        <button onclick="location.href='${pageContext.request.contextPath}/store/manageMenu.do?num=${dto.num}'">메뉴 관리</button>
-        <button onclick="location.href='${pageContext.request.contextPath}/store/storeReview.do?num=${dto.num}'">리뷰 관리</button>
-        <button onclick="location.href='${pageContext.request.contextPath}/store/storeOrder.do?num=${dto.num}'">주문 확인</button>
+        <button onclick="location.href='${pageContext.request.contextPath}/store/myStore.do?num=${num}'">매장 정보</button>
+        <button onclick="location.href='${pageContext.request.contextPath}/store/manageMenu.do?num=${num}'">메뉴 관리</button>
+        <button onclick="location.href='${pageContext.request.contextPath}/store/storeReview.do?num=${num}'">리뷰 관리</button>
+        <button onclick="location.href='${pageContext.request.contextPath}/store/storeOrder.do?num=${num}'">주문 확인</button>
         <button onclick="location.href='#'">자리 관리</button>
     </aside>
 </div>
@@ -133,18 +137,18 @@
 <script src="https://kit.fontawesome.com/2ebe86210e.js" crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 <script>
-	let num = ${dto.num};
+	let num = ${sDto.num};
 	let notUse = [];
-	notUse.push(${dto.notUse});
+	notUse.push(${sDto.notUse});
 	let notEmptySeat = [];
-	notEmptySeat.push(${dto.notEmptySeat});
+	notEmptySeat.push(${sDto.notEmptySeat});
 	let emptySeat = [];
-	emptySeat.push(${dto.emptySeat});
+	emptySeat.push(${sDto.emptySeat});
 	console.log(emptySeat);
 	console.log(notEmptySeat);
 	console.log(notUse);
 	let totalSeat = [];
-	totalSeat.push(${dto.totalSeat});
+	totalSeat.push(${sDto.totalSeat});
 	let totalNum = totalSeat.length;
 	console.log(totalNum);
 	document.querySelector("#totalSeat").value=totalNum;
@@ -173,6 +177,12 @@
 		});
 	});
 	
+	document.querySelector("#content").addEventListener("keyup",function(){
+		console.log(this.value);
+		document.querySelector("#seatContent").value=this.value;
+		console.log(document.querySelector("#seatContent").value);
+	})
+	console.log(document.querySelector("#seatContent").value);
 	document.querySelector("#totalSeat").addEventListener("input",function(){
 		totalNum = this.value;
 		emptySeat = [];

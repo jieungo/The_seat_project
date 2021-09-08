@@ -19,6 +19,8 @@ import com.star.seat.menu.service.MenuService;
 import com.star.seat.order.service.OrderService;
 import com.star.seat.review.dto.ReviewDto;
 import com.star.seat.review.service.ReviewService;
+import com.star.seat.seat.dto.SeatDto;
+import com.star.seat.seat.service.SeatService;
 import com.star.seat.store.dto.StoreDto;
 import com.star.seat.store.service.StoreService;
 
@@ -32,6 +34,8 @@ public class StoreController {
 	private OrderService oService;
 	@Autowired
 	private ReviewService rService;
+	@Autowired
+	private SeatService seatService;
 	
 	// 검색 결과 메인 페이지를 요청할 때의 method
 	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
@@ -179,13 +183,18 @@ public class StoreController {
 
 	// 매장 상세 정보 페이지로 이동
 	@RequestMapping(value = "/store/storeDetail.do",method = RequestMethod.GET)
-	public String goStoreDetail(StoreDto dto, HttpServletRequest request) {
+	public ModelAndView goStoreDetail(SeatDto sDto, StoreDto dto, ModelAndView mView, HttpServletRequest request) {
 		
 		service.getMyStore_num(dto, request);
 		
 		mService.getMenuList_user(dto, request);	
+		int storeNum = Integer.parseInt(request.getParameter("num"));
+		dto.setNum(storeNum);
+		//dto에 num 정보 넣어서 같은 num 의 자리정보 dto 에 담아오기
 		
-		return "store/storeDetail";
+		seatService.getSeat(sDto, mView, request);
+		mView.setViewName("store/storeDetail");
+		return mView;
 	}
 	
 	// 매장 리뷰 관리 페이지로 이동

@@ -7,6 +7,8 @@ public interface SeatDao {
 	public void insertSeat(SeatDto dto);
 	// 자리 정보 수정
 	public void updateSeat(SeatDto dto);
+	// 빈 자리 정보 수정
+	public void updateEmptySeat(SeatDto dto);
 	// 자리 정보 가져가기
 	public SeatDto getSeat(SeatDto dto);
 }

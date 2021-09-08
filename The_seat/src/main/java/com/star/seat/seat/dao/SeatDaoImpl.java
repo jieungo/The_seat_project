@@ -22,6 +22,11 @@ public class SeatDaoImpl implements SeatDao {
 	public void updateSeat(SeatDto dto) {
 		session.update("seat.updateSeat", dto);
 	}
+	
+	@Override
+	public void updateEmptySeat(SeatDto dto) {
+		session.update("seat.updateEmptySeat", dto);
+	}
 
 	@Override
 	public SeatDto getSeat(SeatDto dto) {
