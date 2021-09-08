@@ -281,6 +281,7 @@
 				
 				<!----------------- 주문페이지에서 메뉴 고르기 ------------------>
 				<div class="row">
+				
 					<div class="col text-center" style="margin-top: 45px;">
 						<div class="row row-cols-1 row-cols-md-2 g-4 foodMenu" style="width:100%; height: 800px; overflow: auto;">
 							<c:forEach var="tmp" items="${menuList }">
@@ -297,7 +298,6 @@
 										
 										<div class="col">
 											<div class="card">
-											<h5 class="card-header">베스트</h5>
 												<img src="${pageContext.request.contextPath}${tmp.menuImage }" class="card-img-top" alt="menuImage" style="width: 100%; height: 230px; object-fit: fill;">
 												<div class="card-body" style="background-color: rgb(176, 215, 252); color: rgb(104, 104, 104); font-weight: bold;">
 													<h5 class="card-title">
@@ -311,7 +311,35 @@
 									</form>
 								</c:if>
 							</c:forEach>
+							<c:forEach var="tmp" items="${menuList }">
+								
+									<form class="orderMenu" action="${pageContext.request.contextPath}/order/insert.do">
+										<input type="hidden" name="orderNum" value="${orderNum }" />
+									 	<input type="hidden" name="email" value="${email }" /> 
+									 	<input type="hidden" name="storeName" value="${dto.storeName }" /> 
+										<input type="hidden" name="storeLogo" value="${dto.image_logo }" /> 
+										<input type="hidden" name="menu" value="${tmp.menuName }" /> 
+										<input type="hidden" name="tableNum" value="${tableNum }" /> 
+										<input type="hidden" name="price" value="${tmp.price}" /> 
+										<input type="hidden" name="num" value="${dto.num }" />
+										
+										<div class="col">
+											<div class="card">
+												<img src="${pageContext.request.contextPath}${tmp.menuImage }" class="card-img-top" alt="menuImage" style="width: 100%; height: 230px; object-fit: fill;">
+												<div class="card-body" style="background-color: rgb(176, 215, 252); color: rgb(104, 104, 104); font-weight: bold;">
+													<h5 class="card-title">
+														<button type="submit" id="orderMenu">${tmp.menuName }</button>
+													</h5>
+													<p class="card-text" style="font-size: 20px;">${tmp.price } ￦</p>
+													<input type="number" id="menuCount" name="menuCount" min="1" max="9" value="1">
+												</div>
+											</div>
+										</div>
+									</form>
+							
+							</c:forEach>
 						</div>
+						
 					</div>
 					
 					<!--------------------------- 주문내역 영수증 ---------------------------->
