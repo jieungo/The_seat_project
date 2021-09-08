@@ -46,11 +46,12 @@
 										<div class="user-review__text">
 											<!-- 별점이랑 리뷰내용 출력하기 -->
 											<div class="fiveStar">
-												<i class="starIcon fas fa-star"></i>
-												<i class="starIcon fas fa-star"></i> 
-												<i class="starIcon fas fa-star"></i> 
-												<i class="starIcon fas fa-star"></i> 
-												<i class="starIcon far fa-star"></i>
+												<c:forEach begin="1" end="${tmp.star }">
+													<i class="starIcon fas fa-star"></i>
+												</c:forEach>
+												<c:forEach begin="1" end="${5-tmp.star }">
+													<i class="starIcon far fa-star"></i>
+												</c:forEach>
 											</div>
 											<p>${tmp.content }</p>
 											<!-- 버튼 클릭시 글 작성 가능한 사장님 답글 말풍선 생성-->
@@ -75,20 +76,74 @@
 								<div class="owner-review ownerReview"
 									style="display: none;">
 									<div class="owner-review__title">
-										<small class="ownerRegdate">21/08/22</small>
+										<small class="ownerRegdate"></small>
 									</div>
 									<div class="owner-review__body arrow_box-owner">
 										<div class="edit-btn">
-											<i class="fas fa-edit" id="updateBtn" style="display: none;"></i>
-											<button id="update">수정 완료</button>
-											<button id="updateCancel">취소</button>
+											<i class="fas fa-edit" style="display: none;"></i>
+											<c:choose>
+												<c:when test="${tmp.reviewCheck == 'no'}">
+													<button class="addBtn">댓글 작성</button>
+													<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="updateBtn"style="display:none">댓글 수정</button>
+													<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="deleteBtn" style="display:none">댓글 삭제</button>
+												</c:when>
+												<c:when test="${tmp.reviewCheck == 'yes'}">
+													<button class="addBtn" style="display:none">댓글 작성</button>
+													<button data-num="${tmp.num }" class="updateBtn">댓글 수정</button>
+													<button data-num="${tmp.num }" class="deleteBtn">댓글 삭제</button>
+												</c:when>
+											</c:choose>	
 										</div>
 										<div class="owner-review__text">
 											<h5>
 												<strong>사장님</strong>
 											</h5>
-											<textarea class="ownerComment" name="#" id="" placeholder="답글을 입력해 주세요 :)">test</textarea>
+											<textarea class="ownerComment" name="#" id=""></textarea>
 										</div>
+									</div>
+								</div>
+								<!-- 답글 작성 form -->
+								<div class="owner-review ownerReviewFormBox"
+									style="display: none;">
+									<div class="owner-review__body arrow_box-owner">
+										<form class="ownerReviewForm" action="${pageContext.request.contextPath}/store/addReview.do" method="post">
+											<div class="edit-btn">
+												<i class="fas fa-edit" style="display: none;"></i>
+												<button class="addReview">작성 완료</button>
+												<button class="addCancelBtn">취소</button>
+											</div>
+											<div class="owner-review__text">
+												<h5>
+													<strong>사장님</strong>
+												</h5>
+												<input type="hidden" name="num" value="${tmp.num }"/>
+												<input type="hidden" name="storeNum" value="${tmp.storeNum }" />
+                    							<input type="hidden" name="orderNum" value="${tmp.orderNum }" />
+												<textarea class="ownerAddComment" name="content" placeholder="답글을 입력해 주세요 :)"></textarea>
+											</div>
+										</form>
+									</div>
+								</div>
+								<!-- 답글 수정 form -->
+								<div class="owner-review ownerReviewUpdateFormBox"
+									style="display: none;">
+									<div class="owner-review__body arrow_box-owner">
+										<form class="ownerReviewUpdateForm" action="${pageContext.request.contextPath}/store/updateReview.do" method="post">
+											<div class="edit-btn">
+												<i class="fas fa-edit" style="display: none;"></i>
+												<button class="updateReview">수정 완료</button>
+												<button class="updateCancelBtn">취소</button>
+											</div>
+											<div class="owner-review__text">
+												<h5>
+													<strong>사장님</strong>
+												</h5>
+												<input type="hidden" name="num" value="${tmp.num }"/>
+												<input type="hidden" name="storeNum" value="${tmp.storeNum }" />
+                    							<input type="hidden" name="orderNum" value="${tmp.orderNum }" />
+												<textarea class="ownerUpdateComment" name="content" placeholder="답글을 입력해 주세요 :)"></textarea>
+											</div>
+										</form>
 									</div>
 								</div>
 							</c:when>
@@ -177,17 +232,42 @@
 		</div>
 	</div>
 </div>
+
+
+
 <script src="https://kit.fontawesome.com/2ebe86210e.js"
 	crossorigin="anonymous"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 <script>
+	//각 버튼들이 동작하는곳
 	// 댓글달기 버튼 클릭하면 사장님 답글 창 생성
-
 	let review = document.querySelectorAll('.userReview');
 	let ownerReviewBox = document.querySelectorAll('.ownerReview');
+	let ownerRegdates=document.querySelectorAll(".ownerRegdate");
 	let ownerComments=document.querySelectorAll(".ownerComment");
-
+	// 댓글 작성
+	let addBtns=document.querySelectorAll(".addBtn");
+	// 댓글 수정
+	let updateBtns=document.querySelectorAll(".updateBtn");
+	// 댓글 작성 box
+	let ownerReviewFormBoxes=document.querySelectorAll(".ownerReviewFormBox");
+	// 댓글 수정 box
+	let ownerReviewUpdateFormBoxes=document.querySelectorAll(".ownerReviewUpdateFormBox");
+	// 작성 취소
+	let addCancelBtns=document.querySelectorAll(".addCancelBtn");
+	// 작성한 멘트
+	let ownerAddComments=document.querySelectorAll(".ownerAddComment");
+	// 수정 취소
+	let updateCancelBtns=document.querySelectorAll(".updateCancelBtn");
+	// 수정한 멘트
+	let ownerUpdateComments=document.querySelectorAll(".ownerUpdateComment");
+	// 작성 form
+	let ownerReviewForms=document.querySelectorAll(".ownerReviewForm");
+	// 수정 form
+	let ownerReviewUpdateForms=document.querySelectorAll(".ownerReviewUpdateForm");
+	// 삭제 버튼
+	let deleteBtns=document.querySelectorAll(".deleteBtn");
 	for (let i = 0; i < review.length; i++) {
 		review[i].addEventListener('click', function() {
 			let dummy=ownerReviewBox[i];
@@ -207,15 +287,115 @@
 					console.log(data);
 					if(!data.beChecked){
 						ownerComments[i].innerText="사장님의 답글을 작성해주세요~";
+					} else {
+						ownerRegdates[i].innerText=data.ownerReviewData.regdate;
+						ownerComments[i].innerText=data.ownerReviewData.content;
+						ownerUpdateComments[i].innerText=data.ownerReviewData.content;
 					}
-				})
-				
-				
-				
+				});
 				dummy.style.display = "block";
 			}
 		});
 	}
+
+	for(let i=0; i<addBtns.length; i++){
+		// 댓글 작성 버튼을 눌렀을 때 동작하는 곳
+		addBtns[i].addEventListener("click", function(e){
+			e.preventDefault();
+			
+			ownerReviewBox[i].style.display="none";
+			ownerReviewFormBoxes[i].style.display="block";
+		});
+		// 댓글 수정 버튼을 눌렀을 때 동작하는 곳
+		updateBtns[i].addEventListener("click", function(e){
+			e.preventDefault();
+			
+			ownerUpdateComments[i].innerText=ownerComments[i].value;
+			ownerReviewBox[i].style.display="none";
+			ownerReviewUpdateFormBoxes[i].style.display="block";
+		});
+		// 등록 취소 버튼을 눌렀을 때 동작하는 곳
+		addCancelBtns[i].addEventListener("click", function(e){
+			e.preventDefault();
+			
+			ownerReviewBox[i].style.display="block";
+			ownerReviewFormBoxes[i].style.display="none";
+		});
+		// 수정 취소 버튼을 눌렀을 때 동작하는 곳
+		updateCancelBtns[i].addEventListener("click", function(e){
+			e.preventDefault();
+			
+			ownerReviewBox[i].style.display="block";
+			ownerReviewUpdateFormBoxes[i].style.display="none";
+		});
+		// 등록 완료 버튼을 눌렀을 때 동작하는 곳
+		ownerReviewForms[i].addEventListener("submit", function(e){
+			e.preventDefault();
+			
+			if(ownerAddComments[i].value==""){
+				alert("댓글을 입력해주세요.");
+			} else {
+				ajaxFormPromise(this)
+				.then(function(response){
+					return response.json();
+				}).then(function(data){
+					console.log(data);
+					if(data.beAdded){
+						alert("리뷰에 대한 댓글을 추가하였습니다.");
+						ownerComments[i].innerText=ownerAddComments[i].value;
+						addBtns[i].style.display="none";
+						updateBtns[i].style.display="block";
+						deleteBtns[i].style.display="block";
+						ownerReviewBox[i].style.display="block";
+						ownerReviewFormBoxes[i].style.display="none";
+					}
+				});
+			}
+		});
+		// 삭제를 눌렀을 때 동작하는 곳
+		deleteBtns[i].addEventListener("click", function(e){
+			e.preventDefault();
+			
+			let wantDelete=confirm("리뷰에 대한 댓글을 삭제하시겠습니까?");
+			if(wantDelete){
+				// 해당 리뷰의 번호를 들고와서 targetNum이 이것인 것을 삭제
+				let num=this.getAttribute("data-num");
+				
+				ajaxPromise("${pageContext.request.contextPath}/store/deleteOwnerReview.do", "post", "num="+num)
+				.then(function(response){
+					return response.json();
+				}).then(function(data){
+					console.log(data);
+					if(data.beDeleted){
+						alert("댓글을 삭제하였습니다.");
+						ownerComments[i].innerText="사장님의 답글을 작성해주세요~";
+						addBtns[i].style.display="block";
+						updateBtns[i].style.display="none";
+						deleteBtns[i].style.display="none";
+						ownerReviewBox[i].style.display="block";
+						ownerReviewUpdateFormBoxes[i].style.display="none";
+					}
+				});
+			}
+		});
+		
+		// 수정 완료를 눌렀을 때 동작하는 곳
+		ownerReviewUpdateForms[i].addEventListener("submit", function(e){
+			e.preventDefault();
+			
+			ajaxFormPromise(this)
+			.then(function(response){
+				return response.json();
+			}).then(function(data){
+				console.log(data);
+				alert("댓글을 수정하였습니다.");
+				ownerReviewBox[i].style.display="block";
+				ownerReviewUpdateFormBoxes[i].style.display="none";
+				ownerComments[i].innerText=ownerUpdateComments[i].value;
+			})
+		});
+	}
+	
 </script>
 </body>
 </html>

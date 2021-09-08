@@ -1,7 +1,9 @@
 package com.star.seat.review.service;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -40,21 +42,25 @@ public class ReviewServiceImpl implements ReviewService{
 		// upload할 image 정보
 		MultipartFile reviewImage=dto.getImageFile();
 		System.out.println(reviewImage);
-		//원본 파일명 
-		String orgFileName=reviewImage.getOriginalFilename();
-		//upload 폴더에 저장된 파일명 
-		String saveFileName=System.currentTimeMillis()+orgFileName;
-		System.out.println(orgFileName);
-		System.out.println(saveFileName);
-		try {
-			//upload 폴더에 파일을 저장한다.
-			reviewImage.transferTo(new File(filePath+saveFileName));
-			System.out.println(filePath+saveFileName);
-		}catch(Exception e) {
-			e.printStackTrace();
+		if(reviewImage!=null) {
+			//원본 파일명 
+			String orgFileName=reviewImage.getOriginalFilename();
+			//upload 폴더에 저장된 파일명 
+			String saveFileName=System.currentTimeMillis()+orgFileName;
+			System.out.println(orgFileName);
+			System.out.println(saveFileName);
+			try {
+				//upload 폴더에 파일을 저장한다.
+				reviewImage.transferTo(new File(filePath+saveFileName));
+				System.out.println(filePath+saveFileName);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			dto.setImagePath("/upload/"+saveFileName);
+		} else {
+			dto.setImagePath("null");
 		}
 	
-		dto.setImagePath("/upload/"+saveFileName);
 		String email=(String)request.getSession().getAttribute("email");
 		dto.setWriter(email);
 		
@@ -64,15 +70,19 @@ public class ReviewServiceImpl implements ReviewService{
 		sDto=sDao.getMyStore_num(sDto);
 		dto.setStoreName(sDto.getStoreName());
 		
-		// sequence의 다음 숫자를 미리 읽어와서 넣어줌.
-		int num=dao.getSequence();
-		dto.setNum(num);
-		dto.setGroupNum(num);
-		
-		// 해당 댓글 작성자의 이메일과 사장님의 이메일이 다르면
+		// 해당 댓글 작성자의 이메일과 사장님의 이메일이 같으면
 		// targetNum에 0을 넣지 않기 위해 해당 review num을 넣어줌
 		if(email.equals(sDto.getOwner())){
-			dto.setTargetNum(num);
+			int num=dao.getSequence();
+			dto.setTargetNum(dto.getNum());
+			dto.setGroupNum(dto.getNum());
+			dto.setNum(num);
+		} else {
+			// 이메일이 달라서 유저인 것이 확인되면
+			// sequence의 다음 숫자를 미리 읽어와서 넣어줌.
+			int num=dao.getSequence();
+			dto.setNum(num);
+			dto.setGroupNum(num);
 		}
 		
 		OrderDto oDto=new OrderDto();
@@ -117,9 +127,18 @@ public class ReviewServiceImpl implements ReviewService{
 		dao.reviewExist(oDto);
 	}
 	
+	// 해당 DB번호의 리뷰 정보를 삭제하는 method(사장님은 사장님것만 삭제)
+	@Override
+	public void deleteReview_owner(ReviewDto dto) {
+		
+		dao.deleteReview_owner(dto);
+	}
+	
 	// 해당 DB번호의 리뷰 정보를 가져오는 method
 	@Override
 	public ReviewDto getReviewData(ReviewDto dto) {
+		
+		System.out.println("target: "+dto.getTargetNum());
 		
 		return dao.getReviewData(dto);
 	}
@@ -136,37 +155,46 @@ public class ReviewServiceImpl implements ReviewService{
 		// upload할 image 정보
 		MultipartFile reviewImage=dto.getImageFile();
 		System.out.println(reviewImage);
-		//원본 파일명 
-		String orgFileName=reviewImage.getOriginalFilename();
-		//upload 폴더에 저장된 파일명 
-		String saveFileName=System.currentTimeMillis()+orgFileName;
-		System.out.println(orgFileName);
-		System.out.println(saveFileName);
-		try {
-			//upload 폴더에 파일을 저장한다.
-			reviewImage.transferTo(new File(filePath+saveFileName));
-			System.out.println(filePath+saveFileName);
-		}catch(Exception e) {
-			e.printStackTrace();
+		if(reviewImage!=null) {
+			//원본 파일명 
+			String orgFileName=reviewImage.getOriginalFilename();
+			//upload 폴더에 저장된 파일명 
+			String saveFileName=System.currentTimeMillis()+orgFileName;
+			System.out.println(orgFileName);
+			System.out.println(saveFileName);
+			try {
+				//upload 폴더에 파일을 저장한다.
+				reviewImage.transferTo(new File(filePath+saveFileName));
+				System.out.println(filePath+saveFileName);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		
+			dto.setImagePath("/upload/"+saveFileName);
+		} else {
+			dto.setImagePath("null");
 		}
-	
-		dto.setImagePath("/upload/"+saveFileName);
 		
 		dao.updateReview(dto);	
 	}
 	
 	// 해당 리뷰 번호로 되어있는 targetNum 정보가 있는지 여부를 알아내는 method
 	@Override
-	public boolean getMyReview(ReviewDto dto) {
+	public Map<String, Object> getMyReview(ReviewDto dto, HttpServletRequest request) {
 		
 		//dto.setTargetNum(dto.getNum());
 		
 		boolean result=false;
-		
+		ReviewDto rDto=new ReviewDto();
 		if(dao.getMyReview(dto)!=null) {
 			result=true;
+			rDto=dao.getMyReview(dto);
 		}
 		
-		return result;
+		Map<String, Object> map=new HashMap<>();
+		map.put("beChecked", result);
+		map.put("ownerReviewData", rDto);
+		
+		return map;
 	}
 }
