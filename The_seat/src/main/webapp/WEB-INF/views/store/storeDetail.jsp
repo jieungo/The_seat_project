@@ -245,17 +245,18 @@ type="text/css" />
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="ModalLabel">
-					${dto.storeName } <br /><span id="emptySeatNum1"></span> / <span id="totalSeatNum1"></span>
+					${dto.storeName } <br /><span>( </span><span id="emptySeatNum1"></span> / <span id="totalSeatNum1"></span>
+					<span> )</span>
 				</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal"
 					aria-label="Close"></button>
 			</div>
-			<p style="text-align: right; font-size: 20px; font-weight: 500; margin-top: 20px; margin-right: 40px;">자리를 선택해 주세요 😉</p>
+			<p style="text-align: right; font-size: 20px; font-weight: 500; margin-top: 20px; margin-right: 40px;">자리를 선택해주세요 😉</p>
 			<div class="modal-body">
 				<div class="container-fluid">
 					<img src="${pageContext.request.contextPath}${sDto.seatImage }" class="img-thumbnail" alt="seatImage">
 					<hr />
-					<p>자리 선택 
+					<p style="font-size: 18px;">자리 선택 
 						<select name="자리 선택" id="seatChoice">
 						<!-- storeSeat 테이블에서 지정한 만큼 -->
 							<c:forEach var="tmp" items="${sDto.totalSeat }">
@@ -273,7 +274,7 @@ type="text/css" />
 					</p>
 					<hr />
 					<div class="card">
-						<div class="card-header">✦ 알림사항</div>
+						<div class="card-header">🔔 알림사항</div>
 						<div class="card-body">
 							<p class="card-text">${sDto.seatContent }</p>
 						</div>
