@@ -12,9 +12,338 @@
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/myStore.css?ver=8"
+	href="${pageContext.request.contextPath}/resources/css/myStore.css?ver=11"
 	type="text/css" />
 </head>
+<style>
+
+* {
+   box-sizing: border-box;
+   margin:0;
+}
+
+body {
+    background-color: #598eff;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    flex-direction:column;
+    justify-content: center;
+    color: rgb(78, 78, 78);
+    font-size: 16px;
+}
+
+/* 버튼 기본 스타일링 */
+button {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    color: rgb(78, 78, 78);
+}
+
+/* 링크 기본 스타일링 */
+a {
+    text-decoration: none;
+    color: rgb(78, 78, 78);
+}
+
+/* 리스트 기본 스타일링 */
+ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+img {
+    width: 80px; 
+    height: 80px;
+}
+
+input {
+    padding-left:10px;
+    border:none;
+    border-bottom: 1px solid lightgray;
+    text-align:center;
+}
+
+input:focus {
+    outline:none;
+}
+
+.myStore_container {
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    border-radius: 10px;
+    height: 550px;
+    width: 900px;
+}
+
+.inner_container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.aside {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-evenly;
+    height: 100%;
+    left: 100%;
+    padding: 0;
+}
+
+.aside > button {
+    border: 1px solid lightgray;
+    border-bottom: none;
+    background-color: white;
+    border-radius: 0 5px 5px 0;
+    width: 15vw;
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 700;
+    transition: color 0.2s ease-in-out;
+}
+
+.aside > button:first-child {
+    border-top: none;
+    color: #598eff;
+    border-left: none;
+}
+
+.store-top__info {
+	display: flex; 
+	width:40%; 
+	justify-content: center; 
+	align-items: center; 
+	flex-direction: column; 
+    padding-left:10px; 
+    margin-top:10px; 
+    height:550px; 
+    text-overflow: hidden; 
+    overflow-x: auto;
+}
+
+.store-bottom__info {
+	display: flex; 
+	justify-content: center; 
+	align-items: center; 
+	flex-direction: column; 
+	margin-right:20px;
+    width:50%
+}
+
+#storeOnOffBtn {
+    background-color: white;
+    color: #598eff;
+    box-shadow: 1px 1px 11px rgba(172, 172, 172, 0.699);
+    width: 90%;
+    font-weight: 600;
+	margin-top: 30px;
+}
+
+#deleteStoreBtn {
+	background-color: lightgray;
+    color: #e01a1a;
+    box-shadow: 1px 1px 11px rgba(172, 172, 172, 0.699);
+    width: 90%;
+    font-weight: 600;
+	margin-top: 10px;
+}
+
+.allTag {
+    color: white;
+    font-size:14px;
+}
+
+.updateImgLink {
+	text-decoration: none;
+}
+
+#updateBox a{
+	text-decoration: none;
+    color: rgb(78, 78, 78);
+    padding:5px 0;
+}
+
+#updateBox a:hover {
+	color: #598eff;
+	font-weight: 600;
+}
+
+img:hover {
+	opacity:0.3;
+}
+
+.tag_zone {
+	display:flex; 
+	justify-content:center; 
+	align-items:center; 
+	flex-direction:column; 
+	text-align:center;
+}
+
+.updateImgBtn {
+	font-size: 14px;
+	border-radius: 100px;
+	width: 40px;
+	height: 40px;
+	color: white;
+	font-weight: 500;
+	background-color: #598EFF;
+	display:flex;
+	margin:auto;
+} 
+
+.form-wrapper {
+	display: flex;
+}
+
+
+.tag_input {
+	display:flex; 
+	align-items: center;
+	box-shadow: 1px 1px 11px rgba(172, 172, 172, 0.699); 
+	width:150px; 
+	height:30px;
+    margin-bottom:10px; 
+    border-radius: 5px;
+ 
+}  
+     
+.addTag > span {
+	color: #598eff; 
+    border-radius: 5px; 
+    height: 30px;  
+    font-weight: 500; 
+    font-size: 20px;
+    display:flex; 
+    align-items:center; 
+    justify-content:center;  
+    text-decoration: none;
+    padding: 0;
+}
+
+.addTag:focus {
+    text-decoration: none;
+}
+
+#inputTag {
+	border:none; 
+	font-size:14px;
+	border-radius: 5px;
+	padding: 0;
+}
+	
+	
+		/* 테블릿 (해상도 768px ~ 1023px)*/
+	
+	@media screen and (max-width:1024px) {
+		
+		.myStore_container {
+			height: 80%;
+			width: 95%;
+			flex-direction: column;
+			position:relative;
+			margin-top: 40px;
+		}
+	
+		.aside {
+			display:flex;
+			flex-direction: row;
+			width:100%;
+			position: absolute;
+			top: 0;
+			left:0;
+			height: auto;
+		}
+		
+		.aside > button {
+    		border-radius: 5px;
+    		font-weight: 700;
+			width: 20%;
+			height: 10vh;
+			border: 1px solid lightgray;
+		}
+		
+		.aside > button:first-child {
+			border: none;		
+		}
+		
+		.stroe-top__info {
+			padding-left: 0;
+			height:0;
+			margin-top:120px;
+		}
+		
+		.inner_container {
+			margin-top: 30px;
+		}
+
+	}
+		
+			/* 모바일 가로, 세로 */
+		
+		@media screen and (max-width:767px) {
+		
+		body {
+			height: auto;
+		}
+		
+		.myStore_container {
+			height: 80%;
+			width: 100%;
+			flex-direction: column;
+			text-overflow: hidden; 
+    		overflow-x: auto;
+		}
+	
+		.aside {
+			display:none;
+		}
+		
+		.store-top__info {
+			width:100%;
+			padding-left:0;
+			height: auto;
+		}
+		
+		.store-bottom__info {
+			width: 100%;
+			margin-right:0;
+			padding-top: 30px;
+			border-top: 2px solid #f2f2f2;
+			width:90%;
+		}
+		
+		.inner_container {
+			flex-direction:column;
+			margin-top: 0;
+		}
+		
+		.navbarTwo {
+			margin-top: 30px;
+		}
+		
+		.tag_input {
+			margin-bottom: 30px;
+		}
+	}
+
+</style>
+
 <body>
 <jsp:include page="../nav/navbar2.jsp" />
 <div class="myStore_container pe-0 ps-0">
@@ -71,10 +400,8 @@
                      </c:forEach>
                  </p>
                  <div class="tag_input">
-                     <input placeholder="태그를 입력해주세요" id="inputTag" type="text" style="display:none; border:none; font-size:14px;"/>
-                     <a data-num="${dto.num }" href="javascript:" class="plus addTag btn" style="color: #598eff; 
-                     border-radius: 5px; height: 30px;  font-weight: 500; font-size: 20px;
-                     display:flex; align-items:center; justify-content:center; ">
+                     <input placeholder="태그를 입력해주세요" id="inputTag"/>
+                     <a data-num="${dto.num }" href="javascript:" class="plus btn addTag">
                          <span>+</span>
                      </a>        
                  </div>
@@ -88,7 +415,7 @@
                      style="width: 50%; height: 150px;"/>
                  </a>
                  <form action="${pageContext.request.contextPath}/uploadImage.do" id="imageForm1" method="post" enctype="multipart/form-data"
-                 		style="height:50px;">
+                 		style="height:85px;">
                      <label for="image_1" style="visibility: hidden;">대표 이미지1</label>
                      <input type="hidden" name="num" value="${dto.num }"/>
                      <input type="hidden" name="image_1" value="check"/>
@@ -113,6 +440,7 @@
                      <img src="${pageContext.request.contextPath}${dto.image_4}" alt="" id="image_4" name="image4" class="image"/>
                  </a>
      
+     			<div class="form-wrapper" style="display:flex;">
                  <form class="p-0" action="${pageContext.request.contextPath}/uploadImage.do" id="imageForm2" method="post" enctype="multipart/form-data">
                      <label style="visibility : hidden;" for="image_2">대표 이미지2</label>
                      <input type="hidden" name="num" value="${dto.num }"/>
@@ -136,11 +464,12 @@
                      <input type="file" id="repImage4" name="imageFile" style="display:none"/>
                      <button class="updateImgBtn" type="submit" style="display:none">등록</button>
                  </form>
+                </div>
              </div>
      
-             <div style="width: 60%; text-align:center; margin-bottom:15px;">
+             <div style="width: 70%; text-align:center; margin-bottom:15px;">
                  <button id="storeOnOffBtn" class="btn">매장 열기</button>
-                 <button data-num="${dto.num }" id="deleteStoreBtn">매장 삭제</button>
+                 <button data-num="${dto.num }" class="btn" id="deleteStoreBtn">매장 삭제</button>
              </div>
       </div>
          <!------------------------------------ 사이드바 (매장정보, 메뉴관리 탭) ----------------->
