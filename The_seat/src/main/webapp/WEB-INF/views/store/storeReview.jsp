@@ -15,22 +15,19 @@
 	integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
 	crossorigin="anonymous"></script>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/storeReview.css?ver=1"
+	href="${pageContext.request.contextPath}/resources/css/storeReview.css?ver=3"
 	type="text/css" />
 </head>
 <body>
-
 <jsp:include page="../nav/navbar2.jsp" />
 
-<div class="myStore_container"
-	style="display: flex; flex-direction: row; justify-content: space-between">
-	<div
-		style="display: flex; flex-direction: column; padding: 20px 30px; width: 750px;">
+<div class="myStore_container">
+	<div class="myStore_container_inner">
 
 		<!------------------------ 주문내역 텍스트 및 박스 -------------------------------->
-		<div id="inner" class="inner_container" style="display: flex;">
+		<div id="inner" class="inner_container">
 			<div class="display-box">
-				<div style="width: 500px; text-overflow: hidden; overflow-x: auto;">
+				<div class="scroll-zone">
 					<!------------------------------ USER 리뷰 리스트 (테스트용 1 ) -------------------------->
 					<c:forEach var="tmp" items="${reviewList }">
 						<c:choose>
@@ -89,15 +86,13 @@
 												</c:when>
 												<c:when test="${tmp.reviewCheck == 'yes'}">
 													<button class="addBtn" style="display:none">댓글 작성</button>
-													<button data-num="${tmp.num }" class="updateBtn">댓글 수정</button>
-													<button data-num="${tmp.num }" class="deleteBtn">댓글 삭제</button>
+													<button data-num="${tmp.num }" class="updateBtn">수정</button>
+													<button data-num="${tmp.num }" class="deleteBtn">삭제</button>
 												</c:when>
 											</c:choose>	
 										</div>
 										<div class="owner-review__text">
-											<h5>
 												<strong>사장님</strong>
-											</h5>
 											<textarea class="ownerComment" name="#" id=""></textarea>
 										</div>
 									</div>
@@ -224,9 +219,6 @@
 		</div>
 	</div>
 </div>
-
-
-
 <script src="https://kit.fontawesome.com/2ebe86210e.js"
 	crossorigin="anonymous"></script>
 <script

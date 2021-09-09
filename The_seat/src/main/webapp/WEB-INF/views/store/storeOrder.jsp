@@ -5,270 +5,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-<%-- <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/storeOrder.css?ver=2"
-	type="text/css" /> --%>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/storeOrder.css?ver=3"
+	type="text/css" />
 </head>
-<style>
-
-* {
-    box-sizing: border-box;
-    margin:0;
-}
-
-body {
-    background-color: #598eff;
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    flex-direction:column;
-    align-items: center;
-    justify-content: center;
-    color: rgb(78, 78, 78);
-    -ms-overflow-style: none;
-}
-
-::-webkit-scrollbar { display: none; } /*특정 부분 스크롤바 없애기*/ 
-.box{ -ms-overflow-style: none; } 
-.box::-webkit-scrollbar{ display:none; }
-
-.box {
-	text-overflow: hidden; 
-    overflow-x: auto;
-    height: 450px;
-}
-
-/* 버튼 기본 스타일링 */
-button {
-    outline: none;
-    border: none;
-    background-color: transparent;
-    color: rgb(78, 78, 78);
-}
-
-input:focus {
-    outline: none;
-}
-
-button:focus {
-    outline: none;
-    border: none;
-}
-
-/* 리스트 기본 스타일링 */
-ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-}
-
-.store__order-header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin-bottom:10px;
-}
-
-.store__order-header > h4 {
-    font-weight: 700;
-}
-
-.store__order-header > form > input {
-    border: none;
-    border-radius: 20px;
-    padding: 8px 10px;
-    text-align: center;
-    box-shadow: 1px 1px 11px rgba(172, 172, 172, 0.699);
-    font-size: 14px;
-}
-
-.search-btn {
-    background-color: #598eff;
-    color: white;
-    border-radius: 100%;
-    width: 30px;
-    height: 30px;
-    font-size: 16px;
-    margin-left: 5px;
-    box-shadow: 1px 1px 11px rgba(172, 172, 172, 0.699);
-}
-
-.store__order-user {
-    width: 100%;
-    margin: 5px 0;
-}
-
-.store__order-user > h5, h6 {
-    font-weight: 600;
-    font-size: 18px;
-}
-
-.store__order-user > h5 {
-    color: #598eff;
-    margin-bottom: 10px;
-}
-
-.white-box {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    text-align: center;
-}
-
-.order,
-.reserve {
-    background-color: white;
-    width: 50%;
-    height: 400px;
-    padding: 15px;
-}
-
-.box-title{
-    margin: 5px 0;
-    margin-bottom: 15px;
-}
-
-.reserve {
-    width: 250px;
-}
-
-.line {
-    height: 1.5px;
-    background-color: gray;
-    width: 100%;
-    margin-bottom: 5px;
-}
-
-.dot {
-    border: 1px dashed gray;
-    margin-bottom: 5px;
-}
-
-.myStore_container-gray {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    background-color: #ECECEC;
-    border-radius: 10px;
-    height: 550px;
-   	width: 900px;
-}
-
-::-webkit-scrollbar {
-    display: none;
-}
-
-.inner_container {
-    display: flex; 
-    align-items: center; 
-    flex-direction: column;
-}
-
-.list-item {
-    padding: 10px 0;
-    font-size: 14px;
-}
-
-.order__total {
-    font-weight: 500;
-}
-
-
-
-.list-item {
-    padding: 10px 0;
-    font-size: 14px;
-}
-
-
-.reserve-body {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 70%;
-    align-items: flex-start; 
-}
-
-.reserve-info {
-    padding: 10px;
-    font-size: 14px;
-    display:flex;
-    width: 100%;
-}
-
-.reserve-info > strong {
-    margin-left: 10px;
-}
-
-.reserve-btn {
-    color: #598eff;
-    box-shadow: 1px 1px 11px rgba(172, 172, 172, 0.699);
-    width: 90%;
-    height: 10%;
-    border-radius: 20px;
-    font-weight: 600;
-}
-
-.aside {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: space-evenly;
-    height: 100%;
-    left: 100%;
-    padding: 0;
-}
-
-.aside > button {
-    border: 1px solid #ECECEC;
-    background-color: white;
-    border-radius: 0 5px 5px 0;
-    border: 1px solid #ECECEC;
-    width: 15vw;
-    height: 20vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
-    font-weight: 700;
-    transition: color 0.2s ease-in-out;
-}
-
-
-.aside button:nth-child(4) {
-    background-color: #ECECEC;
-    color: #598eff;
-    border-left: none;
-}
-
-.orderDetail > tr {
-	display: flex;
-	justify-content:space-between;
-	align-items:center;
-	padding-right:10px;
-	margin-bottom:3px;
-}
-
-.orderDetail > tr > td {
-	font-size:14px;
-}
-
-.orderDetail > tr > td:first-child {
-	width:35%;
-}
-
-</style>
 <body>
     <!------------------------------- navbar 추가 -------------------------------->
 <jsp:include page="../nav/navbar2.jsp" />
-<div class="myStore_container-gray" style="display: flex; flex-direction: row; justify-content: space-between">
-<div style="width:750px; display: flex; flex-direction: column; padding: 20px 30px;">
+<div class="myStore_container-gray">
+<div class="wrapper">
     <!-------------------------- 주문내역 타이틀 및 날짜 검색 ---------------------------->
     <header class="store__order-header">
         <h4>주문 내역</h4>
@@ -330,15 +79,15 @@ ul {
 				                <div class="reserve-body">
 				                    <div class="reserve-info">
 				                        <span>전화번호</span>
-				                        <strong style="width:120px;" class="phone"></strong>
+				                        <strong class="phone"></strong>
 				                    </div>
 				                    <div class="reserve-info">
 				                        <span>좌석정보</span>
-				                        <strong style="width:120px;">${tmp.tableNum }번 좌석</strong>
+				                        <strong>${tmp.tableNum }번 좌석</strong>
 				                    </div>
 				                    <div class="reserve-info">
 				                        <span>주문시간</span>
-				                        <strong style="width:120px;">${tmp.regdate }</strong>
+				                        <strong>${tmp.regdate }</strong>
 				                    </div>
 				                </div>
 				                <c:choose>
@@ -370,7 +119,7 @@ ul {
 				            </section>
 				        </div>
 				    </div>
-				    <div class="line box" style="margin: 40px 0;"></div>
+				    <div class="line" style="margin: 40px 0;"></div>
 				</c:forEach>
     		</c:otherwise>
     	</c:choose>
