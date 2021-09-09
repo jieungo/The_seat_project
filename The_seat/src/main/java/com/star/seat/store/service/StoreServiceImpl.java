@@ -390,6 +390,6 @@ public class StoreServiceImpl implements StoreService{
 		// 매장 정보를 지우고
 		dao.deleteStore(dto);
 		// 매장 자리 정보도 지움
-		//stDao.deleteSeat(dto);
+		stDao.seatDelete(dto);
 	}
 }
