@@ -6,7 +6,7 @@
 	<insert id="insertSeat" parameterType="seatDto">
 		insert into storeSeat
 		(num, seatImage, seatContent, totalSeat, emptySeat, notEmptySeat, notUse)
-		values (#{num }, '', '', '', '', '', '')
+		values (#{num }, '', '', '1', '', '', '')
 	</insert>
 	
 	<select id="getSeat" parameterType="seatDto" resultType="seatDto">
