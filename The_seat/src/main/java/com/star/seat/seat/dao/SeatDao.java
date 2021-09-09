@@ -11,4 +11,6 @@ public interface SeatDao {
 	public void updateEmptySeat(SeatDto dto);
 	// 자리 정보 가져가기
 	public SeatDto getSeat(SeatDto dto);
+	// 자리 정보 삭제
+	public void seatDelete(SeatDto dto);
 }

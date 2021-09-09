@@ -351,8 +351,12 @@ document.querySelector("#orderBtn").addEventListener("click", function(){
   let orderNum = str.substring(str.length-6, str.length);
   //선택한 좌석 번호 tableNum 으로 가져간다.
   let tableNum = document.querySelector("#seatChoice").value;
-  //get 방식으로 매장 고유번호를 num 으로 가져가고 orderNum,tableNum을 가져간다.
-  location.href="${pageContext.request.contextPath}/order/order.do?num="+num+"&tableNum="+tableNum+"&orderNum="+orderNum;
+  if(tableNum != ""){
+	//get 방식으로 매장 고유번호를 num 으로 가져가고 orderNum,tableNum을 가져간다.
+	  location.href="${pageContext.request.contextPath}/order/order.do?num="+num+"&tableNum="+tableNum+"&orderNum="+orderNum;
+  } else {
+	  alert("자리를 선택해주세요!");
+  };
 })
 	// 답글 보기 버튼 클릭하면 사장님 답글 창 생성
 	let review = document.querySelectorAll('.userReview');

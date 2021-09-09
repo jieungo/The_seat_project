@@ -45,9 +45,8 @@
                         
                         <div class="seat__select">
                         	<c:choose>
-                        		
-	                        	<c:when test="${sDto.notUse eq null}">
-	                        		<input type="number" id="totalSeat" min="1" max="30" placeholder="좌석수 선택">
+	                        	<c:when test="${sDto.notUse eq null && sDto.notEmptySeat eq null}">
+	                        		<input type="number" id="totalSeat" min="1" max="30" >
 	                        	</c:when>
 	                        	<c:otherwise>
 	                        		<input type="number" id="totalSeat" min="1" max="30" disabled>

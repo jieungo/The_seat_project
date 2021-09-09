@@ -27,4 +27,9 @@
 		WHERE num=#{num }
 	</update>
 	
+	<delete id="seatDelete" parameterType="seatDto">
+		DELETE FROM storeSeat
+		WHERE num=#{num }
+	</delete>
+	
 </mapper>
