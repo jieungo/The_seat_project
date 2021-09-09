@@ -183,7 +183,7 @@ public class StoreController {
 
 	// 매장 상세 정보 페이지로 이동
 	@RequestMapping(value = "/store/storeDetail.do",method = RequestMethod.GET)
-	public ModelAndView goStoreDetail(SeatDto sDto, StoreDto dto, ModelAndView mView, HttpServletRequest request) {
+	public ModelAndView goStoreDetail(SeatDto sDto, StoreDto dto, ReviewDto rDto, ModelAndView mView, HttpServletRequest request) {
 		
 		service.getMyStore_num(dto, request);
 		
@@ -192,7 +192,11 @@ public class StoreController {
 		dto.setNum(storeNum);
 		//dto에 num 정보 넣어서 같은 num 의 자리정보 dto 에 담아오기
 		
+		rDto.setStoreNum(storeNum);
+		List<ReviewDto> list=rService.getReviewList(rDto, request);
+		
 		seatService.getSeat(sDto, mView, request);
+		mView.addObject("reviewList", list);
 		mView.setViewName("store/storeDetail");
 		return mView;
 	}
@@ -206,7 +210,7 @@ public class StoreController {
 		rDto.setStoreNum(dto.getNum());
 		System.out.println("myStoreNum: "+rDto.getStoreNum());
 		
-		List<ReviewDto> list=rService.getReviewList(rDto);
+		List<ReviewDto> list=rService.getReviewList(rDto, request);
 		
 		request.setAttribute("reviewList", list);
 		

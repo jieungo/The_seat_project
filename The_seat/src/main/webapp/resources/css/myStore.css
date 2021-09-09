@@ -133,6 +133,16 @@ input:focus {
     box-shadow: 1px 1px 11px rgba(172, 172, 172, 0.699);
     width: 90%;
     font-weight: 600;
+	margin-top: 30px;
+}
+
+#deleteStoreBtn {
+	background-color: lightgray;
+    color: #e01a1a;
+    box-shadow: 1px 1px 11px rgba(172, 172, 172, 0.699);
+    width: 90%;
+    font-weight: 600;
+	margin-top: 10px;
 }
 
 .allTag {
@@ -167,6 +177,23 @@ img:hover {
 	text-align:center;
 }
 
+.updateImgBtn {
+	font-size: 14px;
+	border-radius: 100px;
+	width: 40px;
+	height: 40px;
+	color: white;
+	font-weight: 500;
+	background-color: #598EFF;
+	display:flex;
+	margin:auto;
+} 
+
+.form-wrapper {
+	display: flex;
+}
+
+
 .tag_input {
 	display:flex; 
 	box-shadow: 1px 1px 11px rgba(172, 172, 172, 0.699); 
@@ -187,6 +214,7 @@ img:hover {
 			width: 95%;
 			flex-direction: column;
 			position:relative;
+			margin-top: 40px;
 		}
 	
 		.aside {
@@ -196,6 +224,7 @@ img:hover {
 			position: absolute;
 			top: 0;
 			left:0;
+			height: auto;
 		}
 		
 		.aside > button {
@@ -219,7 +248,7 @@ img:hover {
 		.inner_container {
 			margin-top: 30px;
 		}
-		
+
 	}
 		
 			/* 모바일 가로, 세로 */

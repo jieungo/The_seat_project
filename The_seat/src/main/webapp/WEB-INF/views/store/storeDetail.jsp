@@ -94,7 +94,11 @@ type="text/css" />
 			<!--------------- 파라미터 값으로 매장 정보를 받아온다. ----------------------->
 
 				<div class="card-header bg-transparent border-dark-light">
-					<h5>별점 : ⭐ 4.9 (100+)</h5>
+					<h5>별점 : ⭐${avgStar }
+						<c:if test="${totalReviewCount gt 100 }">
+							 (100+)
+						</c:if>
+					</h5>
 					<h3 style="line-height: 1.8;">
 					<c:if test="${not empty tagList  }">
 						 <c:forEach var="tmp" items="${tagList }">
@@ -113,7 +117,8 @@ type="text/css" />
 					</h4>
 					<h4 class="card-title" style="line-height: 2;">남은 자리 : <span id="emptySeatNum"></span> / <span id="totalSeatNum"></span></h4>
 					<button type="button" id="reviewBtn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">리뷰
-						: 123개</button>
+						: ${totalReviewCount }개
+					</button>
 				</div>
 				<div class="card-footer bg-transparent border-dark-light">
 					<button type="button" id="seatBtn" data-bs-toggle="modal"
@@ -204,31 +209,67 @@ type="text/css" />
 					aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
-				<div class="card mb-3" style="max-width: 540px; border: none;">
-					<div class="row g-0">
-						<div class="col-md-4">
-							<h5>신현미 님</h5>
-							<!-- <p>★★★★★ 등록일 : 2021.08.19</p> -->
-							<img
-								src="${pageContext.request.contextPath}/resources/img/review1.jpg"
-								class="img-fluid rounded-start" alt="TwosomeReview">
-						</div>
-						<div class="col-md-8">
-							<div class="card-body">
-								<h5 class="card-title">★★★★★</h5>
-								<p class="card-text">케이크가 정말 맛있어요 ๑❤‿❤๑</p>
-								<p class="card-text">
-									<small class="text-muted">등록일 : 2021.08.19</small>
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
+				<c:choose>
+					<c:when test="${empty reviewList }">
+						<p>아직 작성된 리뷰가 없습니다.</p>
+					</c:when>
+					<c:otherwise>
+						<c:forEach var="tmp" items="${reviewList }">
+							<c:choose>
+								<c:when test="${tmp.targetNum==0 }">
+									<div class="card mb-3" style="max-width: 540px; border: none;">
+										<div class="row g-0">
+											<div class="col-md-4">
+												<h5>${tmp.writer } 님</h5>
+												<img
+													src="${pageContext.request.contextPath}${tmp.imagePath}"
+													class="img-fluid rounded-start" alt="TwosomeReview">
+											</div>
+											<div class="col-md-8">
+												<div class="card-body">
+													<!-- 별점 출력 -->
+													<div class="card-title fiveStar">
+														<c:forEach begin="1" end="${tmp.star }">
+															<i class="card-title">★</i>
+														</c:forEach>
+													</div>
+													<p class="card-text">${tmp.content }</p>
+													<p class="card-text">
+														<small class="text-muted">등록일 : ${tmp.regdate }</small>
+													</p>
+												</div>
+											</div>
+											<!-- 버튼 클릭시 글 작성 가능한 사장님 답글 말풍선 생성-->
+											<button data-num="${tmp.groupNum }" href="javascript:" class="userReview">
+												<span class="user-review__reply">답글 보기</span>
+											</button>
+										</div>
+									</div>
+									<!-- 사장님 답글 -->
+									<div class="owner-review ownerReview"
+											style="display: none;">
+											<div class="owner-review__title">
+												<small class="ownerRegdate"></small>
+											</div>
+											<div class="owner-review__body arrow_box-owner">
+												<div class="edit-btn">
+													<i class="fas fa-edit" style="display: none;"></i>
+													
+												</div>
+												<div class="owner-review__text">
+													<h5>
+														<strong>사장님</strong>
+													</h5>
+													<p class="ownerComment" name="#" id=""></p>
+												</div>
+											</div>
+										</div>
+								</c:when>
+							</c:choose>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
 			</div>
-			<hr />
-			<div class="modal-body">...</div>
-			<hr />
-			<div class="modal-body">...</div>
 			<div class="modal-footer">
 				<button type="button" style="border: none; background-color: #fff; font-size: 20px; font-weight: 500; 
 								color: rgb(86, 162, 255); border-bottom: solid 3px rgb(86, 162, 255);"
@@ -245,17 +286,18 @@ type="text/css" />
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="ModalLabel">
-					${dto.storeName } <br /><span id="emptySeatNum1"></span> / <span id="totalSeatNum1"></span>
+					${dto.storeName } <br /><span>( </span><span id="emptySeatNum1"></span> / <span id="totalSeatNum1"></span>
+					<span> )</span>
 				</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal"
 					aria-label="Close"></button>
 			</div>
-			<p style="text-align: right; font-size: 20px; font-weight: 500; margin-top: 20px; margin-right: 40px;">자리를 선택해 주세요 😉</p>
+			<p style="text-align: right; font-size: 20px; font-weight: 500; margin-top: 20px; margin-right: 40px;">자리를 선택해주세요 😉</p>
 			<div class="modal-body">
 				<div class="container-fluid">
 					<img src="${pageContext.request.contextPath}${sDto.seatImage }" class="img-thumbnail" alt="seatImage">
 					<hr />
-					<p>자리 선택 
+					<p style="font-size: 18px;">자리 선택 
 						<select name="자리 선택" id="seatChoice">
 						<!-- storeSeat 테이블에서 지정한 만큼 -->
 							<c:forEach var="tmp" items="${sDto.totalSeat }">
@@ -273,7 +315,7 @@ type="text/css" />
 					</p>
 					<hr />
 					<div class="card">
-						<div class="card-header">✦ 알림사항</div>
+						<div class="card-header">🔔 알림사항</div>
 						<div class="card-body">
 							<p class="card-text">${sDto.seatContent }</p>
 						</div>
@@ -316,6 +358,39 @@ document.querySelector("#orderBtn").addEventListener("click", function(){
 	  alert("자리를 선택해주세요!");
   };
 })
+	// 답글 보기 버튼 클릭하면 사장님 답글 창 생성
+	let review = document.querySelectorAll('.userReview');
+	let ownerReviewBox = document.querySelectorAll('.ownerReview');
+	let ownerRegdates=document.querySelectorAll(".ownerRegdate");
+	let ownerComments=document.querySelectorAll(".ownerComment");
+	for (let i = 0; i < review.length; i++) {
+		review[i].addEventListener('click', function() {
+			let dummy=ownerReviewBox[i];
+			if(dummy.style.display == "block"){
+				dummy.style.display = "none";
+			} else {
+				// DB에 있는 review num 이것을 사용해서 targetNum에 있는지 없는지 여부 판독할 것
+				// 없으면 작성하라는 멘트
+				// 있으면 내용을 출력할 수 있도록
+				let num=this.getAttribute("data-num");
+				console.log(num);
+				
+				ajaxPromise("${pageContext.request.contextPath}/store/getMyReview.do", "post", "num="+num)
+				.then(function(response){
+					return response.json();
+				}).then(function(data){
+					console.log(data);
+					if(!data.beChecked){
+						ownerComments[i].innerText="아직 사장님의 답글이 없습니다.";
+					} else {
+						ownerRegdates[i].innerText=data.ownerReviewData.regdate;
+						ownerComments[i].innerText=data.ownerReviewData.content;
+					}
+				});
+				dummy.style.display = "block";
+			}
+		});
+	}
 </script>
 </body>
 </html>

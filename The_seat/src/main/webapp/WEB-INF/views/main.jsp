@@ -120,6 +120,7 @@ String search = request.getParameter("keyword");
 								<div class="card-body">
 									<h5 class="card-title">이름 : ${tmp.storeName }</h5>
 									<p class="card-text">주소 : ${tmp.storeAddr }</p>
+									<p class="card-text">별점 : ${tmp.avgStar }</p>
 									<p class="card-text">
 										<small class="text-muted">Last updated 3 mins ago</small>
 									</p>
