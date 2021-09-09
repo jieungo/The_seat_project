@@ -51,7 +51,7 @@
                         <div class="seat__select">
                         	<c:choose>
                         		
-	                        	<c:when test="${sDto.notUse eq null}">
+	                        	<c:when test="${sDto.notUse eq null && sDto.notEmptySeat eq null}">
 	                        		<input type="number" id="totalSeat" min="1" max="30" >
 	                        	</c:when>
 	                        	<c:otherwise>

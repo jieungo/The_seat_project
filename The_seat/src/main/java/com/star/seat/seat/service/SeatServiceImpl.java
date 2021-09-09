@@ -80,4 +80,5 @@ public class SeatServiceImpl implements SeatService {
 		
 		return map;
 	}
+
 }

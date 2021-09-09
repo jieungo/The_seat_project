@@ -33,4 +33,9 @@ public class SeatDaoImpl implements SeatDao {
 		return session.selectOne("seat.getSeat", dto);
 	}
 
+	@Override
+	public void seatDelete(SeatDto dto) {
+		session.delete("seat.seatDelete", dto);
+	}
+
 }
