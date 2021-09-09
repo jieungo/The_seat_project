@@ -12,6 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.star.seat.review.dao.ReviewDao;
+import com.star.seat.review.dto.ReviewDto;
+import com.star.seat.seat.dao.SeatDao;
+import com.star.seat.seat.dto.SeatDto;
 import com.star.seat.store.dao.StoreDao;
 import com.star.seat.store.dto.StoreDto;
 
@@ -19,6 +23,10 @@ import com.star.seat.store.dto.StoreDto;
 public class StoreServiceImpl implements StoreService{
 	@Autowired
 	private StoreDao dao;
+	@Autowired
+	private SeatDao stDao;
+	@Autowired
+	private ReviewDao rDao;
 	
 	// 새로운 매장을 추가하는 method
 	@Override
@@ -26,6 +34,18 @@ public class StoreServiceImpl implements StoreService{
 		String email=(String)request.getSession().getAttribute("email");
 		//email="test";
 		dao.addStore(email);
+		
+		// 해당 email로 된 매장의 정보를 모두 불러온 다음
+		List<StoreDto> list=dao.getMyStores(email);
+		// 매장 수가 곧 새로 만들어진 매장에 해당하는 index+1
+		int num=list.size();
+		// 이 index에 해당하는 매장의 번호를 가져와서 매장 번호를 추출
+		num=list.get(num-1).getNum();
+		SeatDto stDto=new SeatDto();
+		stDto.setNum(num);
+		// 해당 매장에 대한 자리 정보를 table에 default로 형성
+		// 나중에 update 방식으로 변경해준다고 함.
+		stDao.insertSeat(stDto);
 	}
 	
 	// 사장님의 매장 정보 목록을 불러오는 method
@@ -113,6 +133,18 @@ public class StoreServiceImpl implements StoreService{
 		System.out.println("keyword : "+dto.getKeyword());
 		System.out.println(dao.getList(dto));
 		request.setAttribute("list", list);
+		
+		// 별점정보를 list에 담는 method
+		ReviewDto rDto=new ReviewDto();
+		for(int i=0; i<list.size(); i++) {
+	    	// 각 주문번호 정보에 해당 매장의 평균 별점과
+	    	// 해당 주문 번호에 대한 내 별점 담기
+	    	int num=list.get(i).getNum(); // 매장 DB 번호
+	    	rDto.setStoreNum(num);
+	    	// 해당 매장의 번호로 평균 별점을 가져옴
+	    	float avgStar=(float)(Math.round(rDao.getAvgStar(rDto)*100)/100.0);
+	    	list.get(i).setAvgStar(avgStar);
+	    }
 	}
 	
 	// 매장 태그를 추가하는 method
@@ -355,6 +387,9 @@ public class StoreServiceImpl implements StoreService{
 		String email=(String)request.getSession().getAttribute("email");
 		dto.setOwner(email);
 		
-		dao.deleteStore(dto);	
+		// 매장 정보를 지우고
+		dao.deleteStore(dto);
+		// 매장 자리 정보도 지움
+		//stDao.deleteSeat(dto);
 	}
 }

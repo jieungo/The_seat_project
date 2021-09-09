@@ -18,12 +18,14 @@ public class OrderDto {
 	private String orderdate;
 	private int startRowNum;
 	private int endRowNum;
+	private float avgStar;
+	private int myStar;
 	
 	public OrderDto () {}
 
 	public OrderDto(int orderNum, String email, String storeName, String storeLogo, int num, int tableNum, String menu,
 			int menuCount, int price, int amount, String reviewExist, String confirm, String cancel, String regdate,
-			String orderdate, int startRowNum, int endRowNum) {
+			String orderdate, int startRowNum, int endRowNum, float avgStar, int myStar) {
 		super();
 		this.orderNum = orderNum;
 		this.email = email;
@@ -42,6 +44,8 @@ public class OrderDto {
 		this.orderdate = orderdate;
 		this.startRowNum = startRowNum;
 		this.endRowNum = endRowNum;
+		this.avgStar = avgStar;
+		this.myStar = myStar;
 	}
 
 	public int getOrderNum() {
@@ -179,5 +183,22 @@ public class OrderDto {
 	public void setEndRowNum(int endRowNum) {
 		this.endRowNum = endRowNum;
 	}
+
+	public float getAvgStar() {
+		return avgStar;
+	}
+
+	public void setAvgStar(float avgStar) {
+		this.avgStar = avgStar;
+	}
+
+	public int getMyStar() {
+		return myStar;
+	}
+
+	public void setMyStar(int myStar) {
+		this.myStar = myStar;
+	}
+
 
 }

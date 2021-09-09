@@ -268,7 +268,7 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
                 newAnchor.innerText = "Defaults";
                 //newAnchor.setAttribute("data-num", dataNum);
                 newAnchor.setAttribute("class", "store");
-                newAnchor.setAttribute("href", storePath+data.newStoreList[num].num);
+                newAnchor.setAttribute("href", storePath+data.newStoreList[num-1].num);
                 
                 //newAnchor.setAttribute("id", "addBtn" + strDataNum);
                 document.querySelector(".toggle").appendChild(newAnchor);
