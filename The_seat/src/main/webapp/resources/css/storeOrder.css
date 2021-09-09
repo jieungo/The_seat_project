@@ -7,8 +7,8 @@
 
 body {
     background-color: #598eff;
-    height: 100%;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
     display: flex;
     flex-direction:column;
     align-items: center;
@@ -21,6 +21,11 @@ body {
 .box{ -ms-overflow-style: none; } 
 .box::-webkit-scrollbar{ display:none; }
 
+.box {
+	text-overflow: hidden; 
+    overflow-x: auto;
+    height: 450px;
+}
 
 /* 버튼 기본 스타일링 */
 button {
@@ -52,6 +57,7 @@ ul {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    margin-bottom:10px;
 }
 
 .store__order-header > h4 {
@@ -132,8 +138,8 @@ ul {
 
 .myStore_container-gray {
     display: flex;
-    justify-content: center;
-    flex-direction: column;
+    justify-content: space-between;
+    flex-direction: row;
     background-color: #ECECEC;
     border-radius: 10px;
     height: 550px;
@@ -150,19 +156,6 @@ ul {
     flex-direction: column;
 }
 
-.order-list__body {
-    text-overflow: hidden; 
-    overflow-x: auto;
-    height: 450px;
-}
-
-.order__list {
-    width: 100%;
-    height: 250px;
-    text-overflow: hidden; 
-    overflow-x: auto;
-}
-
 .list-item {
     padding: 10px 0;
     font-size: 14px;
@@ -172,15 +165,15 @@ ul {
     font-weight: 500;
 }
 
-.down-icon{
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-    height: 50%;
+
+
+.list-item {
+    padding: 10px 0;
+    font-size: 14px;
 }
 
+
 .reserve-body {
-    margin-top: 30px;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -191,10 +184,12 @@ ul {
 .reserve-info {
     padding: 10px;
     font-size: 14px;
+    display:flex;
+    width: 100%;
 }
 
 .reserve-info > strong {
-    margin-left: 30px;
+    margin-left: 10px;
 }
 
 .reserve-btn {
@@ -237,3 +232,146 @@ ul {
     color: #598eff;
     border-left: none;
 }
+
+.orderDetail > tr {
+	display: flex;
+	justify-content:space-between;
+	align-items:center;
+	padding-right:10px;
+	margin-bottom:3px;
+}
+
+.orderDetail > tr > td {
+	font-size:14px;
+}
+
+.orderDetail > tr > td:first-child {
+	width:35%;
+}
+
+.wrapper {
+	width:750px; 
+	display: flex; 
+	flex-direction: column; 
+	padding: 20px 30px;
+}
+
+.reserve-info > strong {
+	width:120px;
+}
+
+	/* 테블릿 (해상도 768px ~ 1023px)*/
+
+@media screen and (max-width:1024px) {
+	
+	.myStore_container-gray {
+		height: 80%;
+		width: 95%;
+		position:relative;
+		justify-content:center;
+	}
+
+	.aside {
+		display:flex;
+		flex-direction: row;
+		width:100%;
+		position: absolute;
+		top: 0;
+		left:0;
+		height: auto;
+	}
+	
+	.aside > button {
+   		border-radius: 5px;
+   		font-weight: 700;
+		width: 20%;
+		height: 10vh;
+		border: 1px solid lightgray;
+	}
+	
+	.aside > button:nth-child(4) {
+		border: none;		
+	}
+	
+	.store__order-header {
+		margin-top:100px;
+	}
+	
+	.box {
+		height: 550px;
+	}
+}
+
+	/* 모바일 가로 */
+
+@media screen and (max-width:767px) {
+	
+
+	.myStore_container-gray {
+		height: 80%;
+		width: 100%;
+		flex-direction: column;
+		text-overflow: hidden; 
+   		overflow-x: auto;
+	}
+
+	.aside {
+		display:none;
+	}
+	
+	.store__order-header {
+		margin-top:0px;
+	}
+	
+	.inner_container {
+		flex-direction:column;
+		margin-top: 0;
+	}
+	
+	.navbarTwo {
+		margin-top: 30px;
+	}
+	
+	.wrapper {
+		width:100%;
+	}
+	
+}
+
+		/* 모바일 세로 */
+		
+@media screen and (max-width:500px) {
+	.white-box {
+		flex-direction: column;
+		align-items:center;
+	}
+	
+	.order {
+		width:100%;
+		margin-bottom: 20px;
+	}
+	
+	.reserve {
+		width:100%;
+	}
+	
+	.wrapper {
+		padding-top: 0;
+	}
+	
+	.reserve-info {
+		display: flex;
+		margin-top: 20px;
+		font-size: 16px;;
+	}
+	
+	.reserve-info > strong {
+		width: auto;
+	}
+	
+	.store__order-header {
+		margin-bottom: 10px;
+	}
+}
+
+

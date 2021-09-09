@@ -15,22 +15,19 @@
 	integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
 	crossorigin="anonymous"></script>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/storeReview.css?ver=1"
+	href="${pageContext.request.contextPath}/resources/css/storeReview.css?ver=3"
 	type="text/css" />
 </head>
 <body>
-
 <jsp:include page="../nav/navbar2.jsp" />
 
-<div class="myStore_container"
-	style="display: flex; flex-direction: row; justify-content: space-between">
-	<div
-		style="display: flex; flex-direction: column; padding: 20px 30px; width: 750px;">
+<div class="myStore_container">
+	<div class="myStore_container_inner">
 
 		<!------------------------ 주문내역 텍스트 및 박스 -------------------------------->
-		<div id="inner" class="inner_container" style="display: flex;">
+		<div id="inner" class="inner_container">
 			<div class="display-box">
-				<div style="width: 500px; text-overflow: hidden; overflow-x: auto;">
+				<div class="scroll-zone">
 					<!------------------------------ USER 리뷰 리스트 (테스트용 1 ) -------------------------->
 					<c:choose>
 						<c:when test="${empty reviewList }">
@@ -76,6 +73,52 @@
 														class="image" />
 												</div>
 											</div>
+
+											<p>${tmp.content }</p>
+											<!-- 버튼 클릭시 글 작성 가능한 사장님 답글 말풍선 생성-->
+											<button data-num="${tmp.groupNum }" href="javascript:" class="userReview">
+												<c:choose>
+													<c:when test="${tmp.reviewCheck == 'no' }">
+														<span class="user-review__reply">답글 작성</span>
+													</c:when>
+													<c:when test="${tmp.reviewCheck == 'yes' }">
+														<span class="user-review__reply">답글 보기</span>
+													</c:when>
+												</c:choose>
+											</button>
+										</div>
+										<div class="img__wrapper">
+											<img src="#" alt="" id="image_logo" name="logo"
+												class="image" />
+										</div>
+									</div>
+								</div>
+								<!-- 사장님 답글 -->
+								<div class="owner-review ownerReview"
+									style="display: none;">
+									<div class="owner-review__title">
+										<small class="ownerRegdate"></small>
+									</div>
+									<div class="owner-review__body arrow_box-owner">
+										<div class="edit-btn">
+											<i class="fas fa-edit" style="display: none;"></i>
+											<c:choose>
+												<c:when test="${tmp.reviewCheck == 'no'}">
+													<button class="addBtn">댓글 작성</button>
+													<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="updateBtn"style="display:none">댓글 수정</button>
+													<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="deleteBtn" style="display:none">댓글 삭제</button>
+												</c:when>
+												<c:when test="${tmp.reviewCheck == 'yes'}">
+													<button class="addBtn" style="display:none">댓글 작성</button>
+													<button data-num="${tmp.num }" class="updateBtn">수정</button>
+													<button data-num="${tmp.num }" class="deleteBtn">삭제</button>
+												</c:when>
+											</c:choose>	
+										</div>
+										<div class="owner-review__text">
+												<strong>사장님</strong>
+											<textarea class="ownerComment" name="#" id=""></textarea>
+                      
 										</div>
 										<!-- 사장님 답글 -->
 										<div class="owner-review ownerReview"
@@ -231,9 +274,6 @@
 		</div>
 	</div>
 </div>
-
-
-
 <script src="https://kit.fontawesome.com/2ebe86210e.js"
 	crossorigin="anonymous"></script>
 <script

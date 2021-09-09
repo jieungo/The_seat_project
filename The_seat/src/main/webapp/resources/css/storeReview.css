@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+
+/* ----------- 기본 설정 ------------- */
+
+
 * {
     box-sizing: border-box;
 }
@@ -16,7 +20,6 @@ body {
     font-size: 16px;
 }
 
-/* 버튼 기본 스타일링 */
 button {
     outline: none;
     border: none;
@@ -24,21 +27,15 @@ button {
     color: rgb(78, 78, 78);
 }
 
-/* 링크 기본 스타일링 */
 a {
     text-decoration: none;
     color: rgb(78, 78, 78);
 }
 
-/* 리스트 기본 스타일링 */
 ul {
     padding: 0;
     margin: 0;
     list-style: none;
-}
-
-.img__wrapper {
-    width: 40%;
 }
 
 img {
@@ -46,24 +43,46 @@ img {
     height: 100%;
 }
 
-.review_container {
-    display: flex;
-    justify-content: center;
-    background-color: white;
-    border-radius: 10px;
-    height: 550px;
-    width: 900px;
+/* ---------- 카드 내부 요소 ------------- */
+
+
+small {
+    color: lightgray;
 }
 
-.inner_container {
-    height: 100%;
+.img__wrapper {
+    width: 50%;
+}
+
+
+.fiveStar {
+    margin-bottom: 10px;
+    color: rgb(253, 197, 14);
+}
+
+.edit-btn {
     display: flex;
-    align-items: center;
+    justify-content: flex-end;
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+
+/* ------------ 스크롤 ------------- */
+
+
+.scroll-zone {
+	width: 80%;
+	text-overflow: hidden; 
+	overflow-x: auto
 }
 
 ::-webkit-scrollbar {
     display: none;
 }
+
+
+/* ---------- 사이드 탭 ------------- */
 
 .aside {
     display: flex;
@@ -100,6 +119,32 @@ img {
 }
 
 
+/* -----------유저 리뷰------------- */
+
+.user-review {
+    min-width: 280px;
+    margin-bottom: 40px;
+    margin-left: 30px;
+}
+
+.user-review__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5px;
+}
+
+.user-review__text > button {
+   font-weight: 500;
+   display: flex;
+   justify-content: flex-end;
+}
+
+.user-review__reply {
+    font-weight: 500;
+    font-size: 15px;
+}
+
 .arrow_box-user {
 	position: relative;
 	background: #ffffff;
@@ -132,6 +177,29 @@ img {
 	margin-top: -31px;
 }
 
+/* ----------오너 & 유저 리뷰------------- */
+
+.user-review__body,
+.owner-review__body {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}
+
+.user-review__text,
+.owner-review__text {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    font-size: 14px;
+    width: 270px;
+    height: auto;
+}
+
+/* ----------오너 리뷰------------- */
+
 .arrow_box-owner {
 	position: relative;
 	background: #d4d4d4;
@@ -152,24 +220,10 @@ img {
 	margin-top: -30px;
 }
 
-
-.user-review {
-    min-width: 280px;
-    margin-bottom: 40px;
-    margin-left: 30px;
-}
-
 .owner-review {
     width: 70%;
-    margin-left: 80px;
+    margin-left: 20%;
     margin-bottom: 40px;
-}
-
-.user-review__title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 5px;
 }
 
 .owner-review__title {
@@ -180,37 +234,21 @@ img {
     padding: 0 5px;
 }
 
-small {
-    color: lightgray;
-}
-
-.user-review__body,
-.owner-review__body {
-    display: flex;
-    flex-direction: row;
-    border: 1px solid lightgray;
-    border-radius: 5px;
-}
-
 .owner-review__body {
     border:none;
     flex-direction: column;
     padding: 0 10px;
 }
 
-.user-review__text,
-.owner-review__text {
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    font-size: 14px;
-    width: 270px;
-    height: auto;
-}
-
 .owner-review__text {
     padding-top: 0;
     height: 150px;
+}
+
+.owner-review__text > strong {
+	font-size: 20px;
+	font-weight: 600;
+	text-align: start;
 }
 
 .owner-review__text > textarea {
@@ -225,46 +263,43 @@ small {
     outline: none;
 }
 
-.user-review__text > button {
-   font-weight: 500;
-   display: flex;
-   justify-content: flex-end;
-}
 
-.fiveStar {
-    margin-bottom: 10px;
-    color: rgb(253, 197, 14);
-}
-
-.user-review__reply {
-    font-weight: 500;
-    font-size: 15px;
-}
-
-.edit-btn {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 5px;
-    font-size: 14px;
-}
+/* ------------- 정렬 컨테이너 요소 ------------- */
 
 
 .display-box {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     text-align: center;
     margin-top: 20px;
     height: 90%;
+    width: 100%;
 }
 
 .myStore_container {
     display: flex;
-    justify-content: center;
-    flex-direction: column;
+    justify-content: space-between;
+    flex-direction: row;
     background-color: white;
     border-radius: 10px;
     height: 550px;
    	width: 900px;
+}
+
+.myStore_container_inner {
+	display: flex; 
+	flex-direction: column; 
+	padding: 20px 0px; 
+	width: 750px;"
+}
+
+.review_container {
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    border-radius: 10px;
+    height: 550px;
+    width: 900px;
 }
 
 .inner_container {
@@ -272,4 +307,99 @@ small {
     align-items: center; 
     flex-direction: column;
     height: 100%;
+}
+
+
+/* --------------------- 미디어쿼리 (반응형 브레이크포인트) ------------------- */
+
+
+/* 테블릿 세로 */
+
+@media screen and (max-width:1024px) {
+	
+	.myStore_container {
+		height: 80%;
+		width: 95%;
+		position:relative;
+		font-weight:500;
+		justify-content:center;
+		
+	}
+
+	.aside {
+		display:flex;
+		flex-direction: row;
+		width:100%;
+		position: absolute;
+		top: 0;
+		left:0;
+		height:auto;
+	}
+	
+	.aside > button {
+   		border-radius: 5px;
+   		font-weight: 700;
+		width: 20%;
+		height: 10vh;
+		border: 1px solid lightgray;
+	}
+	
+	.aside > button:nth-child(3) {
+		border: none;	
+	}
+	
+	.display-box {
+		height:100%;
+		margin-top:100px;
+	}
+}
+
+/* 모바일 가로, 세로 */
+
+@media screen and (max-width:767px) {
+
+	.display-box {
+		margin-top: 50px;
+		width: 100%;
+		justify-content: center;
+	}
+	
+	.scroll-zone {
+		width: 90%;
+	}
+	
+	.user-review {
+		width: auto;
+		margin-left:40px;
+		margin-right:10px;	
+	}
+	
+	.owner-review__text {
+		width:100%;
+	}
+	
+	.ownerComment {
+		width:100%;
+	}
+	
+	.Store_container {
+		height: 80%;
+		width: 100%;
+		flex-direction: column;
+		text-overflow: hidden; 
+   		overflow-x: auto;
+	}
+
+	.aside {
+		display:none;
+	}
+	
+	.inner_container {
+		flex-direction:column;
+		margin-top: 0;
+	}
+	
+	.navbarTwo {
+		margin-top: 30px;
+	}
 }
