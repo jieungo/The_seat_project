@@ -386,10 +386,11 @@ public class StoreServiceImpl implements StoreService{
 	public void deleteStore(StoreDto dto, HttpServletRequest request) {
 		String email=(String)request.getSession().getAttribute("email");
 		dto.setOwner(email);
-		
+		SeatDto sDto = new SeatDto();
+		sDto.setNum(dto.getNum());
 		// 매장 정보를 지우고
 		dao.deleteStore(dto);
 		// 매장 자리 정보도 지움
-		stDao.seatDelete(dto);
+		stDao.seatDelete(sDto);
 	}
 }
