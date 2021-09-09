@@ -33,7 +33,7 @@
 		background-color: white;
 	}
 	
-	/* 메뉴 카테고리 css */
+	/* 메뉴 카테고리 css 
 	#categories {
 		display: flex;
 		margin-top: 20px;
@@ -51,6 +51,8 @@
 		border-bottom: 3px solid rgb(114, 149, 255);
 		color: #636363;
 	}
+	*/
+	
 	
 	/* 메뉴 이름 버튼 css */
 	#orderMenu {
@@ -90,9 +92,17 @@
 	
 	.text_middle {
 		position: absolute;
+		width: 510px;
+		height: 345px;
 		top: 130px;
 		left: 90px;
+		overflow: auto;
 	}
+	
+	/* 투명 스크롤바 */
+	/*.text_middle::-webkit-scrollbar {
+	  	display: none;
+	}*/
 	
 	.text_bottom {
 		position: absolute;
@@ -242,12 +252,37 @@
    	 	border-radius: 10px;
     	box-shadow: inset 0px 0px 5px white;
   	}
+  	
+  	.text_middle::-webkit-scrollbar {
+    	width: 15px;
+  	}
+  	.text_middle::-webkit-scrollbar-thumb {
+    	background-color: rgb(196, 196, 196);
+    	border-radius: 10px;
+    	background-clip: padding-box;
+    	border: 2px solid transparent;
+  	}
+  	.text_middle::-webkit-scrollbar-track {
+    	background-color: rgb(229, 229, 229);
+   	 	border-radius: 10px;
+    	box-shadow: inset 0px 0px 5px white;
+  	}
 	
 	/* 장바구니 이미지에 그림자 효과 주기 */
 	.img2 {
 		filter: drop-shadow(5px 5px 5px #b7b5b5)
 	}
 	
+	/* span 텍스트 css */
+	.total_Menu {
+		position: relative;
+		margin-left: 30px;
+		text-decoration: underline double #719ffc;
+		text-underline-position: under;
+		font-size: 30px;
+		font-weight: 500;
+		color: #636363;
+	}
 	
 </style>
 </head>
@@ -267,7 +302,8 @@
 		</div>
 		<div class="order">
 			<section>
-				<!------ 카테고리에 따라 메뉴 다르게 보이기
+			
+				<!-- 카테고리에 따라 메뉴 다르게 보이기
 				<ul id="categories">
 					<li><a
 						href="${pageContext.request.contextPath}/order/order.do?num=${dto.num}&storeName=${dto.storeName}">전체</a>
@@ -277,15 +313,13 @@
 							href="${pageContext.request.contextPath}/order/order.do?num=${dto.num}&storeName=${dto.storeName}&category=${tmp}">${tmp }</a></li>
 					</c:forEach>
 				</ul>
-				-------->
-				
+				-->
 				<!----------------- 주문페이지에서 메뉴 고르기 ------------------>
 				<div class="row">
-				
+					<span class="total_Menu">전체 메뉴 🍴</span>
 					<div class="col text-center" style="margin-top: 45px;">
 						<div class="row row-cols-1 row-cols-md-2 g-4 foodMenu" style="width:100%; height: 800px; overflow: auto;">
 							<c:forEach var="tmp" items="${menuList }">
-								<c:if test="${tmp.best == 'yes' }">
 									<form class="orderMenu" action="${pageContext.request.contextPath}/order/insert.do">
 										<input type="hidden" name="orderNum" value="${orderNum }" />
 									 	<input type="hidden" name="email" value="${email }" /> 
@@ -309,37 +343,8 @@
 											</div>
 										</div>
 									</form>
-								</c:if>
-							</c:forEach>
-							<c:forEach var="tmp" items="${menuList }">
-								
-									<form class="orderMenu" action="${pageContext.request.contextPath}/order/insert.do">
-										<input type="hidden" name="orderNum" value="${orderNum }" />
-									 	<input type="hidden" name="email" value="${email }" /> 
-									 	<input type="hidden" name="storeName" value="${dto.storeName }" /> 
-										<input type="hidden" name="storeLogo" value="${dto.image_logo }" /> 
-										<input type="hidden" name="menu" value="${tmp.menuName }" /> 
-										<input type="hidden" name="tableNum" value="${tableNum }" /> 
-										<input type="hidden" name="price" value="${tmp.price}" /> 
-										<input type="hidden" name="num" value="${dto.num }" />
-										
-										<div class="col">
-											<div class="card">
-												<img src="${pageContext.request.contextPath}${tmp.menuImage }" class="card-img-top" alt="menuImage" style="width: 100%; height: 230px; object-fit: fill;">
-												<div class="card-body" style="background-color: rgb(176, 215, 252); color: rgb(104, 104, 104); font-weight: bold;">
-													<h5 class="card-title">
-														<button type="submit" id="orderMenu">${tmp.menuName }</button>
-													</h5>
-													<p class="card-text" style="font-size: 20px;">${tmp.price } ￦</p>
-													<input type="number" id="menuCount" name="menuCount" min="1" max="9" value="1">
-												</div>
-											</div>
-										</div>
-									</form>
-							
 							</c:forEach>
 						</div>
-						
 					</div>
 					
 					<!--------------------------- 주문내역 영수증 ---------------------------->
@@ -495,17 +500,20 @@
 			
 			let span3 = document.createElement('span');
 			span3.setAttribute('class','orderMenuPrice');
-			span3.setAttribute('style','margin-left: 100px;');
+			span3.setAttribute('style','margin-left: 110px;');
 			span3.innerText=(price.toString()
 			  .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","))+"원";
 			document.querySelector("#orderList").appendChild(span3);
 			
+			//오더리스트 div 로 묶기
+			let div = document.createElement('div');
+			document.querySelector("#orderList").appendChild(div);
+			
+			
 			let br = document.createElement('br');
 			document.querySelector("#orderList").appendChild(br);
 			
-			//오더리스트 div 로 묶기
-			//let divs = document.createElement('div');
-			//document.querySelector("")
+			
 
 			orderMenu = {orderNum,email,storeName,storeLogo,num,tableNum,menu,menuCount,price};
 			
