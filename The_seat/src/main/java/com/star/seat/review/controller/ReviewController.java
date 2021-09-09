@@ -49,10 +49,11 @@ public class ReviewController {
 		System.out.println(dto.getContent());
 		System.out.println(dto.getImageFile());
 		
-		service.addReview(dto, request);
+		float newAvgStar=service.addReview(dto, request);
 		
 		Map<String, Object> map=new HashMap<>();
 		map.put("beAdded", true);
+		map.put("newAvgStar", newAvgStar);
 		
 		return map;
 	}
@@ -60,10 +61,10 @@ public class ReviewController {
 	// 해당 매장 리뷰 목록을 불러오는 method
 	@RequestMapping(value = "/store/getReview.do", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> getReviewList(ReviewDto dto){
+	public Map<String, Object> getReviewList(ReviewDto dto, HttpServletRequest request){
 		System.out.println("storeNum: "+dto.getStoreNum());
 		
-		List<ReviewDto> list=service.getReviewList(dto);
+		List<ReviewDto> list=service.getReviewList(dto, request);
 		
 		Map<String, Object> map=new HashMap<>();
 		map.put("beTaken", true);
@@ -77,10 +78,11 @@ public class ReviewController {
 	@ResponseBody
 	public Map<String, Object> deleteReview(ReviewDto dto){
 		
-		service.deleteReview(dto);
+		float newAvgNum=service.deleteReview(dto);
 		
 		Map<String, Object> map=new HashMap<>();
 		map.put("beDeleted", true);
+		map.put("newAvgNum", newAvgNum);
 		
 		return map;
 	}
@@ -117,10 +119,11 @@ public class ReviewController {
 	@ResponseBody
 	public Map<String, Object> updateReview(ReviewDto dto, HttpServletRequest request){
 		
-		service.updateReview(dto, request);
+		float newAvgStar=service.updateReview(dto, request);
 		
 		Map<String, Object> map=new HashMap<>();
 		map.put("beUpdated", true);
+		map.put("newAvgStar", newAvgStar);
 		
 		return map;
 	}

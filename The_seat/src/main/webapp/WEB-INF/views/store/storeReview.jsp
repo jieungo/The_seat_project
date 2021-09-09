@@ -29,27 +29,51 @@
 			<div class="display-box">
 				<div class="scroll-zone">
 					<!------------------------------ USER 리뷰 리스트 (테스트용 1 ) -------------------------->
-					<c:forEach var="tmp" items="${reviewList }">
-						<c:choose>
-							<c:when test="${tmp.targetNum == 0 }">
-								<div class="user-review">
-									<div class="user-review__title">
-										<p>
-											<strong>${tmp.writer }</strong>
-										</p>
-										<small>${tmp.regdate }</small>
-									</div>
-									<div class="user-review__body arrow_box-user">
-										<div class="user-review__text">
-											<!-- 별점이랑 리뷰내용 출력하기 -->
-											<div class="fiveStar">
-												<c:forEach begin="1" end="${tmp.star }">
-													<i class="starIcon fas fa-star"></i>
-												</c:forEach>
-												<c:forEach begin="1" end="${5-tmp.star }">
-													<i class="starIcon far fa-star"></i>
-												</c:forEach>
+					<c:choose>
+						<c:when test="${empty reviewList }">
+							<p>아직 작성된 리뷰가 없습니다.</p>
+						</c:when>
+						<c:otherwise>
+							<c:forEach var="tmp" items="${reviewList }">
+								<c:choose>
+									<c:when test="${tmp.targetNum == 0 }">
+										<div class="user-review">
+											<div class="user-review__title">
+												<p>
+													<strong>${tmp.writer }</strong>
+												</p>
+												<small>${tmp.regdate }</small>
 											</div>
+											<div class="user-review__body arrow_box-user">
+												<div class="user-review__text">
+													<!-- 별점이랑 리뷰내용 출력하기 -->
+													<div class="fiveStar">
+														<c:forEach begin="1" end="${tmp.star }">
+															<i class="starIcon fas fa-star"></i>
+														</c:forEach>
+														<c:forEach begin="1" end="${5-tmp.star }">
+															<i class="starIcon far fa-star"></i>
+														</c:forEach>
+													</div>
+													<p>${tmp.content }</p>
+													<!-- 버튼 클릭시 글 작성 가능한 사장님 답글 말풍선 생성-->
+													<button data-num="${tmp.groupNum }" href="javascript:" class="userReview">
+														<c:choose>
+															<c:when test="${tmp.reviewCheck == 'no' }">
+																<span class="user-review__reply">답글 작성</span>
+															</c:when>
+															<c:when test="${tmp.reviewCheck == 'yes' }">
+																<span class="user-review__reply">답글 보기</span>
+															</c:when>
+														</c:choose>
+													</button>
+												</div>
+												<div class="img__wrapper">
+													<img src="#" alt="" id="image_logo" name="logo"
+														class="image" />
+												</div>
+											</div>
+
 											<p>${tmp.content }</p>
 											<!-- 버튼 클릭시 글 작성 가능한 사장님 답글 말풍선 생성-->
 											<button data-num="${tmp.groupNum }" href="javascript:" class="userReview">
@@ -94,56 +118,87 @@
 										<div class="owner-review__text">
 												<strong>사장님</strong>
 											<textarea class="ownerComment" name="#" id=""></textarea>
+                      
 										</div>
-									</div>
-								</div>
-								<!-- 답글 작성 form -->
-								<div class="owner-review ownerReviewFormBox"
-									style="display: none;">
-									<div class="owner-review__body arrow_box-owner">
-										<form class="ownerReviewForm" action="${pageContext.request.contextPath}/store/addReview.do" method="post">
-											<div class="edit-btn">
-												<i class="fas fa-edit" style="display: none;"></i>
-												<button class="addReview">작성 완료</button>
-												<button class="addCancelBtn">취소</button>
+										<!-- 사장님 답글 -->
+										<div class="owner-review ownerReview"
+											style="display: none;">
+											<div class="owner-review__title">
+												<small class="ownerRegdate"></small>
 											</div>
-											<div class="owner-review__text">
-												<h5>
-													<strong>사장님</strong>
-												</h5>
-												<input type="hidden" name="num" value="${tmp.num }"/>
-												<input type="hidden" name="storeNum" value="${tmp.storeNum }" />
-                    							<input type="hidden" name="orderNum" value="${tmp.orderNum }" />
-												<textarea class="ownerAddComment" name="content" placeholder="답글을 입력해 주세요 :)"></textarea>
+											<div class="owner-review__body arrow_box-owner">
+												<div class="edit-btn">
+													<i class="fas fa-edit" style="display: none;"></i>
+													<c:choose>
+														<c:when test="${tmp.reviewCheck == 'no'}">
+															<button class="addBtn">댓글 작성</button>
+															<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="updateBtn"style="display:none">댓글 수정</button>
+															<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="deleteBtn" style="display:none">댓글 삭제</button>
+														</c:when>
+														<c:when test="${tmp.reviewCheck == 'yes'}">
+															<button class="addBtn" style="display:none">댓글 작성</button>
+															<button data-num="${tmp.num }" class="updateBtn">댓글 수정</button>
+															<button data-num="${tmp.num }" class="deleteBtn">댓글 삭제</button>
+														</c:when>
+													</c:choose>	
+												</div>
+												<div class="owner-review__text">
+													<h5>
+														<strong>사장님</strong>
+													</h5>
+													<p class="ownerComment" name="#" id=""></p>
+												</div>
 											</div>
-										</form>
-									</div>
-								</div>
-								<!-- 답글 수정 form -->
-								<div class="owner-review ownerReviewUpdateFormBox"
-									style="display: none;">
-									<div class="owner-review__body arrow_box-owner">
-										<form class="ownerReviewUpdateForm" action="${pageContext.request.contextPath}/store/updateReview.do" method="post">
-											<div class="edit-btn">
-												<i class="fas fa-edit" style="display: none;"></i>
-												<button class="updateReview">수정 완료</button>
-												<button class="updateCancelBtn">취소</button>
+										</div>
+										<!-- 답글 작성 form -->
+										<div class="owner-review ownerReviewFormBox"
+											style="display: none;">
+											<div class="owner-review__body arrow_box-owner">
+												<form class="ownerReviewForm" action="${pageContext.request.contextPath}/store/addReview.do" method="post">
+													<div class="edit-btn">
+														<i class="fas fa-edit" style="display: none;"></i>
+														<button class="addReview">작성 완료</button>
+														<button class="addCancelBtn">취소</button>
+													</div>
+													<div class="owner-review__text">
+														<h5>
+															<strong>사장님</strong>
+														</h5>
+														<input type="hidden" name="num" value="${tmp.num }"/>
+														<input type="hidden" name="storeNum" value="${tmp.storeNum }" />
+		                    							<input type="hidden" name="orderNum" value="${tmp.orderNum }" />
+														<textarea class="ownerAddComment" name="content" placeholder="답글을 입력해 주세요 :)"></textarea>
+													</div>
+												</form>
 											</div>
-											<div class="owner-review__text">
-												<h5>
-													<strong>사장님</strong>
-												</h5>
-												<input type="hidden" name="num" value="${tmp.num }"/>
-												<input type="hidden" name="storeNum" value="${tmp.storeNum }" />
-                    							<input type="hidden" name="orderNum" value="${tmp.orderNum }" />
-												<textarea class="ownerUpdateComment" name="content" placeholder="답글을 입력해 주세요 :)"></textarea>
+										</div>
+										<!-- 답글 수정 form -->
+										<div class="owner-review ownerReviewUpdateFormBox"
+											style="display: none;">
+											<div class="owner-review__body arrow_box-owner">
+												<form class="ownerReviewUpdateForm" action="${pageContext.request.contextPath}/store/updateReview.do" method="post">
+													<div class="edit-btn">
+														<i class="fas fa-edit" style="display: none;"></i>
+														<button class="updateReview">수정 완료</button>
+														<button class="updateCancelBtn">취소</button>
+													</div>
+													<div class="owner-review__text">
+														<h5>
+															<strong>사장님</strong>
+														</h5>
+														<input type="hidden" name="num" value="${tmp.num }"/>
+														<input type="hidden" name="storeNum" value="${tmp.storeNum }" />
+		                    							<input type="hidden" name="orderNum" value="${tmp.orderNum }" />
+														<textarea class="ownerUpdateComment" name="content" placeholder="답글을 입력해 주세요 :)"></textarea>
+													</div>
+												</form>
 											</div>
-										</form>
-									</div>
-								</div>
-							</c:when>
-						</c:choose>
-					</c:forEach>
+										</div>
+									</c:when>
+								</c:choose>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 		</div>

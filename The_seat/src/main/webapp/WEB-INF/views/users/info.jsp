@@ -136,12 +136,28 @@ type="text/css" />
 					  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
 		                   <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
 		              </svg>
+		              <c:choose>
+		              	<c:when test="${tmp.avgStar == 0 }">
+		              		<span data-num2="${tmp.orderNum }" class="avgStar">아직 별점이 없습니다.</span>
+		              	</c:when>
+		              	<c:otherwise>
+		              		<span data-num2="${tmp.orderNum }" class="avgStar">${tmp.avgStar }</span>
+		              	</c:otherwise>
+		              </c:choose>
 		          </span> 
 				  <!-- 내가 준 평점 -->
 				  <span> / 내가 준 평점:
 					  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
 		                  	<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
 		              </svg>
+		              <c:choose>
+		              	<c:when test="${tmp.myStar == 0 }">
+		              		<span data-num2="${tmp.orderNum }" class="myStar">리뷰를 작성해서 별점을 주세요</span>
+		              	</c:when>
+		              	<c:otherwise>
+		              		<span data-num2="${tmp.orderNum }" class="myStar">${tmp.myStar }</span>
+		              	</c:otherwise>
+		              </c:choose>
 		          </span>
 		   		  </div>
 		   		  <div>
@@ -295,9 +311,9 @@ type="text/css" />
 	                style="width: 150px; height: 150px; "/>
 	            </a>
                 <form data-num2="" id="reviewAddForm" action="${pageContext.request.contextPath}/store/addReview.do" method="post" enctype="multipart/form-data">                 
-                    <select name="star">
+                    <select id="insertStarSelect" name="star">
                     	<c:forEach var="tmp" items="1,2,3,4,5">
-                    		<option name="starOption" value="${tmp }">${tmp }</option>
+                    		<option class="insertStar" name="starOption" value="${tmp }">${tmp }</option>
                     	</c:forEach>
                     </select>
                     <input id="inputImg" name="imageFile" type="file" style="display:none;"/>
@@ -326,7 +342,7 @@ type="text/css" />
 	                style="width: 150px; height: 150px; "/>
 	            </a>
                 <form id="reviewUpdateForm" action="${pageContext.request.contextPath}/store/updateReview.do" method="post" enctype="multipart/form-data">                 
-                    <select name="star">
+                    <select id="updateStarSelect" name="star">
                     	<c:forEach var="tmp" items="1,2,3,4,5">
                     		<option class="updateStar" name="starOption" value="${tmp }">${tmp }</option>
                     	</c:forEach>
@@ -666,6 +682,9 @@ type="text/css" />
 					alert("리뷰를 등록하였습니다.");
 					document.querySelector("button.reviewBtn[data-num2=\'"+num+"\']").style.display="none";
 					document.querySelector("button.reviewUpdateBtn[data-num2=\'"+num+"\']").style.display="block";
+					let newMyStar=document.querySelector("#insertStarSelect").value;
+					document.querySelector("span.myStar[data-num2=\'"+num+"\']").innerText=newMyStar;
+					document.querySelector("span.avgStar[data-num2=\'"+num+"\']").innerText=data.newAvgStar;
 				}
 			});
 		});
@@ -696,71 +715,75 @@ type="text/css" />
 				if(data.beTaken){
 					let reviewList=data.reviewList;
 					console.log(reviewList);
-					for(let j=0; j<reviewList.length; j++){
-						console.log(j);
-						if(reviewList[j].targetNum==0){
-							let path="${pageContext.request.contextPath}"+reviewList[j].imagePath;
-							let star=reviewList[j].star;
-							let starTest=``;
-							for(let i=0; i<star; i++){
-								starTest=starTest+`<i class="starIcon fas fa-star"></i>`;
-							}
-							for(let i=0; i<5-star; i++){
-								starTest=starTest+`<i class="starIcon far fa-star"></i>`;
-							}
-							let ownerComment="";
-							if(reviewList[j+1]==null || reviewList[j+1].targetNum==0){
-								ownerComment="사장님의 댓글이 아직 없습니다.";
-							} else if(reviewList[j+1]!=null && reviewList[j+1].targetNum!=0){
-								ownerComment=reviewList[j+1].content;
-							}
-							let testPrime=
-								`
-									<div class="user-review">
-										<div class="user-review__title">
-											<p>
-												<strong>`+reviewList[j].writer+`</strong>
-											</p>
-											<small>`+reviewList[j].regdate+`</small>
-										</div>
-										<div class="user-review__body arrow_box-user">
-											<div class="user-review__text">
-												<!-- 별점이랑 리뷰내용 출력하기 -->
-												<div class="fiveStar">
-													`+starTest+`
+					if(reviewList.length==0){
+						test=`<p>아직 작성된 리뷰가 없습니다.</p>`
+					} else {
+						for(let j=0; j<reviewList.length; j++){
+							console.log(j);
+							if(reviewList[j].targetNum==0){
+								let path="${pageContext.request.contextPath}"+reviewList[j].imagePath;
+								let star=reviewList[j].star;
+								let starTest=``;
+								for(let i=0; i<star; i++){
+									starTest=starTest+`<i class="starIcon fas fa-star"></i>`;
+								}
+								for(let i=0; i<5-star; i++){
+									starTest=starTest+`<i class="starIcon far fa-star"></i>`;
+								}
+								let ownerComment="";
+								if(reviewList[j+1]==null || reviewList[j+1].targetNum==0){
+									ownerComment="사장님의 댓글이 아직 없습니다.";
+								} else if(reviewList[j+1]!=null && reviewList[j+1].targetNum!=0){
+									ownerComment=reviewList[j+1].content;
+								}
+								let testPrime=
+									`
+										<div class="user-review">
+											<div class="user-review__title">
+												<p>
+													<strong>`+reviewList[j].writer+`</strong>
+												</p>
+												<small>`+reviewList[j].regdate+`</small>
+											</div>
+											<div class="user-review__body arrow_box-user">
+												<div class="user-review__text">
+													<!-- 별점이랑 리뷰내용 출력하기 -->
+													<div class="fiveStar">
+														`+starTest+`
+													</div>
+													<p>`+reviewList[j].content+`</p>
+													<!-- 버튼 클릭시 글 작성 가능한 사장님 답글 말풍선 생성-->
+													<button data-num="${tmp.groupNum }" href="javascript:" class="userReview">
+														<span class="user-review__reply">답글 보기</span>
+													</button>
 												</div>
-												<p>`+reviewList[j].content+`</p>
-												<!-- 버튼 클릭시 글 작성 가능한 사장님 답글 말풍선 생성-->
-												<button data-num="${tmp.groupNum }" href="javascript:" class="userReview">
-													<span class="user-review__reply">답글 보기</span>
-												</button>
-											</div>
-											<div class="img__wrapper">
-												<img src=`+path+` alt="" id="image_logo" name="logo"
-													class="image" />
+												<div class="img__wrapper">
+													<img src=`+path+` alt="" id="image_logo" name="logo"
+														class="image" />
+												</div>
 											</div>
 										</div>
-									</div>
-									<!-- 사장님 답글 -->
-									<div class="owner-review ownerReview"
-										style="display: none;">
-										<div class="owner-review__title">
-											<small class="ownerRegdate"></small>
-										</div>
-										<div class="owner-review__body arrow_box-owner">
-											<div class="edit-btn">
-												<i class="fas fa-edit" style="display: none;"></i>
+										<!-- 사장님 답글 -->
+										<div class="owner-review ownerReview"
+											style="display: none;">
+											<div class="owner-review__title">
+												<small class="ownerRegdate"></small>
 											</div>
-											<div class="owner-review__text">
-												<h5>
-													<strong>사장님</strong>
-												</h5>
-												<p class="ownerComment" name="#" id="">`+ownerComment+`</p>
+											<div class="owner-review__body arrow_box-owner">
+												<div class="edit-btn">
+													<i class="fas fa-edit" style="display: none;"></i>
+												</div>
+												<div class="owner-review__text">
+													<h5>
+														<strong>사장님</strong>
+													</h5>
+													<p class="ownerComment" name="#" id="">`+ownerComment+`</p>
+												</div>
 											</div>
 										</div>
-									</div>
-								`;
-							test=test+testPrime;
+									`;
+								test=test+testPrime;
+							}
 						}
 					}
 					document.querySelector("#reviewBox").innerHTML=test;
@@ -786,6 +809,7 @@ type="text/css" />
 	
 	// 리뷰 수정 버튼을 눌렀을 때 동작하는 부분
 	let reviewUpdateBtns=document.querySelectorAll(".reviewUpdateBtn");
+	let myStars=document.querySelectorAll(".myStar");
 	for(let i=0; i<reviewUpdateBtns.length; i++){
 		reviewUpdateBtns[i].addEventListener("click", function(e){
 			e.preventDefault();
@@ -838,8 +862,11 @@ type="text/css" />
 			}).then(function(data){
 				console.log(data);
 				if(data.beUpdated){
-					document.하querySelector("#updateCloseBtn").click();
+					document.querySelector("#updateCloseBtn").click();
 					alert("리뷰를 수정하였습니다.");
+					let newMyStar=document.querySelector("#updateStarSelect").value;
+					document.querySelector("span.myStar[data-num2=\'"+num+"\']").innerText=newMyStar;
+					document.querySelector("span.avgStar[data-num2=\'"+num+"\']").innerText=data.newAvgStar;
 				}
 			});
 		});
@@ -865,6 +892,12 @@ type="text/css" />
 					document.querySelector("#updateCloseBtn").click();
 					document.querySelector("button.reviewBtn[data-num2=\'"+orderNum+"\']").style.display="block";
 					document.querySelector("button.reviewUpdateBtn[data-num2=\'"+orderNum+"\']").style.display="none";
+					document.querySelector("span.myStar[data-num2=\'"+orderNum+"\']").innerText="리뷰를 작성해서 별점을 주세요.";
+					if(data.newAvgNum==0){
+						document.querySelector("span.avgStar[data-num2=\'"+orderNum+"\']").innerText="아직 별점이 없습니다.";
+					} else {
+						document.querySelector("span.avgStar[data-num2=\'"+orderNum+"\']").innerText=data.newAvgStar;
+					}
 				}			
 			});	
 		}

@@ -65,4 +65,25 @@
 		from storeReview
 		where targetNum=#{num}
 	</select>
+	
+	<!-- 해당 DB 번호로 되어있는 매장에 대한 평균 별점을 얻어내는 method -->
+	<select id="getAvgStar" parameterType="reviewDto" resultType="float">
+		select nvl(avg(star),0)
+		from storeReview
+		where storeNum=#{storeNum} and star!=0
+	</select>
+	
+	<!-- 해당 DB 번호로 되어있는 매장의 총 리뷰 수를 얻어내는 method -->
+	<select id="getTotalReviewCount" parameterType="reviewDto" resultType="int">
+		select nvl(max(rownum),0)
+		from storeReview
+		where storeNum=#{storeNum} and targetNum='0'
+	</select>
+	
+	<!-- 해당 orderNum에 준 내 별점 정보를 얻어내는 method -->
+	<select id="getMyStar" parameterType="reviewDto" resultType="int">
+		select nvl(star,0)
+		from storeReview
+		where orderNum=#{orderNum} and targetNum='0'
+	</select>
 </mapper>
