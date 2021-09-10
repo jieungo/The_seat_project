@@ -49,6 +49,7 @@ public class ReviewServiceImpl implements ReviewService{
 			String saveFileName=System.currentTimeMillis()+orgFileName;
 			System.out.println(orgFileName);
 			System.out.println(saveFileName);
+			dto.setImagePath("/upload/"+saveFileName);
 			try {
 				//upload 폴더에 파일을 저장한다.
 				reviewImage.transferTo(new File(filePath+saveFileName));
@@ -56,7 +57,6 @@ public class ReviewServiceImpl implements ReviewService{
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
-			dto.setImagePath("/upload/"+saveFileName);
 		} else {
 			dto.setImagePath("null");
 		}
@@ -178,6 +178,7 @@ public class ReviewServiceImpl implements ReviewService{
 			String saveFileName=System.currentTimeMillis()+orgFileName;
 			System.out.println(orgFileName);
 			System.out.println(saveFileName);
+			dto.setImagePath("/upload/"+saveFileName);
 			try {
 				//upload 폴더에 파일을 저장한다.
 				reviewImage.transferTo(new File(filePath+saveFileName));
@@ -185,8 +186,6 @@ public class ReviewServiceImpl implements ReviewService{
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
-		
-			dto.setImagePath("/upload/"+saveFileName);
 		} else {
 			dto.setImagePath("null");
 		}

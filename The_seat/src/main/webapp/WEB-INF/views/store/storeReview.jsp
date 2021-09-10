@@ -69,56 +69,10 @@
 													</button>
 												</div>
 												<div class="img__wrapper">
-													<img src="#" alt="" id="image_logo" name="logo"
+													<img src="${pageContext.request.contextPath}${tmp.imagePath}" alt="" id="image_logo" name="logo"
 														class="image" />
 												</div>
 											</div>
-
-											<p>${tmp.content }</p>
-											<!-- 버튼 클릭시 글 작성 가능한 사장님 답글 말풍선 생성-->
-											<button data-num="${tmp.groupNum }" href="javascript:" class="userReview">
-												<c:choose>
-													<c:when test="${tmp.reviewCheck == 'no' }">
-														<span class="user-review__reply">답글 작성</span>
-													</c:when>
-													<c:when test="${tmp.reviewCheck == 'yes' }">
-														<span class="user-review__reply">답글 보기</span>
-													</c:when>
-												</c:choose>
-											</button>
-										</div>
-										<div class="img__wrapper">
-											<img src="#" alt="" id="image_logo" name="logo"
-												class="image" />
-										</div>
-									</div>
-								</div>
-								<!-- 사장님 답글 -->
-								<div class="owner-review ownerReview"
-									style="display: none;">
-									<div class="owner-review__title">
-										<small class="ownerRegdate"></small>
-									</div>
-									<div class="owner-review__body arrow_box-owner">
-										<div class="edit-btn">
-											<i class="fas fa-edit" style="display: none;"></i>
-											<c:choose>
-												<c:when test="${tmp.reviewCheck == 'no'}">
-													<button class="addBtn">댓글 작성</button>
-													<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="updateBtn"style="display:none">댓글 수정</button>
-													<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="deleteBtn" style="display:none">댓글 삭제</button>
-												</c:when>
-												<c:when test="${tmp.reviewCheck == 'yes'}">
-													<button class="addBtn" style="display:none">댓글 작성</button>
-													<button data-num="${tmp.num }" class="updateBtn">수정</button>
-													<button data-num="${tmp.num }" class="deleteBtn">삭제</button>
-												</c:when>
-											</c:choose>	
-										</div>
-										<div class="owner-review__text">
-												<strong>사장님</strong>
-											<textarea class="ownerComment" name="#" id=""></textarea>
-                      
 										</div>
 										<!-- 사장님 답글 -->
 										<div class="owner-review ownerReview"
@@ -132,20 +86,18 @@
 													<c:choose>
 														<c:when test="${tmp.reviewCheck == 'no'}">
 															<button class="addBtn">댓글 작성</button>
-															<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="updateBtn"style="display:none">댓글 수정</button>
-															<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="deleteBtn" style="display:none">댓글 삭제</button>
+															<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="updateBtn"style="display:none">수정</button>
+															<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="deleteBtn" style="display:none">삭제</button>
 														</c:when>
 														<c:when test="${tmp.reviewCheck == 'yes'}">
 															<button class="addBtn" style="display:none">댓글 작성</button>
-															<button data-num="${tmp.num }" class="updateBtn">댓글 수정</button>
-															<button data-num="${tmp.num }" class="deleteBtn">댓글 삭제</button>
+															<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="updateBtn">수정</button>
+															<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="deleteBtn">삭제</button>
 														</c:when>
 													</c:choose>	
 												</div>
 												<div class="owner-review__text">
-													<h5>
-														<strong>사장님</strong>
-													</h5>
+													<strong>사장님</strong>
 													<p class="ownerComment" name="#" id=""></p>
 												</div>
 											</div>
@@ -211,68 +163,6 @@
         <button onclick="location.href='${pageContext.request.contextPath}/store/storeOrder.do?num=${num}'">주문 확인</button>
         <button onclick="location.href='${pageContext.request.contextPath}/store/storeSeat.do?num=${num}'">자리 관리</button>
     </aside>
-
-	<div class="modal" tabindex="-1" id="modal-menuAddForm"
-		aria-labelledby="menuAddForm" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title">
-						<strong>메뉴 등록</strong>
-					</h4>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<form id="menuAddForm"
-						action="${pageContext.request.contextPath}/store/addMenu.do"
-						method="post" enctype="multipart/form-data">
-						<img id="thumbImg" src="" alt="" /> <input type="hidden"
-							name="num" value="${storeDBNum }" /> <input
-							class="form-control" type="file" name="imageFile" id="image">
-						<input class="form-control" type="text" name="menuName"
-							id="menuname" placeholder="상품명" required="required"> <input
-							class="form-control" type="text" name="price" id="menuprice"
-							placeholder="상품가격"> <input class="form-control"
-							type="text" name="content" id="menucontaine" placeholder="상품구성"
-							required="required"> <span class="dropdown">카테고리
-							추가</span> <select name="category" id="">
-							<c:forEach var="tmp" items="${categoryList }">
-								<option value="${tmp }">${tmp }</option>
-							</c:forEach>
-						</select>
-						<button id="addBtn" type="submit">완료</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--------------------------------------- 카테고리 추가 모달창 ------------------------------>
-	<div class="modal" tabindex="-1" id="modal-categoryBtn"
-		aria-labelledby="menuAddForm" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title">
-						<strong>카테고리 추가</strong>
-					</h4>
-					<button id="modal-close" type="button" class="btn-close"
-						data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<form data-num="${dto.num }" id="addCategoryForm"
-						action="${pageContext.request.contextPath}/store/addCategory.do"
-						method="post">
-						<label class="form-label" for="category">추가할 카테고리 이름</label> <input
-							type="hidden" name="num" value="${storeDBNum}" /> <input
-							class="form-control" type="text" id="inputCategory"
-							name="category" />
-						<button id="addCategory" type="submit">완료</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
 </div>
 <script src="https://kit.fontawesome.com/2ebe86210e.js"
 	crossorigin="anonymous"></script>
@@ -336,7 +226,6 @@
 			}
 		});
 	}
-
 	for(let i=0; i<addBtns.length; i++){
 		// 댓글 작성 버튼을 눌렀을 때 동작하는 곳
 		addBtns[i].addEventListener("click", function(e){
