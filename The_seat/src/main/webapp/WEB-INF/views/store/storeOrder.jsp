@@ -21,12 +21,6 @@
     <!-------------------------- 주문내역 타이틀 및 날짜 검색 ---------------------------->
     <header class="store__order-header">
         <h4>주문 내역</h4>
-        <form action="#">
-            <input type="date">
-            <button class="search-btn" type="submit">
-                <i class="fas fa-search"></i>
-            </button>
-        </form>
     </header>
     <!------------------------------ 주문내역 텍스트 및 박스 --------------------------------------->
     <div class="box">

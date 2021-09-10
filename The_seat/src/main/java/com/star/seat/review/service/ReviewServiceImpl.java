@@ -190,6 +190,9 @@ public class ReviewServiceImpl implements ReviewService{
 			dto.setImagePath("null");
 		}
 		
+		String email=(String)request.getSession().getAttribute("email");
+		dto.setWriter(email);
+		
 		dao.updateReview(dto);
 		float newAvgStar=(float)(Math.round(dao.getAvgStar(dto)*100)/100.0);
 		

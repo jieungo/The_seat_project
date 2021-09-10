@@ -185,7 +185,6 @@ input:focus {
 	margin:20px;
 }
 
-
 #menuAddForm {
 	text-align: center;
 	margin-top: 20px;
@@ -296,6 +295,10 @@ input:focus {
 		align-items: center;
 		margin-top:50;
 	}
+	
+	.menu_container {
+		width: 90%;
+	}
 }
 
 		/* 모바일 가로, 세로 */
@@ -312,6 +315,7 @@ input:focus {
 		flex-direction: column;
 		text-overflow: hidden; 
    		overflow-x: auto;
+   		left:0;
 	}
 
 	.aside {
