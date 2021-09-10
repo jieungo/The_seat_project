@@ -192,7 +192,14 @@ type="text/css" />
 							</c:when>
 							<c:when test="${tmp.reviewExist == 'NO' }">
 								<button data-num="${tmp.num }" class="reviewListBtn circle-btn" data-bs-toggle="modal" data-bs-target="#modal-reviewList">리뷰 보기</button>
-								<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="reviewBtn circle-btn" data-bs-toggle="modal" data-bs-target="#reviewModal">리뷰 작성</button>
+								<c:choose>
+									<c:when test="${tmp.owner == 'yes' }">
+										<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="reviewBtn circle-btn" data-bs-toggle="modal" data-bs-target="#reviewModal" disabled>리뷰 작성</button>
+									</c:when>
+									<c:when test="${tmp.owner == 'no' }">
+										<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="reviewBtn circle-btn" data-bs-toggle="modal" data-bs-target="#reviewModal">리뷰 작성</button>
+									</c:when>
+								</c:choose>
 								<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="reviewUpdateBtn circle-btn" data-bs-toggle="modal" data-bs-target="#reviewUpdateModal" style="display:none">리뷰 수정</button>
 							</c:when>
 						</c:choose>	

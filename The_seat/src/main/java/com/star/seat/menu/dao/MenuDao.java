@@ -26,4 +26,7 @@ public interface MenuDao {
 	
 	// 해당 매장의 베스트 메뉴 수를 가져오는 method
 	public int bestCount(StoreDto dto);
+	
+	// 해당 매장의 메뉴 전체 정보를 삭제하는 method
+	public void deleteAllMenu(MenuDto dto);
 }
