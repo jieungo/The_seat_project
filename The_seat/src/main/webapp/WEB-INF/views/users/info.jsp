@@ -23,156 +23,10 @@ href="${pageContext.request.contextPath}/resources/css/info.css"
 type="text/css" />
 <!-- 타이틀 로고 -->
 <link rel="shortcut icon" type="image⁄x-icon" href="${pageContext.request.contextPath}/resources/img/summer.jpg">
-<style>
-	.arrow_box-user {
-		position: relative;
-		background: #ffffff;
-		border: 1px solid #c7c7c7;
-	}
-	
-	.arrow_box-user:after, 
-	.arrow_box-user:before {
-		right: 100%;
-		top: 50%;
-		border: solid 1px lightgray;
-		content: "";
-		height: 0;
-		width: 0;
-		position: absolute;
-		pointer-events: none;
-	}
-	
-	.arrow_box-user:after {
-		border-color: rgba(255, 255, 255, 0);
-		border-right-color: #ffffff;
-		border-width: 30px;
-		margin-top: -30px;
-	}
-	
-	.arrow_box-user:before {
-		border-color: rgba(199, 199, 199, 0);
-		border-right-color: #c7c7c7;
-		border-width: 31px;
-		margin-top: -31px;
-	}
-	
-	.arrow_box-owner {
-		position: relative;
-		background: #d4d4d4;
-	}
-	
-	.arrow_box-owner:after {
-		left: 100%;
-		top: 50%;
-		border: solid transparent;
-		content: "";
-		height: 0;
-		width: 0;
-		position: absolute;
-		pointer-events: none;
-		border-color: rgba(212, 212, 212, 0);
-		border-left-color: #d4d4d4;
-		border-width: 30px;
-		margin-top: -30px;
-	}
-	
-	* {
-	box-sizing: border-box;
-}
-
-/* 버튼 기본 스타일링 */
-button {
-	outline: none;
-	border: none;
-	background-color: transparent;
-}
-
-::-webkit-scrollbar {
-	display: none;
-}
-
-ul {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-}
-
-li {
-	list-style: none;
-	padding-left: 0;
-}
-
-.container {
-	margin-top: 30px;
-}
-
-.my-page__header {
-	display: flex;
-	justify-content: space-evenly;
-	align-items: flex-end;
-}
-
-.my-page__profile {
-	display: flex;
-	align-items: center;
-}
-
-.divide-line {
-	width: 100%;
-	height: 1px;
-	background-color: lightgray;
-	margin: 20px 0;
-}
-
-.my-page__order {
-	border: 1px solid lightgray;
-}
-
-.circle-btn {
-	width: 80px;
-	height: 80px;
-	border: 1px solid lightgray;
-	border-radius: 100%;
-	margin: 10px 15px;
-}
-
-.circle-btn__wrapper {
-	display: flex;
-	justify-content: center;
-}
-
-.card {
-	padding: 10px;
-}
-
-.bi-star-fill {
-	color: #ffce31;
-}
-
-.card-head p,
-.orderDetailBtn {
-	font-size: 14px;
-	color: gray;
-}
-
-.amount-wrapper {
-	display:flex;
-	margin-bottom: 10px;
-	font-size: 14px;
-	color: gray;
-}
-
-.card-body {
-	display: flex;
-	flex-direction: column;
-}
-
-</style>
 </head>
 <body style="margin-top:150px;">
 <jsp:include page="/WEB-INF/views/nav/navbar.jsp" />
 <div class="container">
-	
 <!--------------------- 마이페이지 상단 프로필 -------------------------->
 	<header>
 		<div class="my-page__profile mt-2 mb-2">
@@ -310,8 +164,8 @@ li {
 <!------------모달창------------------프로필 편집------------------------------------->
 
 <div class="modal animate__animated animate__bounce animate__fadeInDown" tabindex="-1" id="modal-updateForm" aria-labelledby="updateForm" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
+	<div class="modal-dialog" style="text-align: center;">
+		<div class="modal-content" style="width: 80%">
 			<div class="modal-header">
 				<h4 class="modal-title">
 					<strong>프로필 편집</strong>
@@ -325,20 +179,25 @@ li {
 				<a id="profileLink" href="javascript:" >
 					<c:choose>
 						<c:when test="${dto.profile eq 'profile'}">
-							<svg id="profileImage" xmlns="http://www.w3.org/2000/svg" style="width:100px; border-radius: 100%;" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-								  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-								  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-							</svg>
+							<div class="profileImage-wrapper">
+								<svg id="profileImage" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+									  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+									  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+								</svg>
+								<label for="image">클릭해서 이미지 변경!</label>
+							</div>
 						</c:when>
 						<c:otherwise>
-							<img id="profileImage" style="width:100px; height:100px; border-radius: 100%;" src="${pageContext.request.contextPath}${dto.profile}" />
+							<div class="profileImage-wrapper">
+								<img id="profileImage" src="${pageContext.request.contextPath}${dto.profile}" />
+								<label for="image">클릭해서 이미지 변경!</label>						
+							</div>
 						</c:otherwise>
 					</c:choose>
 				</a>
 				<!-- 정보 변경 -->
 				<form id="updateForm" action="${pageContext.request.contextPath}/users/update.do" method="post" class="needs-validation">
 					<div>
-						<label for="image">클릭해서 이미지 변경!</label>
 			         	<input type="hidden" name="profile" 
 								value="${dto.profile eq 'profile' ? 'profile' : dto.profile}"/>
 					</div>
@@ -360,7 +219,7 @@ li {
 							name="tag" id="tag"
 							value=" ${dto.tag}" required="required">
 					</div>
-					<div style="display: flex; justify-content:flex-end;">
+					<div class="profileSubmitBtn">
 						<button type="submit">정보 수정</button>
 					</div>
 				</form>
@@ -381,7 +240,7 @@ li {
 							placeholder="새 비밀번호 재입력" required="required">
 						<div class="invalid-feedback">비밀번호를 확인 하세요.</div>
 					</div>
-					<div style="display: flex; justify-content:flex-end;">
+					<div class="profileDeleteBtn">
 						<button type="submit">비밀번호 변경</button>
 					</div>
 				</form>
@@ -428,29 +287,32 @@ li {
     
 <!--------------------------- 리뷰 수정 modal --------------------------------------->
 <div class="modal" tabindex="-1" id="reviewUpdateModal" aria-labelledby="menuAddForm" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
+    <div class="modal-dialog" style="display:flex; justify-content:center;">
+        <div class="modal-content" style="width:80%;">
             <div class="modal-header">
-                <h4 class="modal-title"><strong>리뷰 수정</strong> </h4>
+                <h4 class="modal-title"><strong>리뷰 수정</strong></h4>
                 <button data-num="" data-num2="" id="reviewDeleteBtn">리뷰 삭제</button>
-                <button id="updateCloseBtn" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style=" display:flex; flex-direction:column; align-items: center; justify-content: center;">
             	<a id="updateImgLink" href="javascript:">
-	                <img src="#" alt="" id="updateImg" name="review" class="image mt-3"
+	                <img src="#" alt="" id="updateImg" name="review" class="image mb-3"
 	                style="width: 150px; height: 150px; "/>
 	            </a>
-                <form id="reviewUpdateForm" action="${pageContext.request.contextPath}/store/updateReview.do" method="post" enctype="multipart/form-data">                 
+                <form id="reviewUpdateForm" style="display:flex; flex-direction:column;" action="${pageContext.request.contextPath}/store/updateReview.do" method="post" enctype="multipart/form-data">                 
                     <select id="updateStarSelect" name="star">
                     	<c:forEach var="tmp" items="1,2,3,4,5">
-                    		<option class="updateStar" name="starOption" value="${tmp }">${tmp }</option>
+                    		<option class="updateStar" name="starOption" value="${tmp }">
+                    			<c:forEach begin="1" end="${tmp }">
+                    				⭐
+                    			</c:forEach>
+                    		</option>
                     	</c:forEach>
                     </select>
                     <input id="inputUpdateImg" name="imageFile" type="file" style="display:none;"/>
                     <input type="hidden" name="storeNum" id="updateNum" value="" />
                     <input type="hidden" name="orderNum" id="updateOrderNum" value="" />
-                    <textarea name="content" id="updateContent" cols="30" rows="10"></textarea>
-                    <button id="updateBtn" type="submit">수정 완료</button>
+                    <textarea name="content" id="updateContent" cols="30" rows="5" style="resize:none;"></textarea>
+                    <button id="updateBtn" type="submit" class="reviewSubmitBtn">수정 완료</button>
                 </form>
             </div>
         </div>
@@ -520,7 +382,10 @@ li {
 		})
 		.then(function(data){
 			// 클릭하는 자리에 이미지 넣어주기
-			let img=`<img id="profileImage" style="width:100px; border-radius: 100%;" src="${pageContext.request.contextPath}\${data.imagePath}"/>`;
+			let img=`<div class="profileImage-wrapper">
+						<img id="profileImage" src="${pageContext.request.contextPath}\${data.imagePath}"/>
+						<span>변경될 프로필 이미지</span>
+						</div>`;
 			
 			document.querySelector("#profileLink").innerHTML=img;
 			// input name="profile" 요소의 value 값으로 이미지 경로 넣어주기
@@ -841,15 +706,19 @@ li {
 									`
 										<div class="user-review">
 											<div class="user-review__title">
-												<p>
+												<p class="mb-0">
 													<strong>`+reviewList[j].writer+`</strong>
 												</p>
 												<small>`+reviewList[j].regdate+`</small>
 											</div>
 											<div class="user-review__body arrow_box-user">
 												<div class="user-review__text">
+													<div class="img__wrapper">
+														<img src=`+path+` alt="" id="image_logo" name="logo"
+													class="image" />
+													</div>
 													<!-- 별점이랑 리뷰내용 출력하기 -->
-													<div class="fiveStar">
+													<div class="fiveStar mt-2 mb-2">
 														`+starTest+`
 													</div>
 													<p>`+reviewList[j].content+`</p>
@@ -857,10 +726,6 @@ li {
 													<button data-num="${tmp.groupNum }" href="javascript:" class="userReview">
 														<span class="user-review__reply">답글 보기</span>
 													</button>
-												</div>
-												<div class="img__wrapper">
-													<img src=`+path+` alt="" id="image_logo" name="logo"
-														class="image" />
 												</div>
 											</div>
 										</div>
