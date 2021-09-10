@@ -133,25 +133,46 @@ type="text/css" />
 			        <div class="circle-btn__wrapper">
 					<!-- 리뷰작성 Btn -->
 					<!-- 리뷰보기 Btn -->
-						<c:choose>
-							<c:when test="${tmp.reviewExist == 'YES' }">
-								<button data-num="${tmp.num }" class="reviewListBtn circle-btn" data-bs-toggle="modal" data-bs-target="#modal-reviewList">리뷰 보기</button>
-								<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="reviewBtn circle-btn" data-bs-toggle="modal" data-bs-target="#reviewModal" style="display:none">리뷰 작성</button>
-								<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="reviewUpdateBtn circle-btn" data-bs-toggle="modal" data-bs-target="#reviewUpdateModal">리뷰 수정</button>
-							</c:when>
-							<c:when test="${tmp.reviewExist == 'NO' }">
-								<button data-num="${tmp.num }" class="reviewListBtn circle-btn" data-bs-toggle="modal" data-bs-target="#modal-reviewList">리뷰 보기</button>
-								<c:choose>
-									<c:when test="${tmp.owner == 'yes' }">
-										<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="reviewBtn circle-btn" data-bs-toggle="modal" data-bs-target="#reviewModal" disabled>리뷰 작성</button>
-									</c:when>
-									<c:when test="${tmp.owner == 'no' }">
-										<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="reviewBtn circle-btn" data-bs-toggle="modal" data-bs-target="#reviewModal">리뷰 작성</button>
-									</c:when>
-								</c:choose>
-								<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="reviewUpdateBtn circle-btn" data-bs-toggle="modal" data-bs-target="#reviewUpdateModal" style="display:none">리뷰 수정</button>
-							</c:when>
-						</c:choose>	
+					<c:choose>
+						<c:when test="${tmp.cancel == 'CONFIRM' }">
+							<button data-num="${tmp.orderNum }" class="cancelConfirmOn circle-btn" disabled>주문 취소 완료</button>
+						</c:when>
+						<c:when test="${tmp.confirm == 'NO' }">
+							<c:choose>
+								<c:when test="${tmp.cancel == 'YES' }">
+									<button data-num="${tmp.orderNum }" class="cancelIngBtn circle-btn" disabled>주문 취소 중..</button>
+								</c:when>
+								<c:when test="${tmp.cancel == 'NO' }">
+									<button data-num="${tmp.orderNum }" class="cancelBtn circle-btn" >주문 취소</button>
+									<button data-num="${tmp.orderNum }" class="cancelIngBtn circle-btn" style="display:none">주문 취소 중..</button>
+									<button data-num="${tmp.orderNum }" class="cancelConfirmBtn circle-btn" disabled>주문 확인 중..</button>
+								</c:when>
+							</c:choose>
+							
+						</c:when>
+						<c:when test="${tmp.confirm == 'YES' }">
+							<c:choose>
+								<c:when test="${tmp.reviewExist == 'YES' }">
+									<button data-num="${tmp.num }" class="reviewListBtn circle-btn" data-bs-toggle="modal" data-bs-target="#modal-reviewList">리뷰 보기</button>
+									<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="reviewBtn circle-btn" data-bs-toggle="modal" data-bs-target="#reviewModal" style="display:none">리뷰 작성</button>
+									<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="reviewUpdateBtn circle-btn" data-bs-toggle="modal" data-bs-target="#reviewUpdateModal">리뷰 수정</button>
+								</c:when>
+								<c:when test="${tmp.reviewExist == 'NO' }">
+									<button data-num="${tmp.num }" class="reviewListBtn circle-btn" data-bs-toggle="modal" data-bs-target="#modal-reviewList">리뷰 보기</button>
+									<c:choose>
+										<c:when test="${tmp.owner == 'yes' }">
+											<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="reviewBtn circle-btn" data-bs-toggle="modal" data-bs-target="#reviewModal" disabled>리뷰 작성</button>
+										</c:when>
+										<c:when test="${tmp.owner == 'no' }">
+											<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="reviewBtn circle-btn" data-bs-toggle="modal" data-bs-target="#reviewModal">리뷰 작성</button>
+										</c:when>
+									</c:choose>
+									<button data-num="${tmp.num }" data-num2="${tmp.orderNum }" class="reviewUpdateBtn circle-btn" data-bs-toggle="modal" data-bs-target="#reviewUpdateModal" style="display:none">리뷰 수정</button>
+								</c:when>
+							</c:choose>
+						</c:when>
+					</c:choose>
+							
 					</div>
 				  </div>
 				</div>
@@ -868,6 +889,27 @@ type="text/css" />
 			});	
 		}
 	});
+	
+	//주문 취소버튼 눌렀을 때 주문 정보 취소로 변경
+	let cancel = document.querySelectorAll(".cancelBtn");
+	let cancelIng = document.querySelectorAll(".cancelIngBtn");
+	let cancelConfirm = document.querySelectorAll(".cancelConfirmBtn");
+	for(let i=0; i<cancel.length; i++){
+		cancel[i].addEventListener("click",function(){
+			let orderNum = this.getAttribute("data-num");
+			ajaxPromise("${pageContext.request.contextPath}/order/updateState.do","post","orderNum="+orderNum+"&confirm=NO"+"&cancel=YES")
+			.then(function(response){
+				return response.json();
+			})
+			.then(function(data){
+				if(data.isSuccess == true){
+					cancel[i].style.display="none";
+					cancelIng[i].style.display="block";
+					cancelConfirm[i].style.display="none";
+				}
+			})
+		});
+	}
 </script>
 </body>
 </html>
