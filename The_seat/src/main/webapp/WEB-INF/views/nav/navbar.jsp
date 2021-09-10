@@ -103,9 +103,11 @@
 .offcanvas {
 	transform: translateX(100%);
 	transition: transform 0.5s ease-out;
+	background-color: rgb(71, 71, 71);
 }
 
 .offcanvas h5 {
+	color: #fff;
 	margin-top: 20px;
 	display: inline-block;
 	width: 100%;
@@ -113,42 +115,146 @@
 	text-align: center;
 }
 
-.offcanvas ul {
-	margin-top: 10px;
-}
-
-.offcanvas ul li {
-	list-style: none;
-	display: inline-block;
-	width: 100%;
-	height: 50px;
-	text-align: center;
-	box-sizing: border-box;
-	margin-top: 10px;
-	padding: 0 20px;
-	/*box-shadow: 1px 1px 11px rgba(172, 172, 172, 0.699);*/
-}
-
-.offcanvas ul li:hover {
-	background-color: rgba(0, 0, 0, 0.08);
-}
-
-.offcanvas ul li a {
-	display: inline-block;
-	width: 100%;
-	height: 50px;
-	line-height: 50px;
-	color: rgb(88, 143, 252);
-	font-size: 20px;
+.offcanvas a {
 	text-decoration: none;
+	font-size: 25px;
+	font-weight: 500;
+	color: #fff;
+	display: block;
+	transition: 0.3s ease-in-out;
+	display: inline-block;
 }
 
-.store_list{
+.offcanvas .a1:hover {
+	font-weight: 500;
+	transform: scale(1.3);
+	-webkit-transform: scale(1.3);
+	font-weight: 500;
+}
+
+#dropdownMenuLink:hover {
+	color: rgb(161, 208, 252);
+	font-weight: 500;
+}
+
+.offcanvas ul .li_ {
+	list-style: none;
+	text-align: center;
+	box-shadow: 1px 1px 15px #fff;
+}
+
+.list_:hover {
+	transform: scale(1.3);
+	-webkit-transform: scale(1.3);
+}
+
+#logoutBtn {
+	margin: auto;
+	width: 300px;
+	height: 45px;
+	color: #fff;
+	border-radius: 5px;
+	padding: 10px 25px;
+	font-size: 25px;
+	font-weight: 500;
+	background: transparent;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	position: relative;
+	display: inline-block;
+	box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5), 7px 7px 20px
+		0px rgba(0, 0, 0, .1), 4px 4px 5px 0px rgba(0, 0, 0, .1);
+	outline: none;
+	position: relative;
+	right: 20px;
+	bottom: 20px;
 	border: none;
-	margin-top: 10px;
+	box-shadow: none;
+	line-height: 42px;
+	-webkit-perspective: 230px;
+	perspective: 230px;
 }
 
+#logoutBtn span {
+	background: rgb(0, 172, 238);
+	background: -webkit-linear-gradient(rgba(0, 172, 238, 1) 0%,
+		rgba(2, 126, 251, 1) 100%);
+	background: -moz-linear-gradient(rgba(0, 172, 238, 1) 0%,
+		rgba(2, 126, 251, 1) 100%);
+	background: -o-linear-gradient(rgba(0, 172, 238, 1) 0%,
+		rgba(2, 126, 251, 1) 100%);
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(0, 172, 238, 1)),
+		to(rgba(2, 126, 251, 1)));
+	background: linear-gradient(rgba(0, 172, 238, 1) 0%,
+		rgba(2, 126, 251, 1) 100%);
+	display: block;
+	position: absolute;
+	width: 300px;
+	height: 45px;
+	box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5), 7px 7px 20px
+		0px rgba(0, 0, 0, .1), 4px 4px 5px 0px rgba(0, 0, 0, .1);
+	border-radius: 5px;
+	margin: 0;
+	text-align: center;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-transition: all .3s;
+	transition: all .3s;
+}
 
+#logoutBtn span:nth-child(1) {
+	box-shadow: -7px -7px 20px 0px #fff9, -4px -4px 5px 0px #fff9, 7px 7px
+		20px 0px #0002, 4px 4px 5px 0px #0001;
+	-webkit-transform: rotateX(90deg);
+	-moz-transform: rotateX(90deg);
+	transform: rotateX(90deg);
+	-webkit-transform-origin: 50% 50% -20px;
+	-moz-transform-origin: 50% 50% -20px;
+	transform-origin: 50% 50% -20px;
+}
+
+#logoutBtn span:nth-child(2) {
+	-webkit-transform: rotateX(0deg);
+	-moz-transform: rotateX(0deg);
+	transform: rotateX(0deg);
+	-webkit-transform-origin: 50% 50% -20px;
+	-moz-transform-origin: 50% 50% -20px;
+	transform-origin: 50% 50% -20px;
+}
+
+#logoutBtn:hover span:nth-child(1) {
+	box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5), 7px 7px 20px
+		0px rgba(0, 0, 0, .1), 4px 4px 5px 0px rgba(0, 0, 0, .1);
+	-webkit-transform: rotateX(0deg);
+	-moz-transform: rotateX(0deg);
+	transform: rotateX(0deg);
+}
+
+#logoutBtn:hover span:nth-child(2) {
+	box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5), 7px 7px 20px
+		0px rgba(0, 0, 0, .1), 4px 4px 5px 0px rgba(0, 0, 0, .1);
+	color: transparent;
+	-webkit-transform: rotateX(-90deg);
+	-moz-transform: rotateX(-90deg);
+	transform: rotateX(-90deg);
+}
+
+.footer-icons a {
+	display: inline-block;
+	width: 35px;
+	height: 35px;
+	cursor: pointer;
+	background-color: #fff;
+	border-radius: 2px;
+	font-size: 20px;
+	color: rgb(56, 56, 56);
+	text-align: center;
+	line-height: 35px;
+	margin-right: 10px;
+	margin-bottom: 5px;
+	border-radius: 2px;
+}
 </style>
 <nav class="navbars navbar-light">
 	<div style="display: flex; align-items: center;">
@@ -251,11 +357,9 @@
 							style="width: 60px; height: 60px; border-radius: 100%;">
 						<span id="userName" style="font-weight: bold; font-size: 33px;"></span> 님 로그인 중..
                		</c:when>
-               		
-               	
-               		
+
 					<c:otherwise>
-						<span style="font-size: 1.5em;">반갑습니다 😊</span>
+						<span style="color: #fff; font-size: 1.5em;">반갑습니다 😊</span>
 					</c:otherwise>
 				</c:choose>
 			</h5>
@@ -264,39 +368,61 @@
 		</div>
 		<div class="offcanvas-body">
 			<ul>
-				<li class="nav-item"><c:choose>
+				<li class="li_" style="margin-top: 20px;"><c:choose>
 						<c:when test="${email ne null }">
-							<a href="${pageContext.request.contextPath}/users/info.do">마이페이지</a>
+							<a class="a1"
+								href="${pageContext.request.contextPath}/users/info.do"
+								style="line-height: 2.5;">마이페이지</a>
 						</c:when>
 						<c:otherwise>
-							<a href="${pageContext.request.contextPath}/users/loginform.do">로그인</a>
+							<a class="a1"
+								href="${pageContext.request.contextPath}/users/loginform.do"
+								style="line-height: 2.5;">로그인</a>
 						</c:otherwise>
 					</c:choose></li>
 
+				<li class="li_" style="margin-top: 20px;"><a class="a1"
+					data-num="0" id="addBtn0" href="#" style="line-height: 2.5;">+
+						매장 추가</a></li>
 
-				<div class="dropdown" style="text-align: center;">
-					<button class="dropdown-toggle store_list" type="button"
-						id="dropdownMenuButton1" data-bs-toggle="dropdown"
-						aria-expanded="false">매장 목록</button>
-					<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-						<c:choose>
-							<c:when test="${email !=null && myStoreList.size() != 0}">
+				<c:choose>
+					<c:when test="${email !=null && myStoreList.size() != 0}">
+						<div class="dropdown" style="margin-top: 30px;">
+							<a class="dropdown-toggle" href="#" role="button"
+								id="dropdownMenuLink" data-bs-toggle="dropdown"
+								aria-expanded="false"
+								style="box-shadow: 1px 1px 17px #fff; width: 100%; line-height: 2.5; text-align: center;">
+								매장 목록 </a>
+							<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"
+								style="text-align: center; width: 100%; height: 200px; overflow: auto;">
+
 								<c:forEach var="tmp" items="${myStoreList }" varStatus="status">
-									<li><a class="dropdown-item store"
+									<li><a class="list_" style="color: rgb(71, 71, 71);"
 										href="${pageContext.request.contextPath}/store/myStore.do?num=${tmp.num }">${tmp.storeName }</a>
-									</li>
 								</c:forEach>
-							</c:when>
-						</c:choose>
-					</ul>
-				</div>
+							</ul>
+						</div>
+					</c:when>
+				</c:choose>
 
-				<li><a data-num="0" id="addBtn0" href="#">+ 매장 추가</a></li>
-				<c:if test="${email ne null }">
-					<li style="margin-top: 250px;"><a
-						href="${pageContext.request.contextPath}/users/logout.do">로그아웃</a>
-					</li>
-				</c:if>
+				<div class="footer-icons" style="margin-top: 220px;">
+					<section style="text-align: center; margin-right: 30px;">
+						<a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
+						<a href="https://www.google.co.kr/"><i class="fa fa-google"></i></a>
+						<a href="https://kr.linkedin.com/"><i class="fa fa-linkedin"></i></a>
+						<a href="https://github.com/Keunyeong/The_seat"><i
+							class="fa fa-github"></i></a>
+
+					</section>
+					<c:if test="${email ne null }">
+						<li style="list-style: none; margin-top: 20px;">
+							<button type="button" id="logoutBtn"
+								onclick="location.href='${pageContext.request.contextPath}/users/logout.do'">
+								<span>정말로 나가실건가요 ? </span><span>로그아웃</span>
+							</button>
+						</li>
+					</c:if>
+				</div>
 			</ul>
 		</div>
 	</div>
@@ -315,9 +441,7 @@
       });
    }
    
-   document.querySelector("#chair").addEventListener("click", function() {
-      location.href = "${pageContext.request.contextPath}/main.do";
-   });
+   
     
    // 매장 추가 관리 영역
    let storePath = "${pageContext.request.contextPath}/store/myStore.do?num=";
@@ -343,6 +467,7 @@
                 //newAnchor.setAttribute("data-num", dataNum);
                 newAnchor.setAttribute("class", "store");
                 newAnchor.setAttribute("href", storePath+data.newStoreList[num-1].num);
+                //newAnchor.setAttribute('style', 'display: block;');
                 
                 let newLi=document.createElement("li");
                 newLi.appendChild(newAnchor);
@@ -350,6 +475,12 @@
                 //newAnchor.setAttribute("id", "addBtn" + strDataNum);
                 document.querySelector(".dropdown-menu").appendChild(newLi);
                 //resetDataNum();
+                
+                //매장 추가 눌렀을 때 새로고침 없이 토글 버튼 보이게 하기
+                //var divs = document.getElementById("StoreList");
+                //if(divs.style.display=="none"){
+                   	//divs.style.display="block";
+               //}
             }
          });
       }
