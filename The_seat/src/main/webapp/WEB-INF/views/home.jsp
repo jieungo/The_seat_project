@@ -25,55 +25,66 @@ body {
 	font-family: 'IBM Plex Sans KR', sans-serif;
 }
 
-#area, #group {
-	width: 100px;
-	margin-right: 50px;
-	height: 40px;
-	margin-top: 30px;
+#area {
+	color: rgb(73, 73, 73);
+	font-size: 18px;
+	font-weight: 500;
+	width: 110px;
+	margin-right: 40px;
+	height: 45px;
+	margin-top: 45px;
 	border: none;
-	border-radius: 5px;
+	border-radius: 7px;
 	text-align-last: center;
 	text-align: center;
 }
 
-#area, #group:focus {
+#area:focus {
 	outline: none;
 }
 
 #keyword {
-	height: 40px;
+	height: 45px;
 	margin-top: 30px;
 	outline: none;
 	border: none;
-	border-radius: 10px;
+	border-radius: 7px;
 	text-align: center;
+	font-size: 17px;
+	font-weight: 500;
 }
 
 #searchBtn {
-	height: 40px;
-	margin-top: 10px;
-	border-radius: 10px;
+	color: rgb(73, 73, 73);
+	font-size: 20px;
+	font-weight: 500;
+	height: 45px;
+	margin-top: 20px;
+	border-radius: 7px;
 }
 
 #loginBtn {
-	height: 40px;
-	margin-top: 20px;
+	color: rgb(73, 73, 73);
+	font-size: 20px;
+	font-weight: 500;
+	height: 45px;
+	margin-top: 30px;
 	outline: none;
 	border: none;
-	border-radius: 10px;
+	border-radius: 7px;
 }
 </style>
 </head>
 <body>
-	<div style="margin-top: 100px;">
+	<div style="margin-top: 130px;">
 		<section class="d-grid gap-2 col-2 mx-auto">
-			<p>이젠, 빈자리 찾아 해매지 말자!</p>
-			<span style="font-size: 3em; font-family: 'Do Hyeon', sans-serif;">자리..<br>있어요?
+			<p style="font-size: 20px; font-weight: 500;">이젠, 빈자리 찾아 헤매지 말자!</p>
+			<span style="font-size: 3.5em; font-family: 'Do Hyeon', sans-serif;">자리..<br>있어요?
 			</span>
 		</section>
 		<!-- get 방식을 활용해 메인 페이지 URL 에 select & option 태그 설정 -->
 		<form action="${pageContext.request.contextPath}/main.do" method="get">
-			<div style="text-align: center; margin-left: 50px;">
+			<div style="text-align: center;">
 				<select name="area" id="area">
 					<option value="null" ${area eq 'area' ? 'selected' : '' }>지역</option>
 					<option value="Gangnam-gu"
@@ -84,7 +95,12 @@ body {
 					<option value="Songpa-gu" ${area eq 'Songpa-gu' ? 'selected' : '' }>송파구</option>
 					<option value="Eunpyeong-gu"
 						${area eq 'Eunpyeong-gu' ? 'selected' : '' }>은평구</option>
-				</select> <select name="group" id="group">
+				</select>
+				<input type="text" id="keyword" name="keyword"
+					placeholder="오늘은 뭐 먹을까?" />
+			</div>
+				<!--
+				<select name="group" id="group">
 					<option value="null" ${menu eq 'menu' ? 'selected' : '' }>메뉴</option>
 					<option value="KoreanFood"
 						${menu eq 'KoreanFood' ? 'selected' : '' }>한식</option>
@@ -96,12 +112,8 @@ body {
 						${menu eq 'WesternFood' ? 'selected' : '' }>양식</option>
 					<option value="Dessert" ${menu eq 'Dessert' ? 'selected' : '' }>후식</option>
 				</select>
-			</div>
-			<br />
-			<div class="d-grid gap-2 col-3 mx-auto">
-				<input type="text" id="keyword" name="keyword"
-					placeholder="오늘은 뭐 먹을까?" />
-			</div>
+				  -->
+			
 			<br />
 			<div class="d-grid gap-2 col-3 mx-auto">
 				<button id="searchBtn" type="submit" class="btn btn-warning">검색</button>
