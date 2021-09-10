@@ -14,6 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.star.seat.menu.dao.MenuDao;
 import com.star.seat.menu.dto.MenuDto;
+import com.star.seat.order.dao.OrderDao;
+import com.star.seat.order.dto.OrderDto;
 import com.star.seat.review.dao.ReviewDao;
 import com.star.seat.review.dto.ReviewDto;
 import com.star.seat.seat.dao.SeatDao;
@@ -31,6 +33,8 @@ public class StoreServiceImpl implements StoreService{
 	private MenuDao mDao;
 	@Autowired
 	private ReviewDao rDao;
+	@Autowired
+	private OrderDao oDao;
 	
 	// 새로운 매장을 추가하는 method
 	@Override
@@ -400,6 +404,9 @@ public class StoreServiceImpl implements StoreService{
 		ReviewDto rDto=new ReviewDto();
 		rDto.setStoreNum(dto.getNum());
 		
+		OrderDto oDto=new OrderDto();
+		oDto.setNum(dto.getNum());
+		
 		// 매장 정보를 지우고
 		dao.deleteStore(dto);
 		// 매장 자리 정보도 지움
@@ -408,5 +415,7 @@ public class StoreServiceImpl implements StoreService{
 		mDao.deleteAllMenu(mDto);
 		// 매장 리뷰 정보도 지움
 		rDao.deleteAllReview(rDto);
+		// 매장에서 주문했던 내역도 지움
+		oDao.deleteAllOrder(oDto);
 	}
 }

@@ -61,4 +61,9 @@ public class OrderDaoImpl implements OrderDao{
 		session.update("order.updateState", dto);
 	}
 
+	// 해당 매장 번호로 된 모든 주문 내역을 삭제하는 method
+	@Override
+	public void deleteAllOrder(OrderDto dto) {
+		session.delete("deleteAllOrder", dto);
+	}
 }

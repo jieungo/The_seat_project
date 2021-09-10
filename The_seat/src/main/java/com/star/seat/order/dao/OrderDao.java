@@ -21,4 +21,7 @@ public interface OrderDao {
 	public void updateState(OrderDto dto);
 	//orderNum 으로 주문정보 삭제(주문 취소)
 	public void delete(int orderNum);
+	
+	// 해당 매장 번호로 된 모든 주문 내역을 삭제하는 method
+	public void deleteAllOrder(OrderDto dto);
 }

@@ -69,4 +69,11 @@
 		SET cancel=#{cancel } ,confirm=#{confirm }
 		WHERE orderNum=#{orderNum }
 	</update>
+	
+	<!-- 해당 매장 번호로 된 모든 주문 내역을 삭제하는 method -->
+	<delete id="deleteAllOrder" parameterType="orderDto">
+		delete
+		from order_
+		where num=#{num}
+	</delete>
 </mapper>
