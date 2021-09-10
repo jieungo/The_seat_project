@@ -13,7 +13,7 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
 />
 <link rel="stylesheet"
-href="${pageContext.request.contextPath}/resources/css/manageMenu.css?ver=16"
+href="${pageContext.request.contextPath}/resources/css/manageMenu.css?ver=20"
 type="text/css" />
 </head>
 <body>
@@ -33,7 +33,7 @@ type="text/css" />
                 <button id="categoryBtn" style="color:rgb(253, 197, 14); font-weight: 500;" data-bs-toggle="modal" data-bs-target="#modal-categoryBtn">카테고리 추가</button>
                 </section>
                 <article class="menu__list pe-3 ps-3">
-                    <div class="card menu__add-card mb-5 mt-3 ms-4">
+                    <div class="card mb-5 mt-3">
                         <div class="menu__add card-body" id="addBox">
 			            <c:choose>
 			            	<c:when test="${empty categoryList }">
@@ -50,7 +50,7 @@ type="text/css" />
                     </div>
                     
                     <c:forEach var="tmp" items="${menuList }">
-                        <div class="card mb-5 mt-3 ms-4">
+                        <div class="card mb-5 mt-3">
                             <div class="row g-0">
                                 <c:choose>
                                     <c:when test="${tmp.best == 'no' }">
