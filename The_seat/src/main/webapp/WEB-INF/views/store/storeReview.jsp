@@ -15,7 +15,7 @@
 	integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
 	crossorigin="anonymous"></script>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/storeReview.css?ver=3"
+	href="${pageContext.request.contextPath}/resources/css/storeReview.css?ver=5"
 	type="text/css" />
 </head>
 <body>
@@ -97,7 +97,7 @@
 													</c:choose>	
 												</div>
 												<div class="owner-review__text">
-													<strong>사장님</strong>
+													<h5><strong>사장님</strong></h5>
 													<p class="ownerComment" name="#" id=""></p>
 												</div>
 											</div>
@@ -119,7 +119,7 @@
 														<input type="hidden" name="num" value="${tmp.num }"/>
 														<input type="hidden" name="storeNum" value="${tmp.storeNum }" />
 		                    							<input type="hidden" name="orderNum" value="${tmp.orderNum }" />
-														<textarea class="ownerAddComment" name="content" placeholder="답글을 입력해 주세요 :)"></textarea>
+														<textarea class="ownerAddComment" name="content"></textarea>
 													</div>
 												</form>
 											</div>

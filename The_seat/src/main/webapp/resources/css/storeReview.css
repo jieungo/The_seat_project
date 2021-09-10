@@ -263,6 +263,12 @@ small {
     outline: none;
 }
 
+.ownerComment {
+	text-align: start;
+	margin-left: 20px;
+	margin-top: 10px;
+}
+
 
 /* ------------- 정렬 컨테이너 요소 ------------- */
 
@@ -290,7 +296,7 @@ small {
 	display: flex; 
 	flex-direction: column; 
 	padding: 20px 0px; 
-	width: 750px;"
+	width: 750px;
 }
 
 .review_container {
@@ -351,6 +357,11 @@ small {
 	.display-box {
 		height:100%;
 		margin-top:100px;
+	}
+	
+	.inner_container {
+		text-overflow: hidden; 
+		overflow-x: auto
 	}
 }
 

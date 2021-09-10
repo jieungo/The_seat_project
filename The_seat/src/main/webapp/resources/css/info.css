@@ -53,10 +53,10 @@ li {
 }
 
 .circle-btn {
-	width: 100px;
-	height: 100px;
+	width: 50px;
+	height: 50px;
 	border: 1px solid lightgray;
 	border-radius: 100%;
-	margin: 10px 20px;
+	margin: 10px 15px;
 	margin-bottom: 25px;
 }

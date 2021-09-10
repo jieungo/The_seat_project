@@ -75,6 +75,98 @@ type="text/css" />
 		border-width: 30px;
 		margin-top: -30px;
 	}
+	
+	* {
+	box-sizing: border-box;
+}
+
+/* 버튼 기본 스타일링 */
+button {
+	outline: none;
+	border: none;
+	background-color: transparent;
+}
+
+::-webkit-scrollbar {
+	display: none;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+li {
+	list-style: none;
+	padding-left: 0;
+}
+
+.container {
+	margin-top: 30px;
+}
+
+.my-page__header {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: flex-end;
+}
+
+.my-page__profile {
+	display: flex;
+	align-items: center;
+}
+
+.divide-line {
+	width: 100%;
+	height: 1px;
+	background-color: lightgray;
+	margin: 20px 0;
+}
+
+.my-page__order {
+	border: 1px solid lightgray;
+}
+
+.circle-btn {
+	width: 80px;
+	height: 80px;
+	border: 1px solid lightgray;
+	border-radius: 100%;
+	margin: 10px 15px;
+}
+
+.circle-btn__wrapper {
+	display: flex;
+	justify-content: center;
+}
+
+.card {
+	padding: 10px;
+}
+
+.bi-star-fill {
+	color: #ffce31;
+}
+
+.card-head p,
+.orderDetailBtn {
+	font-size: 14px;
+	color: gray;
+}
+
+.amount-wrapper {
+	display:flex;
+	margin-bottom: 10px;
+	font-size: 14px;
+	color: gray;
+}
+
+.card-body {
+	display: flex;
+	flex-direction: column;
+}
+
 </style>
 </head>
 <body style="margin-top:150px;">
@@ -126,9 +218,12 @@ type="text/css" />
 			  <div class="col">
 			    <div class="card">
 			      <div class="card-head">
-			      	<p>주문번호 ${tmp.orderNum }</p>
-			      	<h3>${tmp.storeName }</h3>
-			      	<p>${tmp.regdate }</p>
+			      	<p class="mb-0">${tmp.regdate }</p>
+			      	<p class="mb-0">주문번호 ${tmp.orderNum }</p>
+			      	<div class="amount-wrapper">
+				        <span>결제 금액 :</span><span>${tmp.amount }원</span>
+			        </div>
+			      	<h3 class="mb-3">${tmp.storeName }</h3>
 			      </div>
 			      <div>
 				  <!-- 매장평점 -->
@@ -146,13 +241,13 @@ type="text/css" />
 		              </c:choose>
 		          </span> 
 				  <!-- 내가 준 평점 -->
-				  <span> / 내가 준 평점:
+				  <span> / 나의평점:
 					  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
 		                  	<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
 		              </svg>
 		              <c:choose>
 		              	<c:when test="${tmp.myStar == 0 }">
-		              		<span data-num2="${tmp.orderNum }" class="myStar">리뷰를 작성해서 별점을 주세요</span>
+			              		<span data-num2="${tmp.orderNum }" class="myStar">?</span>
 		              	</c:when>
 		              	<c:otherwise>
 		              		<span data-num2="${tmp.orderNum }" class="myStar">${tmp.myStar }</span>
@@ -160,7 +255,7 @@ type="text/css" />
 		              </c:choose>
 		          </span>
 		   		  </div>
-		   		  <div>
+		   		  <div class="mt-3">
 		   		  	<img src="${pageContext.request.contextPath}${tmp.storeLogo }" class="card-img-top" alt="...">
 		   		  </div>
 			      <div class="card-body">
@@ -179,9 +274,9 @@ type="text/css" />
 			      		</tbody>
 			      	</table>
 			        <br/>
-			        <span>결제 금액</span> <span>${tmp.amount }</span>
+
 			        <p class="card-text"></p>
-			        <div>
+			        <div class="circle-btn__wrapper">
 					<!-- 리뷰작성 Btn -->
 					<!-- 리뷰보기 Btn -->
 						<c:choose>
@@ -212,9 +307,6 @@ type="text/css" />
 		</c:otherwise>
 	</c:choose>
 </div>
-<!------------------------------ footer 불러오기 --------------------------->
-<jsp:include page="/WEB-INF/views/nav/footer.jsp" />
-
 <!------------모달창------------------프로필 편집------------------------------------->
 
 <div class="modal animate__animated animate__bounce animate__fadeInDown" tabindex="-1" id="modal-updateForm" aria-labelledby="updateForm" aria-hidden="true">
@@ -386,6 +478,8 @@ type="text/css" />
 	<input type="file" name="image" id="image" 
 		accept=".jpg, .jpeg, .png, .JPG, .JPEG, .gif"/>
 </form>
+<!------------------------------ footer 불러오기 --------------------------->
+<jsp:include page="/WEB-INF/views/nav/footer.jsp" />
 <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 <script>
 	//-----------------------------------리뷰작성 전송폼-------------------------------
