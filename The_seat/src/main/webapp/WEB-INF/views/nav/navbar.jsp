@@ -156,21 +156,21 @@
 			src="${pageContext.request.contextPath}/resources/img/chair.png"
 			alt="chair" /> <br /> <a class="navbar-brand"
 			style="font-family: 'Do Hyeon', sans-serif;"
-			href="${pageContext.request.contextPath}/main.do">자리..<br>있어요?
+			href="${pageContext.request.contextPath}/main.do?area=&keyword=">자리..<br>있어요?
 		</a>
 	</div>
 	<form action="${pageContext.request.contextPath}/main.do" method="get">
 		<div class="container" style="margin-top: 0; margin-right: 250px;">
 			<select name="area" id="area">
-				<option value="area" ${area eq 'area' ? 'selected' : '' }>지역</option>
-				<option value="Gangnam-gu"
-					${area eq 'Gangnam-gu' ? 'selected' : '' }>강남구</option>
-				<option value="Gangdong-gu"
-					${area eq 'Gangdong-gu' ? 'selected' : '' }>강동구</option>
-				<option value="Seocho-gu" ${area eq 'Seocho-gu' ? 'selected' : '' }>서초구</option>
-				<option value="Songpa-gu" ${area eq 'Songpa-gu' ? 'selected' : '' }>송파구</option>
-				<option value="Eunpyeong-gu"
-					${area eq 'Eunpyeong-gu' ? 'selected' : '' }>은평구</option>
+				<option value="" ${searchData.area eq 'area' ? 'selected' : '' }>지역</option>
+				<option value="강남"
+					${searchData.area eq '강남' ? 'selected' : '' }>강남구</option>
+				<option value="강동"
+					${searchData.area eq '강동' ? 'selected' : '' }>강동구</option>
+				<option value="서초" ${searchData.area eq '서초' ? 'selected' : '' }>서초구</option>
+				<option value="송파" ${searchData.area eq '송파' ? 'selected' : '' }>송파구</option>
+				<option value="은평"
+					${searchData.area eq '은평' ? 'selected' : '' }>은평구</option>
 			</select>
 
 			<!--
@@ -188,7 +188,7 @@
          </select>
          -->
 			<input type="text" id="keyword" name="keyword"
-				placeholder="오늘은 뭐 먹을까?" value="${keyword }" />
+				placeholder="오늘은 뭐 먹을까?" value="${keyword}" />
 			<button id="searchBtn" type="submit"
 				onclick="location.href='${pageContext.request.contextPath}/main.do'">
 				<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"

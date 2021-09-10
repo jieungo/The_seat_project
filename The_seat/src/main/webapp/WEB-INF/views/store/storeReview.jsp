@@ -276,6 +276,7 @@
 						deleteBtns[i].style.display="block";
 						ownerReviewBox[i].style.display="block";
 						ownerReviewFormBoxes[i].style.display="none";
+						review[i].innerText="답글 보기";
 					}
 				});
 			}
@@ -302,6 +303,7 @@
 						deleteBtns[i].style.display="none";
 						ownerReviewBox[i].style.display="block";
 						ownerReviewUpdateFormBoxes[i].style.display="none";
+						review[i].innerText="답글 작성";
 					}
 				});
 			}

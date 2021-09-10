@@ -99,8 +99,8 @@ String search = request.getParameter("keyword");
 
 		<c:if test="${ not empty dto.keyword }">
 			<p>
-				<strong>${dto.area }</strong> 지역, <strong>${dto.group }</strong> 메뉴,
-				<strong>${dto.keyword }</strong> 검색어로 검색된 내용 자세히 보기
+				<strong>${searchData.area }</strong> 지역, <strong>${dto.group }</strong> 메뉴,
+				<strong>${searchData.keyword }</strong> 검색어로 검색된 내용 자세히 보기
 			</p>
 		</c:if>
 	</div>

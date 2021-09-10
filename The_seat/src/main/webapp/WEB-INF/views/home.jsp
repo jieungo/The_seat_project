@@ -86,18 +86,18 @@ body {
 		<form action="${pageContext.request.contextPath}/main.do" method="get">
 			<div style="text-align: center;">
 				<select name="area" id="area">
-					<option value="null" ${area eq 'area' ? 'selected' : '' }>지역</option>
-					<option value="Gangnam-gu"
+					<option value="" ${area eq 'area' ? 'selected' : '' }>지역</option>
+					<option value="강남"
 						${area eq 'Gangnam-gu' ? 'selected' : '' }>강남구</option>
-					<option value="Gangdong-gu"
+					<option value="강동"
 						${area eq 'Gangdong-gu' ? 'selected' : '' }>강동구</option>
-					<option value="Seocho-gu" ${area eq 'Seocho-gu' ? 'selected' : '' }>서초구</option>
-					<option value="Songpa-gu" ${area eq 'Songpa-gu' ? 'selected' : '' }>송파구</option>
-					<option value="Eunpyeong-gu"
+					<option value="서초" ${area eq 'Seocho-gu' ? 'selected' : '' }>서초구</option>
+					<option value="송파" ${area eq 'Songpa-gu' ? 'selected' : '' }>송파구</option>
+					<option value="은평"
 						${area eq 'Eunpyeong-gu' ? 'selected' : '' }>은평구</option>
 				</select>
 				<input type="text" id="keyword" name="keyword"
-					placeholder="오늘은 뭐 먹을까?" />
+					placeholder="오늘은 뭐 먹을까?"/>
 			</div>
 				<!--
 				<select name="group" id="group">

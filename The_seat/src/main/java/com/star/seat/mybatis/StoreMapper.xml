@@ -36,6 +36,23 @@
 	<select id="getList" parameterType="storeDto" resultType="storeDto">
 		select *
 		from store
+		where storeOpen='no'
+		<choose>
+			<when test="{area != '' and keyword != ''}">
+				and (lower(storeAddr) like '%' || lower(#{area}) || '%'
+				or lower(storeName) like '%' || lower(#{area}) || '%')
+				and (lower(storeAddr) like '%' || lower(#{keyword}) || '%'
+				or lower(storeName) like '%' || lower(#{keyword}) || '%')
+			</when>
+			<when test="{area != ''}">
+				and (lower(storeAddr) like '%' || lower(#{area}) || '%'
+				or lower(storeName) like '%' || lower(#{area}) || '%')
+			</when>
+			<when test="{keyword != ''}">
+				and (lower(storeAddr) like '%' || lower(#{keyword}) || '%'
+				or lower(storeName) like '%' || lower(#{keyword}) || '%')
+			</when>
+		</choose>
 	</select>
 	
 	<!-- 매장 태그를 추가하는 method -->
