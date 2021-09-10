@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" 
 integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -45,7 +44,7 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
 
 <nav class="navbarTwo">
 	
-	<i class="fas fa-home fa-2x nav_icon" id="home"><a href="${pageContext.request.contextPath}/main.do"></a></i>
+	<i class="fas fa-home fa-2x nav_icon" id="home"></i>
 
     <button id="bars" data-bs-toggle="offcanvas"
        data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
@@ -105,20 +104,22 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
             <br>
             <br>
             <c:if test="${sessionScope.email ne null }">
-            <li class="nav-item"><a class="nav-link"
-                  href="#">
-                    매장정보 </a></li>
-                     <li class="nav-item">
-                     	<button id="manageMenu1">메뉴관리</button>
-                   	 </li>
-                     <li class="nav-item">
-                     	<button id="storeReview1" >리뷰관리 </button>
-                     </li>
-                     <li class="nav-item">
-                     <button id="storeOrder1">주문확인</button></li>
-                     <li class="nav-item">
-                     <button id="storeSeat1">자리관리 </button></li>
-               <li class="nav-item"><a class="nav-link"
+              <li class="nav-item">
+              	<button id="manageStore">매장관리</button>
+              </li>
+              <li class="nav-item">
+              	<button id="manageMenu1">메뉴관리</button>
+              </li>
+              <li class="nav-item">
+              	<button id="storeReview1" >리뷰관리 </button>
+              </li>
+              <li class="nav-item">
+              	<button id="storeOrder1">주문확인</button>
+              </li>
+              <li class="nav-item">
+              	<button id="storeSeat1">자리관리 </button>
+              </li>
+              <li class="nav-item"><a class="nav-link"
                   href="${pageContext.request.contextPath}/users/logout.do">
                      로그아웃 </a></li>
             </c:if>
@@ -126,22 +127,24 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
       </div>
    </div>
 </nav>
-<script
-   src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
-   <script src="https://kit.fontawesome.com/2ebe86210e.js" crossorigin="anonymous"></script>
+<script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
+<script src="https://kit.fontawesome.com/2ebe86210e.js" crossorigin="anonymous"></script>
 <script>
-document.querySelector("#manageMenu1").addEventListener("click",function(){
-	location.href="${pageContext.request.contextPath}/store/manageMenu.do?num=${num}";
-});
-document.querySelector("#storeReview1").addEventListener("click",function(){
-	location.href="${pageContext.request.contextPath}/store/storeReview.do?num=${num}";
-});
-document.querySelector("#storeOrder1").addEventListener("click",function(){
-	location.href="${pageContext.request.contextPath}/store/storeOrder.do?num=${num}";
-});
-document.querySelector("#storeSeat1").addEventListener("click",function(){
-	location.href="${pageContext.request.contextPath}/store/storeSeat.do?num=${num}";
-});
+	document.querySelector("#manageStore").addEventListener("click",function(){
+		location.href="${pageContext.request.contextPath}/store/myStore.do?num=${num}";
+	});
+	document.querySelector("#manageMenu1").addEventListener("click",function(){
+		location.href="${pageContext.request.contextPath}/store/manageMenu.do?num=${num}";
+	});
+	document.querySelector("#storeReview1").addEventListener("click",function(){
+		location.href="${pageContext.request.contextPath}/store/storeReview.do?num=${num}";
+	});
+	document.querySelector("#storeOrder1").addEventListener("click",function(){
+		location.href="${pageContext.request.contextPath}/store/storeOrder.do?num=${num}";
+	});
+	document.querySelector("#storeSeat1").addEventListener("click",function(){
+		location.href="${pageContext.request.contextPath}/store/storeSeat.do?num=${num}";
+	});
    if(${sessionScope.email ne null }){
       // session 정보로 이름 정보 가져오기
       ajaxPromise("${pageContext.request.contextPath}/users/getData.do").then(
@@ -154,7 +157,7 @@ document.querySelector("#storeSeat1").addEventListener("click",function(){
    }
    
    document.querySelector("#home").addEventListener("click", function() {
-      location.href = "${pageContext.request.contextPath}/main.do";
+      location.href = "${pageContext.request.contextPath}/main.do?area=&keyword=";
    });
    
    
@@ -178,7 +181,6 @@ document.querySelector("#storeSeat1").addEventListener("click",function(){
          .then(function(response){
             return response.json();
          }).then(function(data){
-            console.log(data);
          });
          
          
@@ -203,8 +205,4 @@ document.querySelector("#storeSeat1").addEventListener("click",function(){
       }
    }
    
-   // 네비바의 홈 로고 누르면 메인페이지로 이동
-   document.querySelector("#home").addEventListener("click", function() {
-      location.href = "${pageContext.request.contextPath}/main.do";
-   });
 </script>

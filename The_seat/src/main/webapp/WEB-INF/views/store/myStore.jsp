@@ -7,343 +7,14 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>자리.. 있어요? | my store page </title>
-	<!--  부트스트랩 -->
-   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+<title>자리.. 있어요? | ${dto.storeName} </title>
+<!--  부트스트랩 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/myStore.css?ver=11"
 	type="text/css" />
 </head>
-<style>
-
-* {
-   box-sizing: border-box;
-   margin:0;
-}
-
-body {
-    background-color: #598eff;
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    align-items: center;
-    flex-direction:column;
-    justify-content: center;
-    color: rgb(78, 78, 78);
-    font-size: 16px;
-}
-
-/* 버튼 기본 스타일링 */
-button {
-    outline: none;
-    border: none;
-    background-color: transparent;
-    color: rgb(78, 78, 78);
-}
-
-/* 링크 기본 스타일링 */
-a {
-    text-decoration: none;
-    color: rgb(78, 78, 78);
-}
-
-/* 리스트 기본 스타일링 */
-ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-}
-
-img {
-    width: 80px; 
-    height: 80px;
-}
-
-input {
-    padding-left:10px;
-    border:none;
-    border-bottom: 1px solid lightgray;
-    text-align:center;
-}
-
-input:focus {
-    outline:none;
-}
-
-.myStore_container {
-    display: flex;
-    justify-content: center;
-    background-color: white;
-    border-radius: 10px;
-    height: 550px;
-    width: 900px;
-}
-
-.inner_container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: 100%;
-    justify-content: space-between;
-}
-
-::-webkit-scrollbar {
-    display: none;
-}
-
-.aside {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: space-evenly;
-    height: 100%;
-    left: 100%;
-    padding: 0;
-}
-
-.aside > button {
-    border: 1px solid lightgray;
-    border-bottom: none;
-    background-color: white;
-    border-radius: 0 5px 5px 0;
-    width: 15vw;
-    height: 20vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
-    font-weight: 700;
-    transition: color 0.2s ease-in-out;
-}
-
-.aside > button:first-child {
-    border-top: none;
-    color: #598eff;
-    border-left: none;
-}
-
-.store-top__info {
-	display: flex; 
-	width:40%; 
-	justify-content: center; 
-	align-items: center; 
-	flex-direction: column; 
-    padding-left:10px; 
-    margin-top:10px; 
-    height:550px; 
-    text-overflow: hidden; 
-    overflow-x: auto;
-}
-
-.store-bottom__info {
-	display: flex; 
-	justify-content: center; 
-	align-items: center; 
-	flex-direction: column; 
-	margin-right:20px;
-    width:50%
-}
-
-#storeOnOffBtn {
-    background-color: white;
-    color: #598eff;
-    box-shadow: 1px 1px 11px rgba(172, 172, 172, 0.699);
-    width: 90%;
-    font-weight: 600;
-	margin-top: 30px;
-}
-
-#deleteStoreBtn {
-	background-color: lightgray;
-    color: #e01a1a;
-    box-shadow: 1px 1px 11px rgba(172, 172, 172, 0.699);
-    width: 90%;
-    font-weight: 600;
-	margin-top: 10px;
-}
-
-.allTag {
-    color: white;
-    font-size:14px;
-}
-
-.updateImgLink {
-	text-decoration: none;
-}
-
-#updateBox a{
-	text-decoration: none;
-    color: rgb(78, 78, 78);
-    padding:5px 0;
-}
-
-#updateBox a:hover {
-	color: #598eff;
-	font-weight: 600;
-}
-
-img:hover {
-	opacity:0.3;
-}
-
-.tag_zone {
-	display:flex; 
-	justify-content:center; 
-	align-items:center; 
-	flex-direction:column; 
-	text-align:center;
-}
-
-.updateImgBtn {
-	font-size: 14px;
-	border-radius: 100px;
-	width: 40px;
-	height: 40px;
-	color: white;
-	font-weight: 500;
-	background-color: #598EFF;
-	display:flex;
-	margin:auto;
-} 
-
-.form-wrapper {
-	display: flex;
-}
-
-
-.tag_input {
-	display:flex; 
-	align-items: center;
-	box-shadow: 1px 1px 11px rgba(172, 172, 172, 0.699); 
-	width:150px; 
-	height:30px;
-    margin-bottom:10px; 
-    border-radius: 5px;
- 
-}  
-     
-.addTag > span {
-	color: #598eff; 
-    border-radius: 5px; 
-    height: 30px;  
-    font-weight: 500; 
-    font-size: 20px;
-    display:flex; 
-    align-items:center; 
-    justify-content:center;  
-    text-decoration: none;
-    padding: 0;
-}
-
-.addTag:focus {
-    text-decoration: none;
-}
-
-#inputTag {
-	border:none; 
-	font-size:14px;
-	border-radius: 5px;
-	padding: 0;
-}
-	
-	
-		/* 테블릿 (해상도 768px ~ 1023px)*/
-	
-	@media screen and (max-width:1024px) {
-		
-		.myStore_container {
-			height: 80%;
-			width: 95%;
-			flex-direction: column;
-			position:relative;
-			margin-top: 40px;
-		}
-	
-		.aside {
-			display:flex;
-			flex-direction: row;
-			width:100%;
-			position: absolute;
-			top: 0;
-			left:0;
-			height: auto;
-		}
-		
-		.aside > button {
-    		border-radius: 5px;
-    		font-weight: 700;
-			width: 20%;
-			height: 10vh;
-			border: 1px solid lightgray;
-		}
-		
-		.aside > button:first-child {
-			border: none;		
-		}
-		
-		.stroe-top__info {
-			padding-left: 0;
-			height:0;
-			margin-top:120px;
-		}
-		
-		.inner_container {
-			margin-top: 30px;
-		}
-
-	}
-		
-			/* 모바일 가로, 세로 */
-		
-		@media screen and (max-width:767px) {
-		
-		body {
-			height: auto;
-		}
-		
-		.myStore_container {
-			height: 80%;
-			width: 100%;
-			flex-direction: column;
-			text-overflow: hidden; 
-    		overflow-x: auto;
-		}
-	
-		.aside {
-			display:none;
-		}
-		
-		.store-top__info {
-			width:100%;
-			padding-left:0;
-			height: auto;
-		}
-		
-		.store-bottom__info {
-			width: 100%;
-			margin-right:0;
-			padding-top: 30px;
-			border-top: 2px solid #f2f2f2;
-			width:90%;
-		}
-		
-		.inner_container {
-			flex-direction:column;
-			margin-top: 0;
-		}
-		
-		.navbarTwo {
-			margin-top: 30px;
-		}
-		
-		.tag_input {
-			margin-bottom: 30px;
-		}
-	}
-
-</style>
-
 <body>
 <jsp:include page="../nav/navbar2.jsp" />
 <div class="myStore_container pe-0 ps-0">
@@ -481,7 +152,7 @@ img:hover {
              <button onclick="location.href='${pageContext.request.contextPath}/store/storeSeat.do?num=${dto.num}'">자리 관리</button>
          </aside>
      </div>
-     </div>
+</div>
 <script src="https://kit.fontawesome.com/2ebe86210e.js" crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 <script>
@@ -534,14 +205,12 @@ img:hover {
 		} else {
 			// 두 정보를 object로 만들어서 전달할 준비
 			let obj={num, storeTag};
-			console.log(obj);
 			
 			// 해당 링크를 요청하면서 object를 전달하고
 			ajaxPromise("${pageContext.request.contextPath}/addTag.do", "post", obj)
 			.then(function(response){
 				return response.json();
 			}).then(function(data){
-				console.log(data);
 				// 데이터를 받으면
 				if(data.beAdded){
 					// 태그 추가 input 창을 reset하고, 화면에서 숨김
@@ -584,12 +253,9 @@ img:hover {
 			// 버튼의 data-num 성분의 값과 태그 값을 얻어서 object로 담음
 			let num=deleteBtns[i].getAttribute("data-num");
 			let storeTag=tags[i].innerText;
-			console.log(storeTag);
 			let obj={num, storeTag};
 			// 삭제 버튼을 눌렀을 때 작동할 이벤트
 			deleteBtns[i].addEventListener("click", function(){
-				// 삭제여부를 확인
-				console.log(obj);
 				let toDelete=confirm("이 태그를 삭제하시겠습니까?");
 				if(toDelete){
 					// 해당 경로를 요청하면서 object 전달
@@ -597,7 +263,6 @@ img:hover {
 					.then(function(response){
 						return response.json();
 					}).then(function(data){
-						console.log(data);
 						if(data.beDeleted){
 							// 해당 태그 버튼과 삭제버튼을 지움.
 							tags[i].remove();
@@ -650,7 +315,6 @@ img:hover {
 		.then(function(response){
 			return response.json();
 		}).then(function(data){
-			console.log(data);
 			if(data.beUpdated){
 				// 알람창을 띄우고
 				alert("매장 정보를 수정했습니다.");
@@ -689,13 +353,11 @@ img:hover {
 	// 이미지 파일을 선택했을 때 동작하는 method
 	function viewThumbNail(rel, imageID){
 		document.querySelector(rel).addEventListener("change", function(e){
-			console.log("rel1: "+rel);
 			readImage(e.target, imageID);
 		});
 	}
 	
 	function readImage(input, imageID) {
-		console.log("rel2: "+imageID);
 	    // 인풋 태그에 파일이 있는 경우
 	    if(input.files && input.files[0]) {
 	        // 이미지 파일인지 검사 (생략)
@@ -716,12 +378,10 @@ img:hover {
 		document.querySelector(rel).addEventListener("submit", function(e){
 			// 일단 form 제출을 막음
 			e.preventDefault();
-			console.log("rel3: "+i);
 			ajaxFormPromise(this)
 			.then(function(response){
 				return response.json();
 			}).then(function(data){
-				console.log(data);
 				if(data.beUpdated){
 					updateImgBtns[i].style.display="none";
 					alert("이미지를 수정하였습니다.");
@@ -761,7 +421,6 @@ img:hover {
 		.then(function(response){
 			return response.json();
 		}).then(function(data){
-			console.log(data);
 			if(data.beSwitched && storeOpen=="yes"){
 				self.innerText="매장 닫기";
 				storeOnOffBtn.style.backgroundColor="lightGray";
@@ -786,7 +445,6 @@ img:hover {
 			.then(function(response){
 				return response.json();
 			}).then(function(data){
-				console.log(data);
 				if(data.beDeleted){
 					alert("매장 정보를 삭제하였습니다.");
 					location.href="${pageContext.request.contextPath}/main.do";

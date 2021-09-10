@@ -32,7 +32,6 @@ public class ReviewServiceImpl implements ReviewService{
 		String realPath=request.getServletContext().getRealPath("/upload");
 		//저장할 파일의 상세 경로
 		String filePath=realPath+File.separator;
-		System.out.println("realPath:"+realPath);
 		//해당 경로를 access 할수 있는 파일 객체 생성
 		File f=new File(realPath);
 		if(!f.exists()){ //만일  폴더가 존재 하지 않으면
@@ -41,19 +40,15 @@ public class ReviewServiceImpl implements ReviewService{
 		
 		// upload할 image 정보
 		MultipartFile reviewImage=dto.getImageFile();
-		System.out.println(reviewImage);
 		if(reviewImage!=null) {
 			//원본 파일명 
 			String orgFileName=reviewImage.getOriginalFilename();
 			//upload 폴더에 저장된 파일명 
 			String saveFileName=System.currentTimeMillis()+orgFileName;
-			System.out.println(orgFileName);
-			System.out.println(saveFileName);
 			dto.setImagePath("/upload/"+saveFileName);
 			try {
 				//upload 폴더에 파일을 저장한다.
 				reviewImage.transferTo(new File(filePath+saveFileName));
-				System.out.println(filePath+saveFileName);
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -101,7 +96,6 @@ public class ReviewServiceImpl implements ReviewService{
 	@Override
 	public List<ReviewDto> getReviewList(ReviewDto dto, HttpServletRequest request) {
 		List<ReviewDto> list=dao.getReviewList(dto);
-		System.out.println(dto.getStoreNum());
 		
 		if(list!=null) {
 			for(int i=0; i<list.size(); i++) {
@@ -109,7 +103,6 @@ public class ReviewServiceImpl implements ReviewService{
 				int num=list.get(i).getNum();
 				// 그 번호를 dto의 targetNum에 넣어줌
 				dto.setNum(num);
-				System.out.println("test: "+list.get(i).getReviewCheck());
 				// 만약 그 targetNum으로 된 것이 있으면 yes, 없으면 no
 				if(dao.getMyReview(dto)!=null) {
 					list.get(i).setReviewCheck("yes");
@@ -154,8 +147,6 @@ public class ReviewServiceImpl implements ReviewService{
 	@Override
 	public ReviewDto getReviewData(ReviewDto dto) {
 		
-		System.out.println("target: "+dto.getTargetNum());
-		
 		return dao.getReviewData(dto);
 	}
 	
@@ -166,23 +157,18 @@ public class ReviewServiceImpl implements ReviewService{
 		String realPath=request.getServletContext().getRealPath("/upload");
 		//저장할 파일의 상세 경로
 		String filePath=realPath+File.separator;
-		System.out.println("realPath:"+realPath);
 		
 		// upload할 image 정보
 		MultipartFile reviewImage=dto.getImageFile();
-		System.out.println(reviewImage);
 		if(reviewImage!=null) {
 			//원본 파일명 
 			String orgFileName=reviewImage.getOriginalFilename();
 			//upload 폴더에 저장된 파일명 
 			String saveFileName=System.currentTimeMillis()+orgFileName;
-			System.out.println(orgFileName);
-			System.out.println(saveFileName);
 			dto.setImagePath("/upload/"+saveFileName);
 			try {
 				//upload 폴더에 파일을 저장한다.
 				reviewImage.transferTo(new File(filePath+saveFileName));
-				System.out.println(filePath+saveFileName);
 			}catch(Exception e) {
 				e.printStackTrace();
 			}

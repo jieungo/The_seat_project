@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insert title here</title>
+<title>매장 주문 관리</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 <link rel="stylesheet"
@@ -14,7 +14,7 @@
 	type="text/css" />
 </head>
 <body>
-    <!------------------------------- navbar 추가 -------------------------------->
+<!------------------------------- navbar 추가 -------------------------------->
 <jsp:include page="../nav/navbar2.jsp" />
 <div class="myStore_container-gray">
 <div class="wrapper">
@@ -124,97 +124,91 @@
 <script src="https://kit.fontawesome.com/2ebe86210e.js" crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 <script>
-
-
-let orderEmail = document.querySelectorAll(".email");
-let orderName = document.querySelectorAll(".name");
-let phone = document.querySelectorAll(".phone");
-let orderNumber = document.querySelectorAll(".orderNum");
-let orderDetail = document.querySelectorAll(".orderDetail");
-let orderConfirm = document.querySelectorAll(".confirm");
-let orderCancel = document.querySelectorAll(".cancel");
-
-
-for(let i=0; i<orderEmail.length; i++){
-	let email = orderEmail[i].innerText;
-	ajaxPromise("${pageContext.request.contextPath}/users/getOrderData.do","post","email="+email)
-	.then(function(response) {
-		return response.json();
-	})
-	.then(function(data) {
-		let name = data.dto.name;
-		let phoneNumber = data.dto.phoneNumber;
-		orderName[i].innerText=name+"님이 주문하셨습니다.";
-		phone[i].innerText=phoneNumber;
-	});
+	let orderEmail = document.querySelectorAll(".email");
+	let orderName = document.querySelectorAll(".name");
+	let phone = document.querySelectorAll(".phone");
+	let orderNumber = document.querySelectorAll(".orderNum");
+	let orderDetail = document.querySelectorAll(".orderDetail");
+	let orderConfirm = document.querySelectorAll(".confirm");
+	let orderCancel = document.querySelectorAll(".cancel");
 	
-	let orderNum = orderNumber[i].innerText;
 	
-	ajaxPromise("${pageContext.request.contextPath}/order/orderMenu.do","post","orderNum="+orderNum)
-	.then(function(response){
-		return response.json();
-	})
-	.then(function(data){
-		// orderNum 이 일치하는 메뉴와 수량, 가격을 리스트로 받아온다.
-		let td;
-		for(let j=0; j<data.list.length; j++){
-			// orderTable 에 td로 차례로 넣어주고
-			let menu = data.list[j].menu;
-			let menuCount = data.list[j].menuCount;
-			let price = data.list[j].price;
-			let td = document.createElement( "TD" ); 
-		     td.innerHTML = menu;  
-		     let td1 = document.createElement( "TD" );
-		     td1.innerHTML = menuCount; ; 
-		     let td2 = document.createElement( "TD" );
-		     td2.innerHTML = price; 
-		     
-			let tr = document.createElement( "TR" ); 
-			     tr.appendChild( td );
-			     tr.appendChild( td1 ); 
-			     tr.appendChild( td2 ); 
-			orderDetail[i].appendChild( tr ); 
-		};
-	});
-	
-	if(orderConfirm.length != 0){
-		//주문 확인 버튼 눌렀을 때 
-		orderConfirm[i].addEventListener("click", function(){
-			
-			ajaxPromise("${pageContext.request.contextPath}/order/updateState.do","post","orderNum="+orderNum+"&confirm=YES"+"&cancel=NO")
-			.then(function(response){
-				return response.json();
-			})
-			.then(function(data){
-				if(data.isSuccess == true){
-					orderConfirm[i].innerText = '완료';
-					orderConfirm[i].setAttribute('disabled',true);
-				};
-			});
+	for(let i=0; i<orderEmail.length; i++){
+		let email = orderEmail[i].innerText;
+		ajaxPromise("${pageContext.request.contextPath}/users/getOrderData.do","post","email="+email)
+		.then(function(response) {
+			return response.json();
+		})
+		.then(function(data) {
+			let name = data.dto.name;
+			let phoneNumber = data.dto.phoneNumber;
+			orderName[i].innerText=name+"님이 주문하셨습니다.";
+			phone[i].innerText=phoneNumber;
 		});
-	}
-	
-	if(orderCancel.length != 0){
-		//주문 확인 완료 버튼 눌렀을 때 
-		orderCancel[i].addEventListener("click", function(){
-			
-			ajaxPromise("${pageContext.request.contextPath}/order/updateState.do","post","orderNum="+orderNum+"&confirm=NO"+"&cancel=CONFIRM")
-			.then(function(response){
-				return response.json();
-			})
-			.then(function(data){
-				if(data.isSuccess == true){
-					orderCancel[i].innerText = '취소 완료';
-					orderCancel[i].setAttribute('disabled',true);
-				};
-			});
+		
+		let orderNum = orderNumber[i].innerText;
+		
+		ajaxPromise("${pageContext.request.contextPath}/order/orderMenu.do","post","orderNum="+orderNum)
+		.then(function(response){
+			return response.json();
+		})
+		.then(function(data){
+			// orderNum 이 일치하는 메뉴와 수량, 가격을 리스트로 받아온다.
+			let td;
+			for(let j=0; j<data.list.length; j++){
+				// orderTable 에 td로 차례로 넣어주고
+				let menu = data.list[j].menu;
+				let menuCount = data.list[j].menuCount;
+				let price = data.list[j].price;
+				let td = document.createElement( "TD" ); 
+			     td.innerHTML = menu;  
+			     let td1 = document.createElement( "TD" );
+			     td1.innerHTML = menuCount; ; 
+			     let td2 = document.createElement( "TD" );
+			     td2.innerHTML = price; 
+			     
+				let tr = document.createElement( "TR" ); 
+				     tr.appendChild( td );
+				     tr.appendChild( td1 ); 
+				     tr.appendChild( td2 ); 
+				orderDetail[i].appendChild( tr ); 
+			};
 		});
+		
+		if(orderConfirm.length != 0){
+			//주문 확인 버튼 눌렀을 때 
+			orderConfirm[i].addEventListener("click", function(){
+				
+				ajaxPromise("${pageContext.request.contextPath}/order/updateState.do","post","orderNum="+orderNum+"&confirm=YES"+"&cancel=NO")
+				.then(function(response){
+					return response.json();
+				})
+				.then(function(data){
+					if(data.isSuccess == true){
+						orderConfirm[i].innerText = '완료';
+						orderConfirm[i].setAttribute('disabled',true);
+					};
+				});
+			});
+		}
+		
+		if(orderCancel.length != 0){
+			//주문 확인 완료 버튼 눌렀을 때 
+			orderCancel[i].addEventListener("click", function(){
+				
+				ajaxPromise("${pageContext.request.contextPath}/order/updateState.do","post","orderNum="+orderNum+"&confirm=NO"+"&cancel=CONFIRM")
+				.then(function(response){
+					return response.json();
+				})
+				.then(function(data){
+					if(data.isSuccess == true){
+						orderCancel[i].innerText = '취소 완료';
+						orderCancel[i].setAttribute('disabled',true);
+					};
+				});
+			});
+		}
 	}
-}
-
-
-
-
 </script>
 </body>
 </html>

@@ -19,19 +19,9 @@ public class HomeController {
 	 */
 	@RequestMapping("/home")
 	public String home(HttpServletRequest request) {
-		//DB 에서 읽어온 공지사항이라고 가정하자 
-		List<String> notice=new ArrayList<String>();
-		notice.add("무더운 여름입니다.");
-		notice.add("더위 조심 하세요");
-		notice.add("어쩌구...");
-		notice.add("저쩌구...");
-		//공지 사항을 request 에 담기
-		request.setAttribute("notice", notice);
 		//view 페이지 (jsp페이지) 로 forward 이동해서 응답 
 		return "home";
 	}
-	
-	
 }
 
 

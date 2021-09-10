@@ -27,14 +27,9 @@ public class MenuServiceImpl implements MenuService{
 	@Override
 	public void addMenu(int num, MenuDto dto, HttpServletRequest request) {
 		
-		System.out.println(dto.getMenuName());
-		System.out.println(dto.getPrice());
-		System.out.println(dto.getContent());
-		
 		StoreDto sDto=new StoreDto();
 		sDto.setNum(num);
 		sDto=sDao.getMyStore_num(sDto);
-		System.out.println(sDto.getStoreName());
 		
 		dto.setStoreNum(num);
 		dto.setStoreName(sDto.getStoreName());
@@ -43,8 +38,6 @@ public class MenuServiceImpl implements MenuService{
 		String realPath=request.getServletContext().getRealPath("/upload");
 		// 저장할 파일의 상제 경로
 		String filePath=realPath+File.separator;
-		System.out.println("realPath: "+realPath);
-		
 		// 해당 경로에 접근할 수 있는 File 객체 생성
 		File f=new File(realPath);
 		// 만일 폴더가 존재하지 않으면 만듦
@@ -54,19 +47,14 @@ public class MenuServiceImpl implements MenuService{
 		
 		// upload할 image 정보
 		MultipartFile imageFile=dto.getImageFile();
-		System.out.println(imageFile);
-		
 		// 원본 파일 명
 		String orgImageName=imageFile.getOriginalFilename();
 		// 저장할 파일 명
 		String saveImageName=System.currentTimeMillis()+orgImageName;
-		System.out.println(orgImageName);
-		System.out.println(saveImageName);
 		
 		try {
 			// folder에 image를 저장
 			imageFile.transferTo(new File(filePath+saveImageName));
-			System.out.println(filePath+saveImageName);
 			
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -81,9 +69,6 @@ public class MenuServiceImpl implements MenuService{
 	@Override
 	public void getMenuList(StoreDto sDto, HttpServletRequest request) {
 		String email=(String)request.getSession().getAttribute("email");
-		System.out.println("storeNum : "+sDto.getNum());
-		System.out.println("storeName : "+sDto.getStoreName());
-		System.out.println("category : "+sDto.getCategory());
 		String category=sDto.getCategory();
 		sDto.setOwner(email);
 
@@ -95,14 +80,12 @@ public class MenuServiceImpl implements MenuService{
 		Map<String, Object> map=new HashMap<>();
 		map.put("sDto", sDto);
 		map.put("mDto", mDto);
-		System.out.println(category==null);
 		List<MenuDto> list=null;
 		if(category!=null) {
 			list=dao.getMenuList(map);
 		} else if(category==null){
 			list=dao.getMenuList2(sDto);
 		}
-		System.out.println(list);
 		request.setAttribute("menuList", list);
 		request.setAttribute("storeData", sDto);
 	}
@@ -131,7 +114,6 @@ public class MenuServiceImpl implements MenuService{
 		sDto.setOwner(email);
 		
 		int bestCount=(dao.bestCount(sDto));
-		System.out.println(bestCount);
 		boolean beFour=false;
 		if(bestCount==4 && dto.getBest().equals("yes")) {
 			beFour=true;

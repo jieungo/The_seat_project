@@ -61,9 +61,7 @@ public class StoreServiceImpl implements StoreService{
 	public List<StoreDto> getMyStores(HttpServletRequest request, HttpSession session) {
 		String email=(String)request.getSession().getAttribute("email");
 		//email="test";
-		System.out.println(email);
 		List<StoreDto> list=dao.getMyStores(email);
-		System.out.println(list);
 		session.setAttribute("myStoreList", list);
 		
 		return list;
@@ -89,7 +87,6 @@ public class StoreServiceImpl implements StoreService{
 		if(myDto.getStoreTag()!=null) {
 			String[] tags=myDto.getStoreTag().split(",");
 			for(int i=1; i<tags.length; i++) {
-				System.out.println(tags[i]);
 				list.add(tags[i]);
 			}
 		}
@@ -104,8 +101,6 @@ public class StoreServiceImpl implements StoreService{
 	public void getMyStore_num(StoreDto dto, HttpServletRequest request) {		
 
 		  StoreDto theDto=dao.getMyStore_num(dto);   
-		   
-	      System.out.println(theDto.getStoreTag());
 	      
 	      // 카테고리 리스트를 만들어서 request에 넣을 준비
 	      // DB의 내용을 , 로 구분해서 String array로 만들어주고
@@ -113,7 +108,6 @@ public class StoreServiceImpl implements StoreService{
 	      // 새로운 array를 만들어서 거기에 하나씩 담아줌.
 	      List<String> catList=new ArrayList();
 	      for(int i=1; i<categories.length; i++) {
-	         System.out.println(categories[i]);
 	         catList.add(categories[i]);
 	      }
 	      
@@ -123,7 +117,6 @@ public class StoreServiceImpl implements StoreService{
 	      // 새로운 array를 만들어서 거기에 하나씩 담아줌.
 	      List<String> tagList=new ArrayList();
 	      for(int i=1; i<tags.length; i++) {
-	         System.out.println(tags[i]);
 	         tagList.add(tags[i]);
 	      }
 	      
@@ -136,14 +129,6 @@ public class StoreServiceImpl implements StoreService{
 	@Override
 	public void getList(HttpServletRequest request, StoreDto dto) {
 		List<StoreDto> list=dao.getList(dto);
-		System.out.println("area : "+dto.getArea());
-		//System.out.println("group : "+dto.getGroup());
-		System.out.println("keyword : "+dto.getKeyword());
-		System.out.println(dto.getArea()==null);
-		System.out.println(dto.getKeyword()==null);
-		System.out.println(dto.getArea()=="");
-		System.out.println(dto.getKeyword()=="");
-		System.out.println(dao.getList(dto));
 		request.setAttribute("list", list);
 		
 		// 별점정보를 list에 담는 method
@@ -166,21 +151,18 @@ public class StoreServiceImpl implements StoreService{
 		
 		// DB에서 해당 번호의 정보를 받아옴.
 		StoreDto myDto=dao.getMyStore_num(dto);
-		System.out.println(myDto.getStoreTag());
 		
 		// 만약 DB에 매장 tag 정보가 없다면
 		if(myDto.getStoreTag()==null) {
 			// 이스터 에그를 추가해주고
 			myDto.setStoreTag("easter egg");
 		}
-		System.out.println(myDto.getStoreTag());
 		
 		// DB의 내용을 , 로 구분해서 String array로 만들어주고
 		String[] tags=myDto.getStoreTag().split(",");
 		// 새로운 array를 만들어서 거기에 하나씩 담아줌.
 		List<String> list=new ArrayList();
 		for(int i=0; i<tags.length; i++) {
-			System.out.println(tags[i]);
 			list.add(tags[i]);
 		}
 		
@@ -191,7 +173,6 @@ public class StoreServiceImpl implements StoreService{
 		list.add(newTag);
 		// array 각 성분이 , 로 구분된 String으로 바꿔서
 		String strList=String.join(",", list);
-		System.out.println(strList);
 		
 		// DB에서 받아온 dto에 넣은 다음에
 		myDto.setStoreTag(strList);
@@ -216,14 +197,11 @@ public class StoreServiceImpl implements StoreService{
 		
 		// 입력한 tag의 정보를 읽어서
 		String tag=dto.getStoreTag();
-		System.out.println("|"+tag+"|");
-		System.out.println(list.indexOf(tag));
 		// array에서 없앤다음
 		list.remove(list.indexOf(tag));
 
 		// array 각 성분이 , 로 구분된 String으로 바꿔서
 		String strList=String.join(",", list);
-		System.out.println(strList);
 		// DB에서 받아온 dto에 넣은 다음에
 		myDto.setStoreTag(strList);
 		// dto를 넣어서 update
@@ -233,11 +211,6 @@ public class StoreServiceImpl implements StoreService{
 	// 매장 정보(이름, 주소, 시간)를 수정하는 method
 	@Override
 	public void updateStore(StoreDto dto, HttpServletRequest request) {
-		System.out.println(dto.getNum());
-		System.out.println(dto.getStoreName());
-		System.out.println(dto.getStoreAddr());
-		System.out.println(dto.getStorePhone());
-		System.out.println(dto.getOpeningTime());
 		
 		dao.updateStore(dto);
 		
@@ -251,7 +224,6 @@ public class StoreServiceImpl implements StoreService{
 		String realPath=request.getServletContext().getRealPath("/upload");
 		//저장할 파일의 상세 경로
 		String filePath=realPath+File.separator;
-		System.out.println("realPath:"+realPath);
 		//해당 경로를 access 할수 있는 파일 객체 생성
 		File f=new File(realPath);
 		if(!f.exists()){ //만일  폴더가 존재 하지 않으면
@@ -260,17 +232,13 @@ public class StoreServiceImpl implements StoreService{
 		
 		// upload할 image 정보
 		MultipartFile myImage=dto.getImageFile();
-		System.out.println(myImage);
 		//원본 파일명 
 		String orgFileName=myImage.getOriginalFilename();
 		//upload 폴더에 저장된 파일명 
 		String saveFileName=System.currentTimeMillis()+orgFileName;
-		System.out.println(orgFileName);
-		System.out.println(saveFileName);
 		try {
 			//upload 폴더에 파일을 저장한다.
 			myImage.transferTo(new File(filePath+saveFileName));
-			System.out.println(filePath+saveFileName);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -286,7 +254,6 @@ public class StoreServiceImpl implements StoreService{
 			myDto.setImage_logo("/upload/"+saveFileName);
 			myDto.setImageCheck("logo");
 		} else if("check".equals(dto.getImage_1())) {
-			System.out.println("image1: "+dto.getImage_1());
 			myDto.setImage_1("/upload/"+saveFileName);
 			myDto.setImageCheck("img1");
 		} else if("check".equals(dto.getImage_2())) {
@@ -299,11 +266,6 @@ public class StoreServiceImpl implements StoreService{
 			myDto.setImage_4("/upload/"+saveFileName);
 			myDto.setImageCheck("img4");
 		}
-		
-		System.out.println("num: "+dto.getNum());
-		System.out.println("email: "+email);
-		System.out.println("image: "+"/upload/"+saveFileName);
-		System.out.println("check: "+myDto.getImageCheck());
 		
 		dao.imageCheck(myDto);
 		
@@ -324,21 +286,18 @@ public class StoreServiceImpl implements StoreService{
 		
 		// DB에서 해당 번호의 정보를 받아옴.
 		StoreDto myDto=dao.getMyStore_num(dto);
-		System.out.println(myDto.getStoreTag());
 		
 		// 만약 DB에 매장 tag 정보가 없다면
 		if(myDto.getCategory()==null) {
 			// 이스터 에그를 추가해주고
 			myDto.setCategory("easter egg");
 		}
-		System.out.println(myDto.getCategory());
 		
 		// DB의 내용을 , 로 구분해서 String array로 만들어주고
 		String[] categories=myDto.getCategory().split(",");
 		// 새로운 array를 만들어서 거기에 하나씩 담아줌.
 		List<String> list=new ArrayList();
 		for(int i=0; i<categories.length; i++) {
-			System.out.println(categories[i]);
 			list.add(categories[i]);
 		}
 		
@@ -349,7 +308,6 @@ public class StoreServiceImpl implements StoreService{
 		list.add(newCategory);
 		// array 각 성분이 , 로 구분된 String으로 바꿔서
 		String strList=String.join(",", list);
-		System.out.println(strList);
 		
 		// DB에서 받아온 dto에 넣은 다음에
 		myDto.setCategory(strList);
@@ -364,29 +322,22 @@ public class StoreServiceImpl implements StoreService{
 		
 		// DB에서 해당 번호의 정보를 받아옴.
 		StoreDto myDto=dao.getMyStore_num(dto);
-		System.out.println(myDto.getStoreTag());
-		
-		System.out.println(myDto.getCategory());
 		
 		// DB의 내용을 , 로 구분해서 String array로 만들어주고
 		String[] categories=myDto.getCategory().split(",");
 		// 새로운 array를 만들어서 거기에 하나씩 담아줌.
 		List<String> list=new ArrayList();
 		for(int i=0; i<categories.length; i++) {
-			System.out.println(categories[i]);
 			list.add(categories[i]);
 		}
 		
 		// 입력한 tag의 정보를 읽어서
 		String category=dto.getCategory();
-		System.out.println("|"+category+"|");
-		System.out.println(list.indexOf(category));
 		// array에서 없앤다음
 		list.remove(list.indexOf(category));
 
 		// array 각 성분이 , 로 구분된 String으로 바꿔서
 		String strList=String.join(",", list);
-		System.out.println(strList);
 		// DB에서 받아온 dto에 넣은 다음에
 		myDto.setCategory(strList);
 		// dto를 넣어서 update

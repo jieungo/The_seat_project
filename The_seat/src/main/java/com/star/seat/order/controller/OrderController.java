@@ -69,9 +69,6 @@ public class OrderController {
 	@RequestMapping(value = "/order/updateState.do", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> updateState(OrderDto dto, HttpServletRequest request){
-		System.out.println(dto.getCancel());
-		System.out.println(dto.getConfirm());
-		System.out.println(dto.getOrderNum());
 		return service.updateState(dto);
 	}
 	

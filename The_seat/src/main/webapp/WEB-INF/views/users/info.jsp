@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>My Page</title>
+<title>마이 페이지</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -21,10 +21,11 @@
 <link rel="stylesheet"
 href="${pageContext.request.contextPath}/resources/css/info.css"
 type="text/css" />
-<!-- 타이틀 로고 -->
+<!-- 타이틀 고로고 -->
 <link rel="shortcut icon" type="image⁄x-icon" href="${pageContext.request.contextPath}/resources/img/summer.jpg">
 </head>
 <body style="margin-top:150px;">
+<!------------------------------ navbar 불러오기 --------------------------->
 <jsp:include page="/WEB-INF/views/nav/navbar.jsp" />
 <div class="container">
 <!--------------------- 마이페이지 상단 프로필 -------------------------->
@@ -71,13 +72,13 @@ type="text/css" />
 			<c:forEach var="tmp" items="${list }">
 			  <div class="col">
 			    <div class="card">
-			      <div class="card-head">
-			      	<p class="mb-0">${tmp.regdate }</p>
+			      <div class="card-head">		      	
 			      	<p class="mb-0">주문번호 ${tmp.orderNum }</p>
+			      	<h3 class="mb-3">${tmp.storeName }</h3>
+			      	<p class="mb-0">${tmp.regdate }</p>
 			      	<div class="amount-wrapper">
 				        <span>결제 금액 :</span><span>${tmp.amount }원</span>
 			        </div>
-			      	<h3 class="mb-3">${tmp.storeName }</h3>
 			      </div>
 			      <div>
 				  <!-- 매장평점 -->
@@ -182,6 +183,7 @@ type="text/css" />
 		</c:otherwise>
 	</c:choose>
 </div>
+
 <!------------모달창------------------프로필 편집------------------------------------->
 
 <div class="modal animate__animated animate__bounce animate__fadeInDown" tabindex="-1" id="modal-updateForm" aria-labelledby="updateForm" aria-hidden="true">
@@ -365,23 +367,6 @@ type="text/css" />
 <jsp:include page="/WEB-INF/views/nav/footer.jsp" />
 <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 <script>
-	//-----------------------------------리뷰작성 전송폼-------------------------------
-
-	/* // ajaxFormPromise  요청하기 
-	document.querySelector('#writeReview').addEventListener("submit", (e)=>{
-	  
-	  
-	  const writeReview = document.querySelector('#writeReview');
-	     
-	     ajaxFormPromise(writeReview)
-	     .then(function(response){
-	        return response.json();
-	     })
-	     .then(function(data){
-	        alert("리뷰가 작성되었습니다.");
-	        location.href="${pageContext.request.contextPath}/users/info.do";
-	     });                        
-	  }); */
 
 	//------------------------ 프로필 전송폼 ---------------------------------
 	
@@ -413,8 +398,8 @@ type="text/css" />
 			document.querySelector("input[name=profile]").value=data.imagePath;
 		});
 	});
-	// 회원 정보 수정 ajax 요청하기 
 	
+	// 회원 정보 수정 ajax 요청하기 
 	document.querySelector("#updateForm").addEventListener("submit",function(e) {
 		e.preventDefault();
 		const updateForm = document.querySelector('#updateForm');
@@ -429,7 +414,6 @@ type="text/css" />
 	});
 	
 	//비밀 번호를 확인 하는 함수 
-	
 	let isPwdValid = false;
 	function checkPwd() {
 
@@ -456,6 +440,7 @@ type="text/css" />
 			document.querySelector("#newPwd").classList.add("is-valid");
 		};
 	};
+	
 	// 비밀번호 변경 ajax
 	document.querySelector("#pwdUpdate").addEventListener("submit",function(e) {
 		e.preventDefault();
@@ -536,8 +521,6 @@ type="text/css" />
 	let orderDetail = document.querySelectorAll(".orderDetail");
 	let orderTable = document.querySelectorAll(".orderTable");
 	
-	
-	
 	for(let i=0; i<orderDetailBtn.length; i++){
 		
 		//클릭하면
@@ -592,7 +575,7 @@ type="text/css" />
 	}
 	
 	
-	//--------------------------리뷰-----------------------------------------------------------------------------------------------------------
+	//--------------------------리뷰-----------------------------------------------------
 	document.querySelector("#reviewImgLink").addEventListener("click", function(){
 		document.querySelector("#inputImg").click();
 	});
@@ -606,13 +589,11 @@ type="text/css" />
 	// 이미지 파일을 선택했을 때 동작하는 method
 	function viewThumbNail(rel, imageID){
 		document.querySelector(rel).addEventListener("change", function(e){
-			console.log("rel1: "+rel);
 			readImage(e.target, imageID);
 		});
 	}
 	
 	function readImage(input, imageID) {
-		console.log("rel2: "+imageID);
 	    // 인풋 태그에 파일이 있는 경우
 	    if(input.files && input.files[0]) {
 	        // 이미지 파일인지 검사 (생략)
@@ -640,15 +621,12 @@ type="text/css" />
 			let num=this.getAttribute("data-num");
 			// 주문 번호
 			let num2=this.getAttribute("data-num2");
-			console.log(num);
-			console.log(num2);
 			// 번호정보를 form에서 넘기는 값에 저장
 			document.querySelector("#insertNum").value=num;
 			document.querySelector("#insertOrderNum").value=num2;
 			document.querySelector("#reviewAddForm").setAttribute("data-num2", num2);
 		});
 	}
-	
 	
 	// 매장에 대한 리뷰 등록 시 동작하는 method
 	function addReview(rel){
@@ -657,13 +635,11 @@ type="text/css" />
 			e.preventDefault();
 			
 			let num=this.getAttribute("data-num2");
-			console.log(num);
 			
 			ajaxFormPromise(this)
 			.then(function(response){
 				return response.json();
 			}).then(function(data){
-				console.log(data);
 				if(data.beAdded){
 					document.querySelector("#addCloseBtn").click();
 					alert("리뷰를 등록하였습니다.");
@@ -698,15 +674,12 @@ type="text/css" />
 			.then(function(response){
 				return response.json();
 			}).then(function(data){
-				console.log(data);
 				if(data.beTaken){
 					let reviewList=data.reviewList;
-					console.log(reviewList);
 					if(reviewList.length==0){
 						test=`<p>아직 작성된 리뷰가 없습니다.</p>`
 					} else {
 						for(let j=0; j<reviewList.length; j++){
-							console.log(j);
 							if(reviewList[j].targetNum==0){
 								let path="${pageContext.request.contextPath}"+reviewList[j].imagePath;
 								let star=reviewList[j].star;
@@ -805,8 +778,6 @@ type="text/css" />
 			let num=this.getAttribute("data-num");
 			// 주문 번호
 			let num2=this.getAttribute("data-num2");
-			console.log(num);
-			console.log(num2);
 			// 번호정보를 form에서 넘기는 값에 저장
 			document.querySelector("#updateNum").value=num;
 			document.querySelector("#updateOrderNum").value=num2;
@@ -819,9 +790,7 @@ type="text/css" />
 			.then(function(response){
 				return response.json();
 			}).then(function(data){
-				console.log(data);
 				if(data.beSuccess){
-					console.log(data.reviewData);
 					let path="${pageContext.request.contextPath}"+data.reviewData.imagePath;
 					document.querySelector("#updateImg").setAttribute("src", path);
 					document.querySelector("#updateOrderNum").value=data.reviewData.orderNum;
@@ -841,13 +810,11 @@ type="text/css" />
 			e.preventDefault();
 			
 			let num=this.getAttribute("data-num2");
-			console.log(num);
 			
 			ajaxFormPromise(this)
 			.then(function(response){
 				return response.json();
 			}).then(function(data){
-				console.log(data);
 				if(data.beUpdated){
 					document.querySelector("#updateCloseBtn").click();
 					alert("리뷰를 수정하였습니다.");
@@ -867,13 +834,11 @@ type="text/css" />
 		let wantDelete=confirm("이 주문에 대한 리뷰를 삭제하시겠습니까?");
 		if(wantDelete){
 			let orderNum=this.getAttribute("data-num2");
-			console.log(orderNum);
 			
 			ajaxPromise("${pageContext.request.contextPath}/store/deleteReview.do", "post", "orderNum="+orderNum)
 			.then(function(response){
 				return response.json();
 			}).then(function(data){
-				console.log(data);
 				if(data.beDeleted){
 					alert("리뷰를 삭제하였습니다.");
 					document.querySelector("#updateCloseBtn").click();

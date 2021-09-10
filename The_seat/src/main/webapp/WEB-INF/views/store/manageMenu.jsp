@@ -5,16 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-/>
+<title>매장 메뉴 관리</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 <link rel="stylesheet"
-href="${pageContext.request.contextPath}/resources/css/manageMenu.css?ver=20"
-type="text/css" />
+	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/manageMenu.css?ver=20"
+	type="text/css" />
 </head>
 <body>
 <!----------------------------- 네비바 ------------------------------------>
@@ -82,11 +80,11 @@ type="text/css" />
                     </c:forEach>
                 </article>
                 <aside class="aside">
-			        <button onclick="location.href='${pageContext.request.contextPath}/store/myStore.do?num=${dto.num}'">매장 정보</button>
+			        <button onclick="location.href='${pageContext.request.contextPath}/store/myStore.do?num=${num}'">매장 정보</button>
 			        <button onclick="location.href='#'">메뉴 관리</button>
-			        <button onclick="location.href='${pageContext.request.contextPath}/store/storeReview.do?num=${dto.num}'">리뷰 관리</button>
-			        <button onclick="location.href='${pageContext.request.contextPath}/store/storeOrder.do?num=${dto.num}'">주문 확인</button>
-			        <button onclick="location.href='${pageContext.request.contextPath}/store/storeSeat.do?num=${dto.num}'">자리 관리</button>
+			        <button onclick="location.href='${pageContext.request.contextPath}/store/storeReview.do?num=${num}'">리뷰 관리</button>
+			        <button onclick="location.href='${pageContext.request.contextPath}/store/storeOrder.do?num=${num}'">주문 확인</button>
+			        <button onclick="location.href='${pageContext.request.contextPath}/store/storeSeat.do?num=${num}'">자리 관리</button>
 			    </aside>
 
         <!--------------------------------------- 메뉴 등록 모달창 ------------------------------>
@@ -149,9 +147,7 @@ type="text/css" />
 
 <script src="https://kit.fontawesome.com/2ebe86210e.js" crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
-
 <script>
-	
 	// 이미지를 고르면 썸네일에 등장하도록 하는 영역
 	viewThumbNail("#image");
 	
@@ -195,7 +191,6 @@ type="text/css" />
 			.then(function(response){
 				return response.json();
 			}).then(function(data){
-				console.log(data);
 				if(data.beAdded){
 					alert("메뉴가 추가되었습니다.");
 					location.href="${pageContext.request.contextPath}/store/manageMenu.do?num=${storeData.num}&storeName=${storeData.storeName}";
@@ -218,7 +213,6 @@ type="text/css" />
 				.then(function(response){
 					return response.json();
 				}).then(function(data){
-					console.log(data);
 					if(data.beDeleted){
 						location.href="${pageContext.request.contextPath}/store/manageMenu.do?num=${storeData.num}&storeName=${storeData.storeName}";
 					}
@@ -244,7 +238,6 @@ type="text/css" />
 				.then(function(response){
 					return response.json();
 				}).then(function(data){
-					console.log(data);
 					if(data.beSwitched==true){
 						icons[i].classList.toggle('fas');
 					} else if(data.beSwitched==false){
@@ -258,7 +251,6 @@ type="text/css" />
 				.then(function(response){
 					return response.json();
 				}).then(function(data){
-					console.log(data);
 					icons[i].classList.toggle('fas');
 				});
 			}		
@@ -287,8 +279,6 @@ type="text/css" />
 	
 	let originCatOptions=document.querySelectorAll(".categoryOption");
 	let newCatOptions=document.querySelectorAll(".categoryOption");
-	console.log("ori:"+originCatOptions.length);
-	console.log("new:"+newCatOptions.length);
 	// 매장 카테고리를 추가하는 method
 	document.querySelector("#addCategoryForm").addEventListener("submit", test);
 	
@@ -306,14 +296,12 @@ type="text/css" />
 			
 			// 두 정보를 object로 만들어서 전달할 준비
 			let obj={num, category};
-			console.log(obj);
 			
 			// 해당 링크를 요청하면서 object를 전달하고
 			ajaxPromise("${pageContext.request.contextPath}/store/addCategory.do", "post", obj)
 			.then(function(response){
 				return response.json();
 			}).then(function(data){
-				console.log(data);
 				// 데이터를 받으면
 				let newCategory=document.querySelector("#inputCategory");
 				// 나중에 쓸 값
@@ -329,7 +317,6 @@ type="text/css" />
 					option.setAttribute("data-num2", newCatOptions.length);
 					document.querySelector("#category").appendChild(option);
 					newCatOptions=document.querySelectorAll(".categoryOption");
-					console.log("new:"+newCatOptions.length);
 					
 					// 해당 매장의 DB 번호를 받아서
 					let dataNum=${dto.num};
@@ -401,12 +388,10 @@ type="text/css" />
 			let num=deleteBtns[i].getAttribute("data-num");
 			let category=categories[i].innerText;
 			
-			console.log(category);
 			let obj={num, category};
 			// 삭제 버튼을 눌렀을 때 작동할 이벤트
 			deleteBtns[i].addEventListener("click", function(){
 				// 삭제여부를 확인
-				console.log(obj);
 				let toDelete=confirm("이 카테고리를 삭제하시겠습니까?");
 				if(toDelete){
 					// 해당 경로를 요청하면서 object 전달
@@ -414,7 +399,6 @@ type="text/css" />
 					.then(function(response){
 						return response.json();
 					}).then(function(data){
-						console.log(data);
 						if(data.beDeleted){
 							// 해당 카테고리 버튼과 삭제버튼을 지움.
 							categories[i].remove();
@@ -440,8 +424,6 @@ type="text/css" />
 			});
 		}
 	}
-	
-	
 </script>
 </body>
 </html>

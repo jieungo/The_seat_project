@@ -43,12 +43,6 @@ public class ReviewController {
 	@ResponseBody
 	public Map<String, Object> addReview(ReviewDto dto, HttpServletRequest request){
 		
-		System.out.println(dto.getStoreNum());
-		System.out.println(dto.getStoreName());
-		System.out.println(dto.getStar());
-		System.out.println(dto.getContent());
-		System.out.println(dto.getImageFile());
-		
 		float newAvgStar=service.addReview(dto, request);
 		
 		Map<String, Object> map=new HashMap<>();
@@ -62,7 +56,6 @@ public class ReviewController {
 	@RequestMapping(value = "/store/getReview.do", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> getReviewList(ReviewDto dto, HttpServletRequest request){
-		System.out.println("storeNum: "+dto.getStoreNum());
 		
 		List<ReviewDto> list=service.getReviewList(dto, request);
 		
@@ -134,10 +127,7 @@ public class ReviewController {
 	@ResponseBody
 	public Map<String, Object> getMyReview(ReviewDto dto, HttpServletRequest request){
 		
-		System.out.println(dto.getNum());
-		
 		Map<String, Object> map=service.getMyReview(dto, request);
-		System.out.println(map.get("result"));
 		
 		return map;
 	}

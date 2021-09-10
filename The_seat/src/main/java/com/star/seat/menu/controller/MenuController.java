@@ -31,7 +31,7 @@ public class MenuController {
 
 		int num=sDto.getNum();
 		String storeName=sDto.getStoreName();
-		
+		request.setAttribute("num", num);
 		// 해당 매장의 메뉴 정보를 가져오는 method
 		service.getMenuList(sDto, request);
 		
@@ -78,11 +78,7 @@ public class MenuController {
 	@ResponseBody
 	public Map<String, Object> bestOnOff(MenuDto dto, HttpServletRequest request){
 		
-		System.out.println(dto.getNum());
-		System.out.println(dto.getBest());
-		
 		boolean beFour=service.bestOnOff(dto, request);
-		System.out.println(beFour);
 		Map<String, Object> map=new HashMap<>();
 		if(beFour) {
 			map.put("beSwitched", false);

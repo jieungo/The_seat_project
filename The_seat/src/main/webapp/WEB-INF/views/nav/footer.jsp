@@ -192,7 +192,6 @@
 </head>
 <body>
 
-	<!-- <div class="container"> -->
 	<footer class="footer-distributed">
 		<div class="footer-left">
 			<h3>
@@ -214,7 +213,7 @@
 			</div>
 			<div>
 				<i class="fa fa-phone"></i>
-				<p>+1.555.555.5555</p>
+				<p>프라이버시</p>
 			</div>
 			<div>
 				<i class="fa fa-envelope"></i>
@@ -236,6 +235,5 @@
 			</div>
 		</div>
 	</footer>
-	<!-- </div> -->
 </body>
 </html>

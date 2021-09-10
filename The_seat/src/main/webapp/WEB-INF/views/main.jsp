@@ -1,15 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%
-	// <input>태그의 name 속성값을 사용하여 사용자의 입력값을 수신한다.
-String search = request.getParameter("keyword");
-%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/views/main.jsp</title>
+<title>자리.. 있어요?</title>
 <!-- bootstrap 외부 링크 참조 -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
@@ -21,7 +17,6 @@ String search = request.getParameter("keyword");
 	integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
 	crossorigin="anonymous"></script>
 <style>
-	
 	a:link {
 		color: black;
 		text-decoration: none;
@@ -88,15 +83,13 @@ String search = request.getParameter("keyword");
 		padding:15px;
 		margin-bottom: 20px;
 	}
-	
-	
-	
 </style>
 </head>
 <body style="margin-top:200px; background-color:#f6f6f6;">
+	<!------------------------------ navbar 불러오기 --------------------------->
 	<jsp:include page="/WEB-INF/views/nav/navbar.jsp" />
+	
 	<div class="container">
-
 		<c:if test="${ not empty dto.keyword }">
 			<p>
 				<strong>${searchData.area }</strong> 지역, <strong>${dto.group }</strong> 메뉴,
@@ -105,29 +98,24 @@ String search = request.getParameter("keyword");
 		</c:if>
 	</div>
 
-	<!-- 임시 검색 결과 -->
+	<!-- 검색 결과 -->
 	<div class="container" style="margin-top: 20px; width:80%;">
 		<div class="row row-cols-3 row-cols-md-2 g-4" >
 			<c:forEach var="tmp" items="${list }">
-				<a
-					href="${pageContext.request.contextPath}/store/storeDetail.do?num=${tmp.num}">
-						<div class="row g-0 main-card">
-							<div class="col-md-6" style="height:100%">
-								<img src="${pageContext.request.contextPath}${tmp.image_logo } "
-									class="img" style="object-fit:fill; width:100%; height:180px;" alt="storeImageLogo">
-							</div>
-							<div class="col-md-6">
-								<div class="card-body">
-									<h5 class="card-title">이름 : ${tmp.storeName }</h5>
-									<p class="card-text">주소 : ${tmp.storeAddr }</p>
-									<p class="card-text">별점 : ${tmp.avgStar }</p>
-									<p class="card-text">
-										<small class="text-muted">Last updated 3 mins ago</small>
-									</p>
-								</div>
+				<a href="${pageContext.request.contextPath}/store/storeDetail.do?num=${tmp.num}">
+					<div class="row g-0 main-card">
+						<div class="col-md-6" style="height:100%">
+							<img src="${pageContext.request.contextPath}${tmp.image_logo } "
+								class="img" style="object-fit:fill; width:100%; height:180px;" alt="storeImageLogo">
+						</div>
+						<div class="col-md-6">
+							<div class="card-body">
+								<h5 class="card-title">이름 : ${tmp.storeName }</h5>
+								<p class="card-text">주소 : ${tmp.storeAddr }</p>
+								<p class="card-text">별점 : ${tmp.avgStar }</p>
 							</div>
 						</div>
-					
+					</div>
 				</a>
 			</c:forEach>
 		</div>

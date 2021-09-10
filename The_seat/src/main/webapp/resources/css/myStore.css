@@ -1,4 +1,4 @@
-@charset "UTF-8";
+
 * {
    box-sizing: border-box;
    margin:0;
@@ -196,105 +196,130 @@ img:hover {
 
 .tag_input {
 	display:flex; 
+	align-items: center;
 	box-shadow: 1px 1px 11px rgba(172, 172, 172, 0.699); 
 	width:150px; 
 	height:30px;
     margin-bottom:10px; 
     border-radius: 5px;
+ 
 }  
-          
-	
-	
-		/* 테블릿 (해상도 768px ~ 1023px)*/
-	
-	@media screen and (max-width:1024px) {
-		
-		.myStore_container {
-			height: 80%;
-			width: 95%;
-			flex-direction: column;
-			position:relative;
-			margin-top: 40px;
-		}
-	
-		.aside {
-			display:flex;
-			flex-direction: row;
-			width:100%;
-			position: absolute;
-			top: 0;
-			left:0;
-			height: auto;
-		}
-		
-		.aside > button {
-    		border-radius: 5px;
-    		font-weight: 700;
-			width: 20%;
-			height: 10vh;
-			border: 1px solid lightgray;
-		}
-		
-		.aside > button:first-child {
-			border: none;		
-		}
-		
-		.stroe-top__info {
-			padding-left: 0;
-			height:0;
-			margin-top:120px;
-		}
-		
-		.inner_container {
-			margin-top: 30px;
-		}
+     
+.addTag > span {
+	color: #598eff; 
+    border-radius: 5px; 
+    height: 30px;  
+    font-weight: 500; 
+    font-size: 20px;
+    display:flex; 
+    align-items:center; 
+    justify-content:center;  
+    text-decoration: none;
+    padding: 0;
+}
 
-	}
-		
-			/* 모바일 가로, 세로 */
-		
-		@media screen and (max-width:767px) {
-		
-		body {
-			height: auto;
-		}
-		
-		.myStore_container {
-			height: 80%;
-			width: 100%;
-			flex-direction: column;
-			text-overflow: hidden; 
-    		overflow-x: auto;
-		}
+.addTag:focus {
+    text-decoration: none;
+}
+
+#inputTag {
+	border:none; 
+	font-size:14px;
+	border-radius: 5px;
+	padding: 0;
+}
 	
-		.aside {
-			display:none;
-		}
-		
-		.store-top__info {
-			width:100%;
-			padding-left:0;
-			height: auto;
-		}
-		
-		.store-bottom__info {
-			width: 100%;
-			margin-right:0;
-			padding-top: 30px;
-			border-top: 2px solid #f2f2f2;
-			width:90%;
-		}
-		
-		.inner_container {
-			flex-direction:column;
-			margin-top: 0;
-		}
-		
-		.navbarTwo {
-			margin-top: 30px;
-		}
-		
-		.tag_input {
-			margin-bottom: 30px;
-		}
+	
+	/* 테블릿 (해상도 768px ~ 1023px)*/
+
+@media screen and (max-width:1024px) {
+	
+	.myStore_container {
+		height: 80%;
+		width: 95%;
+		flex-direction: column;
+		position:relative;
+		margin-top: 40px;
 	}
+
+	.aside {
+		display:flex;
+		flex-direction: row;
+		width:100%;
+		position: absolute;
+		top: 0;
+		left:0;
+		height: auto;
+	}
+	
+	.aside > button {
+   		border-radius: 5px;
+   		font-weight: 700;
+		width: 20%;
+		height: 10vh;
+		border: 1px solid lightgray;
+	}
+	
+	.aside > button:first-child {
+		border: none;		
+	}
+	
+	.stroe-top__info {
+		padding-left: 0;
+		height:0;
+		margin-top:120px;
+	}
+	
+	.inner_container {
+		margin-top: 30px;
+	}
+
+}
+		
+		/* 모바일 가로, 세로 */
+	
+	@media screen and (max-width:767px) {
+	
+	body {
+		height: auto;
+	}
+	
+	.myStore_container {
+		height: 80%;
+		width: 100%;
+		flex-direction: column;
+		text-overflow: hidden; 
+   		overflow-x: auto;
+	}
+
+	.aside {
+		display:none;
+	}
+	
+	.store-top__info {
+		width:100%;
+		padding-left:0;
+		height: auto;
+	}
+	
+	.store-bottom__info {
+		width: 100%;
+		margin-right:0;
+		padding-top: 30px;
+		border-top: 2px solid #f2f2f2;
+		width:90%;
+	}
+	
+	.inner_container {
+		flex-direction:column;
+		margin-top: 0;
+	}
+	
+	.navbarTwo {
+		margin-top: 30px;
+	}
+	
+	.tag_input {
+		margin-bottom: 30px;
+	}
+}

@@ -43,14 +43,12 @@ public class StoreController {
 
 		
 		// dto에 지역, 메뉴, 검색어 넣어서 dto라는 이름으로 저장.
-		//request.setAttribute("dto", dto);
 		session.setAttribute("searchData", dto);
 		
 		// 검색 결과 목록을 얻어옴
 		service.getList(request, dto);
 		
 		String email=(String)request.getSession().getAttribute("email");
-		//System.out.println(email!=null);
 		if(email != null) {
 			// 내가 관리하는 매장 정보를 얻어옴
 			service.getMyStores(request, session);
@@ -91,8 +89,6 @@ public class StoreController {
 	@RequestMapping(value = "/addTag.do", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> addTag(StoreDto dto){
-		System.out.println(dto.getNum());
-		System.out.println(dto.getStoreTag());
 		
 		// service에서 DB에 매장 태그를 추가하고
 		service.addTag(dto);
@@ -209,7 +205,6 @@ public class StoreController {
 		request.setAttribute("num", num);
 		ReviewDto rDto=new ReviewDto();
 		rDto.setStoreNum(dto.getNum());
-		System.out.println("myStoreNum: "+rDto.getStoreNum());
 		
 		List<ReviewDto> list=rService.getReviewList(rDto, request);
 		

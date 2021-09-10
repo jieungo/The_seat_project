@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/views/home.jsp</title>
+<title>자리.. 있어요?</title>
 <!-- bootstrap 외부 링크 참조 -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
@@ -19,69 +19,70 @@
 	rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
 <style>
-body {
-	background-color: #2e8eff;
-	color: white;
-	font-family: 'IBM Plex Sans KR', sans-serif;
-}
-
-#area {
-	color: rgb(73, 73, 73);
-	font-size: 18px;
-	font-weight: 500;
-	width: 110px;
-	margin-right: 40px;
-	height: 45px;
-	margin-top: 45px;
-	border: none;
-	border-radius: 7px;
-	text-align-last: center;
-	text-align: center;
-}
-
-#area:focus {
-	outline: none;
-}
-
-#keyword {
-	height: 45px;
-	margin-top: 30px;
-	outline: none;
-	border: none;
-	border-radius: 7px;
-	text-align: center;
-	font-size: 17px;
-	font-weight: 500;
-}
-
-#searchBtn {
-	color: rgb(73, 73, 73);
-	font-size: 20px;
-	font-weight: 500;
-	height: 45px;
-	margin-top: 20px;
-	border-radius: 7px;
-}
-
-#loginBtn {
-	color: rgb(73, 73, 73);
-	font-size: 20px;
-	font-weight: 500;
-	height: 45px;
-	margin-top: 30px;
-	outline: none;
-	border: none;
-	border-radius: 7px;
-}
+	body {
+		background-color: #2e8eff;
+		color: white;
+		font-family: 'IBM Plex Sans KR', sans-serif;
+	}
+	#area {
+		color: rgb(73, 73, 73);
+		font-size: 18px;
+		font-weight: 500;
+		width: 110px;
+		margin-right: 40px;
+		height: 45px;
+		margin-top: 45px;
+		border: none;
+		border-radius: 7px;
+		text-align-last: center;
+		text-align: center;
+	}
+	
+	#area:focus {
+		outline: none;
+	}
+	
+	#keyword {
+		height: 45px;
+		margin-top: 30px;
+		outline: none;
+		border: none;
+		border-radius: 7px;
+		text-align: center;
+		font-size: 17px;
+		font-weight: 500;
+	}
+	
+	#searchBtn {
+		color: rgb(73, 73, 73);
+		font-size: 20px;
+		font-weight: 500;
+		height: 45px;
+		margin-top: 20px;
+		border-radius: 7px;
+	}
+	
+	#loginBtn {
+		color: rgb(73, 73, 73);
+		font-size: 20px;
+		font-weight: 500;
+		height: 45px;
+		margin-top: 30px;
+		outline: none;
+		border: none;
+		border-radius: 7px;
+	}
 </style>
 </head>
 <body>
 	<div style="margin-top: 130px;">
+	
 		<section class="d-grid gap-2 col-2 mx-auto">
 			<p style="font-size: 20px; font-weight: 500;">이젠, 빈자리 찾아 헤매지 말자!</p>
 			<span style="font-size: 3.5em; font-family: 'Do Hyeon', sans-serif;">자리..<br>있어요?
 			</span>
 		</section>
+		
 		<!-- get 방식을 활용해 메인 페이지 URL 에 select & option 태그 설정 -->
 		<form action="${pageContext.request.contextPath}/main.do" method="get">
 			<div style="text-align: center;">
@@ -99,32 +100,19 @@ body {
 				<input type="text" id="keyword" name="keyword"
 					placeholder="오늘은 뭐 먹을까?"/>
 			</div>
-				<!--
-				<select name="group" id="group">
-					<option value="null" ${menu eq 'menu' ? 'selected' : '' }>메뉴</option>
-					<option value="KoreanFood"
-						${menu eq 'KoreanFood' ? 'selected' : '' }>한식</option>
-					<option value="JapaneseFood"
-						${menu eq 'JapaneseFood' ? 'selected' : '' }>일식</option>
-					<option value="ChineseFood"
-						${menu eq 'ChineseFood' ? 'selected' : '' }>중식</option>
-					<option value="WesternFood"
-						${menu eq 'WesternFood' ? 'selected' : '' }>양식</option>
-					<option value="Dessert" ${menu eq 'Dessert' ? 'selected' : '' }>후식</option>
-				</select>
-				  -->
-			
 			<br />
 			<div class="d-grid gap-2 col-3 mx-auto">
 				<button id="searchBtn" type="submit" class="btn btn-warning">검색</button>
 			</div>
 		</form>
+		
 		<c:if test="${sessionScope.email eq null }">
 			<div class="d-grid gap-2 col-3 mx-auto">
 				<button id="loginBtn" style="background-color: #d4d4d4;"
 					onclick="location.href='${pageContext.request.contextPath}/users/loginform.do'">로그인</button>
 			</div>
 		</c:if>
+		
 	</div>
 </body>
 </html>

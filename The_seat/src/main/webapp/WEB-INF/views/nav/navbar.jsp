@@ -357,7 +357,6 @@
 							style="width: 60px; height: 60px; border-radius: 100%;">
 						<span id="userName" style="font-weight: bold; font-size: 33px;"></span> 님 로그인 중..
                		</c:when>
-
 					<c:otherwise>
 						<span style="color: #fff; font-size: 1.5em;">반갑습니다 😊</span>
 					</c:otherwise>
@@ -410,8 +409,7 @@
 						<a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
 						<a href="https://www.google.co.kr/"><i class="fa fa-google"></i></a>
 						<a href="https://kr.linkedin.com/"><i class="fa fa-linkedin"></i></a>
-						<a href="https://github.com/Keunyeong/The_seat"><i
-							class="fa fa-github"></i></a>
+						<a href="https://github.com/Keunyeong/The_seat"><i class="fa fa-github"></i></a>
 
 					</section>
 					<c:if test="${email ne null }">
@@ -459,7 +457,6 @@
          .then(function(response){
             return response.json();
          }).then(function(data){
-            console.log(data);
             if(data.beSuccess){
             	let num=data.newStoreList.length;
             	let newAnchor = document.createElement("a");
@@ -501,6 +498,6 @@
    // 네비바의 의자 로고 누르면 메인페이지로 이동
    
    document.querySelector("#chair").addEventListener("click", function() {
-      location.href = "${pageContext.request.contextPath}/main.do";
+      location.href = "${pageContext.request.contextPath}/main.do?area=&keyword=";
    });
 </script>

@@ -7,10 +7,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insert title here</title>
-<meta charset="UTF-8">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+<title>매장 자리 관리</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" 
+	rel="stylesheet" 
+	integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" 
+	crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" 
+	integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" 
+	crossorigin="anonymous"></script>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/storeSeat.css?ver=4"
 	type="text/css" />
@@ -18,7 +22,6 @@
 <body>
 <!------------------------------- navbar -------------------------------->
 <jsp:include page="../nav/navbar2.jsp" />
-
 <div class="myStore_container">
 	<div class="myStore_container_inner">
      <!------------------------ 주문내역 텍스트 및 박스 -------------------------------->
@@ -112,7 +115,6 @@
             
         </div>
     </div>
-
         <!------------------------------------ 옆 사이드바 (매장정보, 메뉴관리 탭) ----------------->
     <aside class="aside">
         <button onclick="location.href='${pageContext.request.contextPath}/store/myStore.do?num=${num}'">매장 정보</button>
@@ -139,13 +141,9 @@
 	notEmptySeat.push(${sDto.notEmptySeat});
 	let emptySeat = [];
 	emptySeat.push(${sDto.emptySeat});
-	console.log(emptySeat);
-	console.log(notEmptySeat);
-	console.log(notUse);
 	let totalSeat = [];
 	totalSeat.push(${sDto.totalSeat});
 	let totalNum = totalSeat.length;
-	console.log(totalNum);
 	document.querySelector("#totalSeat").value=totalNum;
 	//자리 이미지 링크를 클릭하면 
 	document.querySelector("#seatLink").addEventListener("click", function(){
@@ -173,11 +171,8 @@
 	});
 	
 	document.querySelector("#content").addEventListener("keyup",function(){
-		console.log(this.value);
 		document.querySelector("#seatContent").value=this.value;
-		console.log(document.querySelector("#seatContent").value);
 	})
-	console.log(document.querySelector("#seatContent").value);
 	document.querySelector("#totalSeat").addEventListener("input",function(){
 		totalNum = this.value;
 		emptySeat = [];
@@ -221,9 +216,6 @@
 				if (index3 > -1) {
 					notUse.splice(index3, 1);
 				};
-				console.log(emptySeat);
-				console.log(notEmptySeat);
-				console.log(notUse);
 			} else if (seatState == "notEmptySeat"){
 				let index1 = emptySeat.indexOf(seatNum); 
 				if (index1 > -1) {
@@ -237,9 +229,6 @@
 				if (index3 > -1) {
 				  notUse.splice(index3, 1);
 				};
-				console.log(emptySeat);
-				console.log(notEmptySeat);
-				console.log(notUse);
 				
 			} else if (seatState == "notUse"){
 				let index1 = emptySeat.indexOf(seatNum); 

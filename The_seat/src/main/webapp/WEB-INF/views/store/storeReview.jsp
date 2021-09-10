@@ -5,6 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>매장 리뷰 관리</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -164,10 +166,8 @@
         <button onclick="location.href='${pageContext.request.contextPath}/store/storeSeat.do?num=${num}'">자리 관리</button>
     </aside>
 </div>
-<script src="https://kit.fontawesome.com/2ebe86210e.js"
-	crossorigin="anonymous"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
+<script src="https://kit.fontawesome.com/2ebe86210e.js" crossorigin="anonymous"></script>
+<script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 <script>
 	//각 버튼들이 동작하는곳
 	// 댓글달기 버튼 클릭하면 사장님 답글 창 생성
@@ -207,13 +207,11 @@
 				// 없으면 작성하라는 멘트
 				// 있으면 내용을 출력할 수 있도록
 				let num=this.getAttribute("data-num");
-				console.log(num);
 				
 				ajaxPromise("${pageContext.request.contextPath}/store/getMyReview.do", "post", "num="+num)
 				.then(function(response){
 					return response.json();
 				}).then(function(data){
-					console.log(data);
 					if(!data.beChecked){
 						ownerComments[i].innerText="사장님의 답글을 작성해주세요~";
 					} else {
@@ -267,7 +265,6 @@
 				.then(function(response){
 					return response.json();
 				}).then(function(data){
-					console.log(data);
 					if(data.beAdded){
 						alert("리뷰에 대한 댓글을 추가하였습니다.");
 						ownerComments[i].innerText=ownerAddComments[i].value;
@@ -294,7 +291,6 @@
 				.then(function(response){
 					return response.json();
 				}).then(function(data){
-					console.log(data);
 					if(data.beDeleted){
 						alert("댓글을 삭제하였습니다.");
 						ownerComments[i].innerText="사장님의 답글을 작성해주세요~";
@@ -317,7 +313,6 @@
 			.then(function(response){
 				return response.json();
 			}).then(function(data){
-				console.log(data);
 				alert("댓글을 수정하였습니다.");
 				ownerReviewBox[i].style.display="block";
 				ownerReviewUpdateFormBoxes[i].style.display="none";

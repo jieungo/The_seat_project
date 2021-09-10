@@ -36,7 +36,7 @@
 	<select id="getList" parameterType="storeDto" resultType="storeDto">
 		select *
 		from store
-		where storeOpen='no'
+		where storeOpen='yes'
 		<choose>
 			<when test="{area != '' and keyword != ''}">
 				and (lower(storeAddr) like '%' || lower(#{area}) || '%'

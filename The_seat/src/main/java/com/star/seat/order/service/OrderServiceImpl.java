@@ -196,9 +196,6 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public Map<String, Object> updateState(OrderDto dto) {
-		System.out.println(dto.getCancel());
-		System.out.println(dto.getConfirm());
-		System.out.println(dto.getOrderNum());
 		dao.updateState(dto);
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("isSuccess",true);

@@ -23,9 +23,6 @@ href="${pageContext.request.contextPath}/resources/css/storeDetail.css"
 type="text/css" />
 <!------------------ 타이틀 로고 -------------------->
 <link rel="shortcut icon" type="image⁄x-icon" href="${pageContext.request.contextPath}/resources/img/snow.jpg">
-<style>
-  
-</style>
 </head>
 <!---------------------- 네비바를 import 한다. ------------------------->
 <jsp:include page="/WEB-INF/views/nav/navbar.jsp" />
@@ -332,37 +329,38 @@ type="text/css" />
 </div>
 <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 <script>
-let totalSeat = [];
-let emptySeat = [];
-totalSeat.push(${sDto.totalSeat });
-emptySeat.push(${sDto.emptySeat });
-
-document.querySelector("#totalSeatNum").innerText = totalSeat.length;
-document.querySelector("#emptySeatNum").innerText = emptySeat.length;
-document.querySelector("#totalSeatNum1").innerText = totalSeat.length;
-document.querySelector("#emptySeatNum1").innerText = emptySeat.length;
-
-//--------------------주문하러 가기(버튼 누르면)
-document.querySelector("#orderBtn").addEventListener("click", function(){
-  let num = ${dto.num};
-  //버튼 눌렀을때 millisecond 을 추출
-  let str = String(Date.now());
-  //너무 길어서 필요한 만큼만 orderNum 으로 가져간다.
-  let orderNum = str.substring(str.length-6, str.length);
-  //선택한 좌석 번호 tableNum 으로 가져간다.
-  let tableNum = document.querySelector("#seatChoice").value;
-  if(tableNum != ""){
-	//get 방식으로 매장 고유번호를 num 으로 가져가고 orderNum,tableNum을 가져간다.
-	  location.href="${pageContext.request.contextPath}/order/order.do?num="+num+"&tableNum="+tableNum+"&orderNum="+orderNum;
-  } else {
-	  alert("자리를 선택해주세요!");
-  };
-})
+	let totalSeat = [];
+	let emptySeat = [];
+	totalSeat.push(${sDto.totalSeat });
+	emptySeat.push(${sDto.emptySeat });
+	document.querySelector("#totalSeatNum").innerText = totalSeat.length;
+	document.querySelector("#emptySeatNum").innerText = emptySeat.length;
+	document.querySelector("#totalSeatNum1").innerText = totalSeat.length;
+	document.querySelector("#emptySeatNum1").innerText = emptySeat.length;
+	
+	//--------------------주문하러 가기(버튼 누르면)
+	document.querySelector("#orderBtn").addEventListener("click", function(){
+	  let num = ${dto.num};
+	  //버튼 눌렀을때 millisecond 을 추출
+	  let str = String(Date.now());
+	  //너무 길어서 필요한 만큼만 orderNum 으로 가져간다.
+	  let orderNum = str.substring(str.length-6, str.length);
+	  //선택한 좌석 번호 tableNum 으로 가져간다.
+	  let tableNum = document.querySelector("#seatChoice").value;
+	  if(tableNum != ""){
+		//get 방식으로 매장 고유번호를 num 으로 가져가고 orderNum,tableNum을 가져간다.
+		  location.href="${pageContext.request.contextPath}/order/order.do?num="+num+"&tableNum="+tableNum+"&orderNum="+orderNum;
+	  } else {
+		  alert("자리를 선택해주세요!");
+	  };
+	})
+	
 	// 답글 보기 버튼 클릭하면 사장님 답글 창 생성
 	let review = document.querySelectorAll('.userReview');
 	let ownerReviewBox = document.querySelectorAll('.ownerReview');
 	let ownerRegdates=document.querySelectorAll(".ownerRegdate");
 	let ownerComments=document.querySelectorAll(".ownerComment");
+	
 	for (let i = 0; i < review.length; i++) {
 		review[i].addEventListener('click', function() {
 			let dummy=ownerReviewBox[i];
@@ -373,13 +371,11 @@ document.querySelector("#orderBtn").addEventListener("click", function(){
 				// 없으면 작성하라는 멘트
 				// 있으면 내용을 출력할 수 있도록
 				let num=this.getAttribute("data-num");
-				console.log(num);
 				
 				ajaxPromise("${pageContext.request.contextPath}/store/getMyReview.do", "post", "num="+num)
 				.then(function(response){
 					return response.json();
 				}).then(function(data){
-					console.log(data);
 					if(!data.beChecked){
 						ownerComments[i].innerText="아직 사장님의 답글이 없습니다.";
 					} else {

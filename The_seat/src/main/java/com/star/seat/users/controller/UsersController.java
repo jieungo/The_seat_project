@@ -155,7 +155,7 @@ public class UsersController {
 		//세션에서 id 라는 키값으로 저장된 값 삭제 
 		session.removeAttribute("email");
 		session.removeAttribute("name");
-		mView.setViewName("redirect:/main.do");
+		mView.setViewName("redirect:/main.do?area=&keyword=");
 		return mView;
 	}
 }
