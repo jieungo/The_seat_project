@@ -43,7 +43,8 @@ public class StoreController {
 
 		
 		// dto에 지역, 메뉴, 검색어 넣어서 dto라는 이름으로 저장.
-		request.setAttribute("dto", dto);
+		//request.setAttribute("dto", dto);
+		session.setAttribute("searchData", dto);
 		
 		// 검색 결과 목록을 얻어옴
 		service.getList(request, dto);

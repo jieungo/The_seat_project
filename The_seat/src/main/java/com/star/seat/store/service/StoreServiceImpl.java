@@ -137,8 +137,12 @@ public class StoreServiceImpl implements StoreService{
 	public void getList(HttpServletRequest request, StoreDto dto) {
 		List<StoreDto> list=dao.getList(dto);
 		System.out.println("area : "+dto.getArea());
-		System.out.println("group : "+dto.getGroup());
+		//System.out.println("group : "+dto.getGroup());
 		System.out.println("keyword : "+dto.getKeyword());
+		System.out.println(dto.getArea()==null);
+		System.out.println(dto.getKeyword()==null);
+		System.out.println(dto.getArea()=="");
+		System.out.println(dto.getKeyword()=="");
 		System.out.println(dao.getList(dto));
 		request.setAttribute("list", list);
 		
