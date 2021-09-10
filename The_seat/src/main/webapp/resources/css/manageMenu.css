@@ -1,5 +1,4 @@
 @charset "UTF-8";
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -66,8 +65,12 @@ input:focus {
 .menu__list {
 	margin-top: 60px;
 	height:450px;
+	width: 100%;
 	text-overflow:hidden;
 	overflow-x:auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .menu__category {
@@ -77,6 +80,8 @@ input:focus {
     background-color: white; 
     z-index: 999; 
     position: fixed;
+    width: 50%;
+    left:5%;
 }
 
 .menu__category  a {
@@ -97,7 +102,6 @@ input:focus {
     justify-content: space-between;
     position: relative;
     width: 100%;
-    margin-left: 10%;
 }
 
 ::-webkit-scrollbar {
@@ -202,7 +206,7 @@ input:focus {
 .card {
     border: none;
     box-shadow: 4px 6px 11px rgba(172, 172, 172, 0.699);
-    max-width: 450px; 
+    width:80%;
     height: 220px; 
     margin-top: 20px;
     display:flex;
@@ -236,7 +240,7 @@ input:focus {
 }
 
 .card-body {
-	width: 200px;
+	width: 400px;
 	margin: 20px;
 }
 
@@ -286,6 +290,10 @@ input:focus {
 	
 	.menu__list {
 		height: 80%;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 		margin-top:50;
 	}
 }
@@ -344,4 +352,3 @@ input:focus {
 		margin-bottom:10px;
 	}
 }
-

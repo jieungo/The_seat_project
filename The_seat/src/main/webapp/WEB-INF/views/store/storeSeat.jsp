@@ -15,10 +15,8 @@
 	href="${pageContext.request.contextPath}/resources/css/storeSeat.css?ver=4"
 	type="text/css" />
 </head>
-
 <body>
-    
-    <!------------------------------- navbar -------------------------------->
+<!------------------------------- navbar -------------------------------->
 <jsp:include page="../nav/navbar2.jsp" />
 
 <div class="myStore_container">
@@ -37,7 +35,7 @@
 										<h1>매장 자리 이미지를 등록해 주세요!</h1>
 									</c:when>
 									<c:otherwise>
-										<img id="seatImage" style="width:100%; height:100%; object-fit: cover;" src="${pageContext.request.contextPath}${sDto.seatImage}" />
+										<img id="seatImage" style="width:100%; height:100%; object-fit: fill;" src="${pageContext.request.contextPath}${sDto.seatImage}" />
 									</c:otherwise>
 								</c:choose>
 							</a>
@@ -166,7 +164,7 @@
 		})
 		.then(function(data){
 			// 클릭하는 자리에 이미지 넣어주기
-			let img=`<img id="seatImage" style="width:100%; height:100%; object-fit: cover;" src="${pageContext.request.contextPath}\${data.imagePath}"/>`;
+			let img=`<img id="seatImage" style="width:100%; height:100%; object-fit: fill;" src="${pageContext.request.contextPath}\${data.imagePath}"/>`;
 			
 			document.querySelector("#seatLink").innerHTML=img;
 			// input name="seatImage" 요소의 value 값으로 이미지 경로 넣어주기
