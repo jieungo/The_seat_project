@@ -114,3 +114,17 @@ button {
     background-color: white;
     color: #2e8eff;
 }
+
+#emailAddr {
+	width: 100px;
+	height: 30px;
+	border-radius: 5px;
+	text-align-last: center;
+	text-align: center;
+	color: rgb(73, 73, 73);
+	font-size: 17px;
+}
+
+#emailAddr:focus {
+	outline: none;
+}

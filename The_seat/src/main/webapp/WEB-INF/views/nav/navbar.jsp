@@ -251,6 +251,9 @@
 							style="width: 60px; height: 60px; border-radius: 100%;">
 						<span id="userName" style="font-weight: bold; font-size: 33px;"></span> 님 로그인 중..
                		</c:when>
+               		
+               	
+               		
 					<c:otherwise>
 						<span style="font-size: 1.5em;">반갑습니다 😊</span>
 					</c:otherwise>
@@ -341,8 +344,11 @@
                 newAnchor.setAttribute("class", "store");
                 newAnchor.setAttribute("href", storePath+data.newStoreList[num-1].num);
                 
+                let newLi=document.createElement("li");
+                newLi.appendChild(newAnchor);
+                
                 //newAnchor.setAttribute("id", "addBtn" + strDataNum);
-                document.querySelector(".toggle").appendChild(newAnchor);
+                document.querySelector(".dropdown-menu").appendChild(newLi);
                 //resetDataNum();
             }
          });
