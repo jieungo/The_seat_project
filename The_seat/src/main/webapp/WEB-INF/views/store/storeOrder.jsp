@@ -84,32 +84,24 @@
 				                        <strong>${tmp.regdate }</strong>
 				                    </div>
 				                </div>
-				                <c:choose>
-				                	<c:when test="${tmp.cancel eq 'NO' }">
+		                		<c:choose>
+				                	<c:when test="${tmp.confirm eq 'NO' }">
 				                		<c:choose>
-						                	<c:when test="${tmp.confirm eq 'NO' }">
-						                		<button class="reserve-btn confirm">확인</button>
-						                	</c:when>
-						                	<c:when test="${tmp.confirm eq 'YES' }">
-						                		<button class="reserve-btn confirm" disabled>완료</button>
-						                	</c:when>
-						                </c:choose>
+				                			<c:when test="${tmp.cancel eq 'NO' }">
+				                				<button class="reserve-btn confirm">주문 확인</button>
+				                			</c:when>
+				                			<c:when test="${tmp.cancel eq 'YES' }">
+				                				<button class="reserve-btn cancel">취소 확인</button>
+				                			</c:when>
+				                			<c:when test="${tmp.cancel eq 'CONFIRM' }">
+				                				<button class="reserve-btn cancel" disabled>취소 확인 완료</button>
+				                			</c:when>
+				                		</c:choose>
 				                	</c:when>
-				                	<c:when test="${tmp.cancel eq 'YES' }">
-				                		<c:when test="${tmp.cancel eq 'YES' }">
-					                		<button class="reserve-btn cancelComplete">주문 취소 확인</button>
-					                		<button class="reserve-btn cancelReject">주문 취소 거절</button>
-					                	</c:when>
-					                	<c:when test="${tmp.cancel eq 'COMPLETE' }">
-					                		<button class="reserve-btn cancel" disabled>취소 완료</button>
-					                	</c:when>
-					                	<c:when test="${tmp.cancel eq 'REJECT' }">
-					                		<button class="reserve-btn cancel" disabled>취소 거절 후 완료</button>
-					                	</c:when>
+				                	<c:when test="${tmp.confirm eq 'YES' }">
+				                		<button class="reserve-btn confirm" disabled>확인 완료</button>
 				                	</c:when>
 				                </c:choose>
-				                
-				                
 				            </section>
 				        </div>
 				    </div>
@@ -140,6 +132,7 @@ let phone = document.querySelectorAll(".phone");
 let orderNumber = document.querySelectorAll(".orderNum");
 let orderDetail = document.querySelectorAll(".orderDetail");
 let orderConfirm = document.querySelectorAll(".confirm");
+let orderCancel = document.querySelectorAll(".cancel");
 
 
 for(let i=0; i<orderEmail.length; i++){
@@ -184,19 +177,39 @@ for(let i=0; i<orderEmail.length; i++){
 		};
 	});
 	
-	orderConfirm[i].addEventListener("click", function(){
-		
-		ajaxPromise("${pageContext.request.contextPath}/order/updateState.do","post","orderNum="+orderNum+"&confirm=YES")
-		.then(function(response){
-			return response.json();
-		})
-		.then(function(data){
-			if(data.isSuccess == true){
-				orderConfirm[i].innerText = '완료';
-				orderConfirm[i].setAttribute('disabled',true);
-			}
-		})
-	})
+	if(orderConfirm.length != 0){
+		//주문 확인 버튼 눌렀을 때 
+		orderConfirm[i].addEventListener("click", function(){
+			
+			ajaxPromise("${pageContext.request.contextPath}/order/updateState.do","post","orderNum="+orderNum+"&confirm=YES"+"&cancel=NO")
+			.then(function(response){
+				return response.json();
+			})
+			.then(function(data){
+				if(data.isSuccess == true){
+					orderConfirm[i].innerText = '완료';
+					orderConfirm[i].setAttribute('disabled',true);
+				};
+			});
+		});
+	}
+	
+	if(orderCancel.length != 0){
+		//주문 확인 완료 버튼 눌렀을 때 
+		orderCancel[i].addEventListener("click", function(){
+			
+			ajaxPromise("${pageContext.request.contextPath}/order/updateState.do","post","orderNum="+orderNum+"&confirm=NO"+"&cancel=CONFIRM")
+			.then(function(response){
+				return response.json();
+			})
+			.then(function(data){
+				if(data.isSuccess == true){
+					orderCancel[i].innerText = '취소 완료';
+					orderCancel[i].setAttribute('disabled',true);
+				};
+			});
+		});
+	}
 }
 
 
