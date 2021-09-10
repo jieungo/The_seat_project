@@ -30,9 +30,7 @@
 	<select id="getMenuList_user" parameterType="storeDto" resultType="menuDto">
 		select *
 		from storeMenu
-		inner join store
-		on store.storeName=storeMenu.storeName
-		where storeMenu.storeNum=#{num}
+		where storeNum=#{num}
 	</select>
 	
 	<!-- 해당 매장의 메뉴 정보를 삭제하는 method -->
@@ -61,4 +59,11 @@
 		    	where best='yes' and store.num=#{num} 
 		    	and store.storeName=#{storeName} and store.owner=#{owner}) result1)
 	</select>
+	
+	<!-- 해당 매장의 메뉴 전체 정보를 삭제하는 method -->
+	<delete id="deleteAllMenu" parameterType="menuDto">
+		delete
+		from storeMenu
+		where storeNum=#{storeNum}
+	</delete>
 </mapper>

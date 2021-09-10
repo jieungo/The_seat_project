@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.star.seat.menu.dao.MenuDao;
+import com.star.seat.menu.dto.MenuDto;
 import com.star.seat.review.dao.ReviewDao;
 import com.star.seat.review.dto.ReviewDto;
 import com.star.seat.seat.dao.SeatDao;
@@ -25,6 +27,8 @@ public class StoreServiceImpl implements StoreService{
 	private StoreDao dao;
 	@Autowired
 	private SeatDao stDao;
+	@Autowired
+	private MenuDao mDao;
 	@Autowired
 	private ReviewDao rDao;
 	
@@ -386,11 +390,23 @@ public class StoreServiceImpl implements StoreService{
 	public void deleteStore(StoreDto dto, HttpServletRequest request) {
 		String email=(String)request.getSession().getAttribute("email");
 		dto.setOwner(email);
+		
 		SeatDto sDto = new SeatDto();
 		sDto.setNum(dto.getNum());
+		
+		MenuDto mDto=new MenuDto();
+		mDto.setStoreNum(dto.getNum());
+		
+		ReviewDto rDto=new ReviewDto();
+		rDto.setStoreNum(dto.getNum());
+		
 		// 매장 정보를 지우고
 		dao.deleteStore(dto);
 		// 매장 자리 정보도 지움
 		stDao.seatDelete(sDto);
+		// 매장 메뉴 정도도 지움
+		mDao.deleteAllMenu(mDto);
+		// 매장 리뷰 정보도 지움
+		rDao.deleteAllReview(rDto);
 	}
 }

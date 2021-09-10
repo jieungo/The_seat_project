@@ -20,12 +20,13 @@ public class OrderDto {
 	private int endRowNum;
 	private float avgStar;
 	private int myStar;
+	private String owner;
 	
 	public OrderDto () {}
 
 	public OrderDto(int orderNum, String email, String storeName, String storeLogo, int num, int tableNum, String menu,
 			int menuCount, int price, int amount, String reviewExist, String confirm, String cancel, String regdate,
-			String orderdate, int startRowNum, int endRowNum, float avgStar, int myStar) {
+			String orderdate, int startRowNum, int endRowNum, float avgStar, int myStar, String owner) {
 		super();
 		this.orderNum = orderNum;
 		this.email = email;
@@ -46,6 +47,7 @@ public class OrderDto {
 		this.endRowNum = endRowNum;
 		this.avgStar = avgStar;
 		this.myStar = myStar;
+		this.owner = owner;
 	}
 
 	public int getOrderNum() {
@@ -198,6 +200,14 @@ public class OrderDto {
 
 	public void setMyStar(int myStar) {
 		this.myStar = myStar;
+	}
+
+	public String getOwner() {
+		return owner;
+	}
+
+	public void setOwner(String owner) {
+		this.owner = owner;
 	}
 
 

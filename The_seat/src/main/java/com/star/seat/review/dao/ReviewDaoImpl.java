@@ -86,4 +86,10 @@ public class ReviewDaoImpl implements ReviewDao{
 	public int getMyStar(ReviewDto dto) {
 		return session.selectOne("getMyStar", dto);
 	}
+	
+	// 해당 매장 DB 번호로 된 모든 리뷰를 삭제하는 method
+	@Override
+	public void deleteAllReview(ReviewDto dto) {
+		session.delete("deleteAllReview", dto);	
+	}
 }

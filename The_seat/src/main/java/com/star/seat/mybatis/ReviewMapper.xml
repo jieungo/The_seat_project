@@ -49,7 +49,7 @@
 	<update id="updateReview" parameterType="reviewDto">
 		update storeReview
 		set star=#{star}, content=#{content}, imagePath=#{imagePath}
-		where orderNum=#{orderNum}
+		where orderNum=#{orderNum} and writer=#{writer}
 	</update>
 	
 	<!-- 해당 주문 번호에 해당하는 review 존재 여부를 조정하는 method -->
@@ -86,4 +86,11 @@
 		from storeReview
 		where orderNum=#{orderNum} and targetNum='0'
 	</select>
+	
+	<!-- 해당 매장 DB 번호로 된 모든 리뷰를 삭제하는 method -->
+	<delete id="deleteAllReview" parameterType="reviewDto">
+		delete 
+		from storeReview
+		where storeNum=${storeNum}
+	</delete>
 </mapper>

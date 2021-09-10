@@ -64,4 +64,10 @@ public class MenuDaoImpl implements MenuDao{
 		
 		return session.selectOne("bestCount", dto);
 	}
+	
+	// 해당 매장의 메뉴 전체 정보를 삭제하는 method
+	@Override
+	public void deleteAllMenu(MenuDto dto) {
+		session.delete("deleteAllMenu", dto);	
+	}
 }

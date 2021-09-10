@@ -41,4 +41,7 @@ public interface ReviewDao {
 	
 	// 해당 orderNum에 준 내 별점 정보를 얻어내는 method
 	public int getMyStar(ReviewDto dto);
+	
+	// 해당 매장 DB 번호로 된 모든 리뷰를 삭제하는 method
+	public void deleteAllReview(ReviewDto dto);
 }

@@ -238,7 +238,7 @@
 		updateBtns[i].addEventListener("click", function(e){
 			e.preventDefault();
 			
-			ownerUpdateComments[i].innerText=ownerComments[i].value;
+			ownerUpdateComments[i].innerText=ownerComments[i].innerText;
 			ownerReviewBox[i].style.display="none";
 			ownerReviewUpdateFormBoxes[i].style.display="block";
 		});
