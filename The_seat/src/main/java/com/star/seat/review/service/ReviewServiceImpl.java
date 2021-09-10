@@ -102,7 +102,7 @@ public class ReviewServiceImpl implements ReviewService{
 	public List<ReviewDto> getReviewList(ReviewDto dto, HttpServletRequest request) {
 		List<ReviewDto> list=dao.getReviewList(dto);
 		System.out.println(dto.getStoreNum());
-
+		
 		if(list!=null) {
 			for(int i=0; i<list.size(); i++) {
 				// 해당 댓글의 DB 번호를 불러옴
@@ -189,9 +189,6 @@ public class ReviewServiceImpl implements ReviewService{
 		} else {
 			dto.setImagePath("null");
 		}
-		
-		String email=(String)request.getSession().getAttribute("email");
-		dto.setWriter(email);
 		
 		dao.updateReview(dto);
 		float newAvgStar=(float)(Math.round(dao.getAvgStar(dto)*100)/100.0);
