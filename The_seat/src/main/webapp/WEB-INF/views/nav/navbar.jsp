@@ -103,15 +103,15 @@
 .offcanvas {
 	transform: translateX(100%);
 	transition: transform 0.5s ease-out;
-	background-color: rgb(71, 71, 71);
+	background-color: #fff;
+	box-shadow: -5px 0 10px #fff;
 }
 
 .offcanvas h5 {
-	color: #fff;
+	color: #000;
 	margin-top: 20px;
 	display: inline-block;
 	width: 100%;
-	height: 50px;
 	text-align: center;
 }
 
@@ -119,28 +119,44 @@
 	text-decoration: none;
 	font-size: 25px;
 	font-weight: 500;
-	color: #fff;
+	color: #3fa2ff;
 	display: block;
 	transition: 0.3s ease-in-out;
 	display: inline-block;
 }
 
 .offcanvas .a1:hover {
+	color: #000;
+	transform: scale(1.3);
+	-webkit-transform: scale(1.3);
 	font-weight: 500;
+}
+
+.offcanvas .a2:hover {
+	color: #000;
 	transform: scale(1.3);
 	-webkit-transform: scale(1.3);
 	font-weight: 500;
 }
 
 #dropdownMenuLink:hover {
-	color: rgb(161, 208, 252);
+	color: #000;
 	font-weight: 500;
 }
 
 .offcanvas ul .li_ {
 	list-style: none;
 	text-align: center;
-	box-shadow: 1px 1px 15px #fff;
+	box-shadow: 1px 1px 11px rgba(172, 172, 172, 0.699);
+	width: 200px;
+	margin-left: 50px;
+}
+
+.offcanvas ul .li2 {
+	list-style: none;
+	text-align: center;
+	width: 200px;
+	margin-left: 50px;
 }
 
 .list_:hover {
@@ -245,16 +261,22 @@
 	width: 35px;
 	height: 35px;
 	cursor: pointer;
-	background-color: #fff;
+	background-color: #92c0fc;
 	border-radius: 2px;
-	font-size: 20px;
-	color: rgb(56, 56, 56);
+	font-size: 25px;
+	color: #fff;
 	text-align: center;
 	line-height: 35px;
 	margin-right: 10px;
 	margin-bottom: 5px;
 	border-radius: 2px;
 }
+
+.footer-icons a:hover {
+	transform:scale(1.3);
+	-webkit-transform:scale(1.3);
+}
+
 </style>
 <nav class="navbars navbar-light">
 	<div style="display: flex; align-items: center;">
@@ -358,7 +380,7 @@
 						<span id="userName" style="font-weight: bold; font-size: 33px;"></span> 님 로그인 중..
                		</c:when>
 					<c:otherwise>
-						<span style="color: #fff; font-size: 1.5em;">반갑습니다 😊</span>
+						<span style="color: #000; font-size: 1.8em;">반갑습니다 😊</span>
 					</c:otherwise>
 				</c:choose>
 			</h5>
@@ -380,20 +402,28 @@
 						</c:otherwise>
 					</c:choose></li>
 
-				<li class="li_" style="margin-top: 20px;"><a class="a1"
-					data-num="0" id="addBtn0" href="#" style="line-height: 2.5;">+
-						매장 추가</a></li>
-
 				<c:choose>
+					<c:when test="${email !=null && myStoreList.size() == 0}">
+						<div class="dropdown" style="margin-top: 30px; display: none;">
+							<a class="dropdown-toggle" href="#" role="button"
+								id="dropdownMenuLink" data-bs-toggle="dropdown"
+								aria-expanded="false"
+								style="box-shadow: 1px 1px 11px rgba(172, 172, 172, 0.699); width: 200px; margin-left: 50px; line-height: 2.5; text-align: center;">
+								매장 목록 </a>
+							<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"
+								style="text-align: center; width: 100%; height: 200px; overflow: auto;">
+							</ul>
+						</div>
+					</c:when>
 					<c:when test="${email !=null && myStoreList.size() != 0}">
 						<div class="dropdown" style="margin-top: 30px;">
 							<a class="dropdown-toggle" href="#" role="button"
 								id="dropdownMenuLink" data-bs-toggle="dropdown"
 								aria-expanded="false"
-								style="box-shadow: 1px 1px 17px #fff; width: 100%; line-height: 2.5; text-align: center;">
+								style="box-shadow: 1px 1px 11px rgba(172, 172, 172, 0.699); width: 200px; margin-left: 50px; line-height: 2.5; text-align: center;">
 								매장 목록 </a>
 							<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"
-								style="text-align: center; width: 100%; height: 200px; overflow: auto;">
+								style="text-align: center; width: 200px; height: 200px; overflow: auto;">
 
 								<c:forEach var="tmp" items="${myStoreList }" varStatus="status">
 									<li><a class="list_" style="color: rgb(71, 71, 71);"
@@ -421,6 +451,11 @@
 						</li>
 					</c:if>
 				</div>
+				<c:if test="${email != null }">
+					<li class="li2" style="margin-top: 20px;"><a class="a2"
+						data-num="0" id="addBtn0" href="#" style="line-height: 2.5;">➕ 매장 추가</a>
+					</li>
+				</c:if>
 			</ul>
 		</div>
 	</div>
@@ -435,7 +470,13 @@
                return response.json()
             }).then(function(data) {
          document.querySelector("#userName").innerText = data.dto.name;
-         document.querySelector("#userProfile").setAttribute("src","${pageContext.request.contextPath}"+data.dto.profile);
+         if(data.dto.profile == 'profile'){
+        	 document.querySelector("#userProfile").setAttribute("src","${pageContext.request.contextPath}/resources/img/user1.png");
+        	 document.querySelector("#userProfile").setAttribute('style','width: 55px; height: 50px;');
+         }else{
+        	 document.querySelector("#userProfile").setAttribute("src","${pageContext.request.contextPath}"+data.dto.profile);
+         }
+         
       });
    }
    
@@ -462,7 +503,8 @@
             	let newAnchor = document.createElement("a");
                 newAnchor.innerText = "Defaults";
                 //newAnchor.setAttribute("data-num", dataNum);
-                newAnchor.setAttribute("class", "store");
+                newAnchor.setAttribute("class", "list_");
+                newAnchor.setAttribute("style", "color: rgb(71, 71, 71);");
                 newAnchor.setAttribute("href", storePath+data.newStoreList[num-1].num);
                 //newAnchor.setAttribute('style', 'display: block;');
                 
@@ -471,6 +513,7 @@
                 
                 //newAnchor.setAttribute("id", "addBtn" + strDataNum);
                 document.querySelector(".dropdown-menu").appendChild(newLi);
+                document.querySelector(".dropdown").style.display="block";
                 //resetDataNum();
                 
                 //매장 추가 눌렀을 때 새로고침 없이 토글 버튼 보이게 하기
