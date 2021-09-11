@@ -40,7 +40,6 @@ public class StoreController {
 	// 검색 결과 메인 페이지를 요청할 때의 method
 	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
 	public String getList(StoreDto dto, HttpServletRequest request, HttpSession session) {
-
 		
 		// dto에 지역, 메뉴, 검색어 넣어서 dto라는 이름으로 저장.
 		session.setAttribute("searchData", dto);

@@ -13,7 +13,7 @@
 		select storeMenu.num as num, storeMenu.storeName as storeName, menuImage, menuName, content, price, best, storeMenu.category as category
 		from storeMenu
 		inner join store
-		on store.storeName=storeMenu.storeName and store.num=storeMenu.storeNum
+		on store.num=storeMenu.storeNum
 		where store.owner=#{sDto.owner} and store.num=#{sDto.num}
 		and storeMenu.category=#{mDto.category}
 	</select>

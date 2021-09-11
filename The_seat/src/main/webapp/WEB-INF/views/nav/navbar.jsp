@@ -316,9 +316,8 @@
          </select>
          -->
 			<input type="text" id="keyword" name="keyword"
-				placeholder="오늘은 뭐 먹을까?" value="${keyword}" />
-			<button id="searchBtn" type="submit"
-				onclick="location.href='${pageContext.request.contextPath}/main.do'">
+				placeholder="오늘은 뭐 먹을까?" />
+			<button id="searchBtn" type="submit">
 				<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
 					xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50"
 					viewBox="0 0 485.6 485.6"
@@ -415,7 +414,7 @@
 							</ul>
 						</div>
 					</c:when>
-					<c:when test="${email !=null && myStoreList.size() != 0}">
+					<c:when test="${email != null && myStoreList.size() != 0}">
 						<div class="dropdown" style="margin-top: 30px;">
 							<a class="dropdown-toggle" href="#" role="button"
 								id="dropdownMenuLink" data-bs-toggle="dropdown"
@@ -501,7 +500,7 @@
             if(data.beSuccess){
             	let num=data.newStoreList.length;
             	let newAnchor = document.createElement("a");
-                newAnchor.innerText = "Defaults";
+                newAnchor.innerText = "새 매장";
                 //newAnchor.setAttribute("data-num", dataNum);
                 newAnchor.setAttribute("class", "list_");
                 newAnchor.setAttribute("style", "color: rgb(71, 71, 71);");

@@ -90,12 +90,36 @@
 	<jsp:include page="/WEB-INF/views/nav/navbar.jsp" />
 	
 	<div class="container">
-		<c:if test="${ not empty dto.keyword }">
-			<p>
-				<strong>${searchData.area }</strong> 지역, <strong>${dto.group }</strong> 메뉴,
-				<strong>${searchData.keyword }</strong> 검색어로 검색된 내용 자세히 보기
-			</p>
-		</c:if>
+		<c:choose>
+			<c:when test="${searchData.area == '' and searchData.keyword == ''}">
+				<p>
+					<strong>뭘 좋아하는 지 몰라서 전부 준비해봤어~(찡긋)</strong>
+					<br>
+					${list.size() } 개의 매장이 검색되었습니다.
+				</p>
+			</c:when>
+			<c:when test="${searchData.area != ''}">
+				<p>
+					<strong>'${searchData.area }'</strong> 지역으로
+					<br>
+					${list.size() } 개의 매장이 검색되었습니다.
+				</p>
+			</c:when>
+			<c:when test="${searchData.keyword != ''}">
+				<p>
+					<strong>'${searchData.keyword }'</strong> 검색어로 검색된 내용 자세히 보기
+					<br>
+					${list.size() } 개의 매장이 검색되었습니다.
+				</p>
+			</c:when>
+			<c:otherwise>
+				<p>
+					<strong>'${searchData.area }'</strong> 지역,
+					<strong>'${searchData.keyword }'</strong> 검색어로 검색된 내용 자세히 보기
+					${list.size() } 개의 매장이 검색되었습니다.
+				</p>
+			</c:otherwise>
+		</c:choose>
 	</div>
 
 	<!-- 검색 결과 -->
@@ -112,7 +136,12 @@
 							<div class="card-body">
 								<h5 class="card-title">이름 : ${tmp.storeName }</h5>
 								<p class="card-text">주소 : ${tmp.storeAddr }</p>
-								<p class="card-text">별점 : ${tmp.avgStar }</p>
+								<p class="card-text">별점 : ${tmp.avgStar }
+								<p class="card-text">
+									<c:forEach var="tag" begin="1" items="${tmp.storeTag }">
+										#${tag }
+									</c:forEach>
+								</p>
 							</div>
 						</div>
 					</div>
