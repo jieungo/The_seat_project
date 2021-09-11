@@ -11,7 +11,7 @@
 				FROM order_
 				WHERE email = #{email }
 				GROUP BY orderNum, email, storeName, storeLogo, num, tableNum, amount, reviewExist, cancel, confirm, regdate, orderdate
-				ORDER BY orderdate ASC) result1)
+				ORDER BY orderdate DESC) result1)
 		WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
 	</select>
 	
@@ -24,8 +24,7 @@
 				FROM order_
 				WHERE num = #{num }
 				GROUP BY orderNum, email, storeName, storeLogo, num, tableNum, amount, reviewExist, cancel, confirm, regdate, orderdate
-
-				ORDER BY orderdate ASC) result1)
+				ORDER BY orderdate DESC) result1)
 		WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
 	</select>
 	
@@ -76,4 +75,12 @@
 		from order_
 		where num=#{num}
 	</delete>
+	
+	<!-- 같은 email 로 된 모든 주문 내역을 삭제하는 method -->
+	<delete id="deleteEmailOrder" parameterType="orderDto">
+		delete
+		from order_
+		where email =#{email}
+	</delete>
+
 </mapper>

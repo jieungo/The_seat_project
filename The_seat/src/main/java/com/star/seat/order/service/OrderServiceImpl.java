@@ -201,6 +201,9 @@ public class OrderServiceImpl implements OrderService {
 		map.put("isSuccess",true);
 		return map;
 	}
-	
-	
+
+	@Override
+	public void deleteEmailOrder(OrderDto dto) {
+		dao.deleteEmailOrder(dto);
+	}
 }

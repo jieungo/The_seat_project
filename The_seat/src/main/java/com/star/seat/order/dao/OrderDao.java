@@ -24,4 +24,6 @@ public interface OrderDao {
 	
 	// 해당 매장 번호로 된 모든 주문 내역을 삭제하는 method
 	public void deleteAllOrder(OrderDto dto);
+	// email 번호로 된 모든 주문 내역을 삭제하는 method
+	public void deleteEmailOrder(OrderDto dto);
 }
