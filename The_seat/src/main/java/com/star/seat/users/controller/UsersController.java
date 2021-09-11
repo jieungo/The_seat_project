@@ -1,6 +1,7 @@
 package com.star.seat.users.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.star.seat.order.dto.OrderDto;
 import com.star.seat.order.service.OrderService;
+import com.star.seat.store.dto.StoreDto;
 import com.star.seat.store.service.StoreService;
 import com.star.seat.users.dto.UsersDto;
 import com.star.seat.users.service.UsersService;
@@ -23,6 +26,7 @@ import com.star.seat.users.service.UsersService;
 
 @Controller
 public class UsersController {
+	
 	
 	@Autowired
 	private UsersService service;
@@ -80,6 +84,17 @@ public class UsersController {
 	@ResponseBody
 	public Map<String, Object> Delete(HttpSession session, 
 			HttpServletRequest request) {
+		
+		List<StoreDto> list= sService.getMyStores(request, session);
+		for(StoreDto dto:list) {
+			StoreDto sDto = new StoreDto();
+			sDto.setNum(dto.getNum());
+			sService.deleteStore(sDto, request);
+		}
+		OrderDto oDto = new OrderDto();
+		oDto.setEmail((String)session.getAttribute("email"));
+		order_service.deleteEmailOrder(oDto);
+		
 		// 회원탈퇴한 email 정보를 전달 
 		return service.deleteUser(session);
 	}
@@ -153,8 +168,8 @@ public class UsersController {
 	@RequestMapping("/users/logout")
 	public ModelAndView logout(ModelAndView mView, HttpSession session) {
 		//세션에서 id 라는 키값으로 저장된 값 삭제 
+		
 		session.removeAttribute("email");
-		session.removeAttribute("name");
 		mView.setViewName("redirect:/main.do?area=&keyword=");
 		return mView;
 	}

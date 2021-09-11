@@ -9,6 +9,7 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
 <style>
+
 .footer-distributed {
 	background: rgb(234, 234, 234);
 	margin-top: 80px;
@@ -229,9 +230,10 @@
 				auctor lacus vehicula sit amet.
 			</p>
 			<div class="footer-icons">
-				<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-					class="fa fa-google"></i></a> <a href="#"><i
-					class="fa fa-linkedin"></i></a> <a href="#"><i class="fa fa-github"></i></a>
+				<a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
+				<a href="https://www.google.co.kr/"><i class="fa fa-google"></i></a>
+				<a href="https://kr.linkedin.com/"><i class="fa fa-linkedin"></i></a>
+				<a href="https://github.com/Keunyeong/The_seat"><i class="fa fa-github"></i></a>
 			</div>
 		</div>
 	</footer>

@@ -20,4 +20,6 @@ public interface OrderService {
 	public Map<String, Object> updateState(OrderDto dto);
 	// 주문정보 입력하기
 	public void orderInsert(OrderDto dto);
+	// emaill의 주문 내역 삭제하기
+	public void deleteEmailOrder(OrderDto dto);
 }

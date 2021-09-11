@@ -69,4 +69,9 @@ public class OrderDaoImpl implements OrderDao{
 	public void deleteAllOrder(OrderDto dto) {
 		session.delete("deleteAllOrder", dto);
 	}
+
+	@Override
+	public void deleteEmailOrder(OrderDto dto) {
+		session.delete("deleteEmailOrder", dto);
+	}
 }

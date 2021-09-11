@@ -19,22 +19,23 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 <!-- 스타일 링크 -->
 <link rel="stylesheet"
-href="${pageContext.request.contextPath}/resources/css/info.css"
+href="${pageContext.request.contextPath}/resources/css/info.css?ver=3"
 type="text/css" />
 <!-- 타이틀 고로고 -->
 <link rel="shortcut icon" type="image⁄x-icon" href="${pageContext.request.contextPath}/resources/img/summer.jpg">
 </head>
+
 <body style="margin-top:150px;">
 <!------------------------------ navbar 불러오기 --------------------------->
 <jsp:include page="/WEB-INF/views/nav/navbar.jsp" />
 <div class="container">
 <!--------------------- 마이페이지 상단 프로필 -------------------------->
-	<header>
+	<header class="info-header">
 		<div class="my-page__profile mt-2 mb-2">
 			<img class="me-5" src="${pageContext.request.contextPath}${dto.profile }" alt="프로필 이미지"
-				style="width: 100px; height: 100px; border-radius: 100%;">
+				style="width: 150px; height: 150px; border-radius: 100%;">
 			<div>
-				<h3>${dto.name}님의 마이페이지
+				<h3 style="margin-bottom:20px;">${dto.name}님의 마이페이지
 					<c:choose>
 						<c:when test="${myStoreList.size() eq 0 }"> 
 							<span>(Guest)</span>
@@ -57,9 +58,6 @@ type="text/css" />
 			</svg>
 		</button>
 	</header>
-	
-	<div class="divide-line out-divide-line" style="text-align: center;"></div>
-	
 <!--------------------------- 마이페이지 하단 주문내역 ---------------------------------->
 <!--------------------------- 카드로 만들기 c:forEach  사용------------------------------>
 
@@ -71,7 +69,7 @@ type="text/css" />
 			<div class="row row-cols-1 row-cols-md-3 g-4">
 			<c:forEach var="tmp" items="${list }">
 			  <div class="col">
-			    <div class="card">
+			    <div class="card" style="border-radius: 30px; border: none;">
 			      <div class="card-head">		      	
 			      	<p class="mb-0">주문번호 ${tmp.orderNum }</p>
 			      	<h3 class="mb-3">${tmp.storeName }</h3>
@@ -113,24 +111,21 @@ type="text/css" />
 		   		  <div class="mt-3">
 		   		  	<img src="${pageContext.request.contextPath}${tmp.storeLogo }" class="card-img-top" alt="...">
 		   		  </div>
-			      <div class="card-body">
+			      <div class="card-body pb-0">
 			      	<button class="orderDetailBtn" value="${tmp.orderNum }" style="display:block">주문내역 상세 보기</button>
 			      	<button class="orderDetailOffBtn" style="display:none">주문내역 상세 접기</button>
 			      	<table class="orderTable" style="display:none;">
-			      		<thead>
-			      			<tr>
-				      			<th>메뉴</th>
-				      			<th>수량</th>
-				      			<th>가격</th>
+			      		<thead style="display:flex; margin:5px 0;">
+			      			<tr style="row; display: flex; justify-content: space-evenly; width: 100%; text-align:center;">
+				      			<th class="col-4">메뉴</th>
+				      			<th class="col-3">수량</th>
+				      			<th class="col-3">가격</th>
 			      			</tr>
 			      		</thead>
-			      		<tbody class="orderDetail">
+			      		<tbody class="orderDetail" style="display: flex; flex-direction: column; font-size:14px;">
 			      		
 			      		</tbody>
 			      	</table>
-			        <br/>
-
-			        <p class="card-text"></p>
 			        <div class="circle-btn__wrapper">
 					<!-- 리뷰작성 Btn -->
 					<!-- 리뷰보기 Btn -->
@@ -280,13 +275,13 @@ type="text/css" />
 
 <!-- 리뷰 작성 modal -->
 <div data-num="" class="modal" tabindex="-1" id="reviewModal" aria-labelledby="menuAddForm" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
+    <div class="modal-dialog" style="display:flex; justify-content:center;">
+        <div class="modal-content" style="width:80%;">
             <div class="modal-header">
                 <h4 class="modal-title"><strong>리뷰 등록</strong> </h4>
                 <button id="addCloseBtn" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style=" display:flex; flex-direction:column; align-items: center; justify-content: center;">
             	<a id="reviewImgLink" href="javascript:">
 	                <img src="#" alt="" id="reviewImg" name="review" class="image mt-3"
 	                style="width: 150px; height: 150px; "/>
@@ -294,14 +289,18 @@ type="text/css" />
                 <form data-num2="" id="reviewAddForm" action="${pageContext.request.contextPath}/store/addReview.do" method="post" enctype="multipart/form-data">                 
                     <select id="insertStarSelect" name="star">
                     	<c:forEach var="tmp" items="1,2,3,4,5">
-                    		<option class="insertStar" name="starOption" value="${tmp }">${tmp }</option>
+                    		<option class="updateStar" name="starOption" value="${tmp }">
+                    			<c:forEach begin="1" end="${tmp }">
+                    				⭐
+                    			</c:forEach>
+                    		</option>
                     	</c:forEach>
                     </select>
                     <input id="inputImg" name="imageFile" type="file" style="display:none;"/>
                     <input type="hidden" name="storeNum" id="insertNum" value="" />
                     <input type="hidden" name="orderNum" id="insertOrderNum" value="" />
-                    <textarea name="content" id="inputContent" cols="30" rows="10" placeholer="리뷰를 작성해주세요."></textarea>
-                    <button id="addBtn" type="submit">작성 완료</button>
+                    <textarea name="content" id="inputContent" cols="30" rows="5" style="resize:none; padding:10px;" placeholer="리뷰를 작성해주세요."></textarea>
+                    <button id="addBtn" type="submit" class="reviewSubmitBtn">작성 완료</button>
                 </form>
             </div>
         </div>
@@ -539,16 +538,20 @@ type="text/css" />
 					let menu = data.list[j].menu;
 					let menuCount = data.list[j].menuCount;
 					let price = data.list[j].price;
-					let td = document.createElement( "TD" ); 
+					let td = document.createElement( "TD" );
+					 td.setAttribute('class', 'col-6');
 				     td.innerHTML = menu;  
 				     let td1 = document.createElement( "TD" );
+				     td1.setAttribute('class', 'col-2');
 				     td1.innerHTML = menuCount; ; 
 				     let td2 = document.createElement( "TD" );
+				     td2.setAttribute('class', 'col-4');
 				     td2.innerHTML = price; 
 				 //    td.style.border = "1px solid #92acbb"; 
 				 //    td.style.padding = "3px"; 
 				     
-					let tr = document.createElement( "TR" ); 
+					let tr = document.createElement( "TR" );
+						 tr.setAttribute('class', 'tdWrapper row')
 					     tr.appendChild( td );
 					     tr.appendChild( td1 ); 
 					     tr.appendChild( td2 ); 

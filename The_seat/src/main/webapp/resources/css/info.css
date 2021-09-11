@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-
 .arrow_box-user {
 	position: relative;
 	background: #ffffff;
@@ -129,13 +128,15 @@ li {
 .my-page__profile {
 	display: flex;
 	align-items: center;
+	color: white;
+	justify-content: space-between;
 }
 
-.divide-line {
-	width: 100%;
-	height: 1px;
-	background-color: lightgray;
-	margin: 20px 0;
+.my-page__edit {
+	display: flex;
+	align-items: end;
+	padding-bottom: 10px;
+	color: white;
 }
 
 .my-page__order {
@@ -145,9 +146,18 @@ li {
 .circle-btn {
 	width: 80px;
 	height: 80px;
-	border: 1px solid lightgray;
 	border-radius: 100%;
 	margin: 10px 15px;
+	background: white;
+    color: #5c90fc;
+    font-weight: 500;
+    border: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.circle-btn:hover {
+	background-color: #5c90fc;
+	color: white;
 }
 
 .circle-btn__wrapper {
@@ -156,7 +166,13 @@ li {
 }
 
 .card {
-	padding: 10px;
+	padding: 20px;
+	box-shadow: 4px 6px 11px rgba(172, 172, 172, 0.699);
+	transition: all 0.3s ease-out;
+}
+
+.card:hover {
+	transform: scale(0.97);
 }
 
 .bi-star-fill {
@@ -164,7 +180,8 @@ li {
 }
 
 .card-head p,
-.orderDetailBtn {
+.orderDetailBtn,
+.orderDetailOffBtn {
 	font-size: 14px;
 	color: gray;
 }
@@ -236,14 +253,17 @@ li {
 	text-decoration: none;
 }
 
-#updateStarSelect {
+#updateStarSelect,
+#insertStarSelect {
 	text-align: center;
 	border: none;
 	margin-bottom: 10px;
 }
 
 #updateStarSelect:focus,
-#updateContent:focus {
+#updateContent:focus,
+#insertStarSelect:focus,
+#inputContent:focus {
 	outline: 0;
 }
 
@@ -252,4 +272,35 @@ li {
 	border-radius: 3px;
 	margin: 10px 0;
 	padding: 10px;
+}
+
+.tdWrapper {
+	display: flex;
+    justify-content: space-around;
+    width: 100%;
+    text-align: center;
+}
+
+#reviewAddForm {
+    display: flex;
+    flex-direction: column;
+	align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 10px;
+}
+
+#addBtn {
+	width: 100%;
+	margin-top: 10px;
+}
+
+.info-header {
+	border: 1px solid rgb(89, 142, 255);
+	background-color: rgb(89, 142, 255);
+	border-radius: 100px;
+	margin: 50px 0;
+	display: flex;
+	padding-left:10px;
+	width: 60%;
 }
