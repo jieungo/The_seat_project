@@ -40,17 +40,21 @@
 		<choose>
 			<when test="{area != '' and keyword != ''}">
 				and (lower(storeAddr) like '%' || lower(#{area}) || '%'
-				or lower(storeName) like '%' || lower(#{area}) || '%')
+				or lower(storeName) like '%' || lower(#{area}) || '%'
+				or lower(storeTag) like '%' || lower(#{area}) || '%')
 				and (lower(storeAddr) like '%' || lower(#{keyword}) || '%'
-				or lower(storeName) like '%' || lower(#{keyword}) || '%')
+				or lower(storeName) like '%' || lower(#{keyword}) || '%'
+				or lower(storeTag) like '%' || lower(#{keyword}) || '%')
 			</when>
 			<when test="{area != ''}">
 				and (lower(storeAddr) like '%' || lower(#{area}) || '%'
-				or lower(storeName) like '%' || lower(#{area}) || '%')
+				or lower(storeName) like '%' || lower(#{area}) || '%'
+				or lower(storeTag) like '%' || lower(#{area}) || '%')
 			</when>
 			<when test="{keyword != ''}">
 				and (lower(storeAddr) like '%' || lower(#{keyword}) || '%'
-				or lower(storeName) like '%' || lower(#{keyword}) || '%')
+				or lower(storeName) like '%' || lower(#{keyword}) || '%'
+				or lower(storeTag) like '%' || lower(#{keyword}) || '%')
 			</when>
 		</choose>
 	</select>

@@ -294,9 +294,8 @@
          </select>
          -->
 			<input type="text" id="keyword" name="keyword"
-				placeholder="오늘은 뭐 먹을까?" value="${keyword}" />
-			<button id="searchBtn" type="submit"
-				onclick="location.href='${pageContext.request.contextPath}/main.do'">
+				placeholder="오늘은 뭐 먹을까?" />
+			<button id="searchBtn" type="submit">
 				<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
 					xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50"
 					viewBox="0 0 485.6 485.6"
@@ -379,13 +378,26 @@
 								style="line-height: 2.5;">로그인</a>
 						</c:otherwise>
 					</c:choose></li>
-
-				<li class="li_" style="margin-top: 20px;"><a class="a1"
-					data-num="0" id="addBtn0" href="#" style="line-height: 2.5;">+
-						매장 추가</a></li>
+				<c:if test="${email != null }">
+					<li class="li_" style="margin-top: 20px;"><a class="a1"
+						data-num="0" id="addBtn0" href="#" style="line-height: 2.5;">+
+							매장 추가</a></li>
+				</c:if>
 
 				<c:choose>
-					<c:when test="${email !=null && myStoreList.size() != 0}">
+					<c:when test="${email != null && myStoreList.size() == 0}">
+						<div class="dropdown" style="margin-top: 30px; display:none;">
+							<a class="dropdown-toggle" href="#" role="button"
+								id="dropdownMenuLink" data-bs-toggle="dropdown"
+								aria-expanded="false"
+								style="box-shadow: 1px 1px 17px #fff; width: 100%; line-height: 2.5; text-align: center;">
+								매장 목록 </a>
+							<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"
+								style="text-align: center; width: 100%; height: 200px; overflow: auto;">
+							</ul>
+						</div>
+					</c:when>
+					<c:when test="${email != null && myStoreList.size() != 0}">
 						<div class="dropdown" style="margin-top: 30px;">
 							<a class="dropdown-toggle" href="#" role="button"
 								id="dropdownMenuLink" data-bs-toggle="dropdown"
@@ -460,9 +472,10 @@
             if(data.beSuccess){
             	let num=data.newStoreList.length;
             	let newAnchor = document.createElement("a");
-                newAnchor.innerText = "Defaults";
+                newAnchor.innerText = "새 매장";
                 //newAnchor.setAttribute("data-num", dataNum);
-                newAnchor.setAttribute("class", "store");
+                newAnchor.setAttribute("class", "list_");
+                newAnchor.setAttribute("style", "color: rgb(71, 71, 71);");
                 newAnchor.setAttribute("href", storePath+data.newStoreList[num-1].num);
                 //newAnchor.setAttribute('style', 'display: block;');
                 
@@ -471,6 +484,7 @@
                 
                 //newAnchor.setAttribute("id", "addBtn" + strDataNum);
                 document.querySelector(".dropdown-menu").appendChild(newLi);
+                document.querySelector(".dropdown").style.display="block";
                 //resetDataNum();
                 
                 //매장 추가 눌렀을 때 새로고침 없이 토글 버튼 보이게 하기

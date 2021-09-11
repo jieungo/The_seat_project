@@ -447,7 +447,7 @@
 			}).then(function(data){
 				if(data.beDeleted){
 					alert("매장 정보를 삭제하였습니다.");
-					location.href="${pageContext.request.contextPath}/main.do";
+					location.href="${pageContext.request.contextPath}/main.do?area=&keyword=";
 				}
 			});
 		}
