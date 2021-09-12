@@ -36,8 +36,10 @@
 	
 	<select id="getCount" parameterType="string" resultType="int">
 		SELECT NVL(MAX(ROWNUM), 0)
-		FROM order_
-		WHERE email= #{email }
+		FROM (SELECT orderNum, email, storeName, storeLogo, num, tableNum, amount, reviewExist, cancel, confirm, regdate, orderdate
+				FROM order_
+				WHERE email= #{email }
+				GROUP BY orderNum, email, storeName, storeLogo, num, tableNum, amount, reviewExist, cancel, confirm, regdate, orderdate)
 	</select>
 	
 	<select id="getStoreCount" parameterType="int" resultType="int">

@@ -177,6 +177,32 @@ type="text/css" />
 			</div>
 		</c:otherwise>
 	</c:choose>
+	<div class="page-ui clearfix">
+		<ul>
+			<c:if test="${startPageNum ne 1 }">
+				<li>
+					<a href="${pageContext.request.contextPath}/users/info.do?pageNum=${startPageNum-1 }">Prev</a>
+				</li>
+			</c:if>
+			<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
+				<li>
+					<c:choose>
+						<c:when test="${pageNum eq i }">
+							<a  class="active" href="${pageContext.request.contextPath}/users/info.do?pageNum=${i }">${i }</a>
+						</c:when>
+						<c:otherwise>
+							<a href="${pageContext.request.contextPath}/users/info.do?pageNum=${i }">${i }</a>
+						</c:otherwise>
+					</c:choose>
+				</li>
+			</c:forEach>
+			<c:if test="${endPageNum lt totalPageCount }">
+				<li>
+					<a href="${pageContext.request.contextPath}/users/info.do?pageNum=${endPageNum+1 }">Next</a>
+				</li>
+			</c:if>
+		</ul>
+	</div>
 </div>
 
 <!------------모달창------------------프로필 편집------------------------------------->
