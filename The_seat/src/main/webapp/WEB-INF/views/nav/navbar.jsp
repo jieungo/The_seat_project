@@ -21,7 +21,7 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500&display=swap"
 	rel="stylesheet">
-
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <style>
 * {
 	font-family: 'IBM Plex Sans KR', sans-serif;
@@ -481,8 +481,6 @@
       });
    }
    
-   
-    
    // 매장 추가 관리 영역
    let storePath = "${pageContext.request.contextPath}/store/myStore.do?num=";
    
@@ -544,4 +542,5 @@
    document.querySelector("#chair").addEventListener("click", function() {
       location.href = "${pageContext.request.contextPath}/main.do?area=&keyword=";
    });
+
 </script>

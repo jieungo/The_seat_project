@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>자리.. 있어요?</title>
+
 <!-- bootstrap 외부 링크 참조 -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
