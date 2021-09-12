@@ -355,6 +355,12 @@ li {
 	font-color: white;
 }
 
+.info-row {
+	display: flex;
+   	align-items: center;
+   	justify-content: center;
+}
+
 @media screen and (max-width:1024px) {
 	.my-page__profile {
 		display: flex;

@@ -19,7 +19,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 <!-- 스타일 링크 -->
 <link rel="stylesheet"
-href="${pageContext.request.contextPath}/resources/css/info.css?ver=8"
+href="${pageContext.request.contextPath}/resources/css/info.css?ver=9"
 type="text/css" />
 <!-- 타이틀 고로고 -->
 <link rel="shortcut icon" type="image⁄x-icon" href="${pageContext.request.contextPath}/resources/img/summer.jpg">
@@ -73,10 +73,10 @@ type="text/css" />
 			<h1>아직 이용 내역이 없습니다 😓</h1><span><a href="${pageContext.request.contextPath}/main.do?area=&keyword=">->이용하러가기</a></span>
 		</c:when>
 		<c:otherwise>
-			<div class="row row-cols-1 row-cols-md-3 g-4">
+			<div class="row info-row">
 			<c:forEach var="tmp" items="${list }">
-			  <div class="col">
-			    <div class="card" style="border-radius: 30px; border: none;">
+			  <div style="width:400px; margin-bottom:40px; flex-wrap:wrap;">
+			    <div class="card col" style="border-radius: 30px; border: none; ">
 			      <div class="card-head">		      	
 			      	<p class="mb-0">주문번호 ${tmp.orderNum }</p>
 			      	<h3 class="mb-3">${tmp.storeName }</h3>
