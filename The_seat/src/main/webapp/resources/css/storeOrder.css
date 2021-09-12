@@ -214,10 +214,6 @@ ul {
 }
 
 .orderDetail > tr {
-	display: flex;
-	justify-content:space-between;
-	align-items:center;
-	padding-right:10px;
 	margin-bottom:3px;
 }
 

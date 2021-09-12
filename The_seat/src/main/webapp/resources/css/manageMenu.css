@@ -93,6 +93,7 @@ input:focus {
     flex-direction: column; 
     align-items: center; 
     justify-content: center;
+    height: 170px;
 }
 
 .inner_container {
@@ -243,6 +244,11 @@ input:focus {
 	margin: 20px;
 }
 
+.card_img {
+	display:flex;
+	justify-content: center;
+}
+
 	/* 테블릿 세로 (해상도 768px ~ 1023px)*/
 
 @media screen and (max-width:1024px) {
@@ -316,6 +322,7 @@ input:focus {
 		text-overflow: hidden; 
    		overflow-x: auto;
    		left:0;
+   		padding-right: 60px;
 	}
 
 	.aside {
