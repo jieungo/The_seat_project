@@ -364,6 +364,7 @@ type="text/css" />
                     <textarea name="content" id="updateContent" cols="30" rows="5" style="resize:none;"></textarea>
                     <button id="updateBtn" type="submit" class="reviewSubmitBtn">수정 완료</button>
                 </form>
+                <button id="updateCloseBtn" type="button" data-bs-dismiss="modal">창 닫기</button>
             </div>
         </div>
     </div>
