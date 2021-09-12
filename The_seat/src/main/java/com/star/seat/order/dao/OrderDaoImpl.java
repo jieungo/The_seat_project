@@ -58,9 +58,6 @@ public class OrderDaoImpl implements OrderDao{
 
 	@Override
 	public void updateState(OrderDto dto) {
-		System.out.println(dto.getCancel());
-		System.out.println(dto.getConfirm());
-		System.out.println(dto.getOrderNum());
 		session.update("order.updateState", dto);
 	}
 

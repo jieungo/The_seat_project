@@ -20,7 +20,7 @@
 <div class="wrapper">
     <!-------------------------- 주문내역 타이틀 및 날짜 검색 ---------------------------->
     <header class="store__order-header">
-        <h4>주문 내역</h4>
+        <h4>주문 내역</h4><p><span id="refresh">10</span>초 후 다시 주문내역을 확인합니다.</p>
     </header>
     <!------------------------------ 주문내역 텍스트 및 박스 --------------------------------------->
     <div class="box">
@@ -213,6 +213,34 @@
 			});
 		}
 	}
+	
+	
+	
+	function countDown2(){
+		let count = Number(document.querySelector("#refresh").innerText);
+		count = count-1;
+		document.querySelector("#refresh").innerText= count;
+		setTimeout(countDown, 1000);
+	}
+	
+	function countDown1(){
+		let count = Number(document.querySelector("#refresh").innerText);
+		count = count-1;
+		document.querySelector("#refresh").innerText= count;
+		setTimeout(countDown2, 1000);
+	}
+	
+	function countDown(){
+		let count = Number(document.querySelector("#refresh").innerText);
+		count = count-1;
+		document.querySelector("#refresh").innerText= count;
+		setTimeout(countDown1, 1000);
+	}
+	function refresh(){
+		location.reload(true);
+	}
+	let countNum = setTimeout(countDown, 1000);
+	let timer = setTimeout(refresh, 10000);
 </script>
 </body>
 </html>
