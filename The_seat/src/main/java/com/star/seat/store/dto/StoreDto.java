@@ -25,6 +25,7 @@ public class StoreDto {
 	private MultipartFile imageFile;
 	private float avgStar;
 	
+	
 	public StoreDto() {
 	
 	}
