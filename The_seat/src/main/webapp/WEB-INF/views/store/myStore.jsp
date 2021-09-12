@@ -51,7 +51,7 @@
                          <a href="javascript:" id="updateCancel">취소</a>
                      </button>
      
-                     <input type="hidden" name="num" value="${dto.num }"/>
+                     <input id="storeNum" type="hidden" name="num" value="${dto.num }"/>
                      <p class="m-0">매장 이름 : <strong class="storeData">${dto.storeName } </strong></p>
                      <input type="text" name="storeName" class="updateData" value="${dto.storeName }" style="display:none;"/>
                      <p class="m-0">매장 주소 : <strong class="storeData">${dto.storeAddr } </strong></p>
@@ -139,8 +139,15 @@
              </div>
      
              <div style="width: 70%; text-align:center; margin-bottom:15px;">
-                 <button id="storeOnOffBtn" class="btn">매장 열기</button>
-                 <button data-num="${dto.num }" class="btn" id="deleteStoreBtn">매장 삭제</button>
+             	<c:choose>
+             		<c:when test="${dto.storeOpen == 'no' }">
+             			<button id="storeOnOffBtn" class="btn">매장 열기</button>
+             		</c:when>
+             		<c:when test="${dto.storeOpen == 'yes' }">
+             			<button id="storeOnOffBtn" class="btn" style="">매장 닫기</button>
+             		</c:when>
+             	</c:choose>
+                <button data-num="${dto.num }" class="btn" id="deleteStoreBtn">매장 삭제</button>
              </div>
       </div>
          <!------------------------------------ 사이드바 (매장정보, 메뉴관리 탭) ----------------->

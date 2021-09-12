@@ -316,7 +316,7 @@ type="text/css" />
                 <form data-num2="" id="reviewAddForm" action="${pageContext.request.contextPath}/store/addReview.do" method="post" enctype="multipart/form-data">                 
                     <select id="insertStarSelect" name="star">
                     	<c:forEach var="tmp" items="1,2,3,4,5">
-                    		<option class="updateStar" name="starOption" value="${tmp }">
+                    		<option class="insertStar" name="starOption" value="${tmp }">
                     			<c:forEach begin="1" end="${tmp }">
                     				⭐
                     			</c:forEach>
