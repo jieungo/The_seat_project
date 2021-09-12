@@ -58,7 +58,7 @@
 							id="loginPwd" class="form-control" type="password" name="pwd"
 							placeholder="비밀번호" required="required" />
 					</div>
-					<button class="text-btn" type="submit">Continue</button>
+					<button class="text-btn" type="submit" style="font-weight: 500;">Continue</button>
 				</form>
 
 				<div class="line-section">
@@ -66,7 +66,7 @@
 					<span>OR</span>
 					<div class="line"></div>
 				</div>
-				<button type="button" class="text-btn" data-bs-toggle="modal"
+				<button type="button" style="color: #ffe030; font-weight: 500;" class="text-btn" data-bs-toggle="modal"
 									data-bs-target="#modal-signupForm">Signup</button>
 			</section>
 		</div>

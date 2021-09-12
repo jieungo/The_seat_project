@@ -162,7 +162,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" 
 						</div>
 						<div class="col-md-6">
 							<div class="card-body">
-								<h5 class="card-title">이름 : ${tmp.storeName }</h5>
+								<h5 class="card-title">${tmp.storeName }</h5>
 								<p class="card-text">주소 : ${tmp.storeAddr }</p>
 								<p class="card-text">⭐ 별점 : ${tmp.avgStar }
 								<p class="card-text">
