@@ -90,17 +90,19 @@
 	}
 </style>
 </head>
-<body style="margin-top:200px; background-color:#f6f6f6;">
+<body style="margin-top:150px; background-color:#f6f6f6;">
 	<!------------------------------ navbar 불러오기 --------------------------->
 	<jsp:include page="/WEB-INF/views/nav/navbar.jsp" />
 	
+	<!-- 검색 결과 -->
+	<div class="container" style="width:80%;">
 	<div class="container">
 		<c:choose>
 			<c:when test="${searchData.area == '' and searchData.keyword == ''}">
-				<p>
-					<strong>뭘 좋아하는 지 몰라서 전부 준비해봤어~ (찡긋)</strong>
-					<br>
-					${list.size() } 개의 매장이 검색되었습니다.
+				<p style="color: #6d6d6d;">
+					<strong style="font-size: 18px;">뭘 좋아하는 지 몰라서 전부 준비해봤어~ 😉</strong>
+					
+					( ${list.size() } 개의 매장이 검색되었습니다. )
 				</p>
 			</c:when>
 			<c:when test="${searchData.area != ''}">
@@ -126,10 +128,7 @@
 			</c:otherwise>
 		</c:choose>
 	</div>
-
-	<!-- 검색 결과 -->
-	<div class="container" style="margin-top: 20px; width:80%;">
-		<div class="row row-cols-3 row-cols-md-2 g-4" >
+		<div class="row row-cols-3 row-cols-md-2 g-4" style="margin-top: 10px;" >
 			<c:forEach var="tmp" items="${list }">
 				<a href="${pageContext.request.contextPath}/store/storeDetail.do?num=${tmp.num}">
 					<div class="row g-0 main-card">
