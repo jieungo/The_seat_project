@@ -125,9 +125,7 @@ type="text/css" />
 		</div>
 <!---------------------------------------- 메뉴판 만들기 ------------------------------------------->
 	<!-- 베스트 메뉴 4가지 -->
-	<div>
-		<p style="font-size: 35px; font-weight: bold; color: rgb(84, 84, 84); text-shadow: 2px 6px 2px #d3d3d3;">Best Menu</p>
-	</div>
+	<p style="font-size: 35px; font-weight: bold; margin-left: 10px; color: rgb(84, 84, 84); text-shadow: 2px 6px 2px #d3d3d3;">Best Menu</p>
 	<div id="bestMenu">
 		<c:forEach var="tmp" items="${menuList }" >
 			<c:if test="${tmp.best == 'yes' }">
@@ -151,11 +149,13 @@ type="text/css" />
 			style="width: 1130px; height: 600px; overflow: auto; margin-top: 30px; margin-left: 80px; border-radius: 10px; background-color: white;">
 			<div class="col" style="margin-bottom: 30px;">
 				<!-- 메뉴 리스트 오브잭트 배열 가져와서 꺼내기! -->
-				<c:forEach var="tmp" items="${menuList }">
-						<input type="hidden" class="menuName" />
+				<c:forEach var="cat" items="${categoryList }">
+					<p style="margin-top: 20px; margin-left: 200px;">${cat }</p>
+					<c:forEach var="tmp" items="${menuList }">
+						<c:if test="${tmp.category == cat }">
 						<button data-num="${tmp.num }" type="button" id="menuBtn"
 							data-bs-toggle="modal" data-bs-target="#exampleModal${tmp.num }"
-							style="width: 400px; margin-left: 70px; margin-top: 50px;">${tmp.menuName }</button>
+							style="width: 400px; margin-left: 70px; margin-top: 30px;">${tmp.menuName }</button>
 						<span
 							style="width: 300px; margin-left: 300px; font-size: 1.5em; font-weight: bold; color: rgb(96, 92, 99);"> <fmt:formatNumber value="${tmp.price }" pattern="#,###"/> ￦</span>
 						<!------------모달창-------------- 메뉴 이름 누르면 그에 맞는 이미지 Modal 활성화 -------------------------------->
@@ -173,7 +173,7 @@ type="text/css" />
 											<img src="${pageContext.request.contextPath}${tmp.menuImage }"
 												class="rounded" alt="MenuImage">
 											<div class="card-body text-center">
-												<p class="card-text" style="font-size: 18px;">${tmp.content }</p>
+												<p class="card-text" style="font-size: 18px;"><span>상품 구성 : </span>${tmp.content }</p>
 											</div>
 										</div>
 									</div>
@@ -185,6 +185,11 @@ type="text/css" />
 								</div>
 							</div>
 						</div>
+						</c:if>
+					</c:forEach>
+				</c:forEach>
+				<c:forEach var="tmp" items="${menuList }">
+						
 					</c:forEach>
 				</div>
 			</div>
