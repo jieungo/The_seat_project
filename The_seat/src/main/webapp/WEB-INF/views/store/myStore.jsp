@@ -51,7 +51,7 @@
                          <a href="javascript:" id="updateCancel">취소</a>
                      </button>
      
-                     <input type="hidden" name="num" value="${dto.num }"/>
+                     <input id="storeNum" type="hidden" name="num" value="${dto.num }"/>
                      <p class="m-0">매장 이름 : <strong class="storeData">${dto.storeName } </strong></p>
                      <input type="text" name="storeName" class="updateData" value="${dto.storeName }" style="display:none;"/>
                      <p class="m-0">매장 주소 : <strong class="storeData">${dto.storeAddr } </strong></p>
