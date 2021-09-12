@@ -99,8 +99,9 @@
                 <div class="modal-body">
                     <form id="menuAddForm" action="${pageContext.request.contextPath}/store/addMenu.do" method="post" enctype="multipart/form-data">                 
                         <a href="javascript:" id="imgLink">
-	                    	<img id="thumbImg" src="" alt="" />
+	                    	<img id="thumbImg" src="${pageContext.request.contextPath}/resources/img/Spin.gif" alt="" />
 	                    </a>
+	                    <p><strong>👆🏼 클릭하여 이미지를 넣어주세요!</strong></p>
                         
                         <input type="hidden" name="num" value="${storeDBNum }" />
                         <input class="form-control" type="file" name="imageFile" id="image" style="visibility:hidden; margin:0;">

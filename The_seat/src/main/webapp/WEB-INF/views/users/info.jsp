@@ -31,16 +31,24 @@ type="text/css" />
 <!--------------------- 마이페이지 상단 프로필 -------------------------->
 	<header class="info-header animate__animated animate__fadeInDown">
 		<div class="my-page__profile mt-2 mb-2">
-			<img src="${pageContext.request.contextPath}${dto.profile }" alt="프로필 이미지"
-				style="width: 150px; height: 150px; border-radius: 100%;">
+			<c:choose>
+				<c:when test="${dto.profile eq 'profile' }">
+					<img src="${pageContext.request.contextPath}/resources/img/user1.png" alt="프로필 이미지"
+						style="width: 150px; height: 150px; border-radius: 100%;">
+				</c:when>
+				<c:otherwise>
+					<img src="${pageContext.request.contextPath}${dto.profile }" alt="프로필 이미지"
+						style="width: 150px; height: 150px; border-radius: 100%;">
+				</c:otherwise>
+			</c:choose>
 			<div>
 				<h3 style="margin-bottom:20px;">${dto.name}님의 마이페이지
 					<c:choose>
 						<c:when test="${myStoreList.size() eq 0 }"> 
-							<span>(Guest)</span>
+							<span>(🍽Guest)</span>
 						</c:when>
 						<c:otherwise>
-							<span>(Owner)</span>
+							<span>(💎Owner)</span>
 						</c:otherwise>
 					</c:choose>
 				</h3>
