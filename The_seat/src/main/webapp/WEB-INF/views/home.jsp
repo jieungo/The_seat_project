@@ -21,16 +21,16 @@
 <style>
 	body {
 		background-color: #2e8eff;
-		color: white;
+		color: #fff;
 		font-family: 'IBM Plex Sans KR', sans-serif;
 	}
 	#area {
 		color: rgb(73, 73, 73);
 		font-size: 18px;
 		font-weight: 500;
-		width: 110px;
+		width: 125px;
 		margin-right: 40px;
-		height: 45px;
+		height: 50px;
 		margin-top: 45px;
 		border: none;
 		border-radius: 7px;
@@ -43,7 +43,7 @@
 	}
 	
 	#keyword {
-		height: 45px;
+		height: 50px;
 		margin-top: 30px;
 		outline: none;
 		border: none;
@@ -54,30 +54,40 @@
 	}
 	
 	#searchBtn {
+		width: 400px;
 		color: rgb(73, 73, 73);
 		font-size: 20px;
 		font-weight: 500;
-		height: 45px;
+		height: 50px;
 		margin-top: 20px;
 		border-radius: 7px;
 	}
 	
 	#loginBtn {
+		width: 400px;
 		color: rgb(73, 73, 73);
 		font-size: 20px;
 		font-weight: 500;
-		height: 45px;
+		height: 50px;
 		margin-top: 30px;
 		outline: none;
 		border: none;
 		border-radius: 7px;
 	}
+	
+	.col__section {
+		display: flex;
+    	flex-direction: column;
+    	justify-content: center;
+    	align-items: center;
+	}
+	
 </style>
 </head>
 <body>
-	<div style="margin-top: 130px;">
+	<div class="container-fluid" style="vertical-align: middle; position: absolute; top: 20%;">
 	
-		<section class="d-grid gap-2 col-2 mx-auto">
+		<section class="col__section">
 			<p style="font-size: 20px; font-weight: 500;">이젠, 빈자리 찾아 헤매지 말자!</p>
 			<span style="font-size: 3.5em; font-family: 'Do Hyeon', sans-serif;">자리..<br>있어요?
 			</span>
@@ -101,13 +111,13 @@
 					placeholder="오늘은 뭐 먹을까?"/>
 			</div>
 			<br />
-			<div class="d-grid gap-2 col-3 mx-auto">
+			<div style="text-align: center;">
 				<button id="searchBtn" type="submit" class="btn btn-warning">검색</button>
 			</div>
 		</form>
 		
 		<c:if test="${sessionScope.email eq null }">
-			<div class="d-grid gap-2 col-3 mx-auto">
+			<div style="text-align: center;">
 				<button id="loginBtn" style="background-color: #d4d4d4;"
 					onclick="location.href='${pageContext.request.contextPath}/users/loginform.do'">로그인</button>
 			</div>

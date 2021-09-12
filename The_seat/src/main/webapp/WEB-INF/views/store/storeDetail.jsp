@@ -28,8 +28,7 @@ type="text/css" />
 </head>
 <!---------------------- 네비바를 import 한다. ------------------------->
 <jsp:include page="/WEB-INF/views/nav/navbar.jsp" />
-<body style="margin-top: 150px;">
-	<div class="container">
+	<div class="container detail-container">
 
 		<section style="text-align: center; margin-top: 10px;">
 			<!---------------------- DB 연동해서 파라미터 값으로 칼럼 값을 받아온다.  --------------------->
@@ -38,7 +37,7 @@ type="text/css" />
 				style="font-size: 2.5em; font-weight: bold; color: rgb(85, 152, 252); text-shadow: 2px 6px 2px #d3d3d3; text-align: center;">
 				${dto.storeName }</span>
 		</section>
-		<div class="row">
+		<div class="row" style="display: flex; justify-content: center;">
 			<!--------------------- 매장의 대표 이미지 4개를 Carousel 로 띄우기  -------------------------->
 			<div id="carouselExampleDark"
 				class="col carousel carousel-dark slide" data-bs-ride="carousel"
@@ -59,22 +58,18 @@ type="text/css" />
 					<div class="carousel-item active" data-bs-interval="10000">
 						<img src="${pageContext.request.contextPath}${dto.image_1 }"
 							class="d-block w-100 mainImg" alt="매장대표이미지1">
-						<!-- <div class="carousel-caption d-none d-md-block"><h5>First</h5></div> -->
 					</div>
 					<div class="carousel-item" data-bs-interval="2000">
 						<img src="${pageContext.request.contextPath}${dto.image_2 }"
 							class="d-block w-100 mainImg" alt="매장대표이미지2">
-						<!-- <div class="carousel-caption d-none d-md-block"><h5>Second</h5></div> -->
 					</div>
 					<div class="carousel-item">
 						<img src="${pageContext.request.contextPath}${dto.image_3 }"
 							class="d-block w-100 mainImg" alt="매장대표이미지3">
-						<!-- <div class="carousel-caption d-none d-md-block"><h5>Third</h5></div> -->
 					</div>
 					<div class="carousel-item">
 						<img src="${pageContext.request.contextPath}${dto.image_4 }"
 							class="d-block w-100 mainImg" alt="매장대표이미지4">
-						<!-- <div class="carousel-caption d-none d-md-block"><h5>Fourth</h5></div> -->
 					</div>
 				</div>
 				<button class="carousel-control-prev" type="button"
@@ -87,21 +82,19 @@ type="text/css" />
 					<span class="carousel-control-next-icon" aria-hidden="true"></span>
 					<span class="visually-hidden">Next</span>
 				</button>
-
-				<!------------------------------ 매장 상세 정보 카드 ----------------------------------->
 			</div>
-			<div class="col card text-center"
-				style="max-width: 570px; height: 400px; margin-top: 30px; margin-left: 90px; border: none;">
+				<!------------------------------ 매장 상세 정보 카드 ----------------------------------->
+			<div class="col card text-center" style="width: 550px; height: 400px; border: none;">
 				<!--------------- 파라미터 값으로 매장 정보를 받아온다. ----------------------->
 
 				<div class="card-header bg-transparent border-dark-light">
-					<h5>
+					<h4 style="line-height: 3.5;">
 						별점 : ⭐${avgStar }
-						<c:if test="${totalReviewCount gt 100 }">
-							 (100+)
+						<c:if test="${totalReviewCount gt 10 }">
+							 (10+)
 						</c:if>
-					</h5>
-					<h3 style="line-height: 1.8;">
+					</h4>
+					<h3>
 						<c:if test="${not empty tagList  }">
 							<c:forEach var="tmp" items="${tagList }">
 								<span>#${tmp } </span>
@@ -129,10 +122,11 @@ type="text/css" />
 						data-bs-target="#Modalgrid">자리 잡으러 가기 ❕</button>
 				</div>
 			</div>
+			</div>
 			<!---------------------------------------- 메뉴판 만들기 ------------------------------------------->
 			<!-- 베스트 메뉴 4가지 -->
 			<p
-				style="font-size: 35px; font-weight: bold; margin-left: 10px; color: rgb(84, 84, 84); text-shadow: 2px 6px 2px #d3d3d3;">Best
+				style="font-size: 35px; font-weight: bold; color: rgb(84, 84, 84); text-shadow: 2px 6px 2px #d3d3d3;">Best
 				Menu</p>
 			<div id="bestMenu">
 				<c:forEach var="tmp" items="${menuList }">
@@ -157,9 +151,9 @@ type="text/css" />
 			<div class="card mb-5"
 				style="max-width: auto; height: 700px; margin-top: 30px; background-color: rgb(86, 162, 255); box-shadow: 0 17px 20px -18px rgba(0, 0, 0, 1);">
 				<span
-					style="color: white; font-size: 45px; font-weight: bold; text-shadow: 2px 6px 2px gray; margin-left: 85px; margin-top: 25px;">Menu</span>
+					style="color: white; font-size: 45px; font-weight: bold; text-shadow: 2px 6px 2px gray; text-align: left; margin-top: 25px;">Menu</span>
 				<div class="card mb-5"
-					style="width: 1130px; height: 600px; overflow: auto; margin-top: 30px; margin-left: 80px; border-radius: 10px; background-color: white;">
+					style="width: auto; height: 600px; overflow: auto; margin-top: 30px; margin-left: 80px; border-radius: 10px; background-color: white;">
 					<div class="col" style="margin-bottom: 30px;">
 						<!-- 메뉴 리스트 오브잭트 배열 가져와서 꺼내기! -->
 						<c:forEach var="cat" items="${categoryList }">
@@ -212,8 +206,6 @@ type="text/css" />
 				</div>
 			</div>
 		</div>
-	</div>
-
 	<!------------------------------ footer 불러오기 --------------------------->
 	<jsp:include page="/WEB-INF/views/nav/footer.jsp" />
 
