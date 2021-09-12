@@ -154,17 +154,6 @@ input:focus {
 	text-decoration: none;
 }
 
-#updateBox a{
-	text-decoration: none;
-    color: rgb(78, 78, 78);
-    padding:5px 0;
-}
-
-#updateBox a:hover {
-	color: #598eff;
-	font-weight: 600;
-}
-
 img:hover {
 	opacity:0.3;
 }
@@ -181,12 +170,11 @@ img:hover {
 	font-size: 14px;
 	border-radius: 100px;
 	width: 40px;
-	height: 40px;
 	color: white;
-	font-weight: 500;
 	background-color: #598EFF;
 	display:flex;
 	margin:auto;
+	box-shadow: 1px 1px 11px rgba(172, 172, 172, 0.699); 
 } 
 
 .form-wrapper {
@@ -217,6 +205,26 @@ img:hover {
     text-decoration: none;
     padding: 0;
 }
+
+#updateBox {
+	width: 100%;
+}
+
+#update,
+#updateCancel {
+font-size: 14px;
+    border-radius: 100px;
+    width: 60px;
+    background-color: #598EFF;
+    display: inline-block;
+    margin: auto;
+    box-shadow: 1px 1px 11px rgb(172 172 172 / 70%);
+    height: 20px;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+}
+
 
 .addTag:focus {
     text-decoration: none;

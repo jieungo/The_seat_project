@@ -1,3 +1,4 @@
+
 	/* 주문하기 옆에 위치한 전 페이지로 이동하는 버튼 css */
 	#backBtn {
 		border: none;
@@ -32,7 +33,7 @@
 	.orderR .text_top {
   		position: absolute;
   		top: 55px;
-  		left: 90px;
+  		text-align: center;
 	}
 	
 	.text_top {
@@ -41,10 +42,10 @@
 	
 	.text_middle {
 		position: absolute;
-		width: 510px;
+		width: 90%;
 		height: 345px;
 		top: 130px;
-		left: 90px;
+		left: 10%;
 		overflow: auto;
 	}
 	
@@ -231,4 +232,10 @@
 		font-size: 30px;
 		font-weight: 500;
 		color: #636363;
+	}
+	
+	.menuListWrapper {
+		display: flex;
+		width:100%;
+		justify-content: space-evenly;
 	}

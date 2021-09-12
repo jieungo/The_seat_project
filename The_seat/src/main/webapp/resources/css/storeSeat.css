@@ -144,6 +144,26 @@ ul {
 	margin: 0 auto;
 	resize: none;
 	width: 100%;
+	border: none;
+	background-color: #F3F3F3;
+}
+
+#content:focus {
+	outline:0;
+}
+
+#seatLink {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height:100%;
+	text-decoration: none;
+	color: gray;
+	font-weight: 600;
+}
+
+#seatLink:hover {
+	color: #598EFF;
 }
 
 #totalSeat {

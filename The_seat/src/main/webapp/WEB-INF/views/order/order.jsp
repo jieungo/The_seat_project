@@ -26,9 +26,6 @@
 <!-- 타이틀 로고 -->
 <link rel="shortcut icon" type="image⁄x-icon"
 	href="${pageContext.request.contextPath}/resources/img/summer.jpg">
-<style>
-
-</style>
 </head>
 <body style="margin-top: 150px;">
 <!-- 네비바 import 하기 -->
@@ -95,10 +92,10 @@
 				<div class="col orderR" style="margin-top: 50px; margin-left: 40px;">
 					<img src="${pageContext.request.contextPath}/resources/img/p.svg" alt="receipt" class="img2"
 				 		style="width: 100%; height: 700px;">
-		 			<div class="text_top">
-						<h3 style="margin-left: 50px;">메뉴</h3>
-						<h3 style="margin-left: 100px;">수량</h3>
-						<h3 style="margin-left: 130px;">금액</h3>
+		 			<div class="text_top row" style="width:100%; display:flex; justify-content:space-evenly">
+						<h3 class="col-2">메뉴</h3>
+						<h3 class="col-2">수량</h3>
+						<h3 class="col-2">금액</h3>
 					</div>
 					<div class="text_middle">
 						<h5 id="orderList"></h5>
@@ -171,27 +168,27 @@
 			let price = a*b;
 			
 			let span = document.createElement('span');
-			span.setAttribute('class','orderMenuList');
+			span.setAttribute('class','orderMenuList col-4');
 			span.innerText=menu;
 			document.querySelector("#orderList").appendChild(span);
 			
 			let span2 = document.createElement('span');
-			span2.setAttribute('class','orderMenuCount');
-			span2.setAttribute('style','margin-left: 50px;');
+			span2.setAttribute('class','orderMenuCount col-2');
 			span2.innerText=" "+menuCount+"개 ";
 			document.querySelector("#orderList").appendChild(span2);
 			
 			let span3 = document.createElement('span');
-			span3.setAttribute('class','orderMenuPrice');
-			span3.setAttribute('style','margin-left: 110px;');
+			span3.setAttribute('class','orderMenuPrice col-3');
 			span3.innerText=(price.toString()
 			  .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","))+"원";
 			document.querySelector("#orderList").appendChild(span3);
 			
-			//오더리스트 div 로 묶기
-			let div = document.createElement('div');
-			document.querySelector("#orderList").appendChild(div);
-			
+			let newDiv=document.createElement("div");
+			newDiv.setAttribute('class', 'row menuListWrapper');
+			newDiv.appendChild(span);
+			newDiv.appendChild(span2);
+			newDiv.appendChild(span3);
+			document.querySelector("#orderList").appendChild(newDiv);
 			
 			let br = document.createElement('br');
 			document.querySelector("#orderList").appendChild(br);

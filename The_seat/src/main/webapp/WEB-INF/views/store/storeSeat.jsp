@@ -16,7 +16,7 @@
 	integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" 
 	crossorigin="anonymous"></script>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/storeSeat.css?ver=4"
+	href="${pageContext.request.contextPath}/resources/css/storeSeat.css?ver=6"
 	type="text/css" />
 </head>
 <body>
@@ -35,7 +35,7 @@
                         	<a id="seatLink" href="javascript:" >
 	                        	<c:choose>
 									<c:when test="${sDto.seatImage eq null}">
-										<h1>매장 자리 이미지를 등록해 주세요!</h1>
+										<p>클릭해서 이미지 등록하기</p>
 									</c:when>
 									<c:otherwise>
 										<img id="seatImage" style="width:100%; height:100%; object-fit: fill;" src="${pageContext.request.contextPath}${sDto.seatImage}" />
@@ -56,7 +56,7 @@
                         </div>
                         <div>
                         	<p class="mb-1" style="font-size:14px;">매장 알림사항</p>
-                        	<textarea name="seatContent" id="content" cols="30" rows="2">${sDto.seatContent }</textarea>
+                        	<textarea name="seatContent" id="content" cols="30" rows="3">${sDto.seatContent }</textarea>
                         </div>
                 </section>
         <!------------------------------ 예약정보 박스 --------------------------------------->
