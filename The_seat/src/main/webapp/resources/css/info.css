@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+body {
+	margin-top:150px;
+}
+
 .arrow_box-user {
 	position: relative;
 	background: #ffffff;
@@ -337,6 +341,14 @@ li {
 	font-size: 20px;
 }
 
+.info-container {
+	margin-top: 150px;
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .active {
 	font-weight: 600;
 	background-color: #598EFF;
@@ -351,6 +363,10 @@ li {
 	    text-align: center;
 	}
 	
+	.info-container {
+		margin-top: 250px;
+	}
+	
 	.info-header {
 		padding: 0;
 		display: flex;
@@ -360,5 +376,11 @@ li {
 	.my-page__profile > img {
 		margin: 10px 0;
 		margin-bottom: 40px;
+	}
+}
+
+@media screen and (max-width:767px) {
+	 .info-container {
+		margin-top: 350px;
 	}
 }

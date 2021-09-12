@@ -20,8 +20,8 @@
 	crossorigin="anonymous"></script>
 <!-- css 파일 로딩하기 -->
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/storeDetail.css"
-	type="text/css" />
+href="${pageContext.request.contextPath}/resources/css/storeDetail.css?ver=2"
+type="text/css" />
 <!------------------ 타이틀 로고 -------------------->
 <link rel="shortcut icon" type="image⁄x-icon"
 	href="${pageContext.request.contextPath}/resources/img/snow.jpg">

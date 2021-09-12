@@ -77,6 +77,8 @@ CREATE TABLE order_(
 	orderdate VARCHAR2(100)
 );
 
+alter session set NLS_DATE_FORMAT='YYYY/MM/DD/HH24:MI:SS';
+
 CREATE TABLE storeSeat(
 	num VARCHAR2(100) NOT NULL,
 	seatImage CLOB,

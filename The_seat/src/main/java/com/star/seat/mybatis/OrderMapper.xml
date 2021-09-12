@@ -11,7 +11,7 @@
 				FROM order_
 				WHERE email = #{email }
 				GROUP BY orderNum, email, storeName, storeLogo, num, tableNum, amount, reviewExist, cancel, confirm, regdate, orderdate
-				ORDER BY orderdate DESC) result1)
+				ORDER BY regdate DESC) result1)
 		WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
 	</select>
 	
@@ -24,7 +24,7 @@
 				FROM order_
 				WHERE num = #{num }
 				GROUP BY orderNum, email, storeName, storeLogo, num, tableNum, amount, reviewExist, cancel, confirm, regdate, orderdate
-				ORDER BY orderdate DESC) result1)
+				ORDER BY regdate DESC) result1)
 		WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
 	</select>
 	
@@ -39,7 +39,8 @@
 		FROM (SELECT orderNum, email, storeName, storeLogo, num, tableNum, amount, reviewExist, cancel, confirm, regdate, orderdate
 				FROM order_
 				WHERE email= #{email }
-				GROUP BY orderNum, email, storeName, storeLogo, num, tableNum, amount, reviewExist, cancel, confirm, regdate, orderdate)
+				GROUP BY orderNum, email, storeName, storeLogo, num, tableNum, amount, reviewExist, cancel, confirm, regdate, orderdate
+				ORDER BY orderdate DESC)
 	</select>
 	
 	<select id="getStoreCount" parameterType="int" resultType="int">

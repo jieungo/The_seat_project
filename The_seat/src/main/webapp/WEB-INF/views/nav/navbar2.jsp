@@ -291,7 +291,7 @@ body {
 								style="text-align: center; width: 200px; height: 200px; overflow: auto;">
 
 								<c:forEach var="tmp" items="${myStoreList }">
-									<li><a class="list_" style="color: rgb(71, 71, 71);"
+									<li><a data-num=${tmp.num } class="list_" style="color: rgb(71, 71, 71);"
 										href="${pageContext.request.contextPath}/store/myStore.do?num=${tmp.num }">${tmp.storeName }</a>
 								</c:forEach>
 							</ul>
@@ -423,6 +423,5 @@ body {
          array[i].setAttribute("data-num", num);
          array[i].setAttribute("href", storePath + num);
       }
-   }
-   
+   }   
 </script>
