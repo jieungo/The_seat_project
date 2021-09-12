@@ -13,6 +13,8 @@
 	rel="stylesheet"
 	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
 	crossorigin="anonymous">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
@@ -89,14 +91,35 @@
 	.main-card:hover {
 		color: #000;
 	}
+	
+	.main-container {
+		margin-top: 150px;
+		display: flex;
+	    flex-direction: column;
+	    justify-content: center;
+	    align-items: center;
+	}
+	
+@media screen and (max-width:1024px) {
+	 .main-container {
+		margin-top: 250px;
+	}
+}
+
+@media screen and (max-width:767px) {
+	 .main-container {
+		margin-top: 350px;
+	}
+}
+
 </style>
 </head>
-<body style="margin-top:150px; background-color:#f6f6f6;">
+<body style="background-color:#f6f6f6;">
 	<!------------------------------ navbar 불러오기 --------------------------->
 	<jsp:include page="/WEB-INF/views/nav/navbar.jsp" />
 	
 	<!-- 검색 결과 -->
-	<div class="container" style="width:80%;">
+	<div class="container main-container" style="width:80%;">
 	<div class="container">
 		<c:choose>
 			<c:when test="${searchData.area == '' and searchData.keyword == ''}">
@@ -129,7 +152,7 @@
 			</c:otherwise>
 		</c:choose>
 	</div>
-		<div class="row row-cols-3 row-cols-md-2 g-4" style="margin-top: 10px;" >
+		<div class="row row-cols-1 row-cols-md-2 g-4" style="margin-top: 10px;" >
 			<c:forEach var="tmp" items="${list }">
 				<a href="${pageContext.request.contextPath}/store/storeDetail.do?num=${tmp.num}">
 					<div class="row g-0 main-card">

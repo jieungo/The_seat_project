@@ -19,17 +19,17 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 <!-- 스타일 링크 -->
 <link rel="stylesheet"
-href="${pageContext.request.contextPath}/resources/css/info.css?ver=5"
+href="${pageContext.request.contextPath}/resources/css/info.css?ver=8"
 type="text/css" />
 <!-- 타이틀 고로고 -->
 <link rel="shortcut icon" type="image⁄x-icon" href="${pageContext.request.contextPath}/resources/img/summer.jpg">
 </head>
-<body style="margin-top:150px;">
+<body>
 <!------------------------------ navbar 불러오기 --------------------------->
 <jsp:include page="/WEB-INF/views/nav/navbar.jsp" />
-<div class="container">
+<div class="container info-container" >
 <!--------------------- 마이페이지 상단 프로필 -------------------------->
-	<header class="info-header">
+	<header class="info-header animate__animated animate__fadeInDown">
 		<div class="my-page__profile mt-2 mb-2">
 			<img src="${pageContext.request.contextPath}${dto.profile }" alt="프로필 이미지"
 				style="width: 150px; height: 150px; border-radius: 100%;">
