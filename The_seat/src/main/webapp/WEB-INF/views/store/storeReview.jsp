@@ -17,7 +17,7 @@
 	integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
 	crossorigin="anonymous"></script>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/storeReview.css?ver=5"
+	href="${pageContext.request.contextPath}/resources/css/storeReview.css?ver=6"
 	type="text/css" />
 </head>
 <body>

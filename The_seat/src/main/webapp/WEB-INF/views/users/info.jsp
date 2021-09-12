@@ -19,12 +19,11 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 <!-- 스타일 링크 -->
 <link rel="stylesheet"
-href="${pageContext.request.contextPath}/resources/css/info.css?ver=3"
+href="${pageContext.request.contextPath}/resources/css/info.css?ver=5"
 type="text/css" />
 <!-- 타이틀 고로고 -->
 <link rel="shortcut icon" type="image⁄x-icon" href="${pageContext.request.contextPath}/resources/img/summer.jpg">
 </head>
-
 <body style="margin-top:150px;">
 <!------------------------------ navbar 불러오기 --------------------------->
 <jsp:include page="/WEB-INF/views/nav/navbar.jsp" />
@@ -32,7 +31,7 @@ type="text/css" />
 <!--------------------- 마이페이지 상단 프로필 -------------------------->
 	<header class="info-header">
 		<div class="my-page__profile mt-2 mb-2">
-			<img class="me-5" src="${pageContext.request.contextPath}${dto.profile }" alt="프로필 이미지"
+			<img src="${pageContext.request.contextPath}${dto.profile }" alt="프로필 이미지"
 				style="width: 150px; height: 150px; border-radius: 100%;">
 			<div>
 				<h3 style="margin-bottom:20px;">${dto.name}님의 마이페이지
@@ -45,18 +44,18 @@ type="text/css" />
 						</c:otherwise>
 					</c:choose>
 				</h3>
-				<h4><span>#</span>${dto.tag }</h4>
+				<h6><span>#</span>${dto.tag }</h6>
+				<!---------- 프로필 편집 버튼 ------------------->
+				<button type="button" class="text-btn my-page__edit" data-bs-toggle="modal" data-bs-target="#modal-updateForm">
+					프로필 편집
+					<!-- 버튼 이미지 -->
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+						<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+						<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+					</svg>
+				</button>
 			</div>
 		</div>	
-		<!---------- 프로필 편집 버튼 ------------------->
-		<button type="button" class="text-btn my-page__edit" data-bs-toggle="modal" data-bs-target="#modal-updateForm">
-			프로필 편집
-			<!-- 버튼 이미지 -->
-			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-				<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-				<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-			</svg>
-		</button>
 	</header>
 <!--------------------------- 마이페이지 하단 주문내역 ---------------------------------->
 <!--------------------------- 카드로 만들기 c:forEach  사용------------------------------>
@@ -117,9 +116,9 @@ type="text/css" />
 			      	<table class="orderTable" style="display:none;">
 			      		<thead style="display:flex; margin:5px 0;">
 			      			<tr style="row; display: flex; justify-content: space-evenly; width: 100%; text-align:center;">
-				      			<th class="col-4">메뉴</th>
-				      			<th class="col-3">수량</th>
-				      			<th class="col-3">가격</th>
+				      			<th class="col">메뉴</th>
+				      			<th class="col">수량</th>
+				      			<th class="col">가격</th>
 			      			</tr>
 			      		</thead>
 			      		<tbody class="orderDetail" style="display: flex; flex-direction: column; font-size:14px;">
@@ -178,44 +177,45 @@ type="text/css" />
 		</c:otherwise>
 	</c:choose>
 	<div class="page-ui clearfix">
-		<ul>
-			<c:if test="${startPageNum ne 1 }">
-				<li>
-					<a href="${pageContext.request.contextPath}/users/info.do?pageNum=${startPageNum-1 }">Prev</a>
-				</li>
-			</c:if>
-			<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
-				<li>
-					<c:choose>
-						<c:when test="${pageNum eq i }">
-							<a  class="active" href="${pageContext.request.contextPath}/users/info.do?pageNum=${i }">${i }</a>
-						</c:when>
-						<c:otherwise>
-							<a href="${pageContext.request.contextPath}/users/info.do?pageNum=${i }">${i }</a>
-						</c:otherwise>
-					</c:choose>
-				</li>
-			</c:forEach>
-			<c:if test="${endPageNum lt totalPageCount }">
-				<li>
-					<a href="${pageContext.request.contextPath}/users/info.do?pageNum=${endPageNum+1 }">Next</a>
-				</li>
-			</c:if>
-		</ul>
-	</div>
+      <ul>
+         <c:if test="${startPageNum ne 1 }">
+            <li>
+               <a href="${pageContext.request.contextPath}/users/info.do?pageNum=${startPageNum-1 }">Prev</a>
+            </li>
+         </c:if>
+         <c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
+            <li>
+               <c:choose>
+                  <c:when test="${pageNum eq i }">
+                     <a  class="active" href="${pageContext.request.contextPath}/users/info.do?pageNum=${i }">${i }</a>
+                  </c:when>
+                  <c:otherwise>
+                     <a href="${pageContext.request.contextPath}/users/info.do?pageNum=${i }">${i }</a>
+                  </c:otherwise>
+               </c:choose>
+            </li>
+         </c:forEach>
+         <c:if test="${endPageNum lt totalPageCount }">
+            <li>
+               <a href="${pageContext.request.contextPath}/users/info.do?pageNum=${endPageNum+1 }">Next</a>
+            </li>
+         </c:if>
+      </ul>
+   </div>
 </div>
 
 <!------------모달창------------------프로필 편집------------------------------------->
 
 <div class="modal animate__animated animate__bounce animate__fadeInDown" tabindex="-1" id="modal-updateForm" aria-labelledby="updateForm" aria-hidden="true">
 	<div class="modal-dialog" style="text-align: center;">
-		<div class="modal-content" style="width: 80%">
-			<div class="modal-header">
+		<div class="modal-content" style="width: 90%; border: none" >
+			<div class="modal-header" style="background-color:#598eff; color:white; border-radius: 30px;
+    		margin: 10px; margin-top: 20px;">
 				<h4 class="modal-title">
 					<strong>프로필 편집</strong>
 				</h4>
 				<button type="button" class="btn-close" data-bs-dismiss="modal"
-					aria-label="Close"></button>
+					aria-label="Close" style="color:white;"></button>
 			</div>
 
 			<div class="modal-body">
@@ -302,8 +302,9 @@ type="text/css" />
 <!-- 리뷰 작성 modal -->
 <div data-num="" class="modal" tabindex="-1" id="reviewModal" aria-labelledby="menuAddForm" aria-hidden="true">
     <div class="modal-dialog" style="display:flex; justify-content:center;">
-        <div class="modal-content" style="width:80%;">
-            <div class="modal-header">
+		<div class="modal-content" style="width: 90%; border: none" >
+			<div class="modal-header" style="background-color:#598eff; color:white; border-radius: 30px;
+    		margin: 10px; margin-top: 20px;">
                 <h4 class="modal-title"><strong>리뷰 등록</strong> </h4>
                 <button id="addCloseBtn" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -336,8 +337,9 @@ type="text/css" />
 <!--------------------------- 리뷰 수정 modal --------------------------------------->
 <div class="modal" tabindex="-1" id="reviewUpdateModal" aria-labelledby="menuAddForm" aria-hidden="true">
     <div class="modal-dialog" style="display:flex; justify-content:center;">
-        <div class="modal-content" style="width:80%;">
-            <div class="modal-header">
+		<div class="modal-content" style="width: 90%; border: none" >
+			<div class="modal-header" style="background-color:#598eff; color:white; border-radius: 30px;
+    		margin: 10px; margin-top: 20px;">
                 <h4 class="modal-title"><strong>리뷰 수정</strong></h4>
                 <button data-num="" data-num2="" id="reviewDeleteBtn">리뷰 삭제</button>
             </div>
@@ -370,8 +372,9 @@ type="text/css" />
 <!----------------------------- 리뷰 list modal ------------------------------------------------>
 <div class="modal" tabindex="-1" id="modal-reviewList" aria-labelledby="modal-reviewList" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
+		<div class="modal-content" style="width: 90%; border: none" >
+			<div class="modal-header" style="background-color:#598eff; color:white; border-radius: 30px;
+    		margin: 10px; margin-top: 20px;">
                 <h4 class="modal-title"><strong>리뷰 목록</strong> </h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -565,10 +568,10 @@ type="text/css" />
 					let menuCount = data.list[j].menuCount;
 					let price = data.list[j].price;
 					let td = document.createElement( "TD" );
-					 td.setAttribute('class', 'col-6');
+					 td.setAttribute('class', 'col-4');
 				     td.innerHTML = menu;  
 				     let td1 = document.createElement( "TD" );
-				     td1.setAttribute('class', 'col-2');
+				     td1.setAttribute('class', 'col-3');
 				     td1.innerHTML = menuCount; ; 
 				     let td2 = document.createElement( "TD" );
 				     td2.setAttribute('class', 'col-4');

@@ -115,6 +115,7 @@ li {
 	padding-left: 0;
 }
 
+
 .container {
 	margin-top: 30px;
 }
@@ -132,11 +133,19 @@ li {
 	justify-content: space-between;
 }
 
+.my-page__profile > img {
+	margin-right: 30px;
+}
+
 .my-page__edit {
-	display: flex;
-	align-items: end;
-	padding-bottom: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    padding: 0;
+    margin: 0;
+    margin-top: 20px;
 	color: white;
+	font-size: 14px;
 }
 
 .my-page__order {
@@ -276,9 +285,9 @@ li {
 
 .tdWrapper {
 	display: flex;
-    justify-content: space-around;
-    width: 100%;
+    justify-content: space-evenly;
     text-align: center;
+    align-items: center;
 }
 
 #reviewAddForm {
@@ -303,4 +312,53 @@ li {
 	display: flex;
 	padding-left:10px;
 	width: 60%;
+}
+
+.page-ui > ul {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 80px;
+}
+
+.page-ui > ul > li {
+	margin: 0 10px;
+}
+
+.page-ui > ul > li > a {
+	text-decoration: none;
+	color: lightgray;
+	display:flex;
+	justify-content:center;
+	align-items: center;
+	border-radius: 10px;
+	width:30px;
+	height:30px;
+	font-size: 20px;
+}
+
+.active {
+	font-weight: 600;
+	background-color: #598EFF;
+	font-color: white;
+}
+
+@media screen and (max-width:1024px) {
+	.my-page__profile {
+		display: flex;
+	    flex-direction: column;
+	    padding: 50px;
+	    text-align: center;
+	}
+	
+	.info-header {
+		padding: 0;
+		display: flex;
+		justify-content: center;
+	}
+	
+	.my-page__profile > img {
+		margin: 10px 0;
+		margin-bottom: 40px;
+	}
 }

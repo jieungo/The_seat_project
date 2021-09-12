@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -130,9 +131,9 @@ type="text/css" />
 	<div id="bestMenu">
 		<c:forEach var="tmp" items="${menuList }" >
 			<c:if test="${tmp.best == 'yes' }">
-				<div class="banner_img" style="width:300px; overflow:hidden; box-shadow: 0 5px 18px -7px rgba(0,0,0,1);">
-					<img src="${pageContext.request.contextPath}${tmp.menuImage }" class="rounded" style="width:100%; object-fit:cover;"/>
-					<p class="hover_text">${tmp.menuName } <br> ${tmp.price } ￦</p>
+				<div class="banner_img" style="width:300px; overflow:hidden;">
+					<img src="${pageContext.request.contextPath}${tmp.menuImage }" style="width:100%; object-fit:cover; border-radius: 20px;" />
+					<p class="hover_text">${tmp.menuName } <br> <fmt:formatNumber value="${tmp.price }" pattern="#,###"/> ￦</p>
 				</div>
 			</c:if>
 		</c:forEach>
@@ -153,12 +154,12 @@ type="text/css" />
 				<c:forEach var="tmp" items="${menuList }">
 						<input type="hidden" class="menuName" />
 						<button data-num="${tmp.num }" type="button" id="menuBtn"
-							data-bs-toggle="modal" data-bs-target="#exampleModal"
+							data-bs-toggle="modal" data-bs-target="#exampleModal${tmp.num }"
 							style="width: 400px; margin-left: 70px; margin-top: 50px;">${tmp.menuName }</button>
 						<span
-							style="width: 300px; margin-left: 300px; font-size: 1.5em; font-weight: bold; color: rgb(96, 92, 99);">${tmp.price } ￦</span>
+							style="width: 300px; margin-left: 300px; font-size: 1.5em; font-weight: bold; color: rgb(96, 92, 99);"> <fmt:formatNumber value="${tmp.price }" pattern="#,###"/> ￦</span>
 						<!------------모달창-------------- 메뉴 이름 누르면 그에 맞는 이미지 Modal 활성화 -------------------------------->
-						<div class="modal fade" id="exampleModal" tabindex="-1"
+						<div class="modal fade" id="exampleModal${tmp.num }" tabindex="-1"
 							aria-labelledby="exampleModalLabel" aria-hidden="true">
 							<div class="modal-dialog modal-dialog-centered">
 								<div class="modal-content">
@@ -237,8 +238,8 @@ type="text/css" />
 												</div>
 											</div>
 											<!-- 버튼 클릭시 글 작성 가능한 사장님 답글 말풍선 생성-->
-											<button data-num="${tmp.groupNum }" href="javascript:" class="userReview">
-												<span class="user-review__reply">답글 보기</span>
+											<button data-num="${tmp.groupNum }" href="javascript:" class="userReview" style="text-align: center; width: 70px; height: 70px; margin-left: 200px; margin-top: 10px; font-weight: 600; border: none; border-radius: 100%; color: #fff; background-color: #96caff;">
+												<span class="user-review__reply">답글 <br /> 보기</span>
 											</button>
 										</div>
 									</div>

@@ -10,7 +10,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/storeOrder.css?ver=9"
+	href="${pageContext.request.contextPath}/resources/css/storeOrder.css?ver=10"
 	type="text/css" />
 </head>
 <body>
@@ -45,11 +45,11 @@
 				                    <div style="height:300px; text-overflow: hidden; overflow-x: auto;">
 					                    <table style="width:100%;">
 					                    	<thead class="mb-2">
-					                    		<tr class="row" style="display:flex; justify-content:space-between; align-items:center;
-					                    		margin:10px 0;">
-					                    			<th class="col" style="padding:0 5px;">메뉴명</th>
-					                    			<th class="col ps-0" style="text-align:end;">수량</th>
-					                    			<th class="col ps-0 pe-4" style="text-align:end;">가격</th>
+					                    		<tr class="row" style="display:flex; align-items:center;
+					                    		margin:10px 0; text-align:center">
+					                    			<th class="col">메뉴명</th>
+					                    			<th class="col">수량</th>
+					                    			<th class="col">가격</th>
 					                    		</tr>
 					                    	</thead>
 					                    	<tbody class="orderDetail col ps-3 pe-3">
@@ -160,14 +160,18 @@
 				let menu = data.list[j].menu;
 				let menuCount = data.list[j].menuCount;
 				let price = data.list[j].price;
-				let td = document.createElement( "TD" ); 
+				let td = document.createElement( "TD" );
+				td.setAttribute('class', 'col');
 			     td.innerHTML = menu;  
 			     let td1 = document.createElement( "TD" );
+			     td1.setAttribute('class', 'col');
 			     td1.innerHTML = menuCount; ; 
 			     let td2 = document.createElement( "TD" );
+			     td2.setAttribute('class', 'col');
 			     td2.innerHTML = price; 
 			     
 				let tr = document.createElement( "TR" ); 
+				     tr.setAttribute('class', 'row');
 				     tr.appendChild( td );
 				     tr.appendChild( td1 ); 
 				     tr.appendChild( td2 ); 

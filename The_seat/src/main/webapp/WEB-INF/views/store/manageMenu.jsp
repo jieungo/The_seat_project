@@ -11,7 +11,7 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/manageMenu.css?ver=20"
+	href="${pageContext.request.contextPath}/resources/css/manageMenu.css?ver=25"
 	type="text/css" />
 </head>
 <body>

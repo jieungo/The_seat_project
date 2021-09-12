@@ -388,7 +388,8 @@
 		</div>
 		<div class="offcanvas-body">
 			<ul>
-				<li class="li_" style="margin-top: 20px;"><c:choose>
+				<li class="li_" style="margin-top: 20px;">
+					<c:choose>
 						<c:when test="${email ne null }">
 							<a class="a1"
 								href="${pageContext.request.contextPath}/users/info.do"
@@ -452,7 +453,8 @@
 				</div>
 				<c:if test="${email != null }">
 					<li class="li2" style="margin-top: 20px;"><a class="a2"
-						data-num="0" id="addBtn0" href="#" style="line-height: 2.5;">➕ 매장 추가</a>
+						data-num="0" id="addBtn0" href="#" style="line-height: 2.5;"><img src="${pageContext.request.contextPath}/resources/img/add2.PNG" style="width: 40px; height: 40px;" alt="추가버튼" />
+						매장 추가</a>
 					</li>
 				</c:if>
 			</ul>
