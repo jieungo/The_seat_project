@@ -298,49 +298,44 @@ body {
 						</div>
 					</c:when>
 				</c:choose>
-
-				<c:if test="${sessionScope.email ne null }">
-					<li class="nav-item">
-						<button id="manageStore">매장관리</button>
-					</li>
-					<li class="nav-item">
-						<button id="manageMenu1">메뉴관리</button>
-					</li>
-					<li class="nav-item">
-						<button id="storeReview1">리뷰관리</button>
-					</li>
-					<li class="nav-item">
-						<button id="storeOrder1">주문확인</button>
-					</li>
-					<li class="nav-item">
-						<button id="storeSeat1">자리관리</button>
-					</li>
-				</c:if>
-
-				<div class="footer-icons" style="margin-top: 220px;">
+				
+				<div style="margin-top: 220px;">
+				
+				<div class="footer-icons">
 					<section style="text-align: center; margin-right: 30px;">
 						<a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
 						<a href="https://www.google.co.kr/"><i class="fa fa-google"></i></a>
 						<a href="https://kr.linkedin.com/"><i class="fa fa-linkedin"></i></a>
 						<a href="https://github.com/Keunyeong/The_seat"><i
 							class="fa fa-github"></i></a>
-
 					</section>
-					<c:if test="${email ne null }">
-						<li style="list-style: none; margin-top: 20px;">
-							<button type="button" id="logoutBtn"
-								onclick="location.href='${pageContext.request.contextPath}/users/logout.do'">
-								<span>정말로 나가실건가요 ? </span><span>로그아웃</span>
-							</button>
-						</li>
-					</c:if>
 				</div>
+					
+				<c:if test="${email ne null }">
+					<li style="list-style: none; margin-top: 20px;">
+						<button type="button" id="logoutBtn"
+							onclick="location.href='${pageContext.request.contextPath}/users/logout.do'">
+							<span>정말로 나가실건가요 ? </span><span>로그아웃</span>
+						</button>
+					</li>
+				</c:if>
 				<c:if test="${email != null }">
 					<li class="li2" style="margin-top: 20px;"><a class="a2"
 						data-num="0" id="addBtn0" href="#" style="line-height: 2.5;"><img
 							src="${pageContext.request.contextPath}/resources/img/add2.PNG"
 							style="width: 40px; height: 40px;" alt="추가버튼" /> 매장 추가</a></li>
 				</c:if>
+				<div class="container" style="margin-top: 30px; text-align: center;">
+				<c:if test="${sessionScope.email ne null }">
+						<button id="manageStore">매장관리</button>
+						<button id="manageMenu1">메뉴관리</button>
+						<button id="storeReview1">리뷰관리</button>
+						<br />
+						<button id="storeOrder1">주문확인</button>
+						<button id="storeSeat1">자리관리</button>
+				</c:if>
+				</div>
+				</div>
 			</ul>
 		</div>
 	</div>
@@ -372,7 +367,12 @@ body {
                return response.json()
             }).then(function(data) {
          document.querySelector("#userName").innerText = data.dto.name;
-         document.querySelector("#userProfile").setAttribute("src","${pageContext.request.contextPath}"+data.dto.profile);
+         if(data.dto.profile == 'profile'){
+        	 document.querySelector("#userProfile").setAttribute("src","${pageContext.request.contextPath}/resources/img/user1.png");
+        	 document.querySelector("#userProfile").setAttribute('style','width: 55px; height: 50px;');
+         }else{
+        	 document.querySelector("#userProfile").setAttribute("src","${pageContext.request.contextPath}"+data.dto.profile);
+         }
       });
    }
    

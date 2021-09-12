@@ -119,7 +119,7 @@
 	text-decoration: none;
 	font-size: 25px;
 	font-weight: 500;
-	color: #3fa2ff;
+	color: #598eff;
 	display: block;
 	transition: 0.3s ease-in-out;
 	display: inline-block;

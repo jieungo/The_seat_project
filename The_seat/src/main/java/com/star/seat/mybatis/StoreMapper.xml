@@ -69,7 +69,7 @@
 	<select id="getListCount" parameterType="storeDto" resultType="int">
 		select nvl(max(rownum),0)
 		from store
-		where storeOpen='no'
+		where storeOpen='yes'
 		<choose>
 			<when test="{area != '' and keyword != ''}">
 				and (lower(storeAddr) like '%' || lower(#{area}) || '%'
