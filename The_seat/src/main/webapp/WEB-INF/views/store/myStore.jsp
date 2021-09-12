@@ -12,7 +12,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/myStore.css?ver=19"
+	href="${pageContext.request.contextPath}/resources/css/myStore.css?ver=21"
 	type="text/css" />
 </head>
 <body>
@@ -67,7 +67,7 @@
                  <span style="font-size: 14px; color: lightgray;">매장을 나타내는 태그 추가하기</span>
                  <p id="btns" class="mt-1" style="width:250px;">
                      <c:forEach var="tmp" items="${list }">
-                         <button data-num="${dto.num }" name="tag" class="btn btn-primary tag allTag" style="margin-bottom:5px; font-size:14px;">${tmp}</button>
+                         <button data-num="${dto.num }" name="tag" class="btn btn-primary tag allTag" style="margin-bottom:5px; margin-right:5px; font-size:14px;">${tmp}</button>
                      </c:forEach>
                  </p>
                  <div class="tag_input">
@@ -140,14 +140,15 @@
      
              <div style="width: 70%; text-align:center; margin-bottom:15px;">
              	<c:choose>
-             		<c:when test="${dto.storeOpen == 'no' }">
-             			<button id="storeOnOffBtn" class="btn">매장 열기</button>
-             		</c:when>
-             		<c:when test="${dto.storeOpen == 'yes' }">
-             			<button id="storeOnOffBtn" class="btn" style="">매장 닫기</button>
-             		</c:when>
+             		<c:when test="${dto.storeOpen == 'no'}">
+	                	<button id="storeOnOffBtn" class="btn">매장 열기</button>
+	                </c:when>
+	                <c:when test="${dto.storeOpen == 'yes'}">
+	                	<button id="storeOnOffBtn" class="btn" style="background-color: lightgray;
+    					color: white;">매장 닫기</button>
+	                </c:when>
              	</c:choose>
-                <button data-num="${dto.num }" class="btn" id="deleteStoreBtn">매장 삭제</button>
+	            <button data-num="${dto.num }" class="btn" id="deleteStoreBtn">매장 삭제</button>
              </div>
       </div>
          <!------------------------------------ 사이드바 (매장정보, 메뉴관리 탭) ----------------->
@@ -231,6 +232,7 @@
 					newBtn.setAttribute("class", "btn btn-primary add-tag allTag");
 					newBtn.setAttribute("data-num", dataNum);
 					// 붙어서 생기는 것을 방지하기 위해 야매
+					newBtn.style.marginRight="5px";
 					newBtn.style.marginBottom="5px";
 					newBtn.style.fontSize="14px";
 					// 새로운 취소 버튼을 만들고 성분과 값을 부여함

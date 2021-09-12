@@ -20,15 +20,15 @@
 	crossorigin="anonymous"></script>
 <!-- css 파일 로딩하기 -->
 <link rel="stylesheet"
-href="${pageContext.request.contextPath}/resources/css/storeDetail.css"
+href="${pageContext.request.contextPath}/resources/css/storeDetail.css?ver=2"
 type="text/css" />
 <!------------------ 타이틀 로고 -------------------->
 <link rel="shortcut icon" type="image⁄x-icon" href="${pageContext.request.contextPath}/resources/img/snow.jpg">
 </head>
 <!---------------------- 네비바를 import 한다. ------------------------->
 <jsp:include page="/WEB-INF/views/nav/navbar.jsp" />
-<body style="margin-top:150px;">
-<div class="container">
+<body>
+<div class="container detail-container">
 	
 	<section style="text-align: center; margin-top: 10px;">
 		<!---------------------- DB 연동해서 파라미터 값으로 칼럼 값을 받아온다.  --------------------->

@@ -39,6 +39,7 @@
 	width: 100%;
 	background-color: white;
 	box-shadow: 1px 1px 11px rgba(172, 172, 172, 0.699);
+	margin-bottom: 200px;
 }
 
 #area {
@@ -272,9 +273,65 @@
 	border-radius: 2px;
 }
 
-.footer-icons a:hover {
-	transform:scale(1.3);
-	-webkit-transform:scale(1.3);
+.nav-container {
+	margin-top: 0;
+	margin-right: 250px;
+}
+
+.nav-container {
+	margin-left: 150px;
+}
+
+
+@media screen and (max-width:1024px) {
+	.nav-container {
+		display: flex;
+		flex-direction: column;
+	    justify-content: center;
+	    align-items: center;
+	}
+}
+
+
+/* 모바일 가로, 세로 */
+
+@media screen and (max-width:767px) {
+	.navbars {
+		dispaly: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+	
+	.nav-container {
+		margin: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin: 10px 0;
+	}
+	
+	body {
+		margin-bottom:300px;
+	}
+	
+	#keyword {
+		margin: 10px 0;
+		margin-left: 20px;
+	}
+	
+	#area {
+		margin: 0;
+	}
+	
+	#burgerBtn {
+		margin-top: 10px;
+	}
+	
+	#navbar-brand {
+		margin:0;
+		padding:0;
+	}
 }
 
 </style>
@@ -288,7 +345,7 @@
 		</a>
 	</div>
 	<form action="${pageContext.request.contextPath}/main.do" method="get">
-		<div class="container" style="margin-top: 0; margin-right: 250px;">
+		<div class="nav-container">
 			<select name="area" id="area">
 				<option value="" ${searchData.area eq 'area' ? 'selected' : '' }>지역</option>
 				<option value="강남"
