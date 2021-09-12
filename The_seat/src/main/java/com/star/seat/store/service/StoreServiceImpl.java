@@ -128,8 +128,40 @@ public class StoreServiceImpl implements StoreService{
 	// 매장 검색목록 불러오는 method
 	@Override
 	public void getList(HttpServletRequest request, StoreDto dto) {
+		
+		/*
+		게시글 paging 처리
+		*/
+	
+		// 한 페이지에 표시할 게시물 수
+		final int page_row_count=8;
+		// 하단 페이지를 표시할 수
+		final int page_display_count=5;
+		
+		// 보여줄 페이지의 번호를 초기값으로 1로 지정
+		int pageNum=1;
+		
+		// page 번호가 parameter로 전달되는지 확인
+		String strPageNum=request.getParameter("pageNum");
+		// 넘어온다면
+		if(strPageNum!=null){
+			// String을 숫자로 바꿔서 page 번호로 저장한다.
+			pageNum=Integer.parseInt(strPageNum);
+		}
+		
+		// 보여줄 page의 시작 rownum
+		int startRowNum=1+(pageNum-1)*page_row_count;
+		// 보여줄 page의 끝 rownum
+		int endRowNum=pageNum*page_row_count;
+		
+		dto.setStartRowNum(startRowNum);
+		dto.setEndRowNum(endRowNum);
+		
 		List<StoreDto> list=dao.getList(dto);
 		request.setAttribute("list", list);
+		
+		// 전체 게시글 개수
+		int totalRow=0;
 		
 		// 별점정보를 list에 담는 method
 		ReviewDto rDto=new ReviewDto();
@@ -142,6 +174,25 @@ public class StoreServiceImpl implements StoreService{
 	    	float avgStar=(float)(Math.round(rDao.getAvgStar(rDto)*100)/100.0);
 	    	list.get(i).setAvgStar(avgStar);
 	    }
+		totalRow=dao.getListCount(dto);
+		
+		
+		// 하단의 시작 page 번호
+		int startPageNum=1+((pageNum-1)/page_display_count)*page_display_count;
+		int endPageNum=startPageNum+page_display_count-1;
+		
+		// 전체 page의 수
+		int totalPageCount=(int)Math.ceil(totalRow/(double)page_row_count);
+		// 끝 page의 번호가 전체 page 수 보다 크다면 잘못된 값
+		if(endPageNum > totalPageCount){
+			endPageNum=totalPageCount; // 보정
+		}
+		
+		request.setAttribute("startPageNum", startPageNum);
+		request.setAttribute("endPageNum", endPageNum);
+		request.setAttribute("totalPageCount", totalPageCount);
+		request.setAttribute("pageNum", pageNum);
+		request.setAttribute("totalRow", totalRow);
 	}
 	
 	// 매장 태그를 추가하는 method
