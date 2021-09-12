@@ -24,7 +24,8 @@ public class StoreDto {
 	private String keyword;
 	private MultipartFile imageFile;
 	private float avgStar;
-	
+	private int startRowNum;
+	private int endRowNum;
 	
 	public StoreDto() {
 	
@@ -33,7 +34,7 @@ public class StoreDto {
 	public StoreDto(int num, String owner, String storeName, String storeAddr, String storePhone, String storeTag,
 			String openingTime, String image_logo, String image_1, String image_2, String image_3, String image_4,
 			String storeOpen, String imageCheck, String category, String regdate, String area, String group,
-			String keyword, MultipartFile imageFile, float avgStar) {
+			String keyword, MultipartFile imageFile, float avgStar, int startRowNum, int endRowNum) {
 		super();
 		this.num = num;
 		this.owner = owner;
@@ -56,6 +57,8 @@ public class StoreDto {
 		this.keyword = keyword;
 		this.imageFile = imageFile;
 		this.avgStar = avgStar;
+		this.startRowNum = startRowNum;
+		this.endRowNum = endRowNum;
 	}
 
 	public int getNum() {
@@ -226,5 +229,20 @@ public class StoreDto {
 		this.avgStar = avgStar;
 	}
 
+	public int getStartRowNum() {
+		return startRowNum;
+	}
 
+	public void setStartRowNum(int startRowNum) {
+		this.startRowNum = startRowNum;
+	}
+
+	public int getEndRowNum() {
+		return endRowNum;
+	}
+
+	public void setEndRowNum(int endRowNum) {
+		this.endRowNum = endRowNum;
+	}
+	
 }

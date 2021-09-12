@@ -100,21 +100,21 @@
 				<p>
 					<strong>뭘 좋아하는 지 몰라서 전부 준비해봤어~ (찡긋)</strong>
 					<br>
-					${list.size() } 개의 매장이 검색되었습니다.
+					${totalRow } 개의 매장이 검색되었습니다.
 				</p>
 			</c:when>
 			<c:when test="${searchData.area != ''}">
 				<p>
 					<strong>'${searchData.area }'</strong> 지역으로
 					<br>
-					${list.size() } 개의 매장이 검색되었습니다.
+					${totalRow } 개의 매장이 검색되었습니다.
 				</p>
 			</c:when>
 			<c:when test="${searchData.keyword != ''}">
 				<p>
 					<strong>'${searchData.keyword }'</strong> 검색어로 검색된 내용 자세히 보기
 					<br>
-					${list.size() } 개의 매장이 검색되었습니다.
+					${totalRow } 개의 매장이 검색되었습니다.
 				</p>
 			</c:when>
 			<c:otherwise>
@@ -153,6 +153,41 @@
 				</a>
 			</c:forEach>
 		</div>
+	</div>
+	
+	<!-- page 넘길 수 있는 부분 -->
+	<div class="container">
+		<ul class="page-ui pagination justify-content-center">
+			<!-- 이전 묶음 -->
+			<c:if test="${startPageNum gt 1 }">
+				<li class="page-item">
+					<a class="page-link" href="${pageContext.request.contextPath}/main.do?area=${searchData.area }&keyword=${searchData.keyword }&pageNum=${startPageNum-1 }">prev</a>
+				</li>
+			</c:if>
+
+			<!-- 각 page -->
+			<c:forEach var="tmp" begin="${startPageNum }" end="${endPageNum }">
+				<c:choose>
+					<c:when test="${pageNum == tmp }">
+						<li class="page-item">
+							<a class="active page-link" href="${pageContext.request.contextPath}/main.do?area=${searchData.area }&keyword=${searchData.keyword }&pageNum=${tmp }">${tmp }</a>
+						</li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item">
+							<a class="page-link" href="${pageContext.request.contextPath}/main.do?area=${searchData.area }&keyword=${searchData.keyword }&pageNum=${tmp }">${tmp }</a>
+						</li>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+
+			<!-- 다음 묶음 -->
+			<c:if test="${endPageNum lt totalPageCount }">
+				<li class="page-item">
+					<a class="page-link" href="${pageContext.request.contextPath}/main.do?area=${searchData.area }&keyword=${searchData.keyword }&pageNum=${endPageNum+1 }">next</a>
+				</li>
+			</c:if>
+		</ul>
 	</div>
 	<!------------------------------ footer 불러오기 --------------------------->
 	<jsp:include page="/WEB-INF/views/nav/footer.jsp" />

@@ -153,6 +153,10 @@ public class ReviewServiceImpl implements ReviewService{
 	// 해당 DB번호의 리뷰 정보를 수정하는 method
 	@Override
 	public float updateReview(ReviewDto dto, HttpServletRequest request) {
+		// 이메일 정보 넣어주기
+		String email=(String)request.getSession().getAttribute("email");
+		dto.setWriter(email);
+		
 		// Tomcat 서버를 실행했을때 WebContent/upload 폴더의 실제 경로 얻어오기
 		String realPath=request.getServletContext().getRealPath("/upload");
 		//저장할 파일의 상세 경로
