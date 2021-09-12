@@ -264,6 +264,7 @@ public class StoreServiceImpl implements StoreService{
 	public void updateStore(StoreDto dto, HttpServletRequest request) {
 		
 		dao.updateStore(dto);
+		mDao.updateStoreOfMenu(dto);
 		
 		request.setAttribute("newDto", dto);
 	}
