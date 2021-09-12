@@ -93,7 +93,7 @@
 		<c:choose>
 			<c:when test="${searchData.area == '' and searchData.keyword == ''}">
 				<p>
-					<strong>뭘 좋아하는 지 몰라서 전부 준비해봤어~(찡긋)</strong>
+					<strong>뭘 좋아하는 지 몰라서 전부 준비해봤어~ (찡긋)</strong>
 					<br>
 					${list.size() } 개의 매장이 검색되었습니다.
 				</p>
