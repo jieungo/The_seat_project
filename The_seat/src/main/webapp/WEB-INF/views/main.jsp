@@ -112,6 +112,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" 
 	}
 }
 
+
+
 </style>
 </head>
 <body style="background-color:#f6f6f6;">
@@ -119,7 +121,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" 
 	<jsp:include page="/WEB-INF/views/nav/navbar.jsp" />
 	
 	<!-- 검색 결과 -->
-	<div class="container main-container" style="width:80%;">
+	<div class="container main-container" style="width:100%;">
 	<div class="container">
 		<c:choose>
 			<c:when test="${searchData.area == '' and searchData.keyword == ''}">
@@ -152,11 +154,12 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" 
 			</c:otherwise>
 		</c:choose>
 	</div>
-		<div class="row row-cols-1 row-cols-md-2 g-4" style="margin-top: 10px;" >
+		<div style="margin-top: 10px; width:100%; margin-top: 10px; width: 100%; display: flex; flex-wrap: wrap;
+		justify-content: space-around;" >
 			<c:forEach var="tmp" items="${list }">
 				<a href="${pageContext.request.contextPath}/store/storeDetail.do?num=${tmp.num}">
-					<div class="row g-0 main-card">
-						<div class="col-md-6" style="height:100%">
+					<div class="main-card row" style="width:500px;">
+						<div class="col" style="height:100%">
 							<img src="${pageContext.request.contextPath}${tmp.image_logo } "
 								class="img" style="object-fit:fill; width:100%; height:180px; border-radius:5px;" alt="storeImageLogo">
 						</div>
