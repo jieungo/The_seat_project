@@ -27,7 +27,6 @@
 	/* 주문내역 영수증 문구 위치 및 모양 css */
 	.orderR {
  		position: relative;
- 		margin-left: 180px;
 	}
 
 	.orderR .text_top {
@@ -49,21 +48,16 @@
 		overflow: auto;
 	}
 	
-	/* 투명 스크롤바 */
-	/*.text_middle::-webkit-scrollbar {
-	  	display: none;
-	}*/
-	
 	.text_bottom {
 		position: absolute;
-		bottom: 200px;
-		right: 180px;
+		bottom: 140px;
+		right: 165px;
 	}
 	
 	/* 다시담기 버튼 css */
 	#reset {
   		position: absolute;
-  		bottom: 130px;
+  		bottom: 80px;
   		left : 120px;
   		background-color: #fc5555;
   		border: none;
@@ -73,7 +67,7 @@
   		font-size: 22px;
   		line-height: 1em;
 	  	outline: none;
-	  	padding: 12px 30px 10px;
+	  	padding: 12px 33px 10px;
 	  	text-transform: uppercase;
 	  	font-weight: 700;
 	}
@@ -119,7 +113,7 @@
 	/* 주문하기 버튼 css */
 	#goOrder {
 		position: absolute;
-  		bottom: 130px;
+  		bottom: 80px;
   		right : 100px;
   		background-color: #fc5555;
   		border: none;
@@ -129,7 +123,7 @@
   		font-size: 22px;
   		line-height: 1em;
 	  	outline: none;
-	  	padding: 12px 30px 10px;
+	  	padding: 12px 33px 10px;
 	  	text-transform: uppercase;
 	  	font-weight: 700;
 	}
@@ -225,13 +219,9 @@
 	
 	/* span 텍스트 css */
 	.total_Menu {
-		position: relative;
-		margin-left: 30px;
-		text-decoration: underline double #719ffc;
-		text-underline-position: under;
 		font-size: 30px;
 		font-weight: 500;
-		color: #636363;
+		color: #59a5f7;
 	}
 	
 	.menuListWrapper {
@@ -239,3 +229,35 @@
 		width:100%;
 		justify-content: space-evenly;
 	}
+	
+	.order-container {
+		margin-top: 150px;
+		display: flex;
+	    flex-direction: column;
+	    justify-content: center;
+	    align-items: center;
+	}
+	
+@media screen and (max-width:1024px) {
+	 .order-container {
+		margin-top: 250px;
+	}
+	.row2 {
+		display: flex;
+	    flex-direction: column;
+	    justify-content: center;
+	    align-items: center;
+	}
+}
+
+@media screen and (max-width:767px) {
+	 .order-container {
+		margin-top: 350px;
+	}
+	.row2 {
+		display: flex;
+	    flex-direction: column;
+	    justify-content: center;
+	    align-items: center;
+	}
+}
