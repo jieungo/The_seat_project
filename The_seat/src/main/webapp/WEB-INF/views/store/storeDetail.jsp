@@ -28,7 +28,7 @@ type="text/css" />
 </head>
 <!---------------------- 네비바를 import 한다. ------------------------->
 <jsp:include page="/WEB-INF/views/nav/navbar.jsp" />
-	<div class="container detail-container">
+	<div class="container detail-container" style="width: 100%;">
 
 		<section style="text-align: center; margin-top: 10px;">
 			<!---------------------- DB 연동해서 파라미터 값으로 칼럼 값을 받아온다.  --------------------->
@@ -37,7 +37,7 @@ type="text/css" />
 				style="font-size: 2.5em; font-weight: bold; color: rgb(85, 152, 252); text-shadow: 2px 6px 2px #d3d3d3; text-align: center;">
 				${dto.storeName }</span>
 		</section>
-		<div class="row" style="display: flex; justify-content: center;">
+		<div class="row row1" style="display: flex; justify-content: center;">
 			<!--------------------- 매장의 대표 이미지 4개를 Carousel 로 띄우기  -------------------------->
 			<div id="carouselExampleDark"
 				class="col carousel carousel-dark slide" data-bs-ride="carousel"
@@ -84,7 +84,7 @@ type="text/css" />
 				</button>
 			</div>
 				<!------------------------------ 매장 상세 정보 카드 ----------------------------------->
-			<div class="col card text-center" style="width: 550px; height: 400px; border: none;">
+			<div class="col card text-center" style="width: 550px; height: 400px; padding: 5px 0px 2px 30px; border: none;">
 				<!--------------- 파라미터 값으로 매장 정보를 받아온다. ----------------------->
 
 				<div class="card-header bg-transparent border-dark-light">
@@ -103,8 +103,8 @@ type="text/css" />
 
 					</h3>
 				</div>
-				<div class="card-body" style="margin-top: 10px; line-height: 60px;">
-					<h4 class="card-title" style="line-height: 2;">
+				<div class="card-body" style="margin-top: 10px;">
+					<h4 class="card-title m-0" style="line-height: 2;">
 						매장 주소 : <span>${dto.storeAddr }</span>
 					</h4>
 					<h4 class="card-title" style="line-height: 2;">
@@ -149,26 +149,30 @@ type="text/css" />
 			<!-- 메뉴 -->
 
 			<div class="card mb-5"
-				style="max-width: auto; height: 700px; margin-top: 30px; background-color: rgb(86, 162, 255); box-shadow: 0 17px 20px -18px rgba(0, 0, 0, 1);">
+				style="width: 100%; height: 700px; display: flex; justify-content: center; align-items: center; margin-top: 30px; background-color: rgb(86, 162, 255); box-shadow: 0 17px 20px -18px rgba(0, 0, 0, 1);">
 				<span
-					style="color: white; font-size: 45px; font-weight: bold; text-shadow: 2px 6px 2px gray; text-align: left; margin-top: 25px;">Menu</span>
+					style="color: white; font-size: 50px; font-weight: bold; text-shadow: 2px 6px 2px gray; margin: 15px; display: block; text-align: start;">Menu</span>
 				<div class="card mb-5"
-					style="width: auto; height: 600px; overflow: auto; margin-top: 30px; margin-left: 80px; border-radius: 10px; background-color: white;">
-					<div class="col" style="margin-bottom: 30px;">
+					style="width: 90%; height: 600px; text-align: center; overflow-x:hidden; overflow-y:auto; margin-top: 25px; border-radius: 10px; background-color: #fff;">
 						<!-- 메뉴 리스트 오브잭트 배열 가져와서 꺼내기! -->
 						<c:forEach var="cat" items="${categoryList }">
 							<h2 style="margin-top: 30px; text-align: center; color: #4fa4f9;">${cat }</h2>
 							<c:forEach var="tmp" items="${menuList }">
 								<c:if test="${tmp.category == cat }">
-									<button data-num="${tmp.num }" type="button" id="menuBtn"
+								<div class="row" style="display: flex; justify-content: center; flex-direction: row;">
+								<div class="col">
+									<button data-num="${tmp.num }" type="button" id="menuBtn" style="margin: 10px;"
 										data-bs-toggle="modal"
-										data-bs-target="#exampleModal${tmp.num }"
-										style="width: 400px; margin-left: 70px; margin-top: 30px;">${tmp.menuName }
+										data-bs-target="#exampleModal${tmp.num }">${tmp.menuName }
 									</button>
+									</div>
+									<div class="col">
 									<span
-										style="width: 300px; margin-left: 300px; font-size: 1.5em; font-weight: bold; color: rgb(96, 92, 99);">
+										style="font-size: 1.5em; font-weight: bold; color: rgb(96, 92, 99);">
 										<fmt:formatNumber value="${tmp.price }" pattern="#,###" /> 원
 									</span>
+									</div>
+									</div>
 									<!------------모달창-------------- 메뉴 이름 누르면 그에 맞는 이미지 Modal 활성화 -------------------------------->
 									<div class="modal fade" id="exampleModal${tmp.num }"
 										tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -194,7 +198,7 @@ type="text/css" />
 												<div class="modal-footer">
 													<button type="button"
 														style="border: none; background-color: #fff; font-size: 20px; font-weight: 500; color: rgb(86, 162, 255); border-bottom: solid 3px rgb(86, 162, 255);"
-														data-bs-dismiss="modal">창닫기</button>
+														data-bs-dismiss="modal">Close</button>
 												</div>
 											</div>
 										</div>
@@ -202,7 +206,6 @@ type="text/css" />
 								</c:if>
 							</c:forEach>
 						</c:forEach>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -225,7 +228,7 @@ type="text/css" />
 					<c:choose>
 						<c:when test="${empty reviewList }">
 							<p style="text-align: center; font-size: 20px;">아직 작성된 리뷰가
-								없습니다.</p>
+								없습니다 😥</p>
 						</c:when>
 						<c:otherwise>
 							<c:forEach var="tmp" items="${reviewList }">
@@ -289,7 +292,7 @@ type="text/css" />
 				<div class="modal-footer">
 					<button type="button"
 						style="border: none; background-color: #fff; font-size: 20px; font-weight: 500; color: rgb(86, 162, 255); border-bottom: solid 3px rgb(86, 162, 255);"
-						data-bs-dismiss="modal">창닫기</button>
+						data-bs-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
@@ -323,13 +326,13 @@ type="text/css" />
 								<!-- storeSeat 테이블에서 지정한 만큼 -->
 								<c:forEach var="tmp" items="${sDto.totalSeat }">
 									<c:if test="${fn:contains(sDto.emptySeat, tmp) }">
-										<option value="${tmp}">${tmp}(이용가능)</option>
+										<option value="${tmp}">${tmp} (이용가능)</option>
 									</c:if>
 									<c:if test="${fn:contains(sDto.notEmptySeat, tmp) }">
-										<option value="${tmp}" disabled>${tmp}(이용중)</option>
+										<option value="${tmp}" disabled>${tmp} (이용중)</option>
 									</c:if>
 									<c:if test="${fn:contains(sDto.notUse, tmp) }">
-										<option value="${tmp}" disabled>${tmp}(이용불가)</option>
+										<option value="${tmp}" disabled>${tmp} (이용불가)</option>
 									</c:if>
 								</c:forEach>
 							</select>
@@ -344,8 +347,6 @@ type="text/css" />
 					</div>
 				</div>
 				<div class="modal-footer">
-					<!-- <button type="button" style="border: none; background-color: #fff; font-size: 20px; font-weight: 500; color: rgb(86, 162, 255); border-bottom: solid 3px rgb(86, 162, 255);"
-					data-bs-dismiss="modal">창닫기</button>-->
 					<button type="button" id="orderBtn">
 						<span>GO ! GO !</span><span>주문하러 가기 ☺</span>
 					</button>

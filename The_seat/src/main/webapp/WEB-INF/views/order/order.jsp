@@ -31,7 +31,7 @@
 <body style="margin-top: 150px;">
 	<!-- 네비바 import 하기 -->
 	<jsp:include page="/WEB-INF/views/nav/navbar.jsp" />
-	<div class="container">
+	<div class="container order-container">
 		<div class="container">
 			<button id="backBtn"
 				onclick="location.href='javascript:history.back();'">
@@ -42,84 +42,77 @@
 				style="color: rgb(84, 84, 84); font-size: 2.5em; font-weight: bold; text-shadow: 2px 6px 2px #d3d3d3;">주문하기</span>
 			<span
 				style="margin-left: 20px; font-size: 25px; font-weight: 500; color: rgb(89, 89, 89);">${dto.storeName }에서
-				${tableNum }번 자리 👨‍🍳 </span>
+				${tableNum }번 자리 👨‍🍳 </span> <br /> <span class="total_Menu">전체
+				메뉴 🍴</span>
 		</div>
-		<div class="order">
-			<section>
-				<!----------------- 주문페이지에서 메뉴 고르기 ------------------>
-				<div class="row">
-					<span class="total_Menu">전체 메뉴 🍴</span>
-					<div class="col text-center" style="margin-top: 45px;">
-						<div class="row row-cols-1 row-cols-md-2 g-4 foodMenu"
-							style="width: 100%; height: 800px; overflow: auto;">
-							<c:forEach var="cat" items="${categoryList }">
-								<c:forEach var="tmp" items="${menuList }">
-									<c:if test="${tmp.category == cat }">
-										<form class="orderMenu"
-											action="${pageContext.request.contextPath}/order/insert.do">
-											<input type="hidden" name="orderNum" value="${orderNum }" />
-											<input type="hidden" name="email" value="${email }" /> <input
-												type="hidden" name="storeName" value="${dto.storeName }" />
-											<input type="hidden" name="storeLogo"
-												value="${dto.image_logo }" /> <input type="hidden"
-												name="menu" value="${tmp.menuName }" /> <input
-												type="hidden" name="tableNum" value="${tableNum }" /> <input
-												type="hidden" name="price" value="${tmp.price}" /> <input
-												type="hidden" name="num" value="${dto.num }" />
+		<!----------------- 주문페이지에서 메뉴 고르기 ------------------>
+		<div class="row row2">
+			<div class="col text-center" style="margin-top: 45px;">
+				<div class="row row-cols-1 row-cols-md-2 g-4 foodMenu"
+					style="width: 100%; height: 800px; overflow: auto;">
+					<c:forEach var="cat" items="${categoryList }">
+						<c:forEach var="tmp" items="${menuList }">
+							<c:if test="${tmp.category == cat }">
+								<form class="orderMenu"
+									action="${pageContext.request.contextPath}/order/insert.do">
+									<input type="hidden" name="orderNum" value="${orderNum }" /> <input
+										type="hidden" name="email" value="${email }" /> <input
+										type="hidden" name="storeName" value="${dto.storeName }" /> <input
+										type="hidden" name="storeLogo" value="${dto.image_logo }" />
+									<input type="hidden" name="menu" value="${tmp.menuName }" /> <input
+										type="hidden" name="tableNum" value="${tableNum }" /> <input
+										type="hidden" name="price" value="${tmp.price}" /> <input
+										type="hidden" name="num" value="${dto.num }" />
 
-											<div class="col">
-												<div class="card">
-													<img
-														src="${pageContext.request.contextPath}${tmp.menuImage }"
-														class="card-img-top" alt="menuImage"
-														style="width: 100%; height: 230px; object-fit: fill;">
-													<div class="card-body"
-														style="background-color: rgb(176, 215, 252); color: rgb(104, 104, 104); font-weight: bold;">
-														<h5 class="card-title">
-															<button type="submit" id="orderMenu">${tmp.menuName }</button>
-														</h5>
-														<p class="card-text" style="font-size: 20px;">
-															<fmt:formatNumber value="${tmp.price }" pattern="#,###" />
-															원
-														</p>
-														<input type="number" id="menuCount" name="menuCount"
-															min="1" max="9" value="1">
-													</div>
-												</div>
+									<div class="col">
+										<div class="card">
+											<img
+												src="${pageContext.request.contextPath}${tmp.menuImage }"
+												class="card-img-top" alt="menuImage"
+												style="width: 100%; height: 230px; object-fit: fill;">
+											<div class="card-body"
+												style="background-color: rgb(176, 215, 252); color: rgb(104, 104, 104); font-weight: bold;">
+												<h5 class="card-title">
+													<button type="submit" id="orderMenu">${tmp.menuName }</button>
+												</h5>
+												<p class="card-text" style="font-size: 20px;">
+													<fmt:formatNumber value="${tmp.price }" pattern="#,###" />
+													원
+												</p>
+												<input type="number" id="menuCount" name="menuCount" min="1"
+													max="9" value="1">
 											</div>
-										</form>
-									</c:if>
-								</c:forEach>
-							</c:forEach>
-						</div>
-					</div>
-
-					<!--------------------------- 주문내역 영수증 ---------------------------->
-					<div class="col orderR"
-						style="margin-top: 50px; margin-left: 40px;">
-						<img src="${pageContext.request.contextPath}/resources/img/p.svg"
-							alt="receipt" class="img2" style="width: 100%; height: 700px;">
-						<div class="text_top row"
-							style="width: 100%; display: flex; justify-content: space-evenly">
-							<h3 class="col-2">메뉴</h3>
-							<h3 class="col-2">수량</h3>
-							<h3 class="col-2">금액</h3>
-						</div>
-						<div class="text_middle">
-							<h5 id="orderList"></h5>
-						</div>
-						<div class="text_bottom"
-							style="display: flex; justify-content: center;">
-							<h4>
-								총 결제 금액 <span id="amount"
-									style="font-size: 25px; color: rgb(71, 150, 255);">0</span>
-							</h4>
-						</div>
-						<button id="reset">다시 담기</button>
-						<button id="goOrder">주문 하기</button>
-					</div>
+										</div>
+									</div>
+								</form>
+							</c:if>
+						</c:forEach>
+					</c:forEach>
 				</div>
-			</section>
+			</div>
+
+			<!--------------------------- 주문내역 영수증 ---------------------------->
+			<div class="col orderR" style="width: 100%; margin: auto;">
+				<img src="${pageContext.request.contextPath}/resources/img/p.svg"
+					alt="receipt" class="img2" style="width: 100%; height: 700px;">
+				<div class="text_top row"
+					style="width: 100%; display: flex; justify-content: space-evenly">
+					<h3 class="col-2">메뉴</h3>
+					<h3 class="col-2">수량</h3>
+					<h3 class="col-2">금액</h3>
+				</div>
+				<div class="text_middle">
+					<h5 id="orderList"></h5>
+				</div>
+				<div class="text_bottom">
+					<h4>
+						총 결제 금액 <span id="amount"
+							style="font-size: 25px; color: rgb(71, 150, 255);">0</span>
+					</h4>
+				</div>
+				<button id="reset">다시 담기</button>
+				<button id="goOrder">주문 하기</button>
+			</div>
 		</div>
 	</div>
 	<!------------------------------ footer 불러오기 --------------------------->
