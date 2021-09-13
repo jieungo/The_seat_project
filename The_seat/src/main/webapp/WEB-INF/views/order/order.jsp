@@ -49,7 +49,7 @@
 		<div class="row row2">
 			<div class="col text-center" style="margin-top: 45px;">
 				<div class="row row-cols-1 row-cols-md-2 g-4 foodMenu"
-					style="width: 100%; height: 800px; overflow: auto;">
+					style="width: 650px; height: 800px; overflow: auto;">
 					<c:forEach var="cat" items="${categoryList }">
 						<c:forEach var="tmp" items="${menuList }">
 							<c:if test="${tmp.category == cat }">
@@ -92,7 +92,7 @@
 			</div>
 
 			<!--------------------------- 주문내역 영수증 ---------------------------->
-			<div class="col orderR" style="width: 100%; margin: auto;">
+			<div class="col orderR" style="width: 650px; margin: auto;">
 				<img src="${pageContext.request.contextPath}/resources/img/p.svg"
 					alt="receipt" class="img2" style="width: 100%; height: 700px;">
 				<div class="text_top row"
@@ -110,8 +110,10 @@
 							style="font-size: 25px; color: rgb(71, 150, 255);">0</span>
 					</h4>
 				</div>
+				<div style="display: flex; justify-content: space-between;">
 				<button id="reset">다시 담기</button>
 				<button id="goOrder">주문 하기</button>
+				</div>
 			</div>
 		</div>
 	</div>
