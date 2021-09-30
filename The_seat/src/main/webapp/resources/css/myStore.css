@@ -243,6 +243,7 @@ font-size: 14px;
 
 .del-tag {
 	display: inline-block;
+	vertical-align: bottom;
 }
 	
 	

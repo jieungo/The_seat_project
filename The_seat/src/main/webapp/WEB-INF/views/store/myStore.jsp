@@ -12,7 +12,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/myStore.css?ver=22"
+	href="${pageContext.request.contextPath}/resources/css/myStore.css?ver=24"
 	type="text/css" />
 </head>
 <body>
@@ -82,8 +82,8 @@
                  </p>
                  <div class="tag_input">
                      <input placeholder="태그를 입력해주세요" id="inputTag" style="display:flex;"/>
-	                 <a data-num="${dto.num }" href="javascript:" class="plus btn addTag p-3" style="text-decoration:none; display:flex;">
-	                     <span>+</span>
+	                 <a data-num="${dto.num }" href="javascript:" class="plus addTag" style="text-decoration:none; display:flex;">
+	                     <span id="tag_span" style="width:50px; font-size:16px; padding:5px;">추가</span>
 	                 </a>        
                  </div>
              </div>     
@@ -202,16 +202,12 @@
 <script src="https://kit.fontawesome.com/2ebe86210e.js" crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 <script>
-	// 새로 만들어진 취소 버튼에 삭제 이벤트를 부여
-	deleteTag(".del-tag", ".tag");
+
 		
 	// 태그를 추가하는 method
-	document.querySelector(".plus").addEventListener("click", function(e){
-		e.preventDefault();
-		// 태그를 추가하는 input 요소를 보이게 함
-		document.querySelector("#inputTag").style.display="block";
+	document.querySelector("#tag_span").addEventListener("click", function(e){
 		// 태그 추가 링크의 class를 변경
-		this.setAttribute("class", "addTag p-3");
+		this.setAttribute("class", "addTag");
 		// 해당 class에 해당하는 링크에 태그 추가 이벤트 부여
 		addTagEvent(".addTag");
 	});
@@ -243,13 +239,12 @@
 				if(data.beAdded){
 					// 태그 추가 input 창을 reset하고, 화면에서 숨김
 					document.querySelector("#inputTag").value="";
-					document.querySelector("#inputTag").style.display="none";
 					// 해당 매장의 DB 번호를 받아서
 					let dataNum=${dto.num};
 					// 새로운 태그 버튼을 만들고 성분과 값을 부여함
 					let newBtn=document.createElement("button");
 					newBtn.innerText=storeTag;
-					newBtn.setAttribute("class", "btn btn-primary add-tag allTag add-del-tag");
+					newBtn.setAttribute("class", "btn btn-primary add-tag allTag");
 					newBtn.setAttribute("data-num", dataNum);
 					// 붙어서 생기는 것을 방지하기 위해 야매
 					newBtn.style.marginRight="5px";
@@ -257,7 +252,7 @@
 					newBtn.style.fontSize="14px";
 					// 새로운 취소 버튼을 만들고 성분과 값을 부여함
 					let newDeleteBtn=document.createElement("div");
-					newDeleteBtn.setAttribute("class", "btn-close del-tag");
+					newDeleteBtn.setAttribute("class", "btn-close add-del-tag");
 					newDeleteBtn.setAttribute("data-num", dataNum);
 					// 새 버튼의 자식 요소로 취소 버튼을 넣고, 태그 버튼 또한 태그 공간의 자식 요소로 넣어줌
 					newBtn.appendChild(newDeleteBtn);
@@ -266,7 +261,7 @@
 					// 새롭게 만든 삭제 버튼에 태그 삭제 이벤트 부여
 					deleteTag(".add-del-tag", ".add-tag");
 					// 다시 버튼의 class를 원래대로 돌려놓음
-					newBtn.setAttribute("class", "btn btn-primary add-tag allTag");
+					newBtn.setAttribute("class", "btn btn-primary tag allTag");
 					newDeleteBtn.setAttribute("class", "btn-close del-tag");
 				}
 			});
@@ -303,6 +298,10 @@
 			});
 		}
 	}
+	
+	// 새로 만들어진 취소 버튼에 삭제 이벤트를 부여
+	deleteTag(".del-tag", ".tag");
+	
 	
 	// 매장 정보 수정
 	// 수정완료, 취소 링크 영역
