@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="review">
+	<!-- sequence의 다음 숫자를 가져오는 method -->
+	<select id="getSequence" resultType="int">
+		select storeReview_seq.nextval
+		from dual
+	</select>
+
+	<!-- 작성한 리뷰 정보를 추가하는 method -->
+	<insert id="addReview" parameterType="reviewDto">
+		insert into storeReview
+		(num, storeNum, storeName, writer, content, star,
+			 targetNum, groupNum, orderNum, imagePath, regdate)
+		values(#{num}, #{storeNum}, #{storeName}, #{writer},
+			#{content}, #{star}, #{targetNum}, #{groupNum}, #{orderNum}, #{imagePath}, sysdate)
+	</insert>
+	
+	<!-- 해당 매장 리뷰 정보를 가져오는 method -->
+	<select id="getReviewList" parameterType="reviewDto" resultType="reviewDto">
+		select *
+		from storeReview
+		where storeNum=#{storeNum}
+		order by groupNum desc, num asc
+	</select>
+	
+	<!-- 해당 DB번호의 리뷰 정보를 삭제하는 method(유저는 사장님까지 삭제) -->
+	<delete id="deleteReview" parameterType="reviewDto">
+		delete
+		from storeReview
+		where orderNum=#{orderNum}
+	</delete>
+	
+	<!-- 해당 DB번호의 리뷰 정보를 삭제하는 method(사장님은 사장님것만 삭제) -->
+	<delete id="deleteReview_owner" parameterType="reviewDto">
+		delete
+		from storeReview
+		where targetNum=#{num}
+	</delete>
+	
+	<!-- 해당 DB번호의 리뷰 정보를 가져오는 method -->
+	<select id="getReviewData" parameterType="reviewDto" resultType="reviewDto">
+		select *
+		from storeReview
+		where orderNum=#{orderNum} and targetNum=#{targetNum}
+	</select>
+	
+	<!-- 해당 DB번호의 리뷰 정보를 수정하는 method -->
+	<update id="updateReview" parameterType="reviewDto">
+		update storeReview
+		set star=#{star}, content=#{content}, imagePath=#{imagePath}
+		where orderNum=#{orderNum} and writer=#{writer}
+	</update>
+	
+	<!-- 해당 주문 번호에 해당하는 review 존재 여부를 조정하는 method -->
+	<update id="reviewExist" parameterType="orderDto">
+		update order_
+		set reviewExist=#{reviewExist}
+		where orderNum=#{orderNum}
+	</update>
+	
+	<!-- 해당 리뷰 번호로 되어있는 targetNum 정보가 있는지 여부를 알아내는 method -->
+	<select id="getMyReview" parameterType="reviewDto" resultType="reviewDto">
+		select *
+		from storeReview
+		where targetNum=#{num}
+	</select>
+	
+	<!-- 해당 DB 번호로 되어있는 매장에 대한 평균 별점을 얻어내는 method -->
+	<select id="getAvgStar" parameterType="reviewDto" resultType="float">
+		select nvl(avg(star),0)
+		from storeReview
+		where storeNum=#{storeNum} and star!=0
+	</select>
+	
+	<!-- 해당 DB 번호로 되어있는 매장의 총 리뷰 수를 얻어내는 method -->
+	<select id="getTotalReviewCount" parameterType="reviewDto" resultType="int">
+		select nvl(max(rownum),0)
+		from storeReview
+		where storeNum=#{storeNum} and targetNum='0'
+	</select>
+	
+	<!-- 해당 orderNum에 준 내 별점 정보를 얻어내는 method -->
+	<select id="getMyStar" parameterType="reviewDto" resultType="int">
+		select nvl(star,0)
+		from storeReview
+		where orderNum=#{orderNum} and targetNum='0'
+	</select>
+	
+	<!-- 해당 매장 DB 번호로 된 모든 리뷰를 삭제하는 method -->
+	<delete id="deleteAllReview" parameterType="reviewDto">
+		delete 
+		from storeReview
+		where storeNum=${storeNum}
+	</delete>
+</mapper>

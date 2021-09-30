@@ -3,11 +3,24 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-	<!-- 자주 사용하는 type 의 별칭을 등록 해 놓고  Mapper xml 에서 사용할수 있다. -->
+	<!-- 자주 사용하는 type 의 별칭을 등록 해놓고  Mapper xml 에서 사용할 수 있다. -->
 	<typeAliases>
+		<typeAlias type="com.star.seat.users.dto.UsersDto" alias="usersDto"/>
+		<typeAlias type="com.star.seat.store.dto.StoreDto" alias="storeDto"/>
+		<typeAlias type="com.star.seat.menu.dto.MenuDto" alias="menuDto"/>
+		<typeAlias type="com.star.seat.order.dto.OrderDto" alias="orderDto"/>
+		<typeAlias type="com.star.seat.review.dto.ReviewDto" alias="reviewDto"/>
+		<typeAlias type="com.star.seat.seat.dto.SeatDto" alias="seatDto"/>
 	</typeAliases>
+	
 	<!-- 필요한 Mapper xml 등록하기  -->
 	<mappers>
+		<mapper resource="com/star/seat/mybatis/UsersMapper.xml"/>
+		<mapper resource="com/star/seat/mybatis/StoreMapper.xml"/>
+		<mapper resource="com/star/seat/mybatis/MenuMapper.xml"/>
+		<mapper resource="com/star/seat/mybatis/OrderMapper.xml"/>
+		<mapper resource="com/star/seat/mybatis/ReviewMapper.xml"/>
+		<mapper resource="com/star/seat/mybatis/SeatMapper.xml"/>
 	</mappers>
 </configuration>
 

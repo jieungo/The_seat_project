@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="users">
+
+	<select id="isExist" parameterType="java.lang.String" resultType="string">
+		SELECT email 
+		FROM seat_users
+		WHERE email=#{email}
+	</select>
+	<insert id="insert" parameterType="usersDto">
+		INSERT INTO seat_users
+		(name, email, pwd, tag, phoneNumber,profile, regdate)
+		VALUES(#{name },#{email }, #{pwd }, #{tag }, #{phoneNumber }, #{profile }, SYSDATE)
+	</insert>
+	
+	<select id="getData" parameterType="string" resultType="usersDto">
+		SELECT name, email, pwd, tag, phoneNumber,profile, regdate
+		FROM seat_users
+		WHERE email=#{email }
+	</select>
+	
+	<select id="userStore" parameterType="string" resultType="usersDto">
+		SELECT name, email, pwd, tag, phoneNumber,profile, seat_users.regdate, storeName
+		FROM seat_users
+		INNER JOIN store
+		ON	seat_users.email = store.owner
+		WHERE email=#{email };
+	</select>
+	
+	<update id="pwdUpdate" parameterType="usersDto">
+		UPDATE seat_users
+		SET pwd=#{newPwd }
+		WHERE email=#{email }
+	</update>
+	
+	<update id="update" parameterType="usersDto">
+		UPDATE seat_users
+		SET name=#{name } ,profile=#{profile }, phoneNumber=#{phoneNumber }
+		WHERE email=#{email }
+	</update>
+	
+	<delete id="delete" parameterType="string">
+		DELETE FROM seat_users
+		WHERE email=#{email}
+	</delete>
+</mapper>

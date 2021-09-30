@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="order">
+	
+	<select id="getOrderList" parameterType="orderDto" resultType="orderDto">
+		SELECT *
+		FROM
+			(SELECT result1.*, ROWNUM as rnum
+			FROM
+				(SELECT orderNum, email, storeName, storeLogo, num, tableNum, amount, reviewExist, cancel, confirm, regdate, orderdate
+				FROM order_
+				WHERE email = #{email }
+				GROUP BY orderNum, email, storeName, storeLogo, num, tableNum, amount, reviewExist, cancel, confirm, regdate, orderdate
+				ORDER BY regdate DESC) result1)
+		WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
+	</select>
+	
+	<select id="getStoreOrderList" parameterType="orderDto" resultType="orderDto">
+		SELECT *
+		FROM
+			(SELECT result1.*, ROWNUM as rnum
+			FROM
+				(SELECT orderNum, email, storeName, storeLogo, num, tableNum, amount, reviewExist, cancel, confirm, regdate, orderdate
+				FROM order_
+				WHERE num = #{num }
+				GROUP BY orderNum, email, storeName, storeLogo, num, tableNum, amount, reviewExist, cancel, confirm, regdate, orderdate
+				ORDER BY regdate DESC) result1)
+		WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
+	</select>
+	
+	<select id="getListOne" parameterType="string" resultType="orderDto">
+		SELECT *
+		FROM order_
+		WHERE orderNum = #{orderNum }
+	</select>
+	
+	<select id="getCount" parameterType="string" resultType="int">
+		SELECT NVL(MAX(ROWNUM), 0)
+		FROM (SELECT orderNum, email, storeName, storeLogo, num, tableNum, amount, reviewExist, cancel, confirm, regdate, orderdate
+				FROM order_
+				WHERE email= #{email }
+				GROUP BY orderNum, email, storeName, storeLogo, num, tableNum, amount, reviewExist, cancel, confirm, regdate, orderdate
+				ORDER BY orderdate DESC)
+	</select>
+	
+	<select id="getStoreCount" parameterType="int" resultType="int">
+		SELECT NVL(MAX(ROWNUM), 0)
+		FROM order_
+		WHERE num= #{num }
+	</select>
+	
+	<select id="getOrderMenuList" parameterType="orderDto" resultType="orderDto">
+		SELECT menu, menuCount, price
+		FROM order_
+		WHERE orderNum= #{orderNum }
+	</select>
+	
+	<insert id="insertOrder" parameterType="orderDto">
+		INSERT INTO order_
+		(orderNum, email, storeName, storeLogo, num, tableNum, menu, menuCount, price, amount, reviewExist, confirm, cancel, regdate, orderdate)
+		VALUES(#{orderNum },#{email }, #{storeName }, #{storeLogo }, #{num }, #{tableNum }, #{menu }, #{menuCount }, #{price }, #{amount }, 'NO' , 'NO' , 'NO' , #{regdate } , SYSDATE)
+	</insert>
+
+	<delete id="deleteOrder" parameterType="int">
+		DELETE FROM order_
+		WHERE orderNum=#{orderNum}
+	</delete>
+	
+	<update id="updateState" parameterType="orderDto">
+		UPDATE order_
+		SET cancel=#{cancel } ,confirm=#{confirm }
+		WHERE orderNum=#{orderNum }
+	</update>
+	
+	<!-- 해당 매장 번호로 된 모든 주문 내역을 삭제하는 method -->
+	<delete id="deleteAllOrder" parameterType="orderDto">
+		delete
+		from order_
+		where num=#{num}
+	</delete>
+	
+	<!-- 같은 email 로 된 모든 주문 내역을 삭제하는 method -->
+	<delete id="deleteEmailOrder" parameterType="orderDto">
+		delete
+		from order_
+		where email =#{email}
+	</delete>
+
+</mapper>

@@ -1,0 +1,314 @@
+@charset "UTF-8";
+
+/*************리뷰 보는 버튼 css************/
+	#reviewBtn {
+		background-color: rgb(142, 192, 242);
+		margin-top: 20px;
+		width: 140px;
+		height: 60px;
+		border: none;
+		text-transform: uppercase;
+		letter-spacing: 2.5px;
+		font-weight: 600;
+		color: #ffffff;
+		border-radius: 15px;
+		box-shadow: 1px 8px 11px rgba(172, 172, 172, 0.699);
+		transition: all 0.3s ease 0s;
+		cursor: pointer;
+		outline: none;
+	}
+	
+	#reviewBtn:hover {
+		background-color: rgb(142, 192, 242);
+		box-shadow: 0px 15px 20px rgb(142, 192, 242);
+		color: #fff;
+		transform: translateY(-7px);
+	}
+	
+	/************ 자리 잡는 버튼 css ************/
+	#seatBtn {
+		background-color: rgb(108, 156, 252);
+		color: white;
+		margin-top: 10px;
+		width: 400px;
+		height: 50px;
+		border-radius: 5px;
+		border: none;
+		font-size: 1.5em;
+		font-weight: bold;
+	  	transition: all .3s ease;
+	  	letter-spacing: 2px;
+	  	text-transform: uppercase;
+	  	outline: none;
+	  	align-self: center;
+	  	cursor: pointer;
+	}
+	
+	#seatBtn:hover{
+		animation: random-bg .5s linear infinite, grow 1300ms ease infinite;
+	}
+	
+	@keyframes random-bg {
+	  	from {
+	    filter: hue-rotate(0);
+	  }
+	  to {
+	    filter: hue-rotate(360deg);
+	  }
+	}
+	
+	@keyframes grow {
+	  0% {
+	    transform: scale(1);
+	  }
+	  14% {
+	    transform: scale(1.3);
+	  }
+	  28% {
+	    transform: scale(1);
+	  }
+	  42% {
+	    transform: scale(1.3);
+	  }
+	  70% {
+	    transform: scale(1);
+	  }
+	}
+	
+	/********** 메뉴 이름 버튼 css ************/
+	#menuBtn {
+		background-color: white;
+		border: none;
+		font-size: 1.5em;
+		font-weight: bold;
+		color: rgb(96, 92, 99);
+	}
+	
+	/************** 베스트 메뉴 보이는 이미지 css **************/
+	.banner_img {
+		display: flex;
+		justify-content: space-between;
+		margin: 10px 10px;
+	}
+	
+	/********* 클래스 하나에만 적용하는 투명 스크롤바 css ********/
+	.carousel-inner::-webkit-scrollbar {
+	  	display: none;
+	}
+
+	/********* 자리 잡는 모달에서 select 박스 css ********/
+	#seatChoice {
+	    margin-left: 10px;
+	    width: 60px;
+	    border: 1px solid lightgray;
+	    border-radius: 5px;
+	    padding-left: 15px;
+	}
+	
+	#seatChoice:focus{
+		outline: none;
+	}
+	
+	/****** 베스트 메뉴 hover 하면 메뉴명과 가격 보이게 하는 css *****/
+	.banner_img {
+  		display:inline-block;
+  		position: relative;
+	}
+	.banner_img:hover:after,
+	.banner_img:hover > .hover_text {
+	  	display:block;
+	}
+	.banner_img:after, .hover_text{
+  		display:none;
+	}
+	.banner_img:after {
+	  	content:'';
+	  	position: absolute;
+	  	top: 0;
+	  	right: 0;
+	  	bottom: 0;
+	  	left: 0;
+	  	background: rgba(0, 0, 0, 0.5);
+	  	z-index: 10;
+	}
+	.banner_img {
+  		overflow: hidden;
+	}
+	.banner_img img{
+ 		height: 300px;
+	}
+	.banner_img:hover img{
+  		transform: scale(1.2);
+  		transition: 1s;
+	}
+	.hover_text {
+  		position: absolute;
+  		top: 120px;
+  		left: 50px;
+	  	color: #ffffff;
+	  	border-bottom: solid 2px #fff;
+	  	z-index: 20;
+	  	font-weight: 600;
+	  	font-size: 20px;
+	}
+	
+	/******* 스크롤바 css *******/
+	::-webkit-scrollbar {
+    	width: 15px;
+  	}
+  	::-webkit-scrollbar-thumb {
+    	background-color: rgb(196, 196, 196);
+    	border-radius: 10px;
+    	background-clip: padding-box;
+    	border: 2px solid transparent;
+  	}
+  	::-webkit-scrollbar-track {
+    	background-color: rgb(229, 229, 229);
+   	 	border-radius: 10px;
+    	box-shadow: inset 0px 0px 5px white;
+  	}
+ 
+ 	/* 매장 대표 이미지 꽉 채워서 보이게 하는 css */
+ 	.mainImg {
+ 		width: 100%;
+ 		height: 500px;
+ 		object-fit: fill;
+ 	}
+ 	
+ 	/* 주문하기 버튼 css */
+ 	#orderBtn {
+ 		margin: auto;
+  		width: 300px;
+  		height: 40px;
+  		color: #fff;
+		border-radius: 5px;
+  		padding: 10px 25px;
+  		font-size: 20px;
+  		font-weight: 500;
+  		background: transparent;
+  		cursor: pointer;
+  		transition: all 0.3s ease;
+  		position: relative;
+  		display: inline-block;
+   		box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   							7px 7px 20px 0px rgba(0,0,0,.1),
+   							4px 4px 5px 0px rgba(0,0,0,.1);
+  		outline: none;
+  		position: relative;
+  		right: 20px;
+  		bottom: 20px;
+  		border:none;
+  		box-shadow: none;
+  		line-height: 42px;
+  		-webkit-perspective: 230px;
+  		perspective: 230px;
+	}
+
+	#orderBtn span {
+  		background: rgb(0,172,238);
+		background: -webkit-linear-gradient(rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
+		background: -moz-linear-gradient(rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
+		background: -o-linear-gradient(rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
+		background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(0,172,238,1)), to(rgba(2,126,251,1)));
+		background: linear-gradient(rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
+  		display: block;
+  		position: absolute;
+  		width: 300px;
+  		height: 40px;
+  		box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+							7px 7px 20px 0px rgba(0,0,0,.1),
+   							4px 4px 5px 0px rgba(0,0,0,.1);
+  		border-radius: 5px;
+  		margin:0;
+  		text-align: center;
+  		-webkit-box-sizing: border-box;
+  		-moz-box-sizing: border-box;
+  		box-sizing: border-box;
+  		-webkit-transition: all .3s;
+  		transition: all .3s;
+	}
+	
+	#orderBtn span:nth-child(1) {
+  		box-shadow:
+   					-7px -7px 20px 0px #fff9,
+   					-4px -4px 5px 0px #fff9,
+   					7px 7px 20px 0px #0002,
+   					4px 4px 5px 0px #0001;
+  		-webkit-transform: rotateX(90deg);
+  		-moz-transform: rotateX(90deg);
+  		transform: rotateX(90deg);
+  		-webkit-transform-origin: 50% 50% -20px;
+  		-moz-transform-origin: 50% 50% -20px;
+  		transform-origin: 50% 50% -20px;
+	}
+	#orderBtn span:nth-child(2) {
+  		-webkit-transform: rotateX(0deg);
+		-moz-transform: rotateX(0deg);
+		transform: rotateX(0deg);
+		-webkit-transform-origin: 50% 50% -20px;
+		-moz-transform-origin: 50% 50% -20px;
+		transform-origin: 50% 50% -20px;
+	}
+	#orderBtn:hover span:nth-child(1) {
+  		box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   							7px 7px 20px 0px rgba(0,0,0,.1),
+   							4px 4px 5px 0px rgba(0,0,0,.1);
+  		-webkit-transform: rotateX(0deg);
+  		-moz-transform: rotateX(0deg);
+  		transform: rotateX(0deg);
+	}
+	#orderBtn:hover span:nth-child(2) {
+  		box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   							7px 7px 20px 0px rgba(0,0,0,.1),
+   							4px 4px 5px 0px rgba(0,0,0,.1);
+ 		color: transparent;
+  		-webkit-transform: rotateX(-90deg);
+  		-moz-transform: rotateX(-90deg);
+  		transform: rotateX(-90deg);
+	}
+	
+	.detail-container {
+		margin-top: 150px;
+		display: flex;
+	    flex-direction: column;
+	    justify-content: center;
+	    align-items: center;
+	}
+
+@media screen and (max-width:1024px) {
+	 .detail-container {
+		margin-top: 300px;
+	}
+	.row1 {
+		display: flex;
+	    flex-direction: column;
+	    justify-content: center;
+    	align-items: center;
+	}
+	#bestMenu {
+		display: flex;
+	    flex-direction: column;
+	    justify-content: center;
+    	align-items: center;
+	}
+	
+}
+
+@media screen and (max-width:767px) {
+	 .detail-container {
+		margin-top: 350px;
+	}
+	.row1 {
+		display: flex;
+	    flex-direction: column;
+	    justify-content: center;
+    	align-items: center;
+	}
+	#bestMenu {
+		display: flex;
+	    flex-direction: column;
+	    justify-content: center;
+    	align-items: center;
+	}
+}
+	

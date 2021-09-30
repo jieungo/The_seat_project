@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="menu">
+	<!-- 해당 매장의 메뉴 정보를 추가하는 method -->
+	<insert id="addMenu" parameterType="menuDto">
+		insert into storeMenu
+		(num, storeNum, storeName, menuImage, menuName, content, price, best, category)
+		values(storeMenu_seq.nextval, #{storeNum},#{storeName}, #{menuImage}, #{menuName}, #{content}, #{price}, 'no', #{category})
+	</insert>
+	
+	<!-- 해당 매장의 메뉴 정보를 가져오는 method (사장님)-->
+	<select id="getMenuList" parameterType="hashmap" resultType="menuDto">
+		select storeMenu.num as num, storeMenu.storeName as storeName, menuImage, menuName, content, price, best, storeMenu.category as category
+		from storeMenu
+		inner join store
+		on store.num=storeMenu.storeNum
+		where store.owner=#{sDto.owner} and store.num=#{sDto.num}
+		and storeMenu.category=#{mDto.category}
+	</select>
+	
+	<select id="getMenuList2" parameterType="storeDto" resultType="menuDto">
+		select storeMenu.num as num, storeMenu.storeName as storeName, menuImage, menuName, content, price, best, storeMenu.category as category
+		from storeMenu
+		inner join store
+		on store.num=storeMenu.storeNum
+		where store.owner=#{owner} and store.num=#{num}
+	</select>
+	
+	<!-- 해당 매장의 메뉴 정보를 가져오는 method (유저)-->
+	<select id="getMenuList_user" parameterType="storeDto" resultType="menuDto">
+		select *
+		from storeMenu
+		where storeNum=#{num}
+	</select>
+	
+	<!-- 해당 매장의 메뉴 정보를 삭제하는 method -->
+	<delete id="deleteMenu" parameterType="menuDto">
+		delete from storeMenu
+		where num=#{num}
+	</delete>
+	
+	<!-- 해당 매장의 메뉴를 best로 설정 및 취소하는 method -->
+	<update id="bestOnOff" parameterType="menuDto">
+		update storeMenu
+		set best=#{best}
+		where num=#{num}
+	</update>
+	
+	<!-- 해당 매장의 베스트 메뉴 수를 가져오는 method -->
+	<select id="bestCount" parameterType="storeDto" resultType="int">
+		select nvl(max(rnum),0)
+		from 
+			(select result1.*, rownum as rnum
+			from
+		    	(select *
+		    	from storeMenu
+		    	inner join store
+		    	on store.storeName=storeMenu.storeName
+		    	where best='yes' and store.num=#{num} 
+		    	and store.storeName=#{storeName} and store.owner=#{owner}) result1)
+	</select>
+	
+	<!-- 해당 매장의 메뉴 전체 정보를 삭제하는 method -->
+	<delete id="deleteAllMenu" parameterType="menuDto">
+		delete
+		from storeMenu
+		where storeNum=#{storeNum}
+	</delete>
+	
+	<!-- 해당 매장의 이름이 변경되면 메뉴 table의 메뉴에서도 storeName을 바꿔주는 method -->
+	<update id="updateStoreOfMenu" parameterType="storeDto">
+		update storeMenu
+		set storeName=#{storeName}
+		where storeNum=#{num}
+	</update>
+</mapper>

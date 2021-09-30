@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="store">
+	<!-- 매장 추가 method -->
+	<insert id="addStore" parameterType="string">
+		insert into store
+		(num, owner, storeName, storeAddr, storePhone, openingTime, storeTag,
+			storeOpen, category, regdate)
+		values(store_seq.nextval, #{email}, 'Default', 'Default', '010-1234-5677', '00:00 ~ 24:00', 'easter egg',
+			'no', 'Default', sysdate)
+	</insert>
+	
+	<!-- 사장님의 매장 정보 목록 가져오는 method -->
+	<select id="getMyStores" parameterType="string" resultType="storeDto">
+		select *
+		from store
+		where owner=#{email}
+		order by num
+	</select>
+	
+	<!-- 사장님의 매장 정보 하나만 가져오는 method(이메일과 rnum 이용) -->
+	<select id="getMyStore" parameterType="storeDto" resultType="storeDto">
+		select *
+		from store
+		where owner=#{owner} and num=#{num}
+	</select>
+	
+	<!-- 사장님의 매장 정보 하나만 가져오는 method(해당 매장 DB 번호 이용) -->
+	<select id="getMyStore_num" parameterType="storeDto" resultType="storeDto">
+		select *
+		from store
+		where num=#{num}
+	</select>
+
+	<!-- 검색한 매장 목록들 불러오는 method -->
+	<select id="getList" parameterType="storeDto" resultType="storeDto">
+		select *
+		from
+			(select result1.*, rownum as rnum
+			from
+				(select *
+				from store
+				where storeOpen='yes'
+				<choose>
+					<when test="{area != '' and keyword != ''}">
+						and (lower(storeAddr) like '%' || lower(#{area}) || '%'
+						or lower(storeName) like '%' || lower(#{area}) || '%'
+						or lower(storeTag) like '%' || lower(#{area}) || '%')
+						and (lower(storeAddr) like '%' || lower(#{keyword}) || '%'
+						or lower(storeName) like '%' || lower(#{keyword}) || '%'
+						or lower(storeTag) like '%' || lower(#{keyword}) || '%')
+					</when>
+					<when test="{area != ''}">
+						and (lower(storeAddr) like '%' || lower(#{area}) || '%'
+						or lower(storeName) like '%' || lower(#{area}) || '%'
+						or lower(storeTag) like '%' || lower(#{area}) || '%')
+					</when>
+					<when test="{keyword != ''}">
+						and (lower(storeAddr) like '%' || lower(#{keyword}) || '%'
+						or lower(storeName) like '%' || lower(#{keyword}) || '%'
+						or lower(storeTag) like '%' || lower(#{keyword}) || '%')
+					</when>
+				</choose>
+				) result1)
+		where rnum between #{startRowNum} and #{endRowNum}
+	</select>
+	
+	<!-- 검색한 전체 매장 수를 얻어오는 method -->
+	<select id="getListCount" parameterType="storeDto" resultType="int">
+		select nvl(max(rownum),0)
+		from store
+		where storeOpen='yes'
+		<choose>
+			<when test="{area != '' and keyword != ''}">
+				and (lower(storeAddr) like '%' || lower(#{area}) || '%'
+				or lower(storeName) like '%' || lower(#{area}) || '%'
+				or lower(storeTag) like '%' || lower(#{area}) || '%')
+				and (lower(storeAddr) like '%' || lower(#{keyword}) || '%'
+				or lower(storeName) like '%' || lower(#{keyword}) || '%'
+				or lower(storeTag) like '%' || lower(#{keyword}) || '%')
+			</when>
+			<when test="{area != ''}">
+				and (lower(storeAddr) like '%' || lower(#{area}) || '%'
+				or lower(storeName) like '%' || lower(#{area}) || '%'
+				or lower(storeTag) like '%' || lower(#{area}) || '%')
+			</when>
+			<when test="{keyword != ''}">
+				and (lower(storeAddr) like '%' || lower(#{keyword}) || '%'
+				or lower(storeName) like '%' || lower(#{keyword}) || '%'
+				or lower(storeTag) like '%' || lower(#{keyword}) || '%')
+			</when>
+		</choose>
+	</select>
+	
+	<!-- 매장 태그를 추가하는 method -->
+	<update id="addTag" parameterType="storeDto">
+		update store
+		set storeTag=#{storeTag}
+		where num=#{num}
+	</update>
+	
+	<!-- 매장 정보(이름, 주소, 시간)를 수정하는 method -->
+	<update id="updateStore" parameterType="storeDto">
+		update store
+		set storeName=#{storeName}, storeAddr=#{storeAddr}, storePhone=#{storePhone}, openingTime=#{openingTime}
+		where num=#{num}
+	</update>
+	
+	<!-- 이미지 업로드를 위한 이미지 종류를 체크하는 method -->
+	<update id="imageCheck" parameterType="storeDto">
+		update store
+		set imageCheck=#{imageCheck}
+		where num=#{num}
+	</update>
+	
+	<!-- 이미지를 업로드하는 method -->
+	<update id="updateImage" parameterType="storeDto" >
+		update store
+		<choose>
+			<when test="imageCheck == 'logo'">
+				set image_logo=#{image_logo}
+			</when>
+			<when test="imageCheck == 'img1'">
+				set image_1=#{image_1}
+			</when>
+			<when test="imageCheck == 'img2'">
+				set image_2=#{image_2}
+			</when>
+			<when test="imageCheck == 'img3'">
+				set image_3=#{image_3}
+			</when>
+			<when test="imageCheck == 'img4'">
+				set image_4=#{image_4}
+			</when>
+		</choose>
+		where num=#{num} and owner=#{owner}
+	</update>
+	
+	<!-- 매장 On Off method -->
+	<update id="storeOnOff" parameterType="storeDto">
+		update store
+		set storeOpen=#{storeOpen}
+		where num=#{num}
+	</update>
+	
+	<!-- 매장 카테고리를 추가하는 method -->
+	<update id="addCategory" parameterType="storeDto">
+		update store
+		set category=#{category}
+		where num=#{num}
+	</update>
+	
+	<!-- 매장 정보를 삭제하는 method -->
+	<delete id="deleteStore" parameterType="storeDto">
+		delete
+		from store
+		where num=#{num} and owner=#{owner}
+	</delete>
+</mapper>

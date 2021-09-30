@@ -1,0 +1,263 @@
+
+	/* 주문하기 옆에 위치한 전 페이지로 이동하는 버튼 css */
+	#backBtn {
+		border: none;
+		background-color: white;
+	}
+	/* 메뉴 이름 버튼 css */
+	#orderMenu {
+		border: none;
+		background-color: rgb(176, 215, 252); 
+		color: rgb(104, 104, 104);
+		font-weight: bold;
+	}
+	
+	/* 메뉴 정보가 보이는 카드 css */
+	.card {
+		width: 100%;
+		height: 400px;
+		overflow: auto;
+	}
+	
+	/* 클래스 하나에만 적용하는 투명 스크롤바 css */
+	.card::-webkit-scrollbar {
+	  	display: none;
+	}
+	
+	/* 주문내역 영수증 문구 위치 및 모양 css */
+	.orderR {
+ 		position: relative;
+	}
+
+	.orderR .text_top {
+  		position: absolute;
+  		top: 55px;
+  		text-align: center;
+	}
+	
+	.text_top {
+		display: flex;
+	}
+	
+	.text_middle {
+		position: absolute;
+		width: 90%;
+		height: 345px;
+		top: 130px;
+		left: 10%;
+		overflow: auto;
+	}
+	
+	.text_bottom {
+		position: absolute;
+		bottom: 140px;
+		right: 165px;
+	}
+	
+	/* 다시담기 버튼 css */
+	#reset {
+  		position: absolute;
+  		bottom: 80px;
+  		left : 120px;
+  		background-color: #fc5555;
+  		border: none;
+  		color: #ffffff;
+  		cursor: pointer;
+	 	display: inline-block;
+  		font-size: 22px;
+  		line-height: 1em;
+	  	outline: none;
+	  	padding: 12px 33px 10px;
+	  	text-transform: uppercase;
+	  	font-weight: 700;
+	}
+	
+	#reset:before,
+	#reset:after {
+  		border-color: transparent;
+	  	-webkit-transition: all 0.25s;
+	  	transition: all 0.25s;
+	  	border-style: solid;
+	  	border-width: 0;
+	  	content: "";
+	  	height: 24px;
+	  	position: absolute;
+	  	width: 24px;
+	}
+	#reset:before {
+  		border-color: #fc5555;
+  		border-right-width: 2px;
+  		border-top-width: 2px;
+  		right: -5px;
+  		top: -5px;
+	}
+	#reset:after {
+	  	border-bottom-width: 2px;
+	  	border-color: #fc5555;
+	  	border-left-width: 2px;
+	  	bottom: -5px;
+	  	left: -5px;
+	}
+	#reset:hover,
+	#reset.hover {
+  		background-color: #fc5555;
+	}
+	#reset:hover:before,
+	#reset.hover:before,
+	#reset:hover:after,
+	#reset.hover:after {
+  		height: 100%;
+ 	 	width: 100%;
+	}
+	
+	/* 주문하기 버튼 css */
+	#goOrder {
+		position: absolute;
+  		bottom: 80px;
+  		right : 100px;
+  		background-color: #fc5555;
+  		border: none;
+  		color: #ffffff;
+  		cursor: pointer;
+	 	display: inline-block;
+  		font-size: 22px;
+  		line-height: 1em;
+	  	outline: none;
+	  	padding: 12px 33px 10px;
+	  	text-transform: uppercase;
+	  	font-weight: 700;
+	}
+	
+	#goOrder:before,
+	#goOrder:after {
+  		border-color: transparent;
+	  	-webkit-transition: all 0.25s;
+	  	transition: all 0.25s;
+	  	border-style: solid;
+	  	border-width: 0;
+	  	content: "";
+	  	height: 24px;
+	  	position: absolute;
+	  	width: 24px;
+	}
+	#goOrder:before {
+  		border-color: #fc5555;
+  		border-right-width: 2px;
+  		border-top-width: 2px;
+  		right: -5px;
+  		top: -5px;
+	}
+	#goOrder:after {
+	  	border-bottom-width: 2px;
+	  	border-color: #fc5555;
+	  	border-left-width: 2px;
+	  	bottom: -5px;
+	  	left: -5px;
+	}
+	#goOrder:hover,
+	#goOrder.hover {
+  		background-color: #fc5555;
+	}
+	#goOrder:hover:before,
+	#goOrder.hover:before,
+	#goOrder:hover:after,
+	#goOrder.hover:after {
+  		height: 100%;
+ 	 	width: 100%;
+	}
+	
+	/* 메뉴 수량 input 박스 css*/
+	#menuCount {
+		text-align-last: center;
+      	text-align: center;
+      	border: none;
+      	border-radius: 7px;
+      	font-size: 20px;
+      	font-weight: bold;
+      	color: rgb(104, 104, 104);
+	}
+	
+	#menuCount:focus {
+		outline: none;
+	}
+	
+	/******* 스크롤바 css *******/
+	.foodMenu::-webkit-scrollbar {
+    	width: 15px;
+  	}
+  	.foodMenu::-webkit-scrollbar-thumb {
+    	background-color: rgb(196, 196, 196);
+    	border-radius: 10px;
+    	background-clip: padding-box;
+    	border: 2px solid transparent;
+  	}
+  	.foodMenu::-webkit-scrollbar-track {
+    	background-color: rgb(229, 229, 229);
+   	 	border-radius: 10px;
+    	box-shadow: inset 0px 0px 5px white;
+  	}
+  	
+  	.text_middle::-webkit-scrollbar {
+    	width: 15px;
+  	}
+  	.text_middle::-webkit-scrollbar-thumb {
+    	background-color: rgb(196, 196, 196);
+    	border-radius: 10px;
+    	background-clip: padding-box;
+    	border: 2px solid transparent;
+  	}
+  	.text_middle::-webkit-scrollbar-track {
+    	background-color: rgb(229, 229, 229);
+   	 	border-radius: 10px;
+    	box-shadow: inset 0px 0px 5px white;
+  	}
+	
+	/* 장바구니 이미지에 그림자 효과 주기 */
+	.img2 {
+		filter: drop-shadow(5px 5px 5px #b7b5b5)
+	}
+	
+	/* span 텍스트 css */
+	.total_Menu {
+		font-size: 30px;
+		font-weight: 500;
+		color: #59a5f7;
+	}
+	
+	.menuListWrapper {
+		display: flex;
+		width:100%;
+		justify-content: space-evenly;
+	}
+	
+	.order-container {
+		margin-top: 150px;
+		display: flex;
+	    flex-direction: column;
+	    justify-content: center;
+	    align-items: center;
+	}
+	
+@media screen and (max-width:1024px) {
+	 .order-container {
+		margin-top: 250px;
+	}
+	.row2 {
+		display: flex;
+	    flex-direction: column;
+	    justify-content: center;
+	    align-items: center;
+	}
+}
+
+@media screen and (max-width:767px) {
+	 .order-container {
+		margin-top: 350px;
+	}
+	.row2 {
+		display: flex;
+	    flex-direction: column;
+	    justify-content: center;
+	    align-items: center;
+	}
+}

@@ -1,0 +1,392 @@
+@charset "UTF-8";
+
+body {
+	margin-top:150px;
+}
+
+.arrow_box-user {
+	position: relative;
+	background: #ffffff;
+	border: 1px solid #c7c7c7;
+}
+
+.arrow_box-user:after, 
+.arrow_box-user:before {
+	right: 100%;
+	top: 50%;
+	border: solid 1px lightgray;
+	content: "";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.arrow_box-user:after {
+	border-color: rgba(255, 255, 255, 0);
+	border-right-color: #ffffff;
+	border-width: 30px;
+	margin-top: -30px;
+}
+
+.arrow_box-user:before {
+	border-color: rgba(199, 199, 199, 0);
+	border-right-color: #c7c7c7;
+	border-width: 31px;
+	margin-top: -31px;
+}
+
+.arrow_box-owner {
+	position: relative;
+	background: #d4d4d4;
+}
+
+.arrow_box-owner:after {
+	left: 100%;
+	top: 50%;
+	border: solid transparent;
+	content: "";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-color: rgba(212, 212, 212, 0);
+	border-left-color: #d4d4d4;
+	border-width: 30px;
+	margin-top: -30px;
+}
+
+.user-review__body,
+.arrow_box-user {
+	width: 70%;
+	margin-left: 10%;
+	margin-bottom: 30px;
+}
+
+.user-review__title {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	width: 90%;
+}
+
+.user-review__text {
+	padding: 10px;
+}
+
+.owner-review__body,
+.arrow_box-owner {
+	height: 130px;
+	width: 70%;
+	margin-left: 50px;
+	margin-bottom: 30px;
+	padding: 10px;
+}
+
+.userReview {
+	width: 100%;
+	text-align: end;
+}
+
+.userReview:hover {
+	color: rgb(89, 142, 255);
+	font-weight: 500;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+/* 버튼 기본 스타일링 */
+button {
+	outline: none;
+	border: none;
+	background-color: transparent;
+}
+
+::-webkit-scrollbar {
+	display: none;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+li {
+	list-style: none;
+	padding-left: 0;
+}
+
+
+.container {
+	margin-top: 30px;
+}
+
+.my-page__header {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: flex-end;
+}
+
+.my-page__profile {
+	display: flex;
+	align-items: center;
+	color: white;
+	justify-content: space-between;
+}
+
+.my-page__profile > img {
+	margin-right: 30px;
+}
+
+.my-page__edit {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    padding: 0;
+    margin: 0;
+    margin-top: 20px;
+	color: white;
+	font-size: 14px;
+}
+
+.my-page__order {
+	border: 1px solid lightgray;
+}
+
+.circle-btn {
+	width: 80px;
+	height: 80px;
+	border-radius: 100%;
+	margin: 10px 15px;
+	background: white;
+    color: #5c90fc;
+    font-weight: 500;
+    border: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.circle-btn:hover {
+	background-color: #5c90fc;
+	color: white;
+}
+
+.circle-btn__wrapper {
+	display: flex;
+	justify-content: center;
+}
+
+.card {
+	padding: 20px;
+	box-shadow: 4px 6px 11px rgba(172, 172, 172, 0.699);
+	transition: all 0.3s ease-out;
+}
+
+.card:hover {
+	transform: scale(0.97);
+}
+
+.starIcon {
+	color: #ffce31;
+}
+
+.card-head p,
+.orderDetailBtn,
+.orderDetailOffBtn {
+	font-size: 14px;
+	color: gray;
+}
+
+.amount-wrapper {
+	display:flex;
+	margin-bottom: 10px;
+	font-size: 14px;
+	color: gray;
+}
+
+.card-body {
+	display: flex;
+	flex-direction: column;
+}
+
+.image {
+	width: 100%;
+	height: 100%;
+}
+
+#profileImage {
+	width: 100px; 
+	height: 100px; 
+	border-radius: 100%;
+	margin-bottom: 10px;
+}
+
+.profileImage-wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	color: gray;
+	text-decoration: none;
+	border: none;
+	margin-bottom: 10px;
+}
+
+#withdrawal {
+	margin-top: 15px;
+	font-size: 14px;
+}
+
+#withdrawal:hover,
+#reviewDeleteBtn:hover {
+	color: red;
+	font-weight: 500;
+}
+
+.profileSubmitBtn,
+.profileDeleteBtn {
+	text-align: end;
+	margin: 15px 0;
+}
+
+.reviewSubmitBtn,
+#reviewDeleteBtn {
+	text-align: end;
+}
+
+.profileSubmitBtn button:hover,
+.profileDeleteBtn button:hover,
+.reviewSubmitBtn:hover {
+	color: rgb(89, 142, 255);
+	font-weight: 500;
+}
+
+#profileLink {
+	text-decoration: none;
+}
+
+#updateStarSelect,
+#insertStarSelect {
+	text-align: center;
+	border: none;
+	margin-bottom: 10px;
+}
+
+#updateStarSelect:focus,
+#updateContent:focus,
+#insertStarSelect:focus,
+#inputContent:focus {
+	outline: 0;
+}
+
+#updateContent {
+	border: 1px solid lightgray;
+	border-radius: 3px;
+	margin: 10px 0;
+	padding: 10px;
+}
+
+.tdWrapper {
+	display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+    align-items: center;
+}
+
+#reviewAddForm {
+    display: flex;
+    flex-direction: column;
+	align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 10px;
+}
+
+#addBtn {
+	width: 100%;
+	margin-top: 10px;
+}
+
+.info-header {
+	border: 1px solid rgb(89, 142, 255);
+	background-color: rgb(89, 142, 255);
+	border-radius: 100px;
+	margin: 50px 0;
+	display: flex;
+	padding-left:10px;
+	width: 60%;
+}
+
+.page-ui > ul {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 80px;
+}
+
+.page-ui > ul > li {
+	margin: 0 10px;
+}
+
+.page-ui > ul > li > a {
+	text-decoration: none;
+	color: lightgray;
+	display:flex;
+	justify-content:center;
+	align-items: center;
+	border-radius: 10px;
+	width:30px;
+	height:30px;
+	font-size: 20px;
+}
+
+.info-container {
+	margin-top: 150px;
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.active {
+	font-weight: 600;
+	background-color: #598EFF;
+	font-color: white;
+}
+
+.info-row {
+	display: flex;
+   	align-items: center;
+   	justify-content: center;
+}
+
+@media screen and (max-width:1024px) {
+	.my-page__profile {
+		display: flex;
+	    flex-direction: column;
+	    padding: 50px;
+	    text-align: center;
+	}
+	
+	.info-container {
+		margin-top: 250px;
+	}
+	
+	.info-header {
+		padding: 0;
+		display: flex;
+		justify-content: center;
+	}
+	
+	.my-page__profile > img {
+		margin: 10px 0;
+		margin-bottom: 40px;
+	}
+}
+
+@media screen and (max-width:767px) {
+	 .info-container {
+		margin-top: 350px;
+	}
+}
