@@ -12,7 +12,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/myStore.css?ver=21"
+	href="${pageContext.request.contextPath}/resources/css/myStore.css?ver=22"
 	type="text/css" />
 </head>
 <body>
@@ -24,8 +24,15 @@
          <div class="store-top__info">
              <div>
                  <a class="updateImgLink" href="javascript:">
-                     <img src="${pageContext.request.contextPath}${dto.image_logo}" alt="" id="image_logo" name="logo" class="image mt-3"
-                     style="width: 150px; height: 150px; "/>
+	                 <c:choose>
+	             		<c:when test="${empty dto.image_logo}">
+	             			<img src="${pageContext.request.contextPath}/resources/img/clickme1.png" alt="" />
+	             		</c:when>
+	             		<c:otherwise>
+	             			<img src="${pageContext.request.contextPath}${dto.image_logo}" alt="" id="image_logo" name="logo" class="image mt-3"
+                     			style="width: 150px; height: 150px; "/>
+	             		</c:otherwise>
+	             	 </c:choose>
                  </a>
                  <form action="${pageContext.request.contextPath}/uploadImage.do" id="logoForm" method="post" 
                  style="text-align: center;" enctype="multipart/form-data">
@@ -65,9 +72,12 @@
          <!--------------------------- 매장 태그 관리 영역 --------------------------->
              <div class="tag_zone">
                  <span style="font-size: 14px; color: lightgray;">매장을 나타내는 태그 추가하기</span>
-                 <p id="btns" class="mt-1" style="width:250px;">
+                 <p id="btns" class="mt-1">
                      <c:forEach var="tmp" items="${list }">
-                         <button data-num="${dto.num }" name="tag" class="btn btn-primary tag allTag" style="margin-bottom:5px; margin-right:5px; font-size:14px;">${tmp}</button>
+                       	<button data-num="${dto.num }" name="tag" class="btn btn-primary tag allTag" style="margin-bottom:5px; margin-right:5px; font-size:14px;">
+                       		${tmp}
+                       		<div data-num="${dto.num }" class="btn-close del-tag"></div>
+                       	</button>
                      </c:forEach>
                  </p>
                  <div class="tag_input">
@@ -82,8 +92,15 @@
          <div class="store-bottom__info">
              <div style="text-align: center; width:100%;">
                  <a class="updateImgLink" href="javascript:">
-                     <img src="${pageContext.request.contextPath}${dto.image_1}" alt="" id="image_1" name="image1" class="image" 
-                     style="width: 80%; height: 150px;"/>
+	                 <c:choose>
+	             		<c:when test="${empty dto.image_1}">
+	             			<img src="${pageContext.request.contextPath}/resources/img/clickme1.png" alt="" />
+	             		</c:when>
+	             		<c:otherwise>
+	             			<img src="${pageContext.request.contextPath}${dto.image_1}" alt="" id="image_1" name="image1" class="image" 
+	                     		style="width: 80%; height: 150px;"/>
+	             		</c:otherwise>
+	             	</c:choose>
                  </a>
                  <form action="${pageContext.request.contextPath}/uploadImage.do" id="imageForm1" method="post" enctype="multipart/form-data"
                  		style="height:85px;">
@@ -98,17 +115,38 @@
              <div>
                  <!-- 매장 대표 이미지 관리 영역2-->
                  <a class="updateImgLink" href="javascript:">
-                     <img src="${pageContext.request.contextPath}${dto.image_2}" alt="" id="image_2" name="image2" class="image"/>
+	                 <c:choose>
+	             		<c:when test="${empty dto.image_2}">
+	             			<img src="${pageContext.request.contextPath}/resources/img/clickme1.png" alt="" />
+	             		</c:when>
+	             		<c:otherwise>
+	             			<img src="${pageContext.request.contextPath}${dto.image_2}" alt="" id="image_2" name="image2" class="image"/>
+	             		</c:otherwise>
+	             	</c:choose>
                  </a>
                  
                  <!-- 매장 대표 이미지 관리 영역3-->
                  <a class="updateImgLink" href="javascript:">
-                     <img src="${pageContext.request.contextPath}${dto.image_3}" alt="" id="image_3" name="image3" class="image"/>
+	                 <c:choose>
+	             		<c:when test="${empty dto.image_3}">
+	             			<img src="${pageContext.request.contextPath}/resources/img/clickme1.png" alt="" />
+	             		</c:when>
+	             		<c:otherwise>
+	             			<img src="${pageContext.request.contextPath}${dto.image_3}" alt="" id="image_3" name="image3" class="image"/>
+	             		</c:otherwise>
+	             	</c:choose>
                  </a>
                  
                  <!-- 매장 대표 이미지 관리 영역4-->
                  <a class="updateImgLink" href="javascript:">
-                     <img src="${pageContext.request.contextPath}${dto.image_4}" alt="" id="image_4" name="image4" class="image"/>
+	                 <c:choose>
+	             		<c:when test="${empty dto.image_4}">
+	             			<img src="${pageContext.request.contextPath}/resources/img/clickme1.png" alt="" />
+	             		</c:when>
+	             		<c:otherwise>
+	             			<img src="${pageContext.request.contextPath}${dto.image_4}" alt="" id="image_4" name="image4" class="image"/>
+	             		</c:otherwise>
+	             	 </c:choose>
                  </a>
      
      			<div class="form-wrapper" style="display:flex;">
@@ -164,26 +202,9 @@
 <script src="https://kit.fontawesome.com/2ebe86210e.js" crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 <script>
-	// 태그 안에 x 버튼 넣어서 로딩하기
-	// 페이지 로딩되는 시점에 작동할 함수
-	window.onload=function(){
-		// 태그에 해당하는 버튼들의 array
-		let btns=document.querySelectorAll(".tag");
-		for(let i=0; i<btns.length; i++){
-			// 버튼의 data-num 성분의 값을 가져옴
-			let dataNum=btns[i].getAttribute("data-num");
-			//새로운 버튼을 만듦(취소 버튼)
-			let deleteBtn=document.createElement("button");
-			// 새로운 버튼에 class와 data-num 정보를 지정
-			deleteBtn.setAttribute("class", "btn-close del-tag allTag");
-			deleteBtn.setAttribute("data-num", dataNum);
-			// 각 버튼에 자식 요소로 넣어줌
-			btns[i].appendChild(deleteBtn);
-		}
-		// 새로 만들어진 취소 버튼에 삭제 이벤트를 부여
-		deleteTag(".del-tag", ".tag");
-	};
-
+	// 새로 만들어진 취소 버튼에 삭제 이벤트를 부여
+	deleteTag(".del-tag", ".tag");
+		
 	// 태그를 추가하는 method
 	document.querySelector(".plus").addEventListener("click", function(e){
 		e.preventDefault();
@@ -191,7 +212,6 @@
 		document.querySelector("#inputTag").style.display="block";
 		// 태그 추가 링크의 class를 변경
 		this.setAttribute("class", "addTag p-3");
-
 		// 해당 class에 해당하는 링크에 태그 추가 이벤트 부여
 		addTagEvent(".addTag");
 	});
@@ -229,15 +249,15 @@
 					// 새로운 태그 버튼을 만들고 성분과 값을 부여함
 					let newBtn=document.createElement("button");
 					newBtn.innerText=storeTag;
-					newBtn.setAttribute("class", "btn btn-primary add-tag allTag");
+					newBtn.setAttribute("class", "btn btn-primary add-tag allTag add-del-tag");
 					newBtn.setAttribute("data-num", dataNum);
 					// 붙어서 생기는 것을 방지하기 위해 야매
 					newBtn.style.marginRight="5px";
 					newBtn.style.marginBottom="5px";
 					newBtn.style.fontSize="14px";
 					// 새로운 취소 버튼을 만들고 성분과 값을 부여함
-					let newDeleteBtn=document.createElement("button");
-					newDeleteBtn.setAttribute("class", "btn-close add-del-tag del");
+					let newDeleteBtn=document.createElement("div");
+					newDeleteBtn.setAttribute("class", "btn-close del-tag");
 					newDeleteBtn.setAttribute("data-num", dataNum);
 					// 새 버튼의 자식 요소로 취소 버튼을 넣고, 태그 버튼 또한 태그 공간의 자식 요소로 넣어줌
 					newBtn.appendChild(newDeleteBtn);
@@ -246,7 +266,7 @@
 					// 새롭게 만든 삭제 버튼에 태그 삭제 이벤트 부여
 					deleteTag(".add-del-tag", ".add-tag");
 					// 다시 버튼의 class를 원래대로 돌려놓음
-					newBtn.setAttribute("class", "btn btn-primary tag allTag");
+					newBtn.setAttribute("class", "btn btn-primary add-tag allTag");
 					newDeleteBtn.setAttribute("class", "btn-close del-tag");
 				}
 			});
@@ -262,7 +282,7 @@
 		for(let i=0; i<deleteBtns.length; i++){
 			// 버튼의 data-num 성분의 값과 태그 값을 얻어서 object로 담음
 			let num=deleteBtns[i].getAttribute("data-num");
-			let storeTag=tags[i].innerText;
+			let storeTag=tags[i].innerText.trim();
 			let obj={num, storeTag};
 			// 삭제 버튼을 눌렀을 때 작동할 이벤트
 			deleteBtns[i].addEventListener("click", function(){
@@ -401,11 +421,9 @@
 	}
 		
 	let storeOnOffBtn = document.querySelector('#storeOnOffBtn');
-
 	// 매장 열기 or 닫기 작업
 	storeOnOffBtn.addEventListener("click", function(e){
 		e.preventDefault();
-
 		let self=this;
 		let num=${dto.num}
 		let storeOpen="no";

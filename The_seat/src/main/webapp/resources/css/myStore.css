@@ -240,6 +240,10 @@ font-size: 14px;
 	border-radius: 5px;
 	padding: 0;
 }
+
+.del-tag {
+	display: inline-block;
+}
 	
 	
 	/* 테블릿 (해상도 768px ~ 1023px)*/
