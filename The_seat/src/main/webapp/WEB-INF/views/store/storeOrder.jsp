@@ -228,7 +228,7 @@
 		location.reload();
 	}
 	let countNum = setTimeout(countDown, 1000);
-	let timer = setTimeout(refresh, 10000);
+	let timer = setTimeout(refresh, 10000); 
 </script>
 </body>
 </html>
