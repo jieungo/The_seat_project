@@ -214,7 +214,6 @@
 		}
 	}
 	
-	
 	function countDown(){
 		let count = Number(document.querySelector("#refresh").innerText);
 		count -= 1;
