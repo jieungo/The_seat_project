@@ -166,111 +166,18 @@
 }
 
 #logoutBtn {
-	margin: auto;
 	width: 300px;
-	height: 45px;
-	color: #fff;
-	border-radius: 5px;
-	padding: 10px 25px;
-	font-size: 25px;
+	font-size: 16px;
+	font-weight: 100;
+    display: flex;
+    justify-content: end;
+    margin-top: 30px;
+    color: gray;
+}
+
+#logoutBtn:hover {
+	color: #f20000;
 	font-weight: 500;
-	background: transparent;
-	cursor: pointer;
-	transition: all 0.3s ease;
-	position: relative;
-	display: inline-block;
-	box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5), 7px 7px 20px
-		0px rgba(0, 0, 0, .1), 4px 4px 5px 0px rgba(0, 0, 0, .1);
-	outline: none;
-	position: relative;
-	right: 20px;
-	bottom: 20px;
-	border: none;
-	box-shadow: none;
-	line-height: 42px;
-	-webkit-perspective: 230px;
-	perspective: 230px;
-}
-
-#logoutBtn span {
-	background: rgb(0, 172, 238);
-	background: -webkit-linear-gradient(rgba(0, 172, 238, 1) 0%,
-		rgba(2, 126, 251, 1) 100%);
-	background: -moz-linear-gradient(rgba(0, 172, 238, 1) 0%,
-		rgba(2, 126, 251, 1) 100%);
-	background: -o-linear-gradient(rgba(0, 172, 238, 1) 0%,
-		rgba(2, 126, 251, 1) 100%);
-	background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(0, 172, 238, 1)),
-		to(rgba(2, 126, 251, 1)));
-	background: linear-gradient(rgba(0, 172, 238, 1) 0%,
-		rgba(2, 126, 251, 1) 100%);
-	display: block;
-	position: absolute;
-	width: 300px;
-	height: 45px;
-	box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5), 7px 7px 20px
-		0px rgba(0, 0, 0, .1), 4px 4px 5px 0px rgba(0, 0, 0, .1);
-	border-radius: 5px;
-	margin: 0;
-	text-align: center;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	-webkit-transition: all .3s;
-	transition: all .3s;
-}
-
-#logoutBtn span:nth-child(1) {
-	box-shadow: -7px -7px 20px 0px #fff9, -4px -4px 5px 0px #fff9, 7px 7px
-		20px 0px #0002, 4px 4px 5px 0px #0001;
-	-webkit-transform: rotateX(90deg);
-	-moz-transform: rotateX(90deg);
-	transform: rotateX(90deg);
-	-webkit-transform-origin: 50% 50% -20px;
-	-moz-transform-origin: 50% 50% -20px;
-	transform-origin: 50% 50% -20px;
-}
-
-#logoutBtn span:nth-child(2) {
-	-webkit-transform: rotateX(0deg);
-	-moz-transform: rotateX(0deg);
-	transform: rotateX(0deg);
-	-webkit-transform-origin: 50% 50% -20px;
-	-moz-transform-origin: 50% 50% -20px;
-	transform-origin: 50% 50% -20px;
-}
-
-#logoutBtn:hover span:nth-child(1) {
-	box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5), 7px 7px 20px
-		0px rgba(0, 0, 0, .1), 4px 4px 5px 0px rgba(0, 0, 0, .1);
-	-webkit-transform: rotateX(0deg);
-	-moz-transform: rotateX(0deg);
-	transform: rotateX(0deg);
-}
-
-#logoutBtn:hover span:nth-child(2) {
-	box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5), 7px 7px 20px
-		0px rgba(0, 0, 0, .1), 4px 4px 5px 0px rgba(0, 0, 0, .1);
-	color: transparent;
-	-webkit-transform: rotateX(-90deg);
-	-moz-transform: rotateX(-90deg);
-	transform: rotateX(-90deg);
-}
-
-.footer-icons a {
-	display: inline-block;
-	width: 35px;
-	height: 35px;
-	cursor: pointer;
-	background-color: #92c0fc;
-	border-radius: 2px;
-	font-size: 25px;
-	color: #fff;
-	text-align: center;
-	line-height: 35px;
-	margin-right: 10px;
-	margin-bottom: 5px;
-	border-radius: 2px;
 }
 
 .nav-container {
@@ -332,6 +239,7 @@
 		margin:0;
 		padding:0;
 	}
+
 }
 
 </style>
@@ -444,7 +352,9 @@
 				data-bs-dismiss="offcanvas" aria-label="Close"></button>
 		</div>
 		<div class="offcanvas-body">
-			<ul>
+			<ul class="nav_wrapper" style="height: 100%; display: flex; flex-direction: column; 
+				justify-content: space-around; margin:0;">
+				<section class="nav_top" >
 				<li class="li_" style="margin-top: 20px;">
 					<c:choose>
 						<c:when test="${email ne null }">
@@ -490,30 +400,20 @@
 						</div>
 					</c:when>
 				</c:choose>
-
-				<div class="footer-icons" style="margin-top: 220px;">
-					<section style="text-align: center; margin-right: 30px;">
-						<a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
-						<a href="https://www.google.co.kr/"><i class="fa fa-google"></i></a>
-						<a href="https://kr.linkedin.com/"><i class="fa fa-linkedin"></i></a>
-						<a href="https://github.com/Keunyeong/The_seat"><i class="fa fa-github"></i></a>
-
-					</section>
-					<c:if test="${email ne null }">
-						<li style="list-style: none; margin-top: 20px;">
-							<button type="button" id="logoutBtn"
-								onclick="location.href='${pageContext.request.contextPath}/users/logout.do'">
-								<span>정말로 나가실건가요 ? </span><span>로그아웃</span>
-							</button>
+				</section>
+				<section class="nav_bottom">
+					<c:if test="${email != null }">
+						<li class="li2" style="margin-top: 20px;"><a class="a2"
+							data-num="0" id="addBtn0" href="#" style="line-height: 2.5;"><img src="${pageContext.request.contextPath}/resources/img/add2.PNG" style="width: 40px; height: 40px;" alt="추가버튼" />
+							매장 추가</a>
 						</li>
 					</c:if>
-				</div>
-				<c:if test="${email != null }">
-					<li class="li2" style="margin-top: 20px;"><a class="a2"
-						data-num="0" id="addBtn0" href="#" style="line-height: 2.5;"><img src="${pageContext.request.contextPath}/resources/img/add2.PNG" style="width: 40px; height: 40px;" alt="추가버튼" />
-						매장 추가</a>
-					</li>
-				</c:if>
+					<c:if test="${email ne null }">
+						<a id="logoutBtn" href='${pageContext.request.contextPath}/users/logout.do'>
+							로그아웃
+						</a>
+					</c:if>
+				</section>
 			</ul>
 		</div>
 	</div>
