@@ -1,12 +1,12 @@
-# The_seat_project 자리..있어요?
+# 🪑 The_seat_project 자리..있어요?
 
 
 자세한 웹페이지의 기능은 밑의 링크에서 확인해 주세요 :)
 
 
-[1. 📚 팀 노션](https://www.notion.so/2-2-d57f5833370740869bd2f24943881d4f)
+[1. 📚  팀 노션](https://www.notion.so/2-2-d57f5833370740869bd2f24943881d4f)
 
-[2. 📹 페이지 시연영상](https://www.youtube.com/watch?v=WDNLef7isgw)
+[2. 📹  페이지 시연영상](https://www.youtube.com/watch?v=WDNLef7isgw)
 
 
 
@@ -63,6 +63,7 @@
 
 ## 프로젝트 주요 기능
 
+
 <details>
     <summary>참고 이미지</summary>
 
@@ -73,11 +74,13 @@
 
 
 
-#### 인덱스 페이지 & 로그인 페이지
+
+### 인덱스 페이지 & 로그인 페이지
 
 - 검색 기능 (지역 및 검색 키워드 필터)
 - 유효성 검사를 통한 회원가입 절차
 - 로그인
+
 
 
 <details>
@@ -91,15 +94,17 @@
 
 
 
-#### 메인 페이지
+
+### 메인 페이지
 
 - 등록된 매장(카드형식)노출 (메인에 노출 여부 선택 가능)
 - 네비바
 - 사이드바 목록 (로그인/마이페이지/매장목록/매장추가/로그아웃)
 
 
+
 <details>
-    <summary>참고 이미지</summary>
+    <summary>참고 이미지 1</summary>
 
 <img alt="myStore" src="https://user-images.githubusercontent.com/75401130/135568602-f8b41cef-e1fa-4c5d-876a-8c98b3ad5f35.png">
 
@@ -107,9 +112,20 @@
 
 </details>
 
+<details>
+    <summary>참고 이미지 2 (반응형)</summary>
+
+<img alt="storeOrder" src="https://user-images.githubusercontent.com/75401130/135569271-7041593d-c1b6-4fe7-904b-33d13dce3413.png">
+
+<img alt="storeOrder2" height="500" src="https://user-images.githubusercontent.com/75401130/135569274-607b56bb-f64f-4c02-bb9d-361cdf9877f3.png">
+
+<img alt="storeOrder3" height="500" src="https://user-images.githubusercontent.com/75401130/135569278-b4395e3a-2cef-4bd2-a349-591537633c9d.png">
+
+</details>
 
 
-#### 매장 관리 페이지
+
+### 매장 관리 페이지
 
 ① 매장정보
 : 매장프로필, 정보, 검색키워드, 대표이미지 등록 및 매장 열기&닫기 버튼과 매장삭제 기능
@@ -123,24 +139,13 @@
 : 사용자 리뷰 확인 및 사장님의 답글 작성 및 수정 (사용자는 매장상세페이지/마이페이지에서 답글 확인 가능)
 
 
-<details>
-    <summary>참고 이미지 (반응형)</summary>
-
-<img alt="storeOrder" src="https://user-images.githubusercontent.com/75401130/135569271-7041593d-c1b6-4fe7-904b-33d13dce3413.png">
-
-<img alt="storeOrder2" height="500" src="https://user-images.githubusercontent.com/75401130/135569274-607b56bb-f64f-4c02-bb9d-361cdf9877f3.png">
-
-<img alt="storeOrder3" height="500" src="https://user-images.githubusercontent.com/75401130/135569278-b4395e3a-2cef-4bd2-a349-591537633c9d.png">
-
-</details>
-
-
 ④ 주문확인
 : 주문자 확인, 주문내역(메뉴부터 총금액까지), 주문확인버튼(클릭 시 사용자의 리뷰작성 버튼 활성화), 페이지 새로고침 (일정 시간마다 주문내역 업데이트)
 
 
 ⑤ 자리관리
 : 좌석배치도 및 매장 알림 사항, 좌석 수(최대 30좌석) 및 상태(이용가능or이용중or이용불가능) 선택, 배치변경버튼
+
 
 
 <details>
@@ -156,12 +161,14 @@
 
 
 
-#### 마이페이지
+
+### 마이페이지
 
 - 프로필 작성 및 편집
 - 이용내역 (주문번호, 이용매장, 시간, 내역, 결제금액, 매장 및 나의 별점)
 - 주문 확인 중 버튼 (사장님이 주문확인버튼 클릭 시, 리뷰 작성 버튼으로 변경)
 - 해당 매장의 모든 리뷰 및 사장님의 답글 확인 (최신순으로 출력)
+
 
 
 <details>
@@ -173,13 +180,15 @@
 
 
 
-#### 매장 상세 페이지
+
+### 매장 상세 페이지
 
 - 대표 이미지 4개 및 매장의 모든 정보, 등록된 메뉴 확인
 - 자리 선택
 - 남은 자리 상태 표시
 - 알림 사항 확인
 - 로그인 상태가 아닐 경우, 알림창이 뜨며 로그인 페이지로 이동
+
 
 
 <details>
@@ -191,7 +200,8 @@
 
 
 
-#### 주문 페이지
+
+### 주문 페이지
 
 - 매장의 이름 및 선택한 자리 표기
 - 메뉴 이미지에 마우스 호버 시, 메뉴의 구성 정보를 표시
