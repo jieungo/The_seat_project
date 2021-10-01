@@ -85,7 +85,7 @@
 
 <img alt="main" src="https://user-images.githubusercontent.com/75401130/135568524-5266fad0-5056-4380-9bf3-6f7e221b6739.png">
 
-<img alt="mainNav" src="https://user-images.githubusercontent.com/75401130/135568545-0c5afe73-3101-45b6-9b5b-a43fece8c026.png">
+<img alt="mainNav" height="500" src="https://user-images.githubusercontent.com/75401130/135568545-0c5afe73-3101-45b6-9b5b-a43fece8c026.png">
 
 </details>
 
@@ -103,7 +103,7 @@
 
 <img alt="myStore" src="https://user-images.githubusercontent.com/75401130/135568602-f8b41cef-e1fa-4c5d-876a-8c98b3ad5f35.png">
 
-<img alt="storeNav" src="https://user-images.githubusercontent.com/75401130/135569457-f9616965-118f-410f-bcf0-4fd70ac6ddaa.png">
+<img alt="storeNav" height="500" src="https://user-images.githubusercontent.com/75401130/135569457-f9616965-118f-410f-bcf0-4fd70ac6ddaa.png">
 
 </details>
 
@@ -128,9 +128,9 @@
 
 <img alt="storeOrder" src="https://user-images.githubusercontent.com/75401130/135569271-7041593d-c1b6-4fe7-904b-33d13dce3413.png">
 
-<img alt="storeOrder2" src="https://user-images.githubusercontent.com/75401130/135569274-607b56bb-f64f-4c02-bb9d-361cdf9877f3.png">
+<img alt="storeOrder2" height="500" src="https://user-images.githubusercontent.com/75401130/135569274-607b56bb-f64f-4c02-bb9d-361cdf9877f3.png">
 
-<img alt="storeOrder3" src="https://user-images.githubusercontent.com/75401130/135569278-b4395e3a-2cef-4bd2-a349-591537633c9d.png">
+<img alt="storeOrder3" height="500" src="https://user-images.githubusercontent.com/75401130/135569278-b4395e3a-2cef-4bd2-a349-591537633c9d.png">
 
 </details>
 
@@ -150,7 +150,7 @@
 
 <img alt="info2" src="https://user-images.githubusercontent.com/75401130/135569193-dbc2dc4d-71a9-45a9-a487-0893901d81eb.png">
 
-<img alt="infoReview" src="https://user-images.githubusercontent.com/75401130/135569207-bc7c4715-05f4-457a-a196-209704152bb2.png">
+<img alt="infoReview" height="500" src="https://user-images.githubusercontent.com/75401130/135569207-bc7c4715-05f4-457a-a196-209704152bb2.png">
 
 </details>
 
