@@ -63,8 +63,10 @@
 
 ## 프로젝트 주요 기능
 
-<img width="500" alt="login" src="https://user-images.githubusercontent.com/75401130/135568483-f05a4c1b-9c00-4450-a382-f0a78e373b69.png">
-<img width="500" alt="loginform" src="https://user-images.githubusercontent.com/75401130/135568490-dc7749cc-4dc9-4f1a-b414-0e5e44d4a922.png">
+
+<img width="500" height="350" alt="login" src="https://user-images.githubusercontent.com/75401130/135568483-f05a4c1b-9c00-4450-a382-f0a78e373b69.png">
+<img width="500" height="350" alt="loginform" src="https://user-images.githubusercontent.com/75401130/135568490-dc7749cc-4dc9-4f1a-b414-0e5e44d4a922.png">
+
 
 ✔️ 인덱스 페이지 & 로그인 페이지
 
@@ -72,8 +74,11 @@
 - 유효성 검사를 통한 회원가입 절차
 - 로그인
 
-<img width="500" alt="main" src="https://user-images.githubusercontent.com/75401130/135568524-5266fad0-5056-4380-9bf3-6f7e221b6739.png">
-<img width="500" alt="mainNav" src="https://user-images.githubusercontent.com/75401130/135568545-0c5afe73-3101-45b6-9b5b-a43fece8c026.png">
+
+<img width="500" height="350" alt="main" src="https://user-images.githubusercontent.com/75401130/135568524-5266fad0-5056-4380-9bf3-6f7e221b6739.png">
+
+<img width="500" height="350" alt="mainNav" src="https://user-images.githubusercontent.com/75401130/135568545-0c5afe73-3101-45b6-9b5b-a43fece8c026.png">
+
 
 ✔️ 메인 페이지
 
@@ -81,38 +86,47 @@
 - 네비바
 - 사이드바 목록 (로그인/마이페이지/매장목록/매장추가/로그아웃)
 
-<img width="500" alt="myStore" src="https://user-images.githubusercontent.com/75401130/135568602-f8b41cef-e1fa-4c5d-876a-8c98b3ad5f35.png">
 
-<img width="500" alt="storeNav" src="https://user-images.githubusercontent.com/75401130/135569457-f9616965-118f-410f-bcf0-4fd70ac6ddaa.png">
+<img width="500" height="350" alt="myStore" src="https://user-images.githubusercontent.com/75401130/135568602-f8b41cef-e1fa-4c5d-876a-8c98b3ad5f35.png">
+
+<img width="500" height="350" alt="storeNav" src="https://user-images.githubusercontent.com/75401130/135569457-f9616965-118f-410f-bcf0-4fd70ac6ddaa.png">
+
 
 ✔️ 매장 관리 페이지
 
 - 매장정보
 : 매장프로필, 정보, 검색키워드, 대표이미지 등록 및 매장 열기&닫기 버튼과 매장삭제 기능
 
+
 - 메뉴관리
 : 카테고리, 메뉴 추가 및 삭제, 매장 상세 페이지의 대표메뉴 등록 (최대 4개)
+
 
 - 리뷰관리
 : 사용자 리뷰 확인 및 사장님의 답글 작성 및 수정 (사용자는 매장상세페이지/마이페이지에서 답글 확인 가능)
 
-<img width="500" alt="storeOrder" src="https://user-images.githubusercontent.com/75401130/135569271-7041593d-c1b6-4fe7-904b-33d13dce3413.png">
 
-<img width="500" alt="storeOrder2" src="https://user-images.githubusercontent.com/75401130/135569274-607b56bb-f64f-4c02-bb9d-361cdf9877f3.png">
+<img width="500" height="350" alt="storeOrder" src="https://user-images.githubusercontent.com/75401130/135569271-7041593d-c1b6-4fe7-904b-33d13dce3413.png">
 
-<img width="500" alt="storeOrder3" src="https://user-images.githubusercontent.com/75401130/135569278-b4395e3a-2cef-4bd2-a349-591537633c9d.png">
+<img width="500" height="350" alt="storeOrder2" src="https://user-images.githubusercontent.com/75401130/135569274-607b56bb-f64f-4c02-bb9d-361cdf9877f3.png">
+
+<img width="500" height="350" alt="storeOrder3" src="https://user-images.githubusercontent.com/75401130/135569278-b4395e3a-2cef-4bd2-a349-591537633c9d.png">
+
 
 - 주문확인
 : 주문자 확인, 주문내역(메뉴부터 총금액까지), 주문확인버튼(클릭 시 사용자의 리뷰작성 버튼 활성화), 페이지 새로고침 (일정 시간마다 주문내역 업데이트)
 
+
 - 자리관리
 : 좌석배치도 및 매장 알림 사항, 좌석 수(최대 30좌석) 및 상태(이용가능or이용중or이용불가능) 선택, 배치변경버튼
 
-<img width="500" alt="info" src="https://user-images.githubusercontent.com/75401130/135569170-be394688-bd9a-460c-b157-4934775f8b72.png">
 
-<img width="500" alt="info2" src="https://user-images.githubusercontent.com/75401130/135569193-dbc2dc4d-71a9-45a9-a487-0893901d81eb.png">
+<img width="500" height="350" alt="info" src="https://user-images.githubusercontent.com/75401130/135569170-be394688-bd9a-460c-b157-4934775f8b72.png">
 
-<img width="500" alt="infoReview" src="https://user-images.githubusercontent.com/75401130/135569207-bc7c4715-05f4-457a-a196-209704152bb2.png">
+<img width="500" height="350" alt="info2" src="https://user-images.githubusercontent.com/75401130/135569193-dbc2dc4d-71a9-45a9-a487-0893901d81eb.png">
+
+<img width="500" height="350" alt="infoReview" src="https://user-images.githubusercontent.com/75401130/135569207-bc7c4715-05f4-457a-a196-209704152bb2.png">
+
 
 ✔️ 마이페이지
 
@@ -121,7 +135,9 @@
 - 주문 확인 중 버튼 (사장님이 주문확인버튼 클릭 시, 리뷰 작성 버튼으로 변경)
 - 해당 매장의 모든 리뷰 및 사장님의 답글 확인 (최신순으로 출력)
 
-<img width="500" alt="storeDetail" src="https://user-images.githubusercontent.com/75401130/135569123-85bb930d-a680-4d6a-861a-a3d3f2630800.png">
+
+<img width="500" height="350" alt="storeDetail" src="https://user-images.githubusercontent.com/75401130/135569123-85bb930d-a680-4d6a-861a-a3d3f2630800.png">
+
 
 ✔️ 매장 상세 페이지
 
@@ -131,7 +147,9 @@
 - 알림 사항 확인
 - 로그인 상태가 아닐 경우, 알림창이 뜨며 로그인 페이지로 이동
 
-<img width="500" alt="order" src="https://user-images.githubusercontent.com/75401130/135569400-81f607c3-0272-4293-a833-29d4a15ede62.png">
+
+<img width="500" height="350" alt="order" src="https://user-images.githubusercontent.com/75401130/135569400-81f607c3-0272-4293-a833-29d4a15ede62.png">
+
 
 ✔️ 주문 페이지
 
